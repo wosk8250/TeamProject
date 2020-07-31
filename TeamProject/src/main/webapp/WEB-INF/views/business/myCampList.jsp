@@ -73,7 +73,7 @@ $(function () {
 						<th width="450">이름</th>
 						<th>추천 수</th>
 						<th>조회 수</th>
-						<th>작성자</th>
+						<th>주소</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -81,11 +81,11 @@ $(function () {
 					<tr>
 						<td>${campVo.camp_no}</td>
 						<td width="450" id="td-title">
-							<a href="/camp/selectReview/${campVo.camp_no}">${campVo.camp_address}</a>
+							<a href="/camp/selectReview/${campVo.camp_no}">${campVo.camp_name}</a>
 						</td>
 						<td>${campVo.recommend}</td>
 						<td>${campVo.viewcnt}</td>
-						<td>${campVo.user_id}</td>
+						<td>${campVo.camp_address}</td>
 					</tr>
 				</c:forEach>
 				</tbody>
