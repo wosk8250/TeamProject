@@ -16,7 +16,9 @@ public class CampVo {
 	private String table_name;
 	private String[] files;
 	private String thumbnail;
-	
+	private String inclination;
+	private String latitude;
+	private String user_email;
 	public CampVo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -35,6 +37,30 @@ public class CampVo {
 
 	
 	
+	public String getUser_email() {
+		return user_email;
+	}
+
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
+
+	public String getInclination() {
+		return inclination;
+	}
+
+	public void setInclination(String inclination) {
+		this.inclination = inclination;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
 	public String getThumbnail() {
 		return thumbnail;
 	}
@@ -136,11 +162,11 @@ public class CampVo {
 		return "CampVo [camp_no=" + camp_no + ", camp_address=" + camp_address + ", camp_phone=" + camp_phone
 				+ ", camp_name=" + camp_name + ", camp_content=" + camp_content + ", camp_http=" + camp_http
 				+ ", camp_admin=" + camp_admin + ", camp_location=" + camp_location + ", camp_area=" + camp_area
-				+ ", table_name=" + table_name + ", files=" + Arrays.toString(files) + ", thumbnail=" + thumbnail + "]";
+				+ ", table_name=" + table_name + ", files=" + Arrays.toString(files) + ", thumbnail=" + thumbnail
+				+ ", inclination=" + inclination + ", latitude=" + latitude + "]";
 	}
 
-
-
+	
 	
 	
 

@@ -3,6 +3,8 @@
 <%@include file ="../include/adminheader.jsp" %>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
+$(function() {
+
 	$(".page-link").click(function(e) {
 		e.preventDefault();
 		var page = $(this).attr("href").trim();
@@ -21,6 +23,28 @@
 		location.href="/admin/camp?camp_name=" + campName;
 	});
 
+	$(".modalScreenBtn").click(function() {
+		var modalBody = $(this).parent().find($(".modal-body"));
+		modalBody.find("div").remove();
+		modalBody.append('<div><textarea class="form-control" style="height: 500px; width: 450px; resize: none;" ></textarea></div>');
+		
+	});
+	
+	$(".modalBtn").one("click",function() {
+		var madalBody = $(this).parent().parent().find($(".modal-body"));
+		var email = $(this).parent().parent().find($(".modal-body")).attr("data-email");
+		var context = $(this).parent().parent().find($("textarea")).val();
+
+		var url = "/admin/rejectRegistCamp/"+email+"/"+context
+		$.get(url,function(e){
+	 		$(".modal-body > div" ).remove();
+	 		$(".modalBtn").remove();
+	 		$(".btn-secondary").text("확인");
+	 		$(".modal-body").append("<div>메일 전송 완료</div>");
+		});
+		
+		
+	});
 });
 
 </script>
@@ -48,7 +72,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${list}" var="campVo">
+				<c:forEach items="${list}" var="campVo" varStatus="vs">
 					<tr>
 						<td>${campVo.camp_no}</td>
 						<td>
@@ -58,7 +82,44 @@
 						<td>${campVo.camp_location}</td>
 						<td>${campVo.camp_area}</td>
 						<td><a href="/admin/registCamp/${campVo.camp_no}" class="btn btn-warning">등록</a></td>
-						<td><a href="/admin/notRegistCamp/${campVo.camp_no}" class="btn btn-warning">거절</a></td>
+						<td><a href="/admin/notRegistCamp/${campVo.camp_no}" class="btn btn-warning">거절</a>
+
+
+								<div class="col-md-12">
+									<a id="modal-602868" href="#modal-container-602868${vs.index}"
+										role="button" class="btn modalScreenBtn" data-toggle="modal">거절모달
+										</a>
+
+									<div class="modal fade" id="modal-container-602868${vs.index}"
+										role="dialog" aria-labelledby="myModalLabel"
+										aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="myModalLabel">${campVo.user_email}
+													</h5>
+													<button type="button" class="close" data-dismiss="modal">
+														<span aria-hidden="true">×</span>
+													</button>
+												</div>
+												<div data-email="${campVo.user_email}" class="modal-body">
+													
+												</div>
+												<div class="modal-footer">
+
+													<button type="button" class="btn btn-primary modalBtn">
+														보내기</button>
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">닫기</button>
+												</div>
+											</div>
+
+										</div>
+
+									</div>
+
+								</div>
+						</td>
 					</tr>
 				</c:forEach>
 				</tbody>

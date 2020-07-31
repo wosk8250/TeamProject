@@ -460,14 +460,17 @@
 	<!-- 삭제된 게시물 검색 등록 -->
 	<!-- 캠핑장 대기 등록 목록보기 -->
 	<select id="waitForRegistrationCamp" resultType="CampVo">
-		 select * from (select
-		rownum rnum, a.*
-		from
-		(select * from tbl_camp where
-		camp_admin = 2 order by
-		camp_no desc) a)
+	select * from (select
+	rownum rnum, a.*
+	from
+	(select
+	c.camp_no,c.camp_name,c.camp_location,c.camp_area,c.thumbnail,u.user_email
+	from tbl_camp c
+	join tbl_user u
+	on c.user_id = u.user_id
+	where c.camp_admin = 2) a)
 
-		where rnum between #{startRow} and #{endRow}
+	where rnum between #{startRow} and #{endRow}
 	</select>
 	<!-- 등록 대기 캠핑장 등록 -->
 	<update id="registCamp">

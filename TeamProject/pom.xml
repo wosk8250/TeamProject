@@ -15,6 +15,7 @@
 	</properties>
 	<dependencies>
 	
+
 	<!-- 이메일 -->
 <dependency>
     <groupId>org.springframework</groupId>

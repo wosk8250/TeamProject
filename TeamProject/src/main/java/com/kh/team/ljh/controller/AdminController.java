@@ -5,12 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
+
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.domain.CampNoticeVo;
@@ -19,6 +25,7 @@ import com.kh.team.domain.CampingTalkVo;
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.DemeritCodeVo;
 import com.kh.team.domain.DemeritVo;
+import com.kh.team.domain.EmailDto;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.PagingDto;
@@ -36,10 +43,13 @@ public class AdminController {
 	private AdminService adminService;
 	@Inject
 	private UserService userService;
+	@Inject
+	private JavaMailSender javaMailSender;
 
 	// 유저 조회
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String userList(Model model,String user_id) throws Exception {
+		
 		if(user_id == null) {
 			List<UserVo> list = adminService.userList();
 			model.addAttribute("list", list);
@@ -617,6 +627,27 @@ public class AdminController {
 			adminService.notRegistCamp(camp_no);
 			return "redirect:/admin/waitForRegistrationCamp";
 		}
+		@ResponseBody
+		@RequestMapping(value="/rejectRegistCamp/{email}/{context}",method=RequestMethod.GET)
+		public void rejectRegistCamp(@PathVariable("email") String eamil,@PathVariable("context")String context) throws Exception{
+			
+			EmailDto emailDto = new EmailDto();
+			emailDto.setContents(context);
+			emailDto.setTo(eamil);
+			
+			MimeMessagePreparator preparator = new MimeMessagePreparator() {
+				
+				@Override
+				public void prepare(MimeMessage mimeMessage) throws Exception {
+					MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false,"utf-8");
+					helper.setFrom(emailDto.getFrom());
+					helper.setTo(emailDto.getTo());
+					helper.setSubject(emailDto.getSubject());
+					helper.setText(emailDto.getContents());
+				}
+			};
 		
+			javaMailSender.send(preparator);
+		}
 
 }
