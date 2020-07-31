@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<!-- 클래스 단위 -->
+<!-- 		<typeAlias type="com.kh.team.domain.AmenitiesVo" alias="AmenitiesVo"/> -->
+<!-- 		<typeAlias type="com.kh.team.domain.AreaCampingNameVo" alias="AreaCampingNameVo"/> -->
+<!-- 		<typeAlias type="com.kh.team.domain.CampingTalkVo" alias="CampingTalkVo"/> -->
+<!-- 		<typeAlias type="com.kh.team.domain.CampingTipVo" alias="CampingTipVo"/> -->
+<!-- 		<typeAlias type="com.kh.team.domain.CampNoticeVo" alias="CampNoticeVo"/> -->
+<!-- 		<typeAlias type="com.kh.team.domain.CampVo" alias="CampVo"/> -->
+<!-- 		<typeAlias type="com.kh.team.domain.FaqVo" alias="FaqVo"/> -->
+<!-- 		<typeAlias type="com.kh.team.domain.FilesVo" alias="FilesVo"/> -->
+<!-- 		<typeAlias type="com.kh.team.domain.ReviewVo" alias="ReviewVo"/> -->
+<!-- 		<typeAlias type="com.kh.team.domain.UserVo" alias="UserVo"/> -->
+
+		<!-- 패키지 단위 -->
+		<package name="com.kh.team.domain"/>
+	</typeAliases>
+</configuration>
+  

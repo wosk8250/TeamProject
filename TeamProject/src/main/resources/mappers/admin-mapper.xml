@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mappers.admin-mapper">
+	<!-- 유저 아이디 조회 -->
+	<select id="userList" resultType="UserVo">
+		select * from tbl_user where admin = 0
+	</select>
+	<!-- 정지된유저 아이디 조회 -->
+	<select id="blockUserList" resultType="UserVo">
+		select * from tbl_user where admin = 1
+	</select>
+	<!-- 정지된유저 아이디 검색 -->
+	<select id="searchBlockUser" resultType="UserVo">
+		select * from tbl_user where admin = 1 and user_id = #{user_id}
+	</select>
+	<!-- 캠핑장 입력 -->
+	<insert id="campInsertRun">
+		insert into
+		tbl_camp(camp_no,camp_address,camp_phone,camp_name,camp_content,camp_http,camp_location,camp_area,thumbnail,camp_admin)
+		values(seq_camp_no.nextval,#{camp_address},#{camp_phone},#{camp_name},#{camp_content},#{camp_http},#{camp_location},#{camp_area},#{thumbnail},2)
+	</insert>
+	<!-- 캠핑장 주소로 찾기 -->
+	<select id="campModifyForm" resultType="CampVo">
+		select * from tbl_camp
+		where camp_address = #{camp_address}
+	</select>
+	<!-- 캠핑장 수정 처리 -->
+	<update id="campModifyRun">
+		update tbl_camp
+		set camp_address =#{camp_address},
+		camp_phone = #{camp_phone},
+		camp_name =#{camp_name},
+		camp_content = #{camp_content},
+		camp_http =#{camp_http},
+		camp_location = #{camp_location},
+		camp_area = #{camp_area},
+		thumbnail = #{thumbnail}
+		where camp_no =
+		#{camp_no}
+
+	</update>
+	<!-- 캠핑장 삭제 처리 -->
+	<update id="campDeleteRun">
+		update tbl_camp
+		set camp_admin = 1
+		where camp_no =
+		#{camp_no}
+	</update>
+
+	<!-- 삭제된 캠핑장 검색 -->
+	<select id="searchDeleteCamp" resultType="CampVo">
+		select * from tbl_camp where camp_name = #{camp_name} and camp_admin = 1
+	</select>
+	<!-- 캠핑 수칙 입력 -->
+	<insert id="campingTipInsertRun">
+		insert into
+		tbl_camping_tip(campingtip_no,campingtip_title,campingtip_content,campingtip_img)
+		values(SEQ_CAMPINGTIP.nextval,#{campingtip_title},#{campingtip_content},#{campingtip_img})
+	</insert>
+	<!-- 캠핑 수칙 수정 폼 -->
+	<select id="campingTipModifyForm" resultType="CampingTipVo">
+		select * from
+		tbl_camping_tip where campingtip_title = #{campingtip_title}
+	</select>
+	<!-- 캠핑 수칙 수정 처리 -->
+	<update id="campingTipModifyRun">
+		update tbl_camping_tip
+		set campingtip_title =#{campingtip_title},
+		 campingtip_content = #{campingtip_content} , 
+		 campingtip_img = #{campingtip_img}
+		where
+		campingtip_no = #{campingtip_no}
+	</update>
+	<!-- 캠핑 수칙 삭제 처리 -->
+	<update id="campingTipDelete">
+		update tbl_camping_tip
+		set campingtip_admin = 1
+		where
+		campingtip_no = #{campingtip_no}
+	</update>
+	<!-- 캠핑 이야기 삭제 -->
+	<update id="campingTalkDelete">
+		update tbl_camptalk
+		set campingtalk_admin = 1
+		where
+		campingtalk_no = #{campingtalk_no}
+	</update>
+	<!-- 후기 삭제 -->
+	<update id="reviewDelete">
+		update tbl_review
+		set review_admin = 1
+		where review_no
+		= #{review_no}
+	</update>
+
+	<!-- 캠핑장 이미지파일 입력 -->
+	<insert id="fileInsertRun">
+		insert into tbl_files(files_no,files,table_name)
+		values(#{files_no},#{files},#{table_name})
+	</insert>
+	<!-- 게시판 별 이미지 조회 -->
+	<select id="fileList" resultType="FilesVo">	
+		select * from tbl_files where
+		table_name = #{table_name}
+	</select>
+
+	<!-- 공지사항 입력 -->
+	<insert id="noticeInsertRun">
+		insert into
+		tbl_notice(notice_title,notice_content,notice_writer,notice_no)
+		values(#{notice_title},#{notice_content},#{notice_writer},SEQ_NOTICE.nextval)
+	</insert>
+
+	<!-- 공지사항 수정내용 -->
+	<select id="noticeModifyForm" resultType="CampNoticeVo">
+		select * from
+		tbl_notice where notice_no = #{notice_no}
+	</select>
+
+
+	<!-- 공지사항수정 처리 -->
+	<update id="noticeModifyRun">
+		update tbl_notice
+		set notice_title =
+		#{notice_title},notice_content = #{notice_content}
+		where notice_no =
+		#{notice_no}
+	</update>
+
+	<!-- 공지사항 삭제 -->
+	<update id="noticedeleteRun">
+		update tbl_notice
+		set notice_admin = 1
+		where notice_no
+		= #{notice_no}
+	</update>
+
+	<!-- 자주묻는질문 입력 -->
+
+
+	<insert id="faqInsertRun">
+		insert into tbl_faq(faq_title,faq_content,faq_no)
+		values(#{faq_title},#{faq_content},SEQ_faq_no.nextval)
+	</insert>
+
+	<!-- 자주묻는질문 수정내용 -->
+	<select id="faqModifyForm" resultType="FaqVo">
+		select * from tbl_faq
+		where faq_no = #{faq_no}
+	</select>
+
+
+	<!-- 자주묻는질문 수정처리 -->
+	<update id="faqModifyRun">
+		update tbl_faq
+		set faq_title =
+		#{faq_title},faq_content = #{faq_content}
+		where faq_no =
+		#{faq_no}
+	</update>
+
+	<!-- 자주묻는질문 삭제 -->
+	<update id="faqdeleteRun">
+		update tbl_faq
+		set faq_admin = 1
+		where faq_no =
+		#{faq_no}
+	</update>
+	<!-- 캠핑장 페이징 -->
+	<select id="campListPage" resultType="CampVo">
+		select * from (select
+		rownum rnum, a.* from(select * from tbl_camp where
+		camp_admin = 0 order
+		by camp_no desc) a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	<!-- 캠핑장 게시물 수 조회 -->
+	<select id="campPostsCount" resultType="int">
+		select count(*) from
+		tbl_camp where camp_admin = 0
+	</select>
+	<!-- 삭제된 캠핑장 페이징 -->
+	<select id="blockCampListPage" resultType="CampVo">
+		select * from (select
+		rownum rnum, a.* from(select * from tbl_camp where
+		camp_admin = 1 order
+		by camp_no desc) a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	<!-- 삭제된 캠핑장 게시물 수 조회 -->
+	<select id="blockCampPostsCount" resultType="int">
+		select count(*) from
+		tbl_camp where camp_admin = 1
+	</select>
+	<!-- 캠핑수칙 페이징 -->
+	<select id="campingTipListPage" resultType="CampingTipVo">
+		select * from (select
+		rownum rnum, a.*
+		from
+		(select * from tbl_camping_Tip where
+		campingtip_admin = 0 order by
+		campingtip_no desc) a)
+
+		where rnum between
+		#{startRow} and #{endRow}
+	</select>
+	<!-- 캠핑수칙 게시물 수 조회 -->
+	<select id="campingTipPostsCount" resultType="int">
+		select count(*)
+		from tbl_camping_tip where campingtip_admin = 0
+	</select>
+	<!-- 자주묻는질문 페이징 -->
+	<select id="faqListPage" resultType="FaqVo">
+		select * from (select rownum
+		rnum, a.*
+		from
+		(select * from tbl_faq where faq_admin = 0 order by
+		faq_no desc) a)
+
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	<!-- 자주묻는질문 게시물 수 조회 -->
+	<select id="faqPostsCount" resultType="int">
+		select count(*) from
+		tbl_faq where faq_admin = 0
+	</select>
+	<!-- 공지사항 페이징 -->
+	<select id="noticeListPage" resultType="CampNoticeVo">
+		select * from (select
+		rownum rnum, a.*
+		from
+		(select * from tbl_notice where notice_admin = 0
+		order by
+		notice_no desc) a)
+
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	<!-- 공지사항 게시물 수 조회 -->
+	<select id="noticePostsCount" resultType="int">
+		select count(*) from
+		tbl_notice where notice_admin = 0
+	</select>
+	<!-- 캠핑후기 페이징 -->
+	<select id="reviewListPage" resultType="ReviewVo">
+		select * from (select
+		rownum rnum, a.*
+		from
+		(select * from tbl_review where review_admin = 0
+		order by
+		review_no desc) a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	<!-- 캠핑후기 게시물 수 조회 -->
+	<select id="reviewPostsCount" resultType="int">
+		select count(*) from
+		tbl_review where review_admin = 0
+	</select>
+	<!-- 캠핑이야기 페이징 -->
+	<select id="campingTalkListPage" resultType="CampingTalkVo">
+		select * from
+		(select rownum rnum, a.*
+		from
+		(select * from tbl_camptalk where
+		campingtalk_admin = 0 order by
+		campingtalk_no desc) a)
+		where rnum
+		between #{startRow} and #{endRow}
+	</select>
+	<!-- 캠핑이야기 게시물 수 조회 -->
+	<select id="campingTalkPostsCount" resultType="int">
+		select count(*)
+		from tbl_camptalk where campingtalk_admin = 0
+	</select>
+	<!-- 유저 벌점 조회 -->
+	<select id="userDemeritRef" resultType="int">
+		select user_demerit from
+		tbl_user
+		where user_id = #{user_id}
+	</select>
+
+	<!-- 유저 벌점리스트 조회 -->
+	<select id="demeritList" resultType="DemeritVo">
+		select
+		dc.demerit_content,d.demerit_value,d.demerit_date,d.user_id
+		from
+		tbl_demerit d
+		join tbl_demerit_code dc
+		on d.demerit_code =
+		dc.demerit_code
+		order by d.demerit_num desc
+	</select>
+
+	<!-- 유저 벌점 입력 -->
+	<update id="userDemerit">
+		update tbl_user set user_demerit = user_demerit + #{demerit_value}
+		where user_id = #{user_id}
+	</update>
+	<!-- 벌점 내용 조회 -->
+	<select id="demeritContentList" resultType="DemeritCodeVo">
+		select * from
+		tbl_demerit_code
+	</select>
+	<!-- 정해진 벌점 내용 조회 -->
+	<select id="selectDemeritCode" resultType="DemeritCodeVo">
+		select * from
+		tbl_demerit_code where demerit_content = #{demerit_content} 
+	</select>
+	<!-- 벌점 내역 입력 -->
+	<insert id="insertDemerit">
+		 insert into tbl_demerit(demerit_num,demerit_code,user_id,demerit_value,demerit_date)
+        values(SEQ_DEMERIT_NO.nextval,#{demerit_code},#{user_id},#{demerit_value},#{demerit_date})
+	</insert>
+	<!-- 유저 벌점 조회 -->
+	<select id="selectUserDemerit" resultType="int">
+		 select user_demerit from tbl_user where user_id = #{user_id}
+	</select>
+	<!-- 유저 정지 시간입력 -->
+	<update id="userDemeritTimeUpdate">
+		update tbl_user
+		set user_stopdate = #{user_stopdate} ,
+		admin = 1
+		where user_id = #{user_id} and admin != 9
+	</update>
+	<!-- 회원 강제탈퇴 -->
+	<delete id="deleteUser">
+		delete from tbl_user where user_id = #{user_id}
+	</delete>
+	<delete id="deleteUserByReview">
+		delete from tbl_review where review_id = #{user_id}
+	</delete>
+	<delete id="deleteUserByCampTalk">
+		delete from tbl_camptalk where campingtalk_id = #{user_id}
+	</delete>
+	<delete id="deleteUserByDemerit">
+		delete from tbl_demerit where user_id = #{user_id}
+	</delete>
+	<!-- 벌점 등록 -->
+	<insert id="insertDemeritCode">
+		insert into tbl_demerit_code(demerit_code,demerit_content,demerit_value)
+        values(#{demerit_code},#{demerit_content},#{demerit_value})
+	</insert>
+	<!-- 벌점 삭제 -->
+	<delete id="deleteDemeritCode">
+		delete from tbl_demerit_code where demerit_code = #{demerit_code}
+	</delete>
+	<!-- 벌점 수정 -->
+	<update id="modifyDemeritCode">
+		update tbl_demerit_code
+		set demerit_content = #{demerit_content},demerit_value = #{demerit_value}
+		where demerit_code = #{demerit_code}
+	</update>
+	<!-- 아이디 검색 -->
+	<select id="searchUser" resultType="UserVo">
+		select * from tbl_user where user_id = #{user_id} and admin = 0
+	</select>
+	<!-- 지역검색 -->
+	<select id="searchCamp" resultType="CampVo">
+		 select * from tbl_camp where camp_name = #{camp_name} and camp_admin = 0
+	</select>
+	<!-- 지역 & 시구 입력 -->
+	<insert id="insertAreaCampingName">
+		insert into tbl_area_camping_name(area_camping_no,area_si,area_gu,area_camping)
+		values(SEQ_AREA_CAMPING_NO.nextval,#{area_si},#{area_gu},#{area_camping})
+	</insert>
+	<!-- 리뷰 검색 -->
+	<select id="searchReview" resultType="ReviewVo">
+		select * from tbl_review where review_title = #{review_title}
+	</select>
+	<!-- 캠핑이야기 검색 -->
+	<select id="searchCampingTalk" resultType="CampingTalkVo">
+		select * from tbl_camptalk where campingtalk_title = #{campingtalk_title}
+	</select>
+	<!-- 자주묻는질문 검색 -->
+	<select id="searchFaq" resultType="FaqVo">
+		select * from tbl_faq where faq_title = #{faq_title}
+	</select>
+	<!-- 공지사항 검색 -->
+	<select id="searchNotice" resultType="CampNoticeVo">
+		select * from tbl_notice where notice_title = #{notice_title}
+	</select>
+	<!-- 캠핑 이야기 검색 -->
+	<select id="searchCampingTip" resultType="CampingTipVo">
+		select * from tbl_camping_tip where campingtip_title = #{campingtip_title}
+	</select>
+	
+	<!-- 삭제된 글갯수 조회 -->
+	<select id="deleteCampingTipCount" resultType="int">select count(*) from tbl_camping_tip where campingtip_admin = 1</select>
+	<select id="deleteCampTalkCount" resultType="int">select count(*) from tbl_camptalk where campingtalk_admin = 1</select>
+	<select id="deleteFaqCount" resultType="int">select count(*) from tbl_faq where faq_admin = 1</select>
+	<select id="deleteNoticeCount" resultType="int">select count(*) from tbl_notice where notice_admin = 1</select>
+	<select id="deleteReviewCount" resultType="int">select count(*) from tbl_review where review_admin = 1</select>
+	<!-- 삭제된 글 조회 -->
+	
+	<!-- 삭제된 글 페이징 -->
+	
+	<select id="deletePagingCampingTipList" resultType="CampingTipVo">
+	select * from (select
+		rownum rnum, a.*
+		from
+		(select * from tbl_camping_Tip where
+		campingtip_admin = 1 order by
+		campingtip_no desc) a)
+
+		where rnum between
+		#{startRow} and #{endRow}
+	</select>
+	<select id="deletePagingCampTalkList" resultType="CampingTalkVo">
+	select * from
+		(select rownum rnum, a.*
+		from
+		(select * from tbl_camptalk where
+		campingtalk_admin = 1 order by
+		campingtalk_no desc) a)
+		where rnum
+		between #{startRow} and #{endRow}
+	</select>
+	<select id="deletePagingFaqList" resultType="FaqVo">
+		select * from (select rownum
+		rnum, a.*
+		from
+		(select * from tbl_faq where faq_admin = 1 order by
+		faq_no desc) a)
+	</select>
+	<select id="deletePagingNoticeList" resultType="CampNoticeVo">
+	select * from (select
+		rownum rnum, a.*
+		from
+		(select * from tbl_notice where notice_admin = 1
+		order by
+		notice_no desc) a)
+
+	</select>
+	<select id="deletePagingReviewList" resultType="ReviewVo">
+		select * from (select
+		rownum rnum, a.*
+		from
+		(select * from tbl_review where review_admin = 1
+		order by
+		review_no desc) a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	<!-- 삭제된 글 페이징 -->
+	
+	<!-- 삭제된 캠핑장 재등록 -->
+	<update id="deleteCampReEnrollment">
+		update tbl_camp
+		set camp_admin = 0
+		where camp_no = #{camp_no}
+	</update>
+	
+	<!-- 삭제된 게시물 검색 등록 -->
+	<select id="delelteCampingTipPost" resultType="CampingTipVo">select * from tbl_camping_tip where campingtip_title = #{campingtip_title} and campingtip_admin = 1</select>
+	<select id="deleteCampingTalkPost" resultType="CampingTalkVo">select * from tbl_camptalk where campingtalk_title = #{campingtalk_title} and campingtalk_admin = 1</select>
+	<select id="deleteFaqPost" resultType="FaqVo">select * from tbl_faq where faq_title = #{faq_title} and faq_admin = 1</select>
+	<select id="deleteNoticePost" resultType="CampNoticeVo">select * from tbl_notice where notice_title = #{notice_title} and notice_admin = 1</select>
+	<select id="deleteReviewPost" resultType="ReviewVo">select * from tbl_review where review_title = #{review_title} and review_admin = 1</select>
+	<!-- 삭제된 게시물 검색 등록 -->
+	<!-- 캠핑장 대기 등록 목록보기 -->
+	<select id="waitForRegistrationCamp" resultType="CampVo">
+		 select * from (select
+		rownum rnum, a.*
+		from
+		(select * from tbl_camp where
+		camp_admin = 2 order by
+		camp_no desc) a)
+
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	<!-- 등록 대기 캠핑장 등록 -->
+	<update id="registCamp">
+		update tbl_camp
+		set camp_admin = 0
+		where camp_no = #{camp_no}
+	</update>
+	<!-- 등록 대기 캠핑장 등록거절 -->
+	<update id="notRegistCamp">
+		update tbl_camp
+		set camp_admin = 3
+		where camp_no = #{camp_no}
+	</update>
+	<!-- 등록 대기 캠핑장 갯수 -->
+	<select id="waitForRegistrationCampCount" resultType="int">
+		select count(*) from tbl_camp where camp_admin = 2
+	</select>
+</mapper>
+

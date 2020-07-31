@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.campingReview-mapper">
+
+	<!--  캠핑장 후기 글쓰기 -->
+	<insert id="campingReviewInsertRun">
+			insert into tbl_review(review_no, review_title, review_content , review_id,review_area , review_location , review_campingname ,review_camp_no,review_img)
+			values ( seq_review.nextval, #{review_title}, #{review_content},#{review_id}, #{review_area}, #{review_location},#{review_campingname}, #{review_camp_no},#{review_img})
+	</insert>
+	<!--  캠핑장 후기 목록 조회 -->
+	<select id="campingReviewList" resultType="ReviewVo">
+		select * from tbl_review 
+		where review_admin = 0 order by review_no
+	</select>
+	<!-- 캠핑장 후기 제목으로 찾기 -->
+	<select id="campingTitleSearch" resultType="int">
+		select review_no from tbl_review
+			where review_title= #{review_title}
+	</select>
+	<!-- 캠핑장 이미지파일 입력 -->
+	<insert id="campingReviewFileInsertRun">
+		insert into tbl_files(files_no,files,table_name)
+		values(#{files_no},#{files},#{table_name})
+	</insert>
+	
+	<!-- 캠핑장 이미지 조회 -->
+	<select id="filesList" resultType="FilesVo">
+		select *  from tbl_files where table_name = #{table_name}
+	</select>
+	
+		<!--  캠핑장 후기 내용  보기 -->
+	<select id="selectReview" resultType="ReviewVo">
+			select * from  tbl_review
+		where review_no = #{review_no}
+	</select>
+	
+	<!-- (캠핑장 후기 내용)이미지 보여주기  -->
+	<select id="filesNoFilesList" resultType="FilesVo">
+	        select * from tbl_files
+        where files_no = #{files_no}
+	</select>
+	<!--  캠핑장 후기 수정 폼 -->
+	<select id="campingReviewModifyForm" resultType="ReviewVo">
+			select * from tbl_review
+			where review_no = #{review_no}
+	</select>
+	<!--  캠핑장 후기 수정 처리 -->
+	<update id="campingReviewModifyRun">
+	 update tbl_review
+		set review_title = #{review_title},
+		review_content = #{review_content},
+		review_area = #{review_area},
+		review_location =#{review_location},
+		review_campingname = #{review_campingname}
+		where review_no = #{review_no}
+	</update>
+	
+	<!--  캠핑장 후기 수정 이미지 조회 -->
+	<select id="modifyFileList" resultType="FilesVo">
+		select *  from tbl_files where table_name = #{table_name}
+	</select>
+	
+	<!--  캠핑장 후기 수정 이미지파일 입력 -->	
+	<insert id="campingFileInsertRun">
+		insert into tbl_files(files_no,files,table_name)
+		values(#{files_no},#{files},#{table_name})
+	</insert>
+	
+	
+	<!--  캠핑장 후기 삭제 -->
+	<update id="campingReviewDelete">
+       update tbl_review 
+       set review_admin  = 1
+        where review_no = #{review_no}
+	</update>
+	
+	<!--  캠핑장 후기 조회수 -->
+	<update id="campingReviewView">
+		 	update tbl_review set
+		review_view  =  review_view + 1
+		where review_no = #{review_no}
+	</update>
+	
+		<!-- 캠핑장 후기 게시물 수 조회 -->
+	<select id="campingReviewListCount" resultType="int">
+	    select count(*) from
+			tbl_review where review_admin = 0
+	</select>
+	<!--  캠핑장 후기 페이징 -->
+	<select id="campingReviewListPage" resultType="ReviewVo">
+	      select * from (select
+				rownum rnum, a.* from(select * from tbl_review where
+					review_admin = 0 order
+						by review_no desc) a)
+						where rnum between #{startRow} and #{endRow}
+	</select>
+	<!-- campingReviewCampNo -->
+	<select id="campingReviewCampNo" resultType="int">
+	select camp_no from tbl_camp where camp_name = #{camp_name}
+	</select>
+	
+	<!--  캠핑장 후기 검색 -->
+	<select id="campingReviewSearch" resultType="ReviewVo">
+	select * from tbl_review where review_title = #{review_title}
+	</select>
+	
+</mapper>

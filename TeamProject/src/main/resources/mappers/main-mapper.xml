@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mappers.main-mapper">
+	
+	<!-- 시군 -->
+	
+	<select id="locationArea" resultType="string">
+		select distinct camp_location from tbl_camp_location where camp_area = #{camp_area}
+	</select>
+	
+		
+	<select id="campSelect" resultType="AreaCampLocationVo">
+		select distinct camp_area from tbl_camp_location
+	</select>
+
+	<!-- 캠핑장 상세페이지 -->	
+	<select id="campingContent" resultType="CampVo">
+		select * from tbl_camp where camp_no = #{camp_no}
+	</select>
+	
+	<!-- 캠핑장 정보, 페이징 -->
+	<select id="campList" resultType="CampVo">
+<!-- 		select * from tbl_camp -->
+		select *
+			from(select rownum rnum, a.*
+				from(select * from tbl_camp
+					order by camp_no ASC) a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	
+	<!-- 게시글 갯수 -->
+	<select id="pageCount" resultType="int">
+		select count(camp_no) from tbl_camp
+	</select>
+	
+
+	<select id="areaLocation" resultType="CampVo">
+		select * from tbl_camp where camp_area = #{camp_area} and camp_location = #{camp_location}
+	</select>
+
+	
+	
+</mapper>

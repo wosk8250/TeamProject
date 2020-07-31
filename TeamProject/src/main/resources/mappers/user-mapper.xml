@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.user-mapper">
+	<!-- 회원가입 -->
+	<insert id="insertUser">
+		insert into tbl_user(user_id, user_pw, user_phone, user_name, user_email, admin)
+		values(#{user_id}, #{user_pw}, #{user_phone}, #{user_name}, #{user_email}, #{admin})
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="checkByIdAndPw" resultType="UserVo">
+		select * from tbl_user
+		where user_id = #{user_id} 
+		and user_pw = #{user_pw}
+	</select>
+	
+	<!-- admin 체크 -->
+		<select id="checkAdmin" resultType="UserVo">
+		select admin from tbl_user
+		where user_id = #{user_id}
+	</select>
+	
+	<!-- 회원정보 보기 -->
+	<select id="profile" resultType="UserVo">
+		select * from tbl_user
+		where user_id = #{user_id} 
+	</select>
+
+	<!-- 회원정보 수정 -->
+	<update id="updateInfo">
+		update tbl_user set
+			user_phone = #{user_phone},
+			user_name = #{user_name},
+			user_email = #{user_email}
+		where user_id = #{user_id} 
+		and user_pw = #{user_pw}
+	</update>
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="checkId" resultType="UserVo">
+		select * from tbl_user
+		where user_id = #{user_id}
+	</select>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="secessionUser">
+		delete from tbl_user
+		where user_id = #{user_id}
+	</delete>
+
+	<!-- 비밀번호 확인 -->
+	<select id="checkPw" resultType="UserVo">
+		update tbl_user set
+			user_pw = #{new_pw}
+		where user_id = #{user_id} and user_pw = #{user_pw}
+	</select>
+	
+	<!-- 비밀번호 수정 -->
+	<update id="updatePw">
+		update tbl_user set
+			user_pw = #{new_pw}
+		where user_id = #{user_id}
+	</update>
+	
+	<!-- 내가 쓴 리뷰 -->
+	<select id="myReviewList" resultType="ReviewVo">
+		select * 
+		from(select rownum rnum, a.* 
+    		from(select * from tbl_review 
+        		where review_id = #{user_id}
+        		order by review_no desc)a) 
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	<!-- 내가 쓴 리뷰 갯수 -->
+	<select id="getCount" resultType="int">
+		select count(*) from tbl_review
+		where review_id = #{user_id}
+	</select>
+	
+	<!-- 정지날짜 보기 -->
+	<select id="getStopDate" resultType="String">
+		select user_stopdate from tbl_user where user_id = #{user_id}
+	</select>
+	<!-- 정지 해제 -->
+	<update id="stopUserBlock">
+		update tbl_user
+		set admin = 0 
+		where user_id = #{user_id}
+	</update>
+	
+	<!-- 유저 벌점 조회 -->
+	<select id="userDemerit" resultType="DemeritVo">
+		select dc.demerit_content,d.demerit_value,d.demerit_date,d.user_id
+		from tbl_demerit d join tbl_demerit_code dc
+		on d.demerit_code = dc.demerit_code
+        where user_id = #{user_id}
+		order by d.demerit_num desc
+	</select>
+	
+	<!-- 비번 찾기 -->
+	<select id="findPw" resultType="userVo">
+		select * from tbl_user
+		where user_id = #{user_id} and user_email = #{user_email}
+	</select>
+</mapper>

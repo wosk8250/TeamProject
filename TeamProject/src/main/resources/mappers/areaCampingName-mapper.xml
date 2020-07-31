@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.AreaCampingName-mapper">
+	
+	<select id="areaCampingName" resultType="AreaCampingNameVo">
+	
+    select * from tbl_area_camping_name order by area_camping_no
+	
+	</select>
+	
+	<select id ="areaCampingSi" resultType ="AreaCampingNameVo">
+	
+		select distinct area_si from tbl_area_camping_name
+	</select>
+	
+	<select id ="getAreaCampingList" resultType="string">
+		select distinct area_gu from tbl_area_camping_name
+		where area_si = #{area_si}
+	</select>
+	
+	<select id="getCampingNameList" resultType="string">
+		select area_camping from tbl_area_camping_name
+			where area_si = #{area_si}
+			and area_gu = #{area_gu} 
+	</select>
+	<select id="campingNamesList" resultType="string">
+	select area_camping from tbl_area_camping_name  order by area_camping_no
+	</select>
+	
+	<select id="campingAreaSiNamesList" resultType="string">
+	select area_camping from tbl_area_camping_name
+		where area_si = #{area_si}
+		
+	</select>
+	<select id="updateCampingAreaSi" resultType="AreaCampingNameVo">
+			select distinct area_si from tbl_area_camping_name
+	</select>
+	<select id="updateGetAreaCampingList" resultType="string">
+		    select distinct area_gu from tbl_area_camping_name
+				where area_si = #{area_si}
+	</select>
+	<select id="updateGetCampingNameList" resultType="string">
+			select area_camping from tbl_area_camping_name
+			where area_si = #{area_si}
+			and area_gu = #{area_gu} 
+	</select>
+	
+
+
+
+
+
+</mapper>
