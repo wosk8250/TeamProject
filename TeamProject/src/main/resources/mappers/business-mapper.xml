@@ -13,11 +13,11 @@
 
 	<!-- 내가올린 캠핑장 조회, 페이징 -->
 	<select id="myCampList" resultType="campVo">
-		select *
-			from(select rownum rnum, a.*
-				from(select * from tbl_camp
-					user_id = #{user_id}
-					order by camp_no ASC) a)
+		select * 
+		from(select rownum rnum, a.* 
+    		from(select * from tbl_camp
+        		where user_id = #{user_id}
+        		order by camp_no desc)a) 
 		where rnum between #{startRow} and #{endRow}
 	</select>
 	

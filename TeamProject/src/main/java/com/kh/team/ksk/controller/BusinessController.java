@@ -99,7 +99,7 @@ public class BusinessController {
 //	}
 	
 	//내가 등록한 캠핑장 목록-페이징
-	@RequestMapping(value = "/MycampList", method = RequestMethod.GET)
+	@RequestMapping(value = "/myCampList", method = RequestMethod.GET)
 	public String MycampListPaging(Model model, HttpServletRequest request, myReviewPagingDto pagingDto) throws Exception{
 		HttpSession session = request.getSession();
 		String user_id = (String) session.getAttribute("user_id");
@@ -108,11 +108,13 @@ public class BusinessController {
 		pagingDto.setmyReviewPageInfo();
 		int totalCount = businessService.getCount(pagingDto);
 		pagingDto.setTotalCount(totalCount);
+		System.out.println(pagingDto);
 		List<CampVo> myCampList = businessService.mycampList(pagingDto);
 		
 		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("myCampList", myCampList);
-		return "business/MycampList";
+		System.out.println(myCampList);
+		return "business/myCampList";
 	}
 	
 	//캠핑장 선택

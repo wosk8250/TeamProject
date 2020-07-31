@@ -43,6 +43,8 @@ $(function () {
 		$("#topImg").attr("src","/resources/image/Service_center.jpg");
 	} else if (loc2 == "user"){
 		$("#topImg").attr("src","/resources/image/myPage_top.jpg");
+	}else{
+		$("#topImg").attr("src","/resources/image/business.jpg");
 	}
 });
 </script>
@@ -72,7 +74,7 @@ $(function () {
 	            <!-- <h6 class="collapse-header">Custom Components:</h6> -->
 	            <a class="collapse-item" href="/user/myReviewList"> 내가 작성한 후기</a>
 	            <c:if test="${sessionScope.checkAdmin == 2}">
-	            <a class="collapse-item" href="/user/myCampList"> 내가 올린 캠핑장</a>
+	            <a class="collapse-item" href="/business/myCampList"> 내가 올린 캠핑장</a>
 	            </c:if>
 	            <a class="collapse-item" href="/user/profile">프로필 </a>
 	            <a class="collapse-item" href="/user/updateInfo"> 프로필 수정</a>

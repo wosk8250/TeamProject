@@ -70,24 +70,35 @@ $(function () {
 				<thead>
 					<tr>
 						<th>번호</th>
-						<th width="450">이름</th>
-						<th>추천 수</th>
-						<th>조회 수</th>
-						<th>주소</th>
+						<th width="450">제목</th>
+						<th>작성자</th>
+						<th>캠핑장 이름</th>
+						<th>등록일</th>
 					</tr>
 				</thead>
 				<tbody>
 				<c:forEach items="${myCampList}" var="campVo">
-					<tr>
+				<tr>
 						<td>${campVo.camp_no}</td>
 						<td width="450" id="td-title">
-							<a href="/camp/selectReview/${campVo.camp_no}">${campVo.camp_name}</a>
+							<a href="/board/campingContent/${campVo.camp_no}">${campVo.camp_name}</a>
 						</td>
-						<td>${campVo.recommend}</td>
-						<td>${campVo.viewcnt}</td>
+						<td>작성자</td>
+						<td>캠핑장 이름</td>
 						<td>${campVo.camp_address}</td>
 					</tr>
 				</c:forEach>
+<%-- 				<c:forEach items="${reviewList}" var="reviewVo"> --%>
+<!-- 					<tr> -->
+<%-- 						<td>${reviewVo.review_no}</td> --%>
+<!-- 						<td width="450" id="td-title"> -->
+<%-- 							<a href="/camp/selectReview/${reviewVo.review_no}">${reviewVo.review_title}</a> --%>
+<!-- 						</td> -->
+<%-- 						<td>${reviewVo.review_id}</td> --%>
+<%-- 						<td>${reviewVo.review_campingname}</td> --%>
+<%-- 						<td>${reviewVo.review_date}</td> --%>
+<!-- 					</tr> -->
+<%-- 				</c:forEach> --%>
 				</tbody>
 			</table>
 			</div>
