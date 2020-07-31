@@ -1,5 +1,7 @@
 package com.kh.team.ksk.controller;
 
+import java.util.UUID;
+
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 
@@ -37,13 +39,12 @@ public class EmailController {
 			return "redirect:/user/findPw";
 		}
 		//아이디 이메일이 맞으면 로그인 페이지로 보내고 메시지
-		int tempPw = (int) (Math.random()*10000+99999);
-		String contents = "회원님의 비밀번호가 임시비밀번호 (" + tempPw+ ")로 수정 되었습니다. 로그인 하시고 비밀번호를 즉시 바꿔주세요!";
+		UUID uuid = UUID.randomUUID();
+		String new_pw = uuid.toString().substring(0,6);
+		String contents = "회원님의 비밀번호가 임시비밀번호 (" + new_pw+ ")로 수정 되었습니다. 로그인 하시고 비밀번호를 즉시 바꿔주세요!";
 		EmailDto emailDto = new EmailDto();
 		emailDto.setTo(user_email);
 		emailDto.setContents(contents);
-		
-		String new_pw = Integer.toString(tempPw);
 		userService.updatePw(user_id, new_pw);
 		
 		MimeMessagePreparator preparator = new MimeMessagePreparator() {
