@@ -82,12 +82,9 @@ $(function() {
 						<td>${campVo.camp_location}</td>
 						<td>${campVo.camp_area}</td>
 						<td><a href="/admin/registCamp/${campVo.camp_no}" class="btn btn-warning">등록</a></td>
-						<td><a href="/admin/notRegistCamp/${campVo.camp_no}" class="btn btn-warning">거절</a>
-
-
-								<div class="col-md-12">
+						<td>
 									<a id="modal-602868" href="#modal-container-602868${vs.index}"
-										role="button" class="btn modalScreenBtn" data-toggle="modal">거절모달
+										role="button" class="btn btn-warning modalScreenBtn" data-toggle="modal">거절모달
 										</a>
 
 									<div class="modal fade" id="modal-container-602868${vs.index}"
@@ -118,7 +115,6 @@ $(function() {
 
 									</div>
 
-								</div>
 						</td>
 					</tr>
 				</c:forEach>
