@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <script src="/resources/js/owl.carousel.js"></script>
     <%@ include file="../include/mainHeader.jsp"%>
+
 <style>
 	.jb-wrap {
 	width: 100%;
@@ -19,23 +21,12 @@
 	height: 100%;
 	text-align: center;
 }
-.jb-nav-table {
-	display: table;
-	width: 100%;
-	height: 100%;
-}
-.jb-nav-table-row {
-	display: table-row;
-}
-.jb-nav-table-cell {
-	display: table-cell;
-	vertical-align: middle;
-}
-.jb-nav nav {
-	margin: 0px 25%;
+.navbar-expand-lg {
+	margin: 0px 20%;
 	padding: 10px;
 	background-color: rgba(255, 255, 255, 0.5);
 	text-align: center;
+	margin-top: 20%;
 }
 #out {
  width: 50%;
@@ -49,9 +40,14 @@
  
  }
 </style>
-
+<link rel="stylesheet" href="/resources/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="/resources/assets/owl.theme.default.min.css">
+<script src="/resources/owl.carousel.js"></script>
 <script>
+
 $(function() {
+	
+	
 	//렌덤 배경
 	var random = Math.floor(Math.random() * 9);
 	$("#img_bg").attr("src","/resources/image/main_bg0"+random+".jpg");
@@ -118,6 +114,7 @@ $(function() {
 			});
 		});
 });
+
 </script>
 
 <div class="container-fluid" style="padding: 0px;">
@@ -129,9 +126,8 @@ $(function() {
 				<img id="img_bg" src="">
 			</div>
 			<div class="jb-nav">
-				<div class="jb-nav-table">
-					<div class="jb-nav-table-row">
-						<div class="jb-nav-table-cell">
+				<div class="row">
+						<div class="col-md-12">
 							<nav class="navbar navbar-expand-lg">
 								<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 									<span class="navbar-toggler-icon"></span>
@@ -160,15 +156,52 @@ $(function() {
 							</nav>
 						</div>
 					</div>
+				<div class="row">
+					<div class="col-md-12">
+			<!-- 인기 캠핑장 -->
+						<div class="owl-carousel" id="owl-demo">
+				            <div class="item">
+				              <h4>1</h4>
+				            </div>
+				            <div class="item">
+				              <h4>2</h4>
+				            </div>
+				            <div class="item">
+				              <h4>3</h4>
+				            </div>
+				            <div class="item">
+				              <h4>4</h4>
+				            </div>
+				            <div class="item">
+				              <h4>5</h4>
+				            </div>
+				            <div class="item">
+				              <h4>6</h4>
+				            </div>
+				            <div class="item">
+				              <h4>7</h4>
+				            </div>
+				            <div class="item">
+				              <h4>8</h4>
+				            </div>
+				            <div class="item">
+				              <h4>9</h4>
+				            </div>
+				            <div class="item">
+				              <h4>10</h4>
+				            </div>
+						</div>
+			          <div class="text-center">
+			          <a class="btn btn-primary play" style="color:white;">▶</a> 
+			          <a class="btn btn-primary stop" style="color:white;">■</a>
+			          </div>
+					</div>
 				</div>
 			</div>
 		</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-12">
-		</div>
-	</div>
+	
 	<div class="row">
 		<div class="col-md-6">
 		</div>
@@ -177,18 +210,91 @@ $(function() {
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-		캠핑후기
+			<table class="table">
+				<thead>
+					<tr>
+						<th>후기</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${reviewVo}" var="reviewVo">
+						<tr>
+							<td>${reviewVo.review_title}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 		<div class="col-md-3">
-		공지사항
+			<table class="table">
+				<thead>
+					<tr>
+						<th>공지사항</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${CampNoticeVo}" var="CampNoticeVo">
+						<tr>
+							<td>${CampNoticeVo.notice_title}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 		<div class="col-md-3">
-		캠핑 수칙
+			<table class="table">
+				<thead>
+					<tr>
+						<th>캠핑수칙</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${CampingTipVo}" var="CampingTipVo">
+						<tr>
+							<td>${CampingTipVo.campingtip_title}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 		<div class="col-md-3">
-		자주묻는 질문
+			<table class="table">
+				<thead>
+					<tr>
+						<th>자주 묻는 질문</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${faqVo}" var="faqVo">
+						<tr>
+							<td>${faqVo.faq_title}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
+	<!-- Owl Carousel JS -->
+	
+	<script>
+	
+	var owl = $('.owl-carousel');
+	owl.owlCarousel({
+	    items:6,
+	    loop:true,
+	    margin:10,
+	    autoplay:true,
+	    autoplayTimeout:5000,
+	    autoplayHoverPause:true
 
+	});
+	$('.play').on('click',function(){
+	    owl.trigger('play.owl.autoplay',[1000])
+	})
+	$('.stop').on('click',function(){
+	    owl.trigger('stop.owl.autoplay')
+	})
+	
+	</script>
 <%@ include file="../include/footer.jsp"%>

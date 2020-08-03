@@ -8,8 +8,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.AreaCampLocationVo;
+import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
+import com.kh.team.domain.CampingTipVo;
+import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.PagingDto;
+import com.kh.team.domain.ReviewVo;
 
 @Repository
 public class SelectCampDaoImpl implements SelectCampDao {
@@ -43,6 +47,31 @@ public class SelectCampDaoImpl implements SelectCampDao {
 	@Override
 	public int pageCount(PagingDto pagingDto) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "pageCount", pagingDto);
+	}
+
+	@Override
+	public List<ReviewVo> reviewTop5() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "reviewTop5");
+	}
+
+	@Override
+	public List<CampNoticeVo> noticeTop5() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "noticeTop5");
+	}
+
+	@Override
+	public List<CampingTipVo> tipTop5() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "tipTop5");
+	}
+
+	@Override
+	public List<FaqVo> faqTop5() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "faqTop5");
+	}
+
+	@Override
+	public List<CampVo> recommendTop10() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "recommendTop10");
 	}
 
 }

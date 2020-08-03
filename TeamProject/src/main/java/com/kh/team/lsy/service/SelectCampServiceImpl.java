@@ -8,8 +8,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.kh.team.domain.AreaCampLocationVo;
+import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
+import com.kh.team.domain.CampingTipVo;
+import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.PagingDto;
+import com.kh.team.domain.ReviewVo;
 import com.kh.team.lsy.persistence.SelectCampDao;
 
 @Repository
@@ -41,6 +45,31 @@ public class SelectCampServiceImpl implements SelectCampService {
 	@Override
 	public int pageCount(PagingDto pagingDto) throws Exception {
 		return selectCampDao.pageCount(pagingDto);
+	}
+
+	@Override
+	public List<ReviewVo> reviewTop5() throws Exception {
+		return selectCampDao.reviewTop5();
+	}
+
+	@Override
+	public List<CampNoticeVo> noticeTop5() throws Exception {
+		return selectCampDao.noticeTop5();
+	}
+
+	@Override
+	public List<CampingTipVo> tipTop5() throws Exception {
+		return selectCampDao.tipTop5();
+	}
+
+	@Override
+	public List<FaqVo> faqTop5() throws Exception {
+		return selectCampDao.faqTop5();
+	}
+
+	@Override
+	public List<CampVo> recommendTop10() throws Exception {
+		return selectCampDao.recommendTop10();
 	}
 
 }

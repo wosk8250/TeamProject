@@ -23,6 +23,9 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	
+	<!-- Owl Carousel -->
+    <link rel="stylesheet" href="/resources/css/owl.carousel.css">
 
 <style>
 	#title {
@@ -216,7 +219,7 @@
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top" id="topbar">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top" id="topbar" style="margin-bottom: 0">
 
           <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
