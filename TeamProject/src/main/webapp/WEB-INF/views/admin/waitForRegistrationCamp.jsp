@@ -3,7 +3,7 @@
 <%@include file ="../include/adminheader.jsp" %>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
-$(function() {
+$(function ()) {
 
 	$(".page-link").click(function(e) {
 		e.preventDefault();
@@ -23,28 +23,6 @@ $(function() {
 		location.href="/admin/camp?camp_name=" + campName;
 	});
 
-	$(".modalScreenBtn").click(function() {
-		var modalBody = $(this).parent().find($(".modal-body"));
-		modalBody.find("div").remove();
-		modalBody.append('<div><textarea class="form-control" style="height: 500px; width: 450px; resize: none;" ></textarea></div>');
-		
-	});
-	
-	$(".modalBtn").one("click",function() {
-		var madalBody = $(this).parent().parent().find($(".modal-body"));
-		var email = $(this).parent().parent().find($(".modal-body")).attr("data-email");
-		var context = $(this).parent().parent().find($("textarea")).val();
-
-		var url = "/admin/rejectRegistCamp/"+email+"/"+context
-		$.get(url,function(e){
-	 		$(".modal-body > div" ).remove();
-	 		$(".modalBtn").remove();
-	 		$(".btn-secondary").text("확인");
-	 		$(".modal-body").append("<div>메일 전송 완료</div>");
-		});
-		
-		
-	});
 });
 
 </script>
@@ -72,7 +50,7 @@ $(function() {
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${list}" var="campVo" varStatus="vs">
+				<c:forEach items="${list}" var="campVo">
 					<tr>
 						<td>${campVo.camp_no}</td>
 						<td>
@@ -116,6 +94,7 @@ $(function() {
 									</div>
 
 						</td>
+						<td><a href="/admin/notRegistCamp/${campVo.camp_no}" class="btn btn-warning">거절</a></td>
 					</tr>
 				</c:forEach>
 				</tbody>

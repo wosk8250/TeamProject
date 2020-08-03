@@ -19,8 +19,8 @@
 	<!-- 캠핑장 입력 -->
 	<insert id="campInsertRun">
 		insert into
-		tbl_camp(camp_no,camp_address,camp_phone,camp_name,camp_content,camp_http,camp_location,camp_area,thumbnail,camp_admin)
-		values(seq_camp_no.nextval,#{camp_address},#{camp_phone},#{camp_name},#{camp_content},#{camp_http},#{camp_location},#{camp_area},#{thumbnail},2)
+		tbl_camp(camp_no,camp_address,camp_phone,camp_name,camp_content,camp_http,camp_location,camp_area,thumbnail,camp_admin, user_id)
+		values(seq_camp_no.nextval,#{camp_address},#{camp_phone},#{camp_name},#{camp_content},#{camp_http},#{camp_location},#{camp_area},#{thumbnail}, 2, #{user_id})
 	</insert>
 	<!-- 캠핑장 주소로 찾기 -->
 	<select id="campModifyForm" resultType="CampVo">
@@ -460,17 +460,14 @@
 	<!-- 삭제된 게시물 검색 등록 -->
 	<!-- 캠핑장 대기 등록 목록보기 -->
 	<select id="waitForRegistrationCamp" resultType="CampVo">
-	select * from (select
-	rownum rnum, a.*
-	from
-	(select
-	c.camp_no,c.camp_name,c.camp_location,c.camp_area,c.thumbnail,u.user_email
-	from tbl_camp c
-	join tbl_user u
-	on c.user_id = u.user_id
-	where c.camp_admin = 2) a)
+		 select * from (select
+		rownum rnum, a.*
+		from
+		(select * from tbl_camp where
+		camp_admin = 2 order by
+		camp_no desc) a)
 
-	where rnum between #{startRow} and #{endRow}
+		where rnum between #{startRow} and #{endRow}
 	</select>
 	<!-- 등록 대기 캠핑장 등록 -->
 	<update id="registCamp">
