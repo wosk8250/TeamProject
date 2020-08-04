@@ -49,6 +49,8 @@ public class CampingTipConroller {
 		String asd = (String) httpSession.getAttribute("checkBoard");
 		System.out.println("checkBoard = " + asd);
 		
+		
+		
 		return  "/camp/singleContentsCampingTip";
 	}
 	
