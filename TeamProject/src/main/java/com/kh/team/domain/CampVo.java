@@ -16,6 +16,9 @@ public class CampVo {
 	private String table_name;
 	private String[] files;
 	private String thumbnail;
+	private int recommend;
+	private int viewcnt;
+	private String operatingday;
 	
 	public CampVo() {
 		super();
@@ -32,9 +35,33 @@ public class CampVo {
 		this.camp_content = camp_content;
 		this.camp_http = camp_http;
 	}
+	
+	
 
-	
-	
+	public String getOperatingday() {
+		return operatingday;
+	}
+
+	public void setOperatingday(String operatingday) {
+		this.operatingday = operatingday;
+	}
+
+	public int getViewcnt() {
+		return viewcnt;
+	}
+
+	public void setViewcnt(int viewcnt) {
+		this.viewcnt = viewcnt;
+	}
+
+	public int getRecommend() {
+		return recommend;
+	}
+
+	public void setRecommend(int recommend) {
+		this.recommend = recommend;
+	}
+
 	public String getThumbnail() {
 		return thumbnail;
 	}
@@ -136,12 +163,8 @@ public class CampVo {
 		return "CampVo [camp_no=" + camp_no + ", camp_address=" + camp_address + ", camp_phone=" + camp_phone
 				+ ", camp_name=" + camp_name + ", camp_content=" + camp_content + ", camp_http=" + camp_http
 				+ ", camp_admin=" + camp_admin + ", camp_location=" + camp_location + ", camp_area=" + camp_area
-				+ ", table_name=" + table_name + ", files=" + Arrays.toString(files) + ", thumbnail=" + thumbnail + "]";
+				+ ", table_name=" + table_name + ", files=" + Arrays.toString(files) + ", thumbnail=" + thumbnail
+				+ ", recommend=" + recommend + ", viewcnt=" + viewcnt + ", operatingday=" + operatingday + "]";
 	}
-
-
-
-	
-	
 
 }

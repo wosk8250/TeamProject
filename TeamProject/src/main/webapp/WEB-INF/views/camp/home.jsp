@@ -50,20 +50,19 @@
 		$("#areaDo").change(function() {
 			
 			var camp_area = $("#areaDo").val()
-			console.log(camp_area);
-			
+// 			console.log(camp_area);
 			
 			var url = "/camp/locationArea/" + camp_area;
-			console.log("url", url);
+// 			console.log("url", url);
 			var sendData ={
 				"camp_area" : camp_area
 			};
 			$("#locationSi option").remove();
-			console.log("sendData", sendData);	
+// 			console.log("sendData", sendData);	
 			
 			$.get(url, sendData, function(rData){
 				$.each(rData, function(index){
-					console.log(rData);
+// 					console.log(rData);
 					var optionArea = "<option value='"+ rData[index] +"'>" + rData[index]+ "</option>";
 					
 					$("#locationSi").append(optionArea);
@@ -74,46 +73,26 @@
 		});
 	});
 	
-// 	$(function(){
-// 		$("#locationSi").change(function(){
-			
-// 			var camp_location = $("locationSi").val()
-// 			console.log(camp_location);
-// 			var url = "/camp/areaLocation/" + camp_location;
-// 			var sendData = {
-// 					"camp_location" : camp_location
-// 			};
-// 			console.log("sendData", sendData);
-// 			$.get(url, sendData, function(Data){
-				
-// 			});
-			
-			
-// 		});
-// 	})
 	
 	$(function() {
 		$("#searchButton").click(function() {
 			
 			var selectDo = $("#areaDo").val();
 			var selectSi = $("#locationSi").val();
-			console.log(selectDo);
-			console.log(selectSi);
 			
 			var sendData = {
-				"camp_area"  : areaDo,
-				"camp_location"	: locationSi
+				"camp_area"  : selectDo,
+				"camp_location"	: selectSi
 			};
 			
 			console.log(sendData);
 			
-			
-			var url = "/camp/searchCampList";
+			var url = "/camp/searchList";
 			
 				$.ajax({
 					"type" : "post",
 					"url" : url,
-					"dataType" : "text",
+					"dataType" : "JSON",
 					"data" : JSON.stringify(sendData),
 					"headers" : {
 						"Content-Type" : "application/json",
@@ -121,10 +100,25 @@
 					},
 					"success" : function(rData) {
 						console.log(rData);
-					}
-				});
+						$("#camPingTable").empty();
+						var table = $("#camPingTable tr:first").clone();
+						$.each(rData, function(index, value) {
+							
+							console.log(value.camp_name);
+							
+							var table_re = "<tr>" +
+								"<td>" + value.camp_name + "</td>" +
+							
+								
+								"</tr>";
+							
+							$("#camPingTable").append(table);
+						});	
+				}
 			});
+		});
 	});
+
 	$(function() {
 
 		$("a.page-link").click(function(e) {
@@ -147,7 +141,7 @@
 				return;
 			}
 		});
-		
+
 		// 글제목 클릭 -> 상세보기
 		$("a.a_title").click(function(e) {
 			e.preventDefault();
@@ -177,7 +171,6 @@
 					<div class="jb-nav-table-row">
 						<div class="jb-nav-table-cell">
 							<nav class="navbar navbar-expand-lg">
-
 								<button class="navbar-toggler" type="button"
 									data-toggle="collapse"
 									data-target="#bs-example-navbar-collapse-1">
@@ -219,17 +212,16 @@
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table" id="camPingTable">
-<!-- 			<table class="table" id="camPingTable"> -->
 				<thead>
 					<tr>
-						<th>#</th>
+						<th>지역별 인기 캠핑장 목록</th>
 						<th></th>
 						<th></th>
 						<th></th>
 						<th></th>
 						<th>
 							<select name="perPage" class="form-inline">
-									<c:forEach begin="5" end="30" step="5" var="i">
+									<c:forEach begin="5" end="10" step="5" var="i">
 										<option value="${i}" <c:if test="${i == pagingDto.perPage}">selected</c:if> 
 										>${i}줄씩 보기</option></c:forEach>
 							</select>
@@ -239,52 +231,28 @@
 				<tbody>
 				<c:forEach items="${campList}" var="CampVo">
 					<tr>
-						<td>${CampVo.camp_no}</td>
-						<td><a href="/board/campingContent" class="a_title" data-camp_no="${CampVo.camp_no}">${CampVo.camp_name}</a></td>
+						<td><h2><a href="/camp/campingContent" class="a_title" data-camp_no="${CampVo.camp_no}">${CampVo.camp_name}</a></h2></td>
 						<td>${CampVo.camp_phone}</td>
 						<td>${CampVo.camp_location}</td>
 						<td><img width="200" height="200" src="/resources/image/1594178025406.jpg"></td>
-						<td>
-						</td>
-					</tr>
+							<td>
+							<div class="camp_item_box">
+							<th>
+								<ul>
+									<li><i class="ico_wifi"><span>와이파이</span></i></li>
+									<li><i class="ico_wood"><span>장작판매</span></i></li>
+									<li><i class="ico_hotwater"><span>온수</span></i></li>
+									<li><i class="ico_walk"><span>산책로</span></i></li>
+									<li><i class="ico_mart"><span>마트.편의점</span></i></li>
+								</ul>
+							</th>
+						</div>
+							</td>
+							<td>조회수 : ${CampVo.viewcnt}</td>
+							<td>추천수 : ${CampVo.recommend}</td>
+						</tr>
 				</c:forEach>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table" id="camPingTable1" style="display: none">
-<!-- 			<table class="table" id="camPingTable"> -->
-				<thead>
-					<tr>
-						<th>#</th>
-						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
-						<th>
-							<select name="perPage" class="form-inline">
-									<c:forEach begin="5" end="30" step="5" var="i">
-										<option value="${i}" <c:if test="${i == pagingDto.perPage}">selected</c:if> 
-										>${i}줄씩 보기</option></c:forEach>
-							</select>
-						</th>
 					</tr>
-				</thead>
-				<tbody>
-				<c:forEach items="${campList}" var="CampVo">
-					<tr>
-						<td>${CampVo.camp_no}</td>
-						<td><a href="/board/campingContent" class="a_title" data-camp_no="${CampVo.camp_no}">${CampVo.camp_name}</a></td>
-						<td>${CampVo.camp_phone}</td>
-						<td>${CampVo.camp_location}</td>
-						<td><img width="200" height="200" src="/resources/image/1594178025406.jpg"></td>
-						<td>
-						</td>
-					</tr>
-				</c:forEach>
 				</tbody>
 			</table>
 		</div>

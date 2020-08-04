@@ -27,7 +27,7 @@
 		select *
 			from(select rownum rnum, a.*
 				from(select * from tbl_camp
-					order by camp_no ASC) a)
+					order by recommend DESC) a)
 		where rnum between #{startRow} and #{endRow}
 	</select>
 	
@@ -37,10 +37,40 @@
 	</select>
 	
 
-	<select id="areaLocation" resultType="CampVo">
+	<select id="searchList" resultType="CampVo">
 		select * from tbl_camp where camp_area = #{camp_area} and camp_location = #{camp_location}
 	</select>
-
 	
+	<select id="capingOption" resultType="AmenitiesVo">
+		select * from tbl_amenities
+	</select>
+	<!-- 조회 수 -->
+	<update id="viewcnt">
+		update tbl_camp set
+		 viewcnt = viewcnt + 1
+		where camp_no = #{camp_no}
+	</update>
+	
+	<!-- 추천 -->
+	<update id="recommend">
+		update tbl_camp set 
+			recommend = recommend + 1
+		where camp_no = #{camp_no}
+	</update>
+	
+	<select id="recommendCheck" resultType="CampRecommendVo">
+		select * from tbl_camp_recommend where user_id = #{user_id}
+	</select>
+	
+	
+	<insert id="recommendInsert">
+		insert into tbl_camp_recommend(camp_no, user_id, check_num)
+		values(#{camp_no}, #{user_id}, #{check_num})
+	</insert>
+	
+	<!-- 지역별 베스트 -->
+	<select id="areaLocationSelect" resultType="String">
+		select * from tbl_camp where camp_location = #{camp_location};
+	</select>
 	
 </mapper>
