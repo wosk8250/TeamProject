@@ -56,7 +56,7 @@ $(".searchFaq").click(function() {
 				<c:if test="${faqVo.faq_admin == 0}">
 					<tr>
 						<td>${faqVo.faq_no}</td>
-						<td><a href="/camp/selectByfaq/${faqVo.faq_no}/${checkBoard}">${faqVo.faq_title}</a></td>
+						<td><a href="/camp/selectByfaq/${faqVo.faq_no}">${faqVo.faq_title}</a></td>
 						<td>${faqVo.faq_date}</td>
 					</tr>
 				</c:if>
