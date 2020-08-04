@@ -51,7 +51,7 @@ $(function() {
 						<td>
 	
 						 <a id="modal-129046" href="#modal-container-129046" role="button"
-								class="btn btn-success btnModal" data-toggle="modal">수정</a>
+								class="btn btn-info btnModal" data-toggle="modal">수정</a>
 								<div class="modal fade" id="modal-container-129046"
 									role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog" role="document">
@@ -78,7 +78,7 @@ $(function() {
 								</div>
 
 							</td>
-						<td><a href="/admin/demeritDelete?demerit_code=${demeritCodeVo.demerit_code}" class="btn btn-warning">삭제</a></td>
+						<td><a href="/admin/demeritDelete?demerit_code=${demeritCodeVo.demerit_code}" class="btn btn-danger">삭제</a></td>
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -87,7 +87,7 @@ $(function() {
 		
 	</div>
 	<a id="modal-338047" href="#modal-container-338047" role="button"
-		class="btn btn-dark" data-toggle="modal">벌점 등록</a>
+		class="btn btn-primary" data-toggle="modal">벌점 등록</a>
 
 	<div class="modal fade" id="modal-container-338047" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file ="../include/adminheader.jsp" %>
+
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
 $(function() {
@@ -63,7 +64,7 @@ $(function() {
 						<td><a href="/board/campingContent?camp_no=${campVo.camp_no}">${campVo.camp_name}</a></td>
 						<td>${campVo.camp_location}</td>
 						<td>${campVo.camp_area}</td>
-						<td><a href="/admin/campDelete?camp_no=${campVo.camp_no}" class="btn btn-warning">삭제</a></td>
+						<td><a href="/admin/campDelete?camp_no=${campVo.camp_no}" class="btn btn-danger">삭제</a></td>
 					</tr>
 				</c:forEach>
 				</tbody>
