@@ -19,11 +19,15 @@ public class CampVo {
 	private int recommend;
 	private int viewcnt;
 	private String operatingday;
+	private String inclination;
+	private String latitude;
+	private String user_id;
 	
 	public CampVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 
 	public CampVo(int camp_no, String camp_address, String camp_phone, String camp_name, String camp_content,
 			String camp_http, String camp_location, String camp_area) {
@@ -158,13 +162,41 @@ public class CampVo {
 		this.files = files;
 	}
 
+	public String getInclination() {
+		return inclination;
+	}
+
+	public void setInclination(String inclination) {
+		this.inclination = inclination;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
+
 	@Override
 	public String toString() {
 		return "CampVo [camp_no=" + camp_no + ", camp_address=" + camp_address + ", camp_phone=" + camp_phone
 				+ ", camp_name=" + camp_name + ", camp_content=" + camp_content + ", camp_http=" + camp_http
 				+ ", camp_admin=" + camp_admin + ", camp_location=" + camp_location + ", camp_area=" + camp_area
 				+ ", table_name=" + table_name + ", files=" + Arrays.toString(files) + ", thumbnail=" + thumbnail
-				+ ", recommend=" + recommend + ", viewcnt=" + viewcnt + ", operatingday=" + operatingday + "]";
+				+ ", recommend=" + recommend + ", viewcnt=" + viewcnt + ", operatingday=" + operatingday
+				+ ", inclination=" + inclination + ", latitude=" + latitude + ", user_id=" + user_id + "]";
 	}
+
+
 
 }

@@ -19,8 +19,8 @@
 	<!-- 캠핑장 입력 -->
 	<insert id="campInsertRun">
 		insert into
-		tbl_camp(camp_no,camp_address,camp_phone,camp_name,camp_content,camp_http,camp_location,camp_area,thumbnail,camp_admin)
-		values(seq_camp_no.nextval,#{camp_address},#{camp_phone},#{camp_name},#{camp_content},#{camp_http},#{camp_location},#{camp_area},#{thumbnail},2)
+		tbl_camp(camp_no,camp_address,camp_phone,camp_name,camp_content,camp_http,camp_location,camp_area,thumbnail,camp_admin, user_id)
+		values(seq_camp_no.nextval,#{camp_address},#{camp_phone},#{camp_name},#{camp_content},#{camp_http},#{camp_location},#{camp_area},#{thumbnail}, 2, #{user_id})
 	</insert>
 	<!-- 캠핑장 주소로 찾기 -->
 	<select id="campModifyForm" resultType="CampVo">

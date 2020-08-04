@@ -42,7 +42,7 @@
 <!-- 로그인 상태 -->
 
 
-<!-- <li class="nav-item dropdown no-arrow"> -->
+<li class="nav-item dropdown no-arrow">
 	<c:choose>
 		<c:when test="${not empty sessionScope.user_id}">
 		
@@ -56,7 +56,7 @@
 	            <!-- <h6 class="collapse-header">Custom Components:</h6> -->
 	            <a class="collapse-item" href="/user/myReviewList"> 내가 작성한 후기</a>
 	            <c:if test="${sessionScope.checkAdmin == 2}">
-	            <a class="collapse-item" href="/user/myCampList"> 내가 올린 캠핑장</a>
+	            <a class="collapse-item" href="/business/myCampList"> 내가 올린 캠핑장</a>
 	            </c:if>
 	            <a class="collapse-item" href="/user/profile">프로필 </a>
 	            <a class="collapse-item" href="/user/updateInfo"> 프로필 수정</a>
@@ -80,7 +80,7 @@
          	<span>로그인</span>
          </a>
       <!-- 회원가입 -->
-<!--       <li class="nav-item"> -->
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-address-card fa-sm fa-fw mr-2"></i>
           <span>회원가입</span>
@@ -91,11 +91,11 @@
             <a class="collapse-item" href="/user/insertBusiness">사업자용 회원가입</a>
           </div>
         </div>
-<!--       </li> -->
+      </li>
 		<hr class="sidebar-divider my-0">
 	</c:otherwise>
 </c:choose>
-<!-- </li> -->
+</li>
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
