@@ -56,7 +56,7 @@
 					<tr>
 					<td>${CampingTipVo.table_name}</td>
 					<td><img src="/upload/displayImg?fileName=${CampingTipVo.campingtip_img}" alt="사진없음"/></td>
-					<td>${CampingTipVo.campingtip_title}</td>
+					<td><a href="/camp/singleContentsCampingTip/${CampingTipVo.campingtip_no}/admin">${CampingTipVo.campingtip_title}</a></td>
 					<td>${CampingTipVo.campingtip_writer}</td>
 					<td>${CampingTipVo.campingtip_date}</td>
 					</tr>

@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:choose>
+ <c:when test="${sessionScope.checkBoard == 'admin'}">
+ <%@ include file="../include/adminheader.jsp" %>
+ </c:when>
+ <c:when test="${sessionScope.checkBoard eq 'camp'}">
 <%@ include file="../include/header.jsp" %>
+ </c:when>
+ </c:choose>
 <style>
 .camping_content{
 text-align: center;
@@ -83,7 +91,20 @@ margin-left:  20px;
 
 				</tbody>
 			</table>
+		<c:if test="${sessionScope.checkAdmin eq 9 }">
+				<a href="/admin/campingTalkDelete?campingtip_no=${campingTipVo.campingtip_no}"class="btn btn-danger">삭제</a>				
+ </c:if>
+ <c:choose>
+ <c:when test="${sessionScope.checkBoard eq 'admin'}">
+				<a href="/admin/campingTalk"class="btn btn-success">목록</a>				
+ </c:when>
+ <c:when test="${sessionScope.checkBoard eq 'camp'}">
+				<a href="/admin/campingTipModifyForm/${campingTipVo.campingtip_title}/${checkBoard}"class="btn btn-info">수정</a>				
 				<a href="/camp/campingToolTalkList"class="btn btn-success" id= "btnList">목록</a>		
+ </c:when>
+ </c:choose>
+		
+		
 		</div>
 		<div class="col-md-2">
 
