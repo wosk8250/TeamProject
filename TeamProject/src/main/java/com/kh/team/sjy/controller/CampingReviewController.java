@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.domain.AreaCampingNameVo;
+
 import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.myReviewPagingDto;
 import com.kh.team.sjy.persitence.AreaCampingNameDaoImpl;
 import com.kh.team.sjy.persitence.CampingReviewDaoImpl;
+
 import com.kh.team.sjy.service.CampingReviewService;
 
 
@@ -38,7 +40,7 @@ public class CampingReviewController {
 	
 	@Inject
 	private CampingReviewService campingReviewService;
-	
+
 	
 
 	
@@ -48,19 +50,18 @@ public class CampingReviewController {
 	//캠핑장 후기 목록 
 	@RequestMapping(value="/campingReviewList", method=RequestMethod.GET)
 	public String campingReviewList(myReviewPagingDto myReviewPagingDto, Model model, String review_title)throws Exception{
+		List<ReviewVo>  list = null;
 		if (review_title == null) {
 			myReviewPagingDto.setmyReviewPageInfo();
 			int totalCount = campingReviewService.campingReviewListCount();
 //			System.out.println("totalCount:" + totalCount);
 			myReviewPagingDto.setTotalCount(totalCount);	
-			List<ReviewVo> list  = campingReviewService.campingReviewListPage(myReviewPagingDto);
-			model.addAttribute("list", list);
-			model.addAttribute("pagingDto", myReviewPagingDto);
+			 list = campingReviewService.campingReviewListPage(myReviewPagingDto);
 		}else {
-			List<ReviewVo> list = campingReviewService.campingReviewSearch(review_title);
-			model.addAttribute("list",list);
+			 list = campingReviewService.campingReviewSearch(review_title);
 		}
-		
+		model.addAttribute("list", list);
+		model.addAttribute("pagingDto", myReviewPagingDto);		
 		
 		return "camp/campingReviewList";
 	}
@@ -82,13 +83,14 @@ public class CampingReviewController {
 	//캠핑장 후기 글 등록(처리)
 	
 	@RequestMapping(value="/campingReviewWritingRun", method = RequestMethod.POST)
-	public String campingReviewWritingRun(HttpServletRequest request,ReviewVo reviewVo)throws Exception{
+	public String campingReviewWritingRun(HttpServletRequest request,ReviewVo reviewVo,  RedirectAttributes rttr)throws Exception{
+		rttr.addFlashAttribute("msg","insert");
 		HttpSession httpSession =  request.getSession();
 		String user_id = (String)httpSession.getAttribute("user_id");
 		reviewVo.setReview_id(user_id);
-		System.out.println("user_id:"+user_id);
-		System.out.println("review_id:"+reviewVo.getReview_id());
-		System.out.println("reviewVo:"+reviewVo);
+//		System.out.println("user_id:"+user_id);
+//		System.out.println("review_id:"+reviewVo.getReview_id());
+//		System.out.println("reviewVo:"+reviewVo);
 
 		campingReviewService.campingReviewInsertRun(reviewVo);
 		return "redirect:/camp/campingReviewList";
@@ -102,7 +104,7 @@ public class CampingReviewController {
 		ReviewVo reviewVo = campingReviewDaoImpl.selectReview(review_no);
 		System.out.println("reviewVo:" + reviewVo);
 		List<ReviewVo> list = campingReviewService.campingReviewList();
-		List<FilesVo> fileList = campingReviewService.filesList("review");
+		List<FilesVo> fileList = campingReviewService.filesList("후기");
 		List<FilesVo> fileNoListImg = campingReviewService.filesNoFilesList(review_no);
 //		System.out.println("list:" + list);
 //		System.out.println("fileList:" + fileList);
@@ -119,7 +121,7 @@ public class CampingReviewController {
 		 campingReviewDaoImpl.campingReviewView(review_no); //조회수
 		
 		
-		
+	
 		model.addAttribute(reviewVo);
 	
 		model.addAttribute("list",list);
@@ -138,7 +140,7 @@ public class CampingReviewController {
 		HttpSession httpSession =  request.getSession();
 		String user_id = (String)httpSession.getAttribute("user_id");
 		if(!user_id.equals(reviewVo.getReview_id())) {
-			return "redirect:/camp/home";
+			return "redirect:/camp/main";
 		}
 		
 		model.addAttribute("reviewVo", reviewVo);

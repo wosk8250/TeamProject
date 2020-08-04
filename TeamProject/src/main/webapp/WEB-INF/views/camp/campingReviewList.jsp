@@ -95,7 +95,7 @@ $(function(){
 
 					<tr>
 						<td  colspan="2">
-							<img src="/upload/displayImg?fileName=${reviewVo.review_img}" alt="사진 미등록"/>
+							<img src="/upload/displayCampingImg?fileName=${reviewVo.review_img}" alt="사진 등록"/>
 						</td>
 	
 						<td colspan="2">

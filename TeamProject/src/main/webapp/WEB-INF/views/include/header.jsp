@@ -42,12 +42,12 @@
 <!-- 로그인 상태 -->
 
 
-<!-- <li class="nav-item dropdown no-arrow"> -->
+<li class="nav-item dropdown no-arrow">
 	<c:choose>
 		<c:when test="${not empty sessionScope.user_id}">
 		
 			<a class="nav-link" href="/user/updateInfo">${sessionScope.user_id}님 반갑습니다.</a>
-			<li class="nav-item"><a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMyPage" aria-expanded="true" aria-controls="collapseTwo">
+			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMyPage" aria-expanded="true" aria-controls="collapseTwo">
 	          <i class="fas fa-fw fa-cog"></i>
 	          <span>마이 페이지</span>
 	        </a>
@@ -55,20 +55,11 @@
 	          <div class="bg-white py-2 collapse-inner rounded">
 	            <!-- <h6 class="collapse-header">Custom Components:</h6> -->
 	            <a class="collapse-item" href="/user/myReviewList"> 내가 작성한 후기</a>
-	            <c:if test="${sessionScope.checkAdmin == 2}">
-	            <a class="collapse-item" href="/user/myCampList"> 내가 올린 캠핑장</a>
-	            </c:if>
 	            <a class="collapse-item" href="/user/profile">프로필 </a>
 	            <a class="collapse-item" href="/user/updateInfo"> 프로필 수정</a>
 	            <a class="collapse-item" href="/user/updatePw"> 비밀번호 수정</a>
 	          </div>
 	        </div>
-	        <c:if test="${sessionScope.checkAdmin == 2}">
-				<a class="nav-link" href="/business/campForm">
-	        		<i class="fas fa-home fa-sm fa-fw mr-2"></i>
-	        		<span>캠핑장 등록</span>
-	        	</a>
-	        </c:if>
 			<a class="nav-link" href="/user/logout">
         		<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
         		<span>로그아웃</span>
@@ -76,26 +67,18 @@
 		</c:when>
 	<c:otherwise>
 		<a class="nav-link" href="/user/login">
-         	<i class="fas fa-sign-in-alt fa-sm fa-fw mr-2"></i>
-         	<span>로그인</span>
-         </a>
-      <!-- 회원가입 -->
-<!--       <li class="nav-item"> -->
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-address-card fa-sm fa-fw mr-2"></i>
-          <span>회원가입</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="/user/insertUser">일반 회원가입</a>
-            <a class="collapse-item" href="/user/insertBusiness">사업자용 회원가입</a>
-          </div>
-        </div>
-<!--       </li> -->
+         			<i class="fas fa-sign-in-alt fa-sm fa-fw mr-2"></i>
+         			<span>로그인</span>
+         		</a>
+		<a class="nav-link" href="/user/insertUser">
+         			<i class="fas fa-address-card fa-sm fa-fw mr-2"></i>
+         			<span>회원가입</span>
+         		</a>
+
 		<hr class="sidebar-divider my-0">
 	</c:otherwise>
 </c:choose>
-<!-- </li> -->
+</li>
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
@@ -122,7 +105,7 @@
           <span>캠핑후기</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/camp/campingToolList">
+        <a class="nav-link" href="/camp/campingToolTalkList">
           <i class="fas fa-fw fa-wrench"></i>
           <span>캠핑장비</span></a>
       </li>
@@ -140,7 +123,22 @@
         </div>
       </li>
 
-
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-fw fa-wrench"></i>
+          <span>Utilities</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Utilities:</h6>
+            <a class="collapse-item" href="utilities-color.html">Colors</a>
+            <a class="collapse-item" href="utilities-border.html">Borders</a>
+            <a class="collapse-item" href="utilities-animation.html">Animations</a>
+            <a class="collapse-item" href="utilities-other.html">Other</a>
+          </div>
+        </div>
+      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -165,7 +163,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/camp/faqList">
-          <i class="fa fa-question-circle" aria-hidden="true"></i>
+          <i class="fas fa-fw fa-table"></i>
           <span>자주 묻는 질문</span></a>
       </li>
       <!-- 관리자 로그인 할때 보이기 -->

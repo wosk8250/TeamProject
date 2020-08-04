@@ -1,49 +1,121 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+<style>
+.camping_content{
+text-align: center;
+
+
+}
+.camping_img{
+text-align: center;
+
+}
+.oriImg{
+ 
+	width : 200px; 
+ 	height: auto; 
+ 	line-height : 100px;
+ 	margin-left:  200px;
+	vertical-align: middle;
+	margin-bottom:  100px;
+
+}
+.content_first{
+	vertical-align: middle;
+	 	margin-left:  200px;
+}
+.btn{
+float:right;
+margin-left:  20px;
+}
+.camping_pre{
+
+	font-size: 20px;
+	
+}
+#review_title {
+	border-top: 3px solid;
+	border-bottom : 1px solid;
+	padding: 10px 30px;
+}
+</style>
+
+
+
+
+
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<h3>캠핑장 수칙</h3>
-			<table class="table">
-				<thead>
-					<tr>
-						<th colspan="3">
-							<h3>${campingTipVo.campingtip_title }</h3>
-						</th>
-						
-						<th>
-							<div class="admin_info" style="float:right;">
-								<a>${campingTipVo.campingtip_writer}</a>
+	<div class="row" style="color: black;" >
+	<br>
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
+		
+			<h3 style="padding: 10px;">캠핑장 수칙</h3>
+			
+			<div class="row" id="review_title">
+				<div class="col-md-6">
+						<h3>${campingTipVo.campingtip_title }</h3>
+				</div>
+				<div class="col-md-6" align="right">
+									<a>${campingTipVo.campingtip_writer}</a>
 								<a>|</a>
 								<a>${campingTipVo.campingtip_date}</a>
 								<a>|</a>
 								<a>${campingTipVo.campingtip_view}</a>
-							</div>
-						</th>
+				</div>
+			</div>
+			<table class="table">
 
-					</tr>
-				</thead>
 				<tbody>
-					<tr>
-						<td>
-							<div class="campingtip">
-								<img class="mr-3" alt="Bootstrap Media Preview" src="https://www.layoutit.com/img/sports-q-c-64-64-8.jpg" />
-							</div>
-						</td>
-						<td>
-								<div class="media-body">
-									<h5 class="mt-0">${campingTipVo.campingtip_content}</h5>
+				<tr>
+					<td>
+								<div class="camping_content">
+									<pre class="camping_pre">${campingTipVo.campingtip_content}</pre>
 								</div>
-						</td>
-	
-					</tr>
+							<div class="camping_img">
+								<c:forEach items="${fileNoListImg}" var="filesVo">
+									<img src="/upload/displayImg?fileName=${filesVo.files }" alt="사진 미등록" class="oriImg"/>
+								</c:forEach>
+
+							</div>
+					</td>
+				</tr>
+
 				</tbody>
 			</table>
-				<a style="float:right; margin: 20px;" href="/camp/campingTipList"class="btn btn-success">목록</a>				
-				<a style="float:right; margin: 20px;" href="/admin/campingTipModifyForm?campingtip_title=${campingTipVo.campingtip_title}"class="btn btn-info">수정</a>				
-				<a style="float:right; margin: 20px;" href="/admin/campingTipDelete?campingtip_no=${campingTipVo.campingtip_no}"class="btn btn-danger">삭제</a>				
+			<a href="/camp/campingTipList"class="btn btn-success" id= "btnList">목록</a>	
 		</div>
+		<div class="col-md-2">
+
+		</div>
+
 	</div>
+
+									
+
+	
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <%@ include file="../include/footer.jsp" %>

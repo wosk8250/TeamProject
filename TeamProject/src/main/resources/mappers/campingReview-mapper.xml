@@ -54,7 +54,8 @@
 		review_content = #{review_content},
 		review_area = #{review_area},
 		review_location =#{review_location},
-		review_campingname = #{review_campingname}
+		review_campingname = #{review_campingname},
+		review_img = #{review_img}
 		where review_no = #{review_no}
 	</update>
 	
