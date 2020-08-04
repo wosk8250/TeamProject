@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <style>
+ .btn{
+ 	float:right; 
+ 	margin: 20px;
+ }
+ 
+ </style>
  <c:choose>
  <c:when test="${checkBoard == 'admin'}">
  <%@ include file="../include/adminheader.jsp" %>
@@ -51,14 +58,14 @@ pre {
 			<div style="text-align: right;">
  <c:if test="${checkAdmin eq 9 }">
 			<a href="/admin/faqModifyForm/${faqVo.faq_no}" class="btn btn-info" >수정</a>
-			<a href="/admin/faqDelete/${faqVo.faq_no}" class="btn btn-info" >삭제</a>
+			<a href="/admin/faqDelete/${faqVo.faq_no}" class="btn btn-danger" >삭제</a>
  </c:if>
  <c:choose>
  <c:when test="${checkBoard == 'admin'}">
-			<a href="/admin/faq" class="btn btn-info" >목록</a>
+			<a href="/admin/faq" class="btn btn-success" >목록</a>
  </c:when>
  <c:when test="${checkBoard eq 'camp'}">
-			<a href="/camp/faqList" class="btn btn-info" >목록</a>
+			<a href="/camp/faqList" class="btn btn-success" >목록</a>
  </c:when>
  </c:choose>
 			</div>

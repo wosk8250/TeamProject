@@ -58,9 +58,7 @@ if(msg == "delete"){
 						<td>
 							<img src="/upload/displayImg?fileName=${campingTipVo.campingtip_img}" alt="사진등록" />
 						</td>
-						<td><a href="/camp/singleContentsCampingTip/${campingTipVo.campingtip_no}">${campingTipVo.campingtip_title}</a></td>
-						<td><a href="/admin/campingTipModifyForm?campingtip_title=${campingTipVo.campingtip_title}" class="btn btn-info" >수정</a></td>
-						<td><a href="/admin/campingTipDelete?campingtip_no=${campingTipVo.campingtip_no}" class="btn btn-warning">삭제</a></td>
+						<td><a href="/camp/singleContentsCampingTip/${campingTipVo.campingtip_no}/${checkBoard}">${campingTipVo.campingtip_title}</a></td>
 					</tr>
 				</c:forEach>
 				</tbody>

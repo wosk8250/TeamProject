@@ -113,6 +113,11 @@ $(function() {
 					<input type="text" class="form-control" id="camp_location" name="camp_location" value="${campVo.camp_location}"/>
 					<span>구</span>
 					<input type="text" class="form-control" id="camp_area" name="camp_area" value="${campVo.camp_area}"/>
+					<span>위도</span>
+					<input type="text" class="form-control" id="latitude" name="latitude" value="${campVo.latitude}"/>
+					<span>경도</span>
+					<input type="text" class="form-control" id="inclination" name="inclination" value="${campVo.inclination}"/>
+					
 					<input type="hidden" class="form-group" id="camp_no" name="camp_no" value="${campVo.camp_no}"/>
 					
 					<input type="hidden" class="form-group" id="table_name" name="table_name" value="${campVo.table_name}"/>

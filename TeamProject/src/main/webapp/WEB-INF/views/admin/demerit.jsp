@@ -13,9 +13,9 @@ $(function() {
 		var demerit_value = $(this).parent().parent().find("td").eq(2).text();
 		
 		var inputContent = "<div>"
-			inputContent += "<span>코드</span> <input type='text' class='form-control' name='demerit_code' value='"+demerit_code+"'/>";
-			inputContent += "<span>내용</span> <input type='text' class='form-control' name='demerit_content' value='"+demerit_content+"'/>";
-			inputContent += "<span>벌점</span> <input type='number' class='form-control' max='100' name='demerit_value' value='"+demerit_value+"'/>";
+			inputContent += "<span>코드</span> <input type='text'  required class='form-control' name='demerit_code' value='"+demerit_code+"'/>";
+			inputContent += "<span>내용</span> <input type='text'  required class='form-control' name='demerit_content' value='"+demerit_content+"'/>";
+			inputContent += "<span>벌점</span> <input type='number'  required class='form-control' max='100' name='demerit_value' value='"+demerit_value+"'/>";
 			inputContent += "</div>"
 		$("#myModalLabel > div").remove();
 		$("#myModalLabel").append("<div>" + demerit_code + " 수정 </div>");
@@ -101,9 +101,12 @@ $(function() {
 				</div>
 				<form action="/admin/insertDemeritCode" method="get">
 				<div class="modal-bodyInput">
-				<input class="form-control" name="demerit_code" type="text" placeholder="코드"/>
-				<input class="form-control" name="demerit_content" type="text" placeholder="내용"/>
-				<input class="form-control" name="demerit_value" type="number" placeholder="벌점" max="100"/>
+				코드
+				<input class="form-control" name="demerit_code" type="text" required/>
+				내용
+				<input class="form-control" name="demerit_content" type="text" required/>
+				벌점
+				<input class="form-control" name="demerit_value" type="number" max="100" required/>
 				</div>
 				<div class="modal-footer">
 

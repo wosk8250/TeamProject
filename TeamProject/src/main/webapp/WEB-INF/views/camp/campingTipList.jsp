@@ -30,7 +30,7 @@
 				<div class="media">
 				<img class="mr-3" alt="Bootstrap Media Preview" src="https://www.layoutit.com/img/sports-q-c-64-64-8.jpg" />
 				<div class="totaltext" >
-						<p class="title"><a href="/camp/singleContentsCampingTip/${CampingTipVo.campingtip_no}">${CampingTipVo.campingtip_title}</a></p>
+						<p class="title"><a href="/camp/singleContentsCampingTip/${CampingTipVo.campingtip_no}/${checkBoard}">${CampingTipVo.campingtip_title}</a></p>
 						<p class="content">${CampingTipVo.campingtip_content}</p>
 				</div>
 

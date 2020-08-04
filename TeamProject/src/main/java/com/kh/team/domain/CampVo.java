@@ -19,6 +19,7 @@ public class CampVo {
 	private String inclination;
 	private String latitude;
 	private String user_id;
+	private String user_email;
 	
 	public CampVo() {
 		super();
@@ -36,6 +37,16 @@ public class CampVo {
 		this.camp_content = camp_content;
 		this.camp_http = camp_http;
 	}
+
+	public String getUser_email() {
+		return user_email;
+	}
+
+
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
+
 
 	public int getCamp_no() {
 		return camp_no;
