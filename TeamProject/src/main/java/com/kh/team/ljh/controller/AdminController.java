@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
+
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +24,7 @@ import com.kh.team.domain.CampingTalkVo;
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.DemeritCodeVo;
 import com.kh.team.domain.DemeritVo;
+import com.kh.team.domain.EmailDto;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.PagingDto;
@@ -36,6 +42,8 @@ public class AdminController {
 	private AdminService adminService;
 	@Inject
 	private UserService userService;
+	@Inject
+	private JavaMailSender javaMailSender;
 
 	// 유저 조회
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
@@ -615,6 +623,24 @@ public class AdminController {
 		@RequestMapping(value="/notRegistCamp/{camp_no}" , method = RequestMethod.GET)
 		public String notRegistCamp(@PathVariable("camp_no") int camp_no)throws Exception  {
 			adminService.notRegistCamp(camp_no);
+			
+			EmailDto emailDto = new EmailDto();
+			emailDto.setTo("janjan44@naver.com");
+			emailDto.setContents("등록이 거절되엇습니다");
+			
+			MimeMessagePreparator preparator = new MimeMessagePreparator() {
+				
+				@Override
+				public void prepare(MimeMessage mimeMessage) throws Exception {
+					MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
+					helper.setFrom(emailDto.getFrom());
+					helper.setTo(emailDto.getTo());
+					helper.setSubject("camping club입니다");
+					helper.setText(emailDto.getContents());
+				}
+			};
+			javaMailSender.send(preparator);
+			
 			return "redirect:/admin/waitForRegistrationCamp";
 		}
 		
