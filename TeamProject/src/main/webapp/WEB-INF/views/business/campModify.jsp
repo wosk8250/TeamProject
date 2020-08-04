@@ -97,7 +97,7 @@ $(function() {
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<form role="form" id="campModifyRun" action="/admin/campModifyRun" method="post"  enctype="multipart/form-data">
+			<form role="form" id="campModifyRun" action="/business/campModifyRun" method="post"  enctype="multipart/form-data">
 				<div class="form-group">
 
 					<label for="camp_title"> 제목 </label> 

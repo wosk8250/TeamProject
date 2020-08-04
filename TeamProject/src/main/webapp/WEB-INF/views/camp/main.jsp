@@ -4,6 +4,10 @@
     <%@ include file="../include/mainHeader.jsp"%>
 
 <style>
+	#owl-demo {
+	color: white;
+	}
+
 	.jb-wrap {
 	width: 100%;
 	margin: 0px auto;
@@ -34,11 +38,20 @@
  }
 #in {
 	float: left;
-	margin-left: 50%;
+	margin-left: 60%;
  }
- .jb-image {
- 
- }
+#owl-demo .item img{
+  display: block;
+  width: 100%;
+  height: 160px;
+  
+}
+#owl-demo {
+	margin-top: 250px;
+}
+#form {
+margin-bottom: 0;
+}
 </style>
 <link rel="stylesheet" href="/resources/assets/owl.carousel.min.css">
 <link rel="stylesheet" href="/resources/assets/owl.theme.default.min.css">
@@ -160,41 +173,13 @@ $(function() {
 					<div class="col-md-12">
 			<!-- 인기 캠핑장 -->
 						<div class="owl-carousel" id="owl-demo">
-				            <div class="item">
-				              <h4>1</h4>
-				            </div>
-				            <div class="item">
-				              <h4>2</h4>
-				            </div>
-				            <div class="item">
-				              <h4>3</h4>
-				            </div>
-				            <div class="item">
-				              <h4>4</h4>
-				            </div>
-				            <div class="item">
-				              <h4>5</h4>
-				            </div>
-				            <div class="item">
-				              <h4>6</h4>
-				            </div>
-				            <div class="item">
-				              <h4>7</h4>
-				            </div>
-				            <div class="item">
-				              <h4>8</h4>
-				            </div>
-				            <div class="item">
-				              <h4>9</h4>
-				            </div>
-				            <div class="item">
-				              <h4>10</h4>
-				            </div>
+							<c:forEach items="${campVo}" var="campVo">
+					            <div class="item">
+					            <img src="/upload/displayCampingImg?fileName=${campVo.thumbnail}" alt="${campVo.thumbnail}"/>
+					              <h4>${campVo.camp_name}</h4>
+					            </div>
+							</c:forEach>
 						</div>
-			          <div class="text-center">
-			          <a class="btn btn-primary play" style="color:white;">▶</a> 
-			          <a class="btn btn-primary stop" style="color:white;">■</a>
-			          </div>
 					</div>
 				</div>
 			</div>
@@ -219,7 +204,7 @@ $(function() {
 				<tbody>
 					<c:forEach items="${reviewVo}" var="reviewVo">
 						<tr>
-							<td>${reviewVo.review_title}</td>
+							<td><a href="/camp/selectReview/${reviewVo.review_no}">${reviewVo.review_title}</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -235,7 +220,7 @@ $(function() {
 				<tbody>
 					<c:forEach items="${CampNoticeVo}" var="CampNoticeVo">
 						<tr>
-							<td>${CampNoticeVo.notice_title}</td>
+							<td><a href="/camp/singleContentsCampNotice/${CampNoticeVo.notice_no}">${CampNoticeVo.notice_title}</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -251,7 +236,7 @@ $(function() {
 				<tbody>
 					<c:forEach items="${CampingTipVo}" var="CampingTipVo">
 						<tr>
-							<td>${CampingTipVo.campingtip_title}</td>
+							<td><a href="/camp/singleContentsCampingTip/${CampingTipVo.campingtip_no}">${CampingTipVo.campingtip_title}</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -267,7 +252,7 @@ $(function() {
 				<tbody>
 					<c:forEach items="${faqVo}" var="faqVo">
 						<tr>
-							<td>${faqVo.faq_title}</td>
+							<td><a href="/camp/selectByfaq/${faqVo.faq_no}/${checkBoard}">${faqVo.faq_title}</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -289,12 +274,6 @@ $(function() {
 	    autoplayHoverPause:true
 
 	});
-	$('.play').on('click',function(){
-	    owl.trigger('play.owl.autoplay',[1000])
-	})
-	$('.stop').on('click',function(){
-	    owl.trigger('stop.owl.autoplay')
-	})
 	
 	</script>
 <%@ include file="../include/footer.jsp"%>
