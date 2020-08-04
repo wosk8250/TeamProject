@@ -107,6 +107,7 @@ public class AdminController {
 		List<CampNoticeVo> list = adminService.noticeListPage(myReviewPagingDto);
 		model.addAttribute("list", list);
 		model.addAttribute("pagingDto", myReviewPagingDto);
+		model.addAttribute("checkBoard", "admin");
 		} else {
 			List<CampNoticeVo> list =  adminService.searchNotice(notice_title);
 			model.addAttribute("list", list);
@@ -248,7 +249,7 @@ public class AdminController {
 		}else {
 		list =  adminService.searchCampingTip(campingtip_title);
 		}
-		
+		model.addAttribute("checkBoard", "admin");
 		model.addAttribute("list", list);
 		model.addAttribute("pagingDto", myReviewPagingDto);
 		return "admin/campingTip";

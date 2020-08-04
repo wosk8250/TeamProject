@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/header.jsp" %>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <c:choose>
+ <c:when test="${checkBoard == 'admin'}">
+ <%@ include file="../include/adminheader.jsp" %>
+ </c:when>
+ <c:when test="${checkBoard eq 'camp'}">
+<%@ include file="../include/topImgHeader.jsp" %>
+ </c:when>
+ </c:choose>
 <style>
 dd{
 	text-indent:10%;
@@ -36,7 +44,19 @@ a{
 			<dl>
 				<dd>${campNoticeVo.notice_content}</dd>
 			</dl>
+			
+			<c:if test="${checkAdmin eq 9 }">
+			<a href="/admin/noticeDelete?notice_no=${campNoticeVo.notice_no}" class="btn btn-info" >삭제</a>
+			<a href="/admin/noticeModifyForm?notice_no=${campNoticeVo.notice_no}" class="btn btn-info" >수정</a>
+ </c:if>
+ <c:choose>
+ <c:when test="${checkBoard == 'admin'}">
+			<a href="/admin/notice" class="btn btn-info" >목록</a>
+ </c:when>
+ <c:when test="${checkBoard eq 'camp'}">
 			<a  href="/camp/campNoticeList"class="btn btn-success">목록</a>
+ </c:when>
+ </c:choose>
 			
 		</div>
 	</div>

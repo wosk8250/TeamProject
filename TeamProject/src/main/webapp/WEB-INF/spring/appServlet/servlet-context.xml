@@ -31,7 +31,7 @@
 	
 	<beans:bean
 		id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="\\192.168.0.203\yaya"/>	
+		<beans:constructor-arg value="\\192.168.0.224\yaya"/>	
 <!-- 		<beans:constructor-arg value="//192.168.0.212/upload"/> -->
 	</beans:bean>
 
