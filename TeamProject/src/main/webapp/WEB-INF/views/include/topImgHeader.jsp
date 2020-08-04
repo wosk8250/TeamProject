@@ -65,7 +65,7 @@ $(function () {
 		<c:when test="${not empty sessionScope.user_id}">
 		
 			<a class="nav-link" href="/user/updateInfo">${sessionScope.user_id}님 반갑습니다.</a>
-			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMyPage" aria-expanded="true" aria-controls="collapseTwo">
+			<li class="nav-item"><a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMyPage" aria-expanded="true" aria-controls="collapseTwo">
 	          <i class="fas fa-fw fa-cog"></i>
 	          <span>마이 페이지</span>
 	        </a>

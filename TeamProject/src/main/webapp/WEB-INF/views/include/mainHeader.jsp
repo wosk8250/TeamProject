@@ -23,6 +23,9 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	
+	<!-- Owl Carousel -->
+    <link rel="stylesheet" href="/resources/css/owl.carousel.css">
 
 <style>
 	#title {
@@ -47,7 +50,7 @@
 		<c:when test="${not empty sessionScope.user_id}">
 		
 			<a class="nav-link" href="/user/updateInfo">${sessionScope.user_id}님 반갑습니다.</a>
-			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMyPage" aria-expanded="true" aria-controls="collapseTwo">
+			<li class="nav-item"><a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMyPage" aria-expanded="true" aria-controls="collapseTwo">
 	          <i class="fas fa-fw fa-cog"></i>
 	          <span>마이 페이지</span>
 	        </a>
@@ -56,7 +59,7 @@
 	            <!-- <h6 class="collapse-header">Custom Components:</h6> -->
 	            <a class="collapse-item" href="/user/myReviewList"> 내가 작성한 후기</a>
 	            <c:if test="${sessionScope.checkAdmin == 2}">
-	            <a class="collapse-item" href="/user/myCampList"> 내가 올린 캠핑장</a>
+	            <a class="collapse-item" href="/business/myCampList"> 내가 올린 캠핑장</a>
 	            </c:if>
 	            <a class="collapse-item" href="/user/profile">프로필 </a>
 	            <a class="collapse-item" href="/user/updateInfo"> 프로필 수정</a>
@@ -216,7 +219,7 @@
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top" id="topbar">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top" id="topbar" style="margin-bottom: 0">
 
           <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
