@@ -85,6 +85,19 @@
 	<div class="row">
 		<div class="col-md-12">
 
+  <div id="contextMenu" class="dropdown clearfix">
+            <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
+                style="display:block;position:static;margin-bottom:5px;">
+                <li><a tabindex="-1" href="#">카테고리1</a></li>
+                <li><a tabindex="-1" href="#">카테고리2</a></li>
+                <li><a tabindex="-1" href="#">카테고리3</a></li>
+                <li><a tabindex="-1" href="#">카테고리4</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
+            </ul>
+        </div>
+
+
 			 <div id='calendar'></div>
 			
 			
