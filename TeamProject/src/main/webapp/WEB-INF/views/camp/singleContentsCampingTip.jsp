@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ 
+ <style>
+ .btn{
+ 	float:right; 
+ 	margin: 20px;
+ }
+ 
+ </style>
+ 
  <c:choose>
  <c:when test="${checkBoard == 'admin'}">
  <%@ include file="../include/adminheader.jsp" %>
@@ -49,15 +58,15 @@
 				</tbody>
 			</table>
 		<c:if test="${checkAdmin eq 9 }">
-				<a style="float:right; margin: 20px;" href="/admin/campingTipModifyForm?campingtip_title=${campingTipVo.campingtip_title}"class="btn btn-info">수정</a>				
-				<a style="float:right; margin: 20px;" href="/admin/campingTipDelete?campingtip_no=${campingTipVo.campingtip_no}"class="btn btn-danger">삭제</a>				
+				<a href="/admin/campingTipModifyForm?campingtip_title=${campingTipVo.campingtip_title}"class="btn btn-info">수정</a>				
+				<a href="/admin/campingTipDelete?campingtip_no=${campingTipVo.campingtip_no}"class="btn btn-danger">삭제</a>				
  </c:if>
  <c:choose>
  <c:when test="${checkBoard == 'admin'}">
-				<a style="float:right; margin: 20px;" href="/admin/campingTip"class="btn btn-success">목록</a>				
+				<a href="/admin/campingTip"class="btn btn-success">목록</a>				
  </c:when>
  <c:when test="${checkBoard eq 'camp'}">
-				<a style="float:right; margin: 20px;" href="/camp/campingTipList"class="btn btn-success">목록</a>				
+				<a href="/camp/campingTipList"class="btn btn-success">목록</a>				
  </c:when>
  </c:choose>
 		

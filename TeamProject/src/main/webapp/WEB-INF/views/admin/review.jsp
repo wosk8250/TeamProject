@@ -6,6 +6,7 @@
 
 
 <script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
 	$(function() {
 
@@ -91,12 +92,12 @@
 			<script type="text/javascript"
 				src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=a3pn1ogugq"></script>
 			<script>
+				var map = new naver.maps.Map('map', mapOptions);
+				
 				var mapOptions = {
 					center : new naver.maps.LatLng(35.554606, 129.322896),//위도,경도
 					zoom : 15
-				//줌 숫자
 				};
-				var map = new naver.maps.Map('map', mapOptions);
 			</script>
 
 
@@ -132,9 +133,6 @@
 								<td>${reviewVo.review_id}</td>
 								<td>${reviewVo.review_date}</td>
 								<td>${reviewVo.review_campingname}</td>
-								<td><a
-									href="/admin/reviewDelete?review_no=${reviewVo.review_no}"
-									class="btn btn-warning">삭제</a></td>
 
 							</tr>
 						</c:if>

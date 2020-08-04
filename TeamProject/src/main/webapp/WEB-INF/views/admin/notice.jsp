@@ -61,8 +61,6 @@ $(function() {
 						<td>${campNoticeVo.notice_no}</td>
 						<td><a href="/camp/singleContentsCampNotice/${campNoticeVo.notice_no}/${checkBoard}">${campNoticeVo.notice_title}</a></td>
 						<td>${campNoticeVo.notice_date}</td>
-						<td><a href="/admin/noticeModifyForm?notice_no=${campNoticeVo.notice_no}" class="btn btn-info" >수정</a></td>
-						<td><a href="/admin/noticeDelete?notice_no=${campNoticeVo.notice_no}" class="btn btn-warning">삭제</a></td>
 					</tr>
 					</c:if>
 				</c:forEach>
