@@ -34,21 +34,16 @@ public class CampNoticeController {
 	public String campNoticeList(Model model)throws Exception{
 		List<CampNoticeVo> list = campNoticeDaoImpl.campNoticeList();
 		model.addAttribute("list",list);
-		model.addAttribute("checkBoard","camp");
 	return "/camp/campNoticeList";
 	}
 	
 	//공지사항 글 내용
 	@Transactional
-	@RequestMapping(value="/singleContentsCampNotice/{notice_no}/{checkBoard}", method= RequestMethod.GET)
-	public String  singleContentsCampNotice(@PathVariable("checkBoard") String checkBoard,@PathVariable("notice_no") int notice_no,  Model model,HttpServletRequest request)throws Exception{
+	@RequestMapping(value="/singleContentsCampNotice/{notice_no}", method= RequestMethod.GET)
+	public String  singleContentsCampNotice(@PathVariable("notice_no") int notice_no,  Model model,HttpServletRequest request)throws Exception{
 		System.out.println("notice_no:"+ notice_no);
 		CampNoticeVo campNoticeVo = campNoticeDaoImpl.singleContentsCampNotice(notice_no); //  공지사항 글내용
 		campNoticeDaoImpl.updateNoticeView(notice_no);  //조회수
-		HttpSession httpSession = request.getSession();
-		String admin = (String) httpSession.getAttribute("checkAdmin");
-		model.addAttribute("checkAdmin", admin);
-		model.addAttribute("checkBoard", checkBoard);
 		System.out.println("campNoticeVo:" + campNoticeVo );
 		model.addAttribute(campNoticeVo);
 		return "camp/singleContentsCampNotice";
@@ -67,18 +62,13 @@ public class CampNoticeController {
 		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("faqList",faqList);
 		
-		model.addAttribute("checkBoard","camp" );
 	}
 	
 	//자주 묻는 질문보기
 	@Transactional
-	@RequestMapping(value="/selectByfaq/{faq_no}/{checkBoard}", method= RequestMethod.GET)
-	public String selectByfaq(@PathVariable("faq_no") int faq_no,@PathVariable("checkBoard") String checkBoard, Model model,HttpServletRequest request)throws Exception{
+	@RequestMapping(value="/selectByfaq/{faq_no}", method= RequestMethod.GET)
+	public String selectByfaq(@PathVariable("faq_no") int faq_no,Model model)throws Exception{
 		//뷰 추가
-		HttpSession httpSession = request.getSession();
-		String admin = (String) httpSession.getAttribute("checkAdmin");
-		model.addAttribute("checkAdmin", admin);
-		model.addAttribute("checkBoard", checkBoard);
 		
 		campNoticeDaoImpl.faqViewCount(faq_no);
 		FaqVo faqVo = campNoticeDaoImpl.selectByfaq(faq_no);
