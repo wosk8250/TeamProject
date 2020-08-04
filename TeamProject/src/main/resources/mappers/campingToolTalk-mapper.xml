@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.campingToolTalk-mapper">
+	
+	
+<!--  캠핑장비 게시판	 -->
+<select id="campingToolTalk" resultType="CampingTalkVo">
+		select * from tbl_camptalk
+</select>
+
+
+<!-- 캠핑장비 게시글 보기 -->
+<select id="selectCampingToolTalk" resultType="CampingTalkVo">
+      		select * from tbl_camptalk
+			where campingtalk_no =#{campingtalk_no}
+</select>
+
+<!--  조회수 -->
+<update id="campingToolTalkView">
+	 	update tbl_camptalk set
+		campingtalk_view  =  campingtalk_view + 1
+		where campingtalk_no = #{campingtalk_no}
+</update>
+</mapper>

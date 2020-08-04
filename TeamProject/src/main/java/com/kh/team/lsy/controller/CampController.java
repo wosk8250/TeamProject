@@ -3,6 +3,7 @@ package com.kh.team.lsy.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -84,14 +85,14 @@ public class CampController {
 	
 	//메인 페이지
 	@RequestMapping(value = "/main" , method = RequestMethod.GET)
-	public String main(Model model) throws Exception {
+	public String main(Model model,HttpSession session) throws Exception {
 		List<AreaCampLocationVo> list = selectCampService.campSelect();
 		List<ReviewVo> reviewVo = selectCampService.reviewTop5();
 		List<CampNoticeVo> CampNoticeVo = selectCampService.noticeTop5();
 		List<CampingTipVo> CampingTipVo = selectCampService.tipTop5();
 		List<FaqVo> faqVo = selectCampService.faqTop5();
 		List<CampVo> campVo = selectCampService.recommendTop10();
-		
+		session.setAttribute("checkBoard", "camp");
 		model.addAttribute("list" , list);//검색
 		model.addAttribute("reviewVo" , reviewVo);//후기 리스트
 		model.addAttribute("CampNoticeVo" , CampNoticeVo);// 공지사항

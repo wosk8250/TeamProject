@@ -35,6 +35,10 @@ select{
 
 
 <script>
+
+
+
+
 $(function() {
 	$("#review_area").change(function(){
 		var area_si =$(this).val();
@@ -178,7 +182,7 @@ $(function() {
 				
 				var option_tag  = "<option value='"+rData[index]+"'>" + rData[index] + "</option>";
 				
-				$("#review_campingname ").append(option_tag);
+				$("#review_campingname").append(option_tag);
 				
 				});
 		});	
@@ -242,14 +246,48 @@ $(function() {
 			that.parent().remove();
 		});		
 	});	
-	$("#campingReviewWritingRun").submit(function() {
-		var upDiv = $("#uploadedList > div");
-		upDiv.each(function(index) {
-			var filename = $(this).attr("data-filename");
-			var hiddenInput = "<input type='hidden' name='files["+index+"]' value='"+filename+"'/>";
-			$("#campingReviewWritingRun").prepend(hiddenInput);
-		});
+	
+// 	$("#campingReviewWritingRun").submit(function() {
+//  		e.preventDefault();
+// 		var upDiv = $("#uploadedList > div");
+// 		upDiv.each(function(index) {
+// 			var filename = $(this).attr("data-filename");
+// 			var hiddenInput = "<input type='hidden' name='files["+index+"]' value='"+filename+"'/>";
+// 			$("#campingReviewWritingRun").prepend(hiddenInput);
+// 		});
+	
+// 	});
+	
+	$("#reviewInsert").click(function(e){
+	
+		var title = $("#review_title").val();
+		var campingname = $("#review_campingname").val();
+	
+		if(title == ""){
+			e.preventDefault();
+// 			console.log("null");
+						var inputMessage = "<div><span>제목다시입력해주세요.</span></div>";
+							$(".modal-body > div").remove();
+						$(".modal-body").append(inputMessage);
+		
+		}else if(campingname == "" ){
+			e.preventDefault();
+			var inputMessage = "<div><span>캠핑장 선택 해주세요.</span></div>";
+			$(".modal-body > div").remove();
+		$(".modal-body").append(inputMessage);
+
+		}else {
+// 			console.log("not null");
+			$(".modal").remove();
+			var upDiv = $("#uploadedList > div");
+			upDiv.each(function(index) {
+				var filename = $(this).attr("data-filename");
+				var hiddenInput = "<input type='hidden' name='files["+index+"]' value='"+filename+"'/>";
+				$("#campingReviewWritingRun").prepend(hiddenInput);
+			});
+		}
 	});
+	
 			
 			
 }); //function()
@@ -261,7 +299,27 @@ $(function() {
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-
+<!--    The Modal  -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+<!--         Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">알림!</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+<!--         Modal body -->
+        <div class="modal-body">
+        </div>
+<!--         Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">확인</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 			<form id="campingReviewWritingRun" role="form" action="/camp/campingReviewWritingRun" method='post'enctype="multipart/form-data">
 				<div class="container-fluid">
 					<div class="row">
@@ -339,7 +397,8 @@ $(function() {
 						<div class="col-md-12">
 					
 							<a href="/camp/campingReviewList" class="btn btn-secondary">목록</a>
-							<button type="submit" class="btn btn-primary">글쓰기</button>
+							<button type="submit" class="btn btn-primary"  id="reviewInsert"
+							          data-toggle="modal" data-target="#myModal">글쓰기</button>
 						</div>
 					</div>
 				</div>
