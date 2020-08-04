@@ -13,7 +13,7 @@ import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.myReviewPagingDto;
 import com.kh.team.sjy.persitence.CampingReviewDao;
-@Transactional
+
 @Service
 public class CampingReviewServiceImpl implements CampingReviewService {
 	
@@ -38,12 +38,14 @@ public class CampingReviewServiceImpl implements CampingReviewService {
 			campingReivewDao.campingReviewInsertRun(reviewVo);
 			 int camping_no=campingReivewDao.campingTitleSearch(reviewVo.getReview_title());
 			for(int i =0; i < files.length; i++) {
-				FilesVo filesVo = new FilesVo(camping_no,files[i],"review");
+				FilesVo filesVo = new FilesVo(camping_no,files[i],"후기");
 				campingReivewDao.campingReviewFileInsertRun(filesVo);
 			}
 			
 		}else {
 			reviewVo.setReview_img("사진없음");
+			campingReivewDao.campingReviewInsertRun(reviewVo);
+		
 		}
 		
 
@@ -92,20 +94,22 @@ public class CampingReviewServiceImpl implements CampingReviewService {
 			int slashIndex = filename.lastIndexOf("/");
 			String front = filename.substring(0, slashIndex + 1);
 			String rear = filename.substring(slashIndex + 1);
-			String thumbnailName = front + "sm_" + rear;
+			String thumbnailName = front + "sm_" + rear;	
 			reviewVo.setReview_img(thumbnailName);
-			if(files != null) {
+			
 				for( int i =0; i < files.length; i++) {
-					FilesVo filesVo = new FilesVo(reviewVo.getReview_no(), files[i], reviewVo.getTable_name());
+					files = reviewVo.getFiles();
+					FilesVo filesVo = new FilesVo(reviewVo.getReview_no(),   reviewVo.getFiles()[i], reviewVo.getTable_name());
 					campingReivewDao.campingFileInsertRun(filesVo);
 				}
-			}
+			
 			
 		}else {
 			reviewVo.setReview_img("사진없음");
-		}
 		
+		}
 		campingReivewDao.campingReviewModifyRun(reviewVo);
+		
 	}
 
 	//캠핑장 후기 수정 이미지 조회

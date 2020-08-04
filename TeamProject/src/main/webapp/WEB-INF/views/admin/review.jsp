@@ -52,6 +52,12 @@
       },
       initialDate: '2020-08-03',
       selectable: true,
+      
+      dateClick: function() {
+    	    alert('a day has been clicked!');
+    	  },
+      
+      
       events: [
         {
           title: '예약',

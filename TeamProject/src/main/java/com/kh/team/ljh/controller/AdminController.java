@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -216,7 +217,6 @@ public class AdminController {
 	// 캠핑장 수정 처리
 	@RequestMapping(value = "/campModifyRun", method = RequestMethod.POST)
 	public String campModifyRun(CampVo campVo) throws Exception {
-		
 		adminService.campModifyRun(campVo);
 		return "redirect:/admin/camp";
 	}
@@ -269,8 +269,8 @@ public class AdminController {
 	}
 
 	// 캠핑 수칙 수정 폼
-	@RequestMapping(value = "/campingTipModifyForm", method = RequestMethod.GET)
-	public String campingModifyForm(String campingtip_title, Model model) throws Exception {
+	@RequestMapping(value = "/campingTipModifyForm/{campingtip_title}/{checkBoard}", method = RequestMethod.GET)
+	public String campingModifyForm(@PathVariable("checkBoard") String checkBoard, @PathVariable("campingtip_title") String campingtip_title, Model model) throws Exception {
 		CampingTipVo campingTipVo = adminService.campingTipModifyForm(campingtip_title);
 		model.addAttribute("campingTipVo", campingTipVo);
 		List<FilesVo> list = adminService.filesList(campingTipVo.getTable_name());
@@ -298,8 +298,8 @@ public class AdminController {
 	@RequestMapping(value = "/campingTipModifyRun", method = RequestMethod.POST)
 	public String campingModifyRun(CampingTipVo campingTipVo) throws Exception {
 		adminService.campingTipModifyRun(campingTipVo);
-
-		return "redirect:/admin/campingTip";
+		String checkBoard = "admin";
+		return "redirect:/camp/singleContentsCampingTip/" + campingTipVo.getCampingtip_no() +"/" + checkBoard;
 	}
 
 	// 캠핑 수칙 삭제 처리
@@ -645,5 +645,5 @@ public class AdminController {
 			return "redirect:/admin/waitForRegistrationCamp";
 		}
 		
-
+		
 }

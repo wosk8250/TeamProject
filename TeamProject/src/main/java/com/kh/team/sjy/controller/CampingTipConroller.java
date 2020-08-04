@@ -25,9 +25,10 @@ public class CampingTipConroller {
 	
 	//캠핑 수칙 목록
 	@RequestMapping(value="/campingTipList" , method = RequestMethod.GET  )
-	public String CampTipList(Model model)throws Exception{
+	public String CampTipList(HttpSession session,Model model)throws Exception{
 		List<CampingTipVo> list = campingTipDaoImpl.campingTipList();
 		model.addAttribute("list",list);
+		session.setAttribute("checkBoard", "camp");
 		model.addAttribute("checkBoard", "camp");
 		return  "/camp/campingTipList";
 	}
@@ -44,6 +45,10 @@ public class CampingTipConroller {
 		String admin = (String) httpSession.getAttribute("checkAdmin");
 		model.addAttribute("checkAdmin", admin);
 		model.addAttribute(campingTipVo);
+		
+		String asd = (String) httpSession.getAttribute("checkBoard");
+		System.out.println("checkBoard = " + asd);
+		
 		return  "/camp/singleContentsCampingTip";
 	}
 	
