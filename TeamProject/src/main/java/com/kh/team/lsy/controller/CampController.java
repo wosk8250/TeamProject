@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.domain.AreaCampLocationVo;
+import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
+import com.kh.team.domain.CampingTipVo;
+import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.PagingDto;
+import com.kh.team.domain.ReviewVo;
 import com.kh.team.lsy.service.SelectCampService;
 
 @Controller
@@ -82,7 +86,18 @@ public class CampController {
 	@RequestMapping(value = "/main" , method = RequestMethod.GET)
 	public String main(Model model) throws Exception {
 		List<AreaCampLocationVo> list = selectCampService.campSelect();
-		model.addAttribute("list" , list);
+		List<ReviewVo> reviewVo = selectCampService.reviewTop5();
+		List<CampNoticeVo> CampNoticeVo = selectCampService.noticeTop5();
+		List<CampingTipVo> CampingTipVo = selectCampService.tipTop5();
+		List<FaqVo> faqVo = selectCampService.faqTop5();
+		List<CampVo> campVo = selectCampService.recommendTop10();
+		
+		model.addAttribute("list" , list);//검색
+		model.addAttribute("reviewVo" , reviewVo);//후기 리스트
+		model.addAttribute("CampNoticeVo" , CampNoticeVo);// 공지사항
+		model.addAttribute("CampingTipVo" , CampingTipVo);// 수칙리스트
+		model.addAttribute("faqVo" , faqVo);//질문 리스트
+		model.addAttribute("campVo" , campVo);//추천수 많은 캠핑장10
 		return "camp/main";
 	}
 	

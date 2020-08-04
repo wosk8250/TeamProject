@@ -1,75 +1,120 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@include file ="../include/adminheader.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@include file="../include/adminheader.jsp"%>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.2.0/main.css">
+
+
+<script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
-$(function() {
-	var msg = "${msg}"
-	console.log(msg);
-	if(msg == "delete"){
-		alert("게시글 삭제완료");
-	}
-	
-	$(".page-link").click(function(e) {
-		e.preventDefault();
-		var page = $(this).attr("href").trim();
-		$("#adminReviewFrmPage > input[name=page]").val(page);
-		$("#adminReviewFrmPage").submit();
-	});
-	
-	$("select[name=perPage]").change(function() {
-		var perPage = $(this).val();
-		var i = $("#adminReviewFrmPage > input[name=perPage]").val(perPage);
-	 	$("#adminReviewFrmPage").submit();
-	});
-	
+	$(function() {
 
-	$(".searchReview").click(function() {
-		var reviewTitle = $("#textReview").val();
-		location.href="/admin/review?review_title=" + reviewTitle;
+		var msg = "${msg}"
+		if (msg == "delete") {
+			alert("게시글 삭제완료");
+		}
+
+		$(".page-link").click(function(e) {
+			e.preventDefault();
+			var page = $(this).attr("href").trim();
+			$("#adminReviewFrmPage > input[name=page]").val(page);
+			$("#adminReviewFrmPage").submit();
+		});
+
+		$("select[name=perPage]").change(
+				function() {
+					var perPage = $(this).val();
+					var i = $("#adminReviewFrmPage > input[name=perPage]").val(
+							perPage);
+					$("#adminReviewFrmPage").submit();
+				});
+
+		$(".searchReview").click(function() {
+			var reviewTitle = $("#textReview").val();
+			location.href = "/admin/review?review_title=" + reviewTitle;
+		});
+
 	});
+</script>
 
-	
-});
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.2.0/main.js"></script>
+			<script>
 
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: ''
+      },
+      initialDate: '2020-08-03',
+      selectable: true,
+      
+      dateClick: function() {
+    	    alert('a day has been clicked!');
+    	  },
+      
+      
+      events: [
+        {
+          title: '예약',
+          textColor : '#000000',
+          start: '2020-08-08',
+          end: '2020-08-10',
+        },
+        {
+        	title: '예약',
+            textColor : '#000000',
+        	start: '2020-08-15',
+          end: '2020-08-18',
+        }
+      ]
+    });
+
+    calendar.render();
+  });
 
 </script>
-<%@include file ="../include/adminReviewFrmPage.jsp" %>
+
+<%@include file="../include/adminReviewFrmPage.jsp"%>
 
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-		
-		
-		
-		
-		
-		
-		
-		<div id="map" style="width:100%;height:400px;"></div> <!-- 지도크기 -->
 
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=a3pn1ogugq"></script>
-<script>
-var mapOptions = {
-    center: new naver.maps.LatLng(37.2304, 125.153),//위도,경도
-    zoom: 10 //줌 숫자
-};
+			 <div id='calendar'></div>
+			
+			
 
-var map = new naver.maps.Map('map', mapOptions);
-</script>
-		
-		
-		
-		
-		
-		
-		
-		<select name="perPage" class="form-inline">
-			<c:forEach begin="5" end="30" step="5" var="i">
-				<option value="${i}"
-					<c:if test="${i == pagingDto.perPage}">selected</c:if>
-				>${i}줄씩 보기</option>
-			</c:forEach>
+
+
+
+			<div id="map" style="width: 100%; height: 400px;"></div>
+			<!-- 지도크기 -->
+
+			<script type="text/javascript"
+				src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=a3pn1ogugq"></script>
+			<script>
+				var map = new naver.maps.Map('map', mapOptions);
+				
+				var mapOptions = {
+					center : new naver.maps.LatLng(35.554606, 129.322896),//위도,경도
+					zoom : 15
+				};
+			</script>
+
+
+
+
+			<select name="perPage" class="form-inline">
+				<c:forEach begin="5" end="30" step="5" var="i">
+					<option value="${i}"
+						<c:if test="${i == pagingDto.perPage}">selected</c:if>>${i}줄씩
+						보기</option>
+				</c:forEach>
 			</select>
 			<table class="table">
 				<thead>
@@ -84,18 +129,19 @@ var map = new naver.maps.Map('map', mapOptions);
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="reviewVo">
-					<c:if test="${reviewVo.review_admin == 0}">
-					<tr>
-						<td>${reviewVo.review_no}</td>
-						<td><img src="/upload/displayImg?fileName=${reviewVo.review_img}" alt="사진없음"/></td>
-						<td><a href="/camp/selectReview/${reviewVo.review_no}">${reviewVo.review_title}</a></td>
-						<td>${reviewVo.review_id}</td>
-						<td>${reviewVo.review_date}</td>
-						<td>${reviewVo.review_campingname}</td>
-						<td><a href="/admin/reviewDelete?review_no=${reviewVo.review_no}" class="btn btn-warning">삭제</a></td>
-					
-					</tr>
-					</c:if>
+						<c:if test="${reviewVo.review_admin == 0}">
+							<tr>
+								<td>${reviewVo.review_no}</td>
+								<td><img
+									src="/upload/displayImg?fileName=${reviewVo.review_img}"
+									alt="사진없음" /></td>
+								<td><a href="/camp/selectReview/${reviewVo.review_no}">${reviewVo.review_title}</a></td>
+								<td>${reviewVo.review_id}</td>
+								<td>${reviewVo.review_date}</td>
+								<td>${reviewVo.review_campingname}</td>
+
+							</tr>
+						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
@@ -104,37 +150,35 @@ var map = new naver.maps.Map('map', mapOptions);
 			<div class="row">
 				<div class="col-md-4"></div>
 				<div class="col-md-4">
-					<input type="text" class="form-group" id="textReview"/>
+					<input type="text" class="form-group" id="textReview" />
 					<button class="btn btn-success searchReview">검색</button>
 				</div>
 				<div class="col-md-4"></div>
 			</div>
 		</div>
 		<div class="row">
-		<div class="col-md-12 text-center">
-			<nav>
-				<ul class="pagination">
-				<c:if test="${pagingDto.startPage != 1}">
-					<li class="page-item">
-						<a class="page-link" href="${pagingDto.startPage - 1}">이전</a>
-					</li>
-				</c:if>
-					<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="page">
-					<li class="page-item">
-						<a class="page-link" href="${page}">${page}</a>
-					</li>
-					</c:forEach>
-					<c:if test="${pagingDto.endPage < pagingDto.totalPage}">
-					<li class="page-item">
-						<a class="page-link" href="${pagingDto.endPage + 1}">다음</a>
-					</li>
-					</c:if>
-				</ul>
-			</nav>
+			<div class="col-md-12 text-center">
+				<nav>
+					<ul class="pagination">
+						<c:if test="${pagingDto.startPage != 1}">
+							<li class="page-item"><a class="page-link"
+								href="${pagingDto.startPage - 1}">이전</a></li>
+						</c:if>
+						<c:forEach begin="${pagingDto.startPage}"
+							end="${pagingDto.endPage}" var="page">
+							<li class="page-item"><a class="page-link" href="${page}">${page}</a>
+							</li>
+						</c:forEach>
+						<c:if test="${pagingDto.endPage < pagingDto.totalPage}">
+							<li class="page-item"><a class="page-link"
+								href="${pagingDto.endPage + 1}">다음</a></li>
+						</c:if>
+					</ul>
+				</nav>
+			</div>
 		</div>
-	</div>
 	</div>
 </div>
 
 
-<%@include file ="../include/adminfooter.jsp" %>
+<%@include file="../include/adminfooter.jsp"%>

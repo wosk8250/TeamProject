@@ -58,8 +58,6 @@ $(".searchFaq").click(function() {
 						<td>${faqVo.faq_no}</td>
 						<td><a href="/camp/selectByfaq/${faqVo.faq_no}/${checkBoard}">${faqVo.faq_title}</a></td>
 						<td>${faqVo.faq_date}</td>
-						<td><a href="/admin/faqModifyForm?faq_no=${faqVo.faq_no}" class="btn btn-info" >수정</a></td>
-						<td><a href="/admin/faqDelete?faq_no=${faqVo.faq_no}" class="btn btn-warning">삭제</a></td>
 					</tr>
 				</c:if>
 				</c:forEach>

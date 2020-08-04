@@ -82,13 +82,23 @@ $(function () {
 		<div class="col-md-12">
 			<form id="campRun" role="form" action="/admin/campRun" method='post' enctype="multipart/form-data">
 				<div class="form-group">
-
-					<input type="text" class="form-control" id="camp_name" name="camp_name" placeholder="캠핑장 이름"/>
-					<input type="text" class="form-control" id="camp_address" name="camp_address" placeholder="주소"/>
-					<input type="text" class="form-control" id="camp_phone" name="camp_phone" placeholder="휴대폰 번호"/>
-					<input type="text" class="form-control" id="camp_http" name="camp_http" placeholder="홈페이지 주소"/>
-					<input type="text" class="form-control" id="camp_location" name="camp_location" placeholder="지역"/>
-					<input type="text" class="form-control" id="camp_area" name="camp_area" placeholder="시&구"/>
+					캠핑장 이름
+					<input type="text" class="form-control" id="camp_name" name="camp_name" />
+					주소
+					<input type="text" class="form-control" id="camp_address" name="camp_address" />
+					휴대폰 번호
+					<input type="text" class="form-control" id="camp_phone" name="camp_phone" />
+					홈페이지 주소
+					<input type="text" class="form-control" id="camp_http" name="camp_http" />
+					지역
+					<input type="text" class="form-control" id="camp_location" name="camp_location" />
+					시 & 구
+					<input type="text" class="form-control" id="camp_area" name="camp_area" />
+					위도
+					<input type="text" class="form-control" id="inclination" name="inclination"/>
+					경도
+					<input type="text" class="form-control" id="latitude" name="latitude"/>
+				
 				</div>
 				<div class="form-group">
 				<textarea class="form-control" id="camp_content" name="camp_content" rows="25" style="resize:none; width:100%;" ></textarea>

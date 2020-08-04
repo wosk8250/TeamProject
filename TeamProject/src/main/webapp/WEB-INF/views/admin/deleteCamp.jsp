@@ -60,7 +60,7 @@ $(function() {
 						<td>
 							<img src="/upload/displayImg?fileName=${campVo.thumbnail}" alt="사진 미등록"/>
 						</td>
-						<td>${campVo.camp_name}</td>
+						<td><a href="/board/campingContent?camp_no=${campVo.camp_no}">${campVo.camp_name}</a></td>
 						<td>${campVo.camp_location}</td>
 						<td>${campVo.camp_area}</td>
 						<td><a href="/admin/deleteCampReEnrollment?camp_no=${campVo.camp_no}" class="btn btn-info">재등록</a></td>

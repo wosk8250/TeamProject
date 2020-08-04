@@ -3,6 +3,8 @@
 <%@include file ="../include/adminheader.jsp" %>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
+$(function ()) {
+
 	$(".page-link").click(function(e) {
 		e.preventDefault();
 		var page = $(this).attr("href").trim();
@@ -54,11 +56,11 @@
 						<td>
 							<img src="/upload/displayImg?fileName=${campVo.thumbnail}" alt="사진 미등록"/>
 						</td>
-						<td>${campVo.camp_name}</td>
+						<td><a href="/board/campingContent?camp_no=${campVo.camp_no}">${campVo.camp_name}</a></td>
 						<td>${campVo.camp_location}</td>
 						<td>${campVo.camp_area}</td>
-						<td><a href="/admin/registCamp/${campVo.camp_no}" class="btn btn-warning">등록</a></td>
-						<td><a href="/admin/notRegistCamp/${campVo.camp_no}" class="btn btn-warning">거절</a></td>
+						<td><a href="/admin/registCamp/${campVo.camp_no}" class="btn btn-primary">등록</a></td>
+						<td><a href="/admin/notRegistCamp/${campVo.camp_no}" class="btn btn-danger">거절</a></td>
 					</tr>
 				</c:forEach>
 				</tbody>

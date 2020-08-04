@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +25,7 @@ import com.kh.team.domain.CampingTalkVo;
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.DemeritCodeVo;
 import com.kh.team.domain.DemeritVo;
+import com.kh.team.domain.EmailDto;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.PagingDto;
@@ -36,6 +43,8 @@ public class AdminController {
 	private AdminService adminService;
 	@Inject
 	private UserService userService;
+	@Inject
+	private JavaMailSender javaMailSender;
 
 	// 유저 조회
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
@@ -99,6 +108,7 @@ public class AdminController {
 		List<CampNoticeVo> list = adminService.noticeListPage(myReviewPagingDto);
 		model.addAttribute("list", list);
 		model.addAttribute("pagingDto", myReviewPagingDto);
+		model.addAttribute("checkBoard", "admin");
 		} else {
 			List<CampNoticeVo> list =  adminService.searchNotice(notice_title);
 			model.addAttribute("list", list);
@@ -207,7 +217,6 @@ public class AdminController {
 	// 캠핑장 수정 처리
 	@RequestMapping(value = "/campModifyRun", method = RequestMethod.POST)
 	public String campModifyRun(CampVo campVo) throws Exception {
-		
 		adminService.campModifyRun(campVo);
 		return "redirect:/admin/camp";
 	}
@@ -240,7 +249,7 @@ public class AdminController {
 		}else {
 		list =  adminService.searchCampingTip(campingtip_title);
 		}
-		
+		model.addAttribute("checkBoard", "admin");
 		model.addAttribute("list", list);
 		model.addAttribute("pagingDto", myReviewPagingDto);
 		return "admin/campingTip";
@@ -260,8 +269,8 @@ public class AdminController {
 	}
 
 	// 캠핑 수칙 수정 폼
-	@RequestMapping(value = "/campingTipModifyForm", method = RequestMethod.GET)
-	public String campingModifyForm(String campingtip_title, Model model) throws Exception {
+	@RequestMapping(value = "/campingTipModifyForm/{campingtip_title}/{checkBoard}", method = RequestMethod.GET)
+	public String campingModifyForm(@PathVariable("checkBoard") String checkBoard, @PathVariable("campingtip_title") String campingtip_title, Model model) throws Exception {
 		CampingTipVo campingTipVo = adminService.campingTipModifyForm(campingtip_title);
 		model.addAttribute("campingTipVo", campingTipVo);
 		List<FilesVo> list = adminService.filesList(campingTipVo.getTable_name());
@@ -289,8 +298,8 @@ public class AdminController {
 	@RequestMapping(value = "/campingTipModifyRun", method = RequestMethod.POST)
 	public String campingModifyRun(CampingTipVo campingTipVo) throws Exception {
 		adminService.campingTipModifyRun(campingTipVo);
-
-		return "redirect:/admin/campingTip";
+		String checkBoard = "admin";
+		return "redirect:/camp/singleContentsCampingTip/" + campingTipVo.getCampingtip_no() +"/" + checkBoard;
 	}
 
 	// 캠핑 수칙 삭제 처리
@@ -615,8 +624,26 @@ public class AdminController {
 		@RequestMapping(value="/notRegistCamp/{camp_no}" , method = RequestMethod.GET)
 		public String notRegistCamp(@PathVariable("camp_no") int camp_no)throws Exception  {
 			adminService.notRegistCamp(camp_no);
+			
+			EmailDto emailDto = new EmailDto();
+			emailDto.setTo("janjan44@naver.com");
+			emailDto.setContents("등록이 거절되엇습니다");
+			
+			MimeMessagePreparator preparator = new MimeMessagePreparator() {
+				
+				@Override
+				public void prepare(MimeMessage mimeMessage) throws Exception {
+					MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
+					helper.setFrom(emailDto.getFrom());
+					helper.setTo(emailDto.getTo());
+					helper.setSubject("camping club입니다");
+					helper.setText(emailDto.getContents());
+				}
+			};
+			javaMailSender.send(preparator);
+			
 			return "redirect:/admin/waitForRegistrationCamp";
 		}
 		
-
+		
 }
