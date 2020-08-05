@@ -77,6 +77,7 @@
 	$(function() {
 		$("#searchButton").click(function() {
 			
+			
 			var selectDo = $("#areaDo").val();
 			var selectSi = $("#locationSi").val();
 			
@@ -100,20 +101,55 @@
 					},
 					"success" : function(rData) {
 						console.log(rData);
-						$("#camPingTable").empty();
-						var table = $("#camPingTable tr:first").clone();
-						$.each(rData, function(index, value) {
+						$("#camPingTable").remove();
+						$.each(rData, function(index, item) {
+// 							console.log(index);
+							console.log(item);
 							
-							console.log(value.camp_name);
 							
-							var table_re = "<tr>" +
-								"<td>" + value.camp_name + "</td>" +
 							
-								
-								"</tr>";
+							var output = '';
 							
-							$("#camPingTable").append(table);
-						});	
+							output += "<div class='row'>";
+							output += "<div class='col-md-12' id='campingDiv'>";
+							output += "<table id='camPingTable'>";
+							output += "<thead>";
+							output += "<tr>";
+							output += "<th>" + item.camp_location + ' 캠핑장이 검색되었습니다.' + "</th>"; 
+							output += "<th>" + "</th>";
+							output += "<th>" + "</th>";
+							output += "<th>" + "</th>";
+							output += "<th>" + "</th>";
+							output += "<th>";
+// 							output += "<select name='perPage' class='form-inline'>";
+// 							output += "<c:forEach begin='5' end='10' step='5' var='i'>";
+// 							output += "<option value='${i}' <c:if test='${i == pagingDto.perPage}'>" + 'selected' + "</c:if>";
+// 							output += ">" + '${i}줄씩 보기' + "</option>" + "</c:forEach>";
+// 							output += "</select>";
+							output += "</th>";
+							output += "</tr>";
+							output += "</thead>";
+							output += "<tbody>";
+							output += "<c:forEach items='${campList}' var='CampVo'>";
+							output += "<tr>";
+							output += "<td>" + "<h2>" + "<a href='/camp/campingContent' class='a_title' data-camp_no=item>" + item.camp_name + "</a>" + "</h2>" + "</td>";
+							output += "<td>" + item.camp_phone + "</td>";
+							output += "<td>" + item.camp_location + "</td>";
+							output += "<td>" + "<img width='200' height='200' src='/resources/image/1594178025406.jpg'>" + "</td>";
+							output += "<td>";
+							output += "</td>";
+							output += "<td>" + '조회 수 :' + item.viewcnt + "</td>";
+							output += "<td>" + '추천 수 :' + item.recommend + "</td>";
+							output += "</tr>";
+							output += "</c:forEach>";
+							output += "</tbody>";
+							output += "</table>";	
+							output += "</div>";
+							output += "</div>";
+
+							$("#campingDiv").append(output);
+							
+						});
 				}
 			});
 		});
@@ -153,9 +189,6 @@
 
 	});
 </script>
-<%-- list: ${list} --%>
-<%-- CampList : ${campList} --%>
-<%-- <%@ include file="../include/frmPage.jsp" %> --%>
 
 <%@ include file="../board/mainFrmPage.jsp" %>
 
@@ -210,7 +243,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12" id="campingDiv">
 			<table class="table" id="camPingTable">
 				<thead>
 					<tr>
@@ -252,11 +285,11 @@
 							<td>추천수 : ${CampVo.recommend}</td>
 						</tr>
 				</c:forEach>
-					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
+	
 	
 	<div class="row">
 		<div class="col-md-12 text-center" >
