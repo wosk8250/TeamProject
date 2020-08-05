@@ -132,9 +132,7 @@
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">
 			<div class="sidebar-heading">기타</div>
-			<li class="nav-item"><a class="nav-link"
-				href="/admin/deleteList"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>삭제된 게시글</span></a>
-			</li>
+			
 			
 			<li class="nav-item"><a class="nav-link" href="/camp/home">
 					<i class="fas fa-fw fa-table"></i> <span>메인</span>

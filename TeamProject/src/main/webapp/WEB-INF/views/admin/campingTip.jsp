@@ -58,7 +58,7 @@ if(msg == "delete"){
 						<td>
 							<img src="/upload/displayImg?fileName=${campingTipVo.campingtip_img}" alt="사진등록" />
 						</td>
-						<td><a href="/camp/singleContentsCampingTip/${campingTipVo.campingtip_no}/${checkBoard}">${campingTipVo.campingtip_title}</a></td>
+						<td><a href="/camp/singleContentsCampingTip/${campingTipVo.campingtip_no}">${campingTipVo.campingtip_title}</a></td>
 					</tr>
 				</c:forEach>
 				</tbody>

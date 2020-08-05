@@ -59,7 +59,7 @@ $(function() {
 					<c:if test="${campNoticeVo.notice_admin == 0}">
 					<tr>
 						<td>${campNoticeVo.notice_no}</td>
-						<td><a href="/camp/singleContentsCampNotice/${campNoticeVo.notice_no}/${checkBoard}">${campNoticeVo.notice_title}</a></td>
+						<td><a href="/camp/singleContentsCampNotice/${campNoticeVo.notice_no}">${campNoticeVo.notice_title}</a></td>
 						<td>${campNoticeVo.notice_date}</td>
 					</tr>
 					</c:if>
