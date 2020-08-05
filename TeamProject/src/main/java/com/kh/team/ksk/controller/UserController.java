@@ -65,7 +65,7 @@ public class UserController {
 					session.removeAttribute("tergetLoction");
 					return "redirect:" + tergetLoction;
 				}
-				return "redirect:/camp/home";
+				return "redirect:/camp/main";
 			}
 		} catch (NullPointerException e) {
 			rttr.addFlashAttribute("message", "fail");

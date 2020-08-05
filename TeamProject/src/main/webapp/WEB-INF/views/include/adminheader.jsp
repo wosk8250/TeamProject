@@ -45,18 +45,18 @@
 			<!-- Sidebar - Brand -->
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center">
-				<div class="sidebar-brand-icon rotate-n-15">
+				<span class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-laugh-wink"></i>
-				</div>
-				<div class="sidebar-brand-text mx-3">
+				</span>
+				<span class="sidebar-brand-text mx-3">
 					관리자님 반갑습니다
 					<!-- <sup>2</sup> -->
-				</div>
+				</span>
 			</a>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
-			<div class="sidebar-heading">?</div>
+			<div class="sidebar-heading">캠핑장 및 회원 관리</div>
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapseOne"
 				aria-expanded="true" aria-controls="collapseOne"> <i
@@ -67,7 +67,7 @@
 					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" href="/admin/camp">목록</a> 
 						<a class="collapse-item" href="/admin/waitForRegistrationCamp">등록대기</a> 
-						<a class="collapse-item" href="/admin/deleteCamp">삭제된 캠핑장</a>
+						<a class="collapse-item" href="/admin/deleteCamp">이용중지</a>
 					</div>
 				</div></li>
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
@@ -92,15 +92,12 @@
 			<hr class="sidebar-divider">
 
 			<!-- Heading -->
-			<div class="sidebar-heading">캠핑이야기</div>
+			<div class="sidebar-heading">캠핑후기</div>
 
 			<!-- Nav Item - Pages Collapse Menu -->
 			<li class="nav-item"><a class="nav-link" href="/admin/review">
 					<i class="fas fa-fw fa-table"></i> <span>캠핑후기</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link"
-				href="/admin/campingTalk"> <i class="fas fa-fw fa-table"></i> <span>캠핑
-						이야기</span></a></li>
 			
 
 			<!-- Nav Item - Utilities Collapse Menu -->
@@ -134,7 +131,7 @@
 			<div class="sidebar-heading">기타</div>
 			
 			
-			<li class="nav-item"><a class="nav-link" href="/camp/home">
+			<li class="nav-item"><a class="nav-link" href="/camp/main">
 					<i class="fas fa-fw fa-table"></i> <span>메인</span>
 			</a></li>
 			<hr class="sidebar-divider">
@@ -165,12 +162,11 @@
 					<!-- Nav Item - User Information -->
 				 <a class="sidebar-brand d-flex align-items-center justify-content-center" id="title" style="width: 100%;">
         <div class="sidebar-brand-icon">
-          <img alt="camp" src="/resources/image/tent.svg" width="50" height="50">
-        </div>
+         <img alt="camp" src="/resources/image/camping_club_icon.svg" width="55" height="55">
+			         </div>
         <div class="sidebar-brand-text mx-3">Camping Club!</div>
       </a>
 
-            
-
 
 				</nav>
+				

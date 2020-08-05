@@ -4,6 +4,21 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.2.0/main.css">
 
+<style>
+	div {
+		color: black;
+	}
+	table {
+		text-align: center;
+		color: black;
+	}
+	#td_title {
+		text-align: center;
+	}
+	th {
+		background-color: #4f6fcc25;
+	}
+</style>
 
 <script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -80,7 +95,9 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
+	<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
 
   <div id="contextMenu" class="dropdown clearfix">
             <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
@@ -126,7 +143,10 @@
 						보기</option>
 				</c:forEach>
 			</select>
-			<table class="table">
+			<h2>캠핑장 후기</h2>
+			<hr>
+			<div class="table-responsive">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>글번호</th>
@@ -155,6 +175,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="row">
@@ -166,8 +187,11 @@
 				<div class="col-md-4"></div>
 			</div>
 		</div>
+		<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-12 text-center">
+		<div class="col-md-1">
+		</div>
+			<div class="col-md-10 text-center">
 				<nav>
 					<ul class="pagination">
 						<c:if test="${pagingDto.startPage != 1}">
@@ -186,6 +210,9 @@
 					</ul>
 				</nav>
 			</div>
+			<div class="col-md-1">
+		</div>
+		</div>
 		</div>
 	</div>
 </div>
