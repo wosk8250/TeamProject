@@ -2,13 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 <style>
-.totaltext {
-	text-align: center;
-}
-
-.admin_sort {
-	float: right;
-}
+	div {
+		color: black;
+	}
+	table {
+		text-align: center;
+		color: black;
+	}
+	#td_title {
+		text-align: center;
+	}
+	th {
+		background-color: #4f6fcc25;
+	}
 </style>
 <script>
 $(function(){
@@ -35,15 +41,7 @@ $(function(){
 </script>
 
 <%@ include file = "../include/campingTipFrmPage.jsp" %>
-<div class="container-fluid">
-	<div class="row">
-				<div class="col-md-2">
-				<h3>캠핑장 수칙</h3>
-				</div>
-				<div class="col-md-5"></div>
-				<div class="col-md-5"></div>
-	</div>
-</div>
+
 <div class="container-fluid">
 	<div class="row">
 				<div class="col-md-4">
@@ -68,35 +66,44 @@ $(function(){
 
 <div class="container-fluid">
 	<div class="row">
-				<div class="col-md-12">
-
-			<table class="table" >
-
+	
+				<div class="col-md-1">
+		</div>
+				<div class="col-md-10">
+	<h2>캠핑 수칙</h2>
+			<hr>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th></th>
+						<th width="450">제목</th>
+						<th>작성자</th>
+						<th>등록일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				
 				<tbody>
 
 				<c:forEach items="${list}" var ="CampingTipVo">
 
 					<tr>
-						<td  colspan="2">
-							<img src="/upload/displayCampingImg?fileName=${CampingTipVo.campingtip_img}" alt="사진 등록"/>
-						</td>
-	
-						<td colspan="2">
-						<div class="warting">
-							<h6><a href="/camp/singleContentsCampingTip/${CampingTipVo.campingtip_no}">${CampingTipVo.campingtip_title}</a></h6>
-							<p>${CampingTipVo.campingtip_content} <br/>
-	
-							
-							</p>
-					</div>
-						<div class="admin_sort" >
-						<a>${CampingTipVo.campingtip_writer}</a>
-						<a>|</a>
-						<a>${CampingTipVo.campingtip_date}</a>
-						<a>|</a>
-						<a>${CampingTipVo.campingtip_view}</a>
-				</div>
-						</td>
+					<td>${CampingTipVo.campingtip_no}</td>
+					<td><img src="/upload/displayCampingImg?fileName=${CampingTipVo.campingtip_img}" alt="사진 등록"/>
+					</td>
+					<td><h6><a href="/camp/singleContentsCampingTip/${CampingTipVo.campingtip_no}">${CampingTipVo.campingtip_title}</a></h6>
+					</td>
+					<td>${CampingTipVo.campingtip_writer}</td>
+					<td>${CampingTipVo.campingtip_date}</td>
+					<td>${CampingTipVo.campingtip_view}</td>
+						
+						
+						
+						
+						
+			
 	
 					</tr>
 				<tr>
@@ -104,7 +111,10 @@ $(function(){
 				</c:forEach>
 				</tbody>
 			</table>
+			</div>
 				</div>
+				<div class="col-md-1">
+		</div>
 
 	</div>
 </div>

@@ -11,7 +11,7 @@
 		color: black;
 	}
 	#td_title {
-		text-align: left;
+		text-align: center;
 	}
 	th {
 		background-color: #4f6fcc25;
@@ -65,6 +65,7 @@ $(function () {
 				</tbody>
 			</table>
 			</div>
+			
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
 					<!-- 이전 -->

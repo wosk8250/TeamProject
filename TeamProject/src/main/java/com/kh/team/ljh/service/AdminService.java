@@ -237,4 +237,5 @@ public interface AdminService {
 		public void notRegistCamp(int camp_no)throws Exception;
 		//등록대기 캠핑장 갯수
 		public int waitForRegistrationCampCount() throws Exception;
+		
 }

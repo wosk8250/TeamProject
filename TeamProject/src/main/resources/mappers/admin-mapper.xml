@@ -485,5 +485,7 @@
 	<select id="waitForRegistrationCampCount" resultType="int">
 		select count(*) from tbl_camp where camp_admin = 2
 	</select>
+	
+	
 </mapper>
 

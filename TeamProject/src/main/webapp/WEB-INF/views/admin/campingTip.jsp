@@ -1,6 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
 <%@include file ="../include/adminheader.jsp" %>
+
+
+<style>
+	div {
+		color: black;
+	}
+	table {
+		text-align: center;
+		color: black;
+	}
+	#td_title {
+		text-align: center;
+	}
+	th {
+		background-color: #4f6fcc25;
+	}
+</style>
+
+
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
 $(function() {
@@ -35,7 +56,9 @@ if(msg == "delete"){
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
 		<select name="perPage" class="form-inline">
 			<c:forEach begin="5" end="30" step="5" var="i">
 				<option value="${i}"
@@ -43,12 +66,16 @@ if(msg == "delete"){
 				>${i}줄씩 보기</option>
 			</c:forEach>
 			</select>
-			<table class="table">
+			<div class="col-md-10">
+			<h2>캠핑수칙</h2>
+			<hr>
+			<div class="table-responsive">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>글번호</th>
 						<th>이미지</th>
-						<th>제목</th>
+						<th width="450">제목</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -63,6 +90,7 @@ if(msg == "delete"){
 				</c:forEach>
 				</tbody>
 			</table>
+			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="row">
@@ -75,7 +103,7 @@ if(msg == "delete"){
 			</div>
 		</div>
 		<div class="row">
-		<div class="col-md-12 text-center">
+		<div class="col-md-12">
 			<nav>
 				<ul class="pagination">
 				<c:if test="${pagingDto.startPage != 1}">
@@ -95,10 +123,16 @@ if(msg == "delete"){
 					</c:if>
 				</ul>
 			</nav>
+					<div>
+					<a class="btn btn-primary" href="/admin/campingTipForm">작성</a>
+					</div>
 		</div>
 	</div>
 	</div>
-	<a class="btn btn-primary" href="/admin/campingTipForm">작성</a>
+	<div class="col-md-1">
+		</div>
+	
+</div>
 </div>
     
 
