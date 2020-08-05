@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <script src="/resources/js/owl.carousel.js"></script>
-    <%@ include file="../include/mainHeader.jsp"%>
+<%@ include file="../include/header.jsp" %>
 
 <style>
 	#owl-demo {
@@ -24,9 +24,9 @@
 	width: 100%;
 	height: 100%;
 	text-align: center;
+	  background-color: rgba(0, 0, 0, 0.2);
 }
 .navbar-expand-lg {
-	margin: 0px 20%;
 	padding: 10px;
 	background-color: rgba(255, 255, 255, 0.5);
 	text-align: center;
@@ -48,6 +48,8 @@
 }
 #owl-demo {
 	margin-top: 250px;
+	padding: 10px;
+	
 }
 #form {
 margin-bottom: 0;
@@ -140,7 +142,8 @@ $(function() {
 			</div>
 			<div class="jb-nav">
 				<div class="row">
-						<div class="col-md-12">
+				<div class="col-md-3"></div>
+						<div class="col-md-6">
 							<nav class="navbar navbar-expand-lg">
 								<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 									<span class="navbar-toggler-icon"></span>
@@ -168,9 +171,12 @@ $(function() {
 								</div>
 							</nav>
 						</div>
+						<div class="col-md-3"></div>
 					</div>
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-1">
+					</div>
+					<div class="col-md-10">
 			<!-- 인기 캠핑장 -->
 						<div class="owl-carousel" id="owl-demo">
 							<c:forEach items="${campVo}" var="campVo">
@@ -180,6 +186,8 @@ $(function() {
 					            </div>
 							</c:forEach>
 						</div>
+					</div>
+					<div class="col-md-1">
 					</div>
 				</div>
 			</div>

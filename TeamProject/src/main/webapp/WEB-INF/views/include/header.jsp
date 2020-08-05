@@ -23,6 +23,9 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	
+	<!-- Owl Carousel -->
+    <link rel="stylesheet" href="/resources/css/owl.carousel.css">
 
 <style>
 	#title {
@@ -30,6 +33,25 @@
 		color: black;
 	}
 </style>
+<script>
+//상단 이미지 
+$(function () {
+	var link = document.location.href;
+	var last = link.lastIndexOf("/");
+	var loc = link.substring(17, last);
+	var loc2 = loc.substring(0, 4);
+	console.log(link);
+	console.log(loc);
+	console.log(loc2);
+	if(loc2 == "camp"){
+		$("#topImg").attr("src","/resources/image/Service_center.jpg");
+	} else if (loc2 == "user"){
+		$("#topImg").attr("src","/resources/image/myPage_top.jpg");
+	}else{
+		$("#topImg").attr("src","/resources/image/business.jpg");
+	}
+});
+</script>
 </head>
 
 <body id="page-top">
@@ -140,7 +162,22 @@
         </div>
       </li>
 
-
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-fw fa-wrench"></i>
+          <span>Utilities</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Utilities:</h6>
+            <a class="collapse-item" href="utilities-color.html">Colors</a>
+            <a class="collapse-item" href="utilities-border.html">Borders</a>
+            <a class="collapse-item" href="utilities-animation.html">Animations</a>
+            <a class="collapse-item" href="utilities-other.html">Other</a>
+          </div>
+        </div>
+      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -165,7 +202,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/camp/faqList">
-          <i class="fa fa-question-circle" aria-hidden="true"></i>
+          <i class="fas fa-fw fa-table"></i>
           <span>자주 묻는 질문</span></a>
       </li>
       <!-- 관리자 로그인 할때 보이기 -->
@@ -199,32 +236,62 @@
 
       <!-- Main Content -->
       <div id="content">
-
-        <!-- Topbar -->
+      <!-- Topbar 분류 -->
+<c:choose>
+	<c:when test="${sessionScope.Loction == 'home'}">
+	        <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" id="topbar">
 
           <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-
-<!-- Sidebar - Brand -->
-<!--       <a id="headerTitle" class="sidebar-brand d-flex align-items-center justify-content-center" > -->
-<!--         <span> -->
-<!--           <img alt="camp" src="/resources/image/tent.svg" width="50" height="50"> -->
-<!--         </span> -->
-<!--         <span class="sidebar-brand-text mx-3">Camping Club<sup>2</sup></span> -->
-<!--       </a> -->
       
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" id="title" style="width: 100%;">
-        <div class="sidebar-brand-icon">
-          <img alt="camp" src="/resources/image/camping_club_icon.svg" width="55" height="55">
-        </div>
-        <div class="sidebar-brand-text mx-3">Camping Club!</div>
-      </a>
-
-            
-
-
-
+	      <a href="/camp/main" class="sidebar-brand d-flex align-items-center justify-content-center" id="title" style="width: 100%; text-decoration: none;">
+	        <div class="sidebar-brand-icon">
+	          <img alt="camp" src="/resources/image/camping_club_icon.svg" width="55" height="55">
+	        </div>
+	        <div class="sidebar-brand-text mx-3">Camping Club!</div>
+	      </a>
         </nav>
+	</c:when>
+	<c:otherwise>
+		<!-- 2차 분류 -->
+		<c:choose>
+			<c:when test="${sessionScope.Loction == 'main'}">
+			         <!-- Topbar -->
+				<nav class="navbar navbar-expand navbar-light bg-white topbar static-top" id="topbar" style="margin-bottom: 0">
+		
+		          <!-- Sidebar Toggle (Topbar) -->
+		          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+		            <i class="fa fa-bars"></i>
+		          </button>
+		      
+			      <a href="/camp/main" class="sidebar-brand d-flex align-items-center justify-content-center" id="title" style="width: 100%; text-decoration: none;">
+			        <div class="sidebar-brand-icon">
+			          <img alt="camp" src="/resources/image/camping_club_icon.svg" width="55" height="55">
+			        </div>
+			        <div class="sidebar-brand-text mx-3">Camping Club!</div>
+			      </a>
+				</nav>
+			</c:when>
+			<c:otherwise>
+			        <!-- Topbar -->
+		        <div class="navbar navbar-expand navbar-light bg-white topbar static-top" id="topbar" style="margin-bottom: 0;">
+		      
+			      <a href="/camp/main" class="sidebar-brand d-flex align-items-center justify-content-center" id="title" style="width: 100%; text-decoration: none;">
+			        
+			          <img alt="camp" src="/resources/image/camping_club_icon.svg" width="55" height="55">
+			        
+			        <span class="sidebar-brand-text mx-3">Camping Club!</span>
+			      </a>
+		           
+		        </div>
+		        <div>
+					<img id="topImg" alt="myPage_top" src="" style="margin-bottom: 30px;">
+				</div>
+			</c:otherwise>
+		</c:choose>
+		<!-- 2차 분류 끝 -->
+	</c:otherwise>
+</c:choose>
