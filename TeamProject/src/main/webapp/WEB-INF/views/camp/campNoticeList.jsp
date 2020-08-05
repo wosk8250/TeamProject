@@ -22,7 +22,7 @@
 				
 					<tr>
 						<td>${CampNoticeVo.notice_no}</td>
-						<td><a href="/camp/singleContentsCampNotice/${CampNoticeVo.notice_no}/${checkBoard}">${CampNoticeVo.notice_title}</a></td>
+						<td><a href="/camp/singleContentsCampNotice/${CampNoticeVo.notice_no}">${CampNoticeVo.notice_title}</a></td>
 						<td>${CampNoticeVo.notice_writer}</td>
 						<td>${CampNoticeVo.notice_date}</td>
 						<td>${CampNoticeVo.notice_view}</td>

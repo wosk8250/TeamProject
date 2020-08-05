@@ -129,13 +129,14 @@ public class AdminController {
 			List<FaqVo> list = adminService.searchFaq(faq_title);
 			model.addAttribute("list", list);
 		}
+		
 		return "admin/faq";
 		
 	}
 
 	// 캠핑장 조회
 	@RequestMapping(value = "/camp", method = RequestMethod.GET)
-	public String adminCampList(myReviewPagingDto myReviewPagingDto,Model model,String camp_name) throws Exception {
+	public String adminCampList(HttpSession session,myReviewPagingDto myReviewPagingDto,Model model,String camp_name) throws Exception {
 		myReviewPagingDto.setmyReviewPageInfo();
 		int totalCount = adminService.campPostsCount();
 		myReviewPagingDto.setTotalCount(totalCount);
@@ -146,6 +147,7 @@ public class AdminController {
 			list = adminService.searchCamp(camp_name);
 		}
 		
+		session.setAttribute("checkBoard", "admin");
 		model.addAttribute("list", list);
 
 		model.addAttribute("pagingDto", myReviewPagingDto);
