@@ -125,7 +125,7 @@
           <span>캠핑후기</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/camp/campingToolList">
+        <a class="nav-link" href="/camp/campingToolTalkList">
           <i class="fas fa-fw fa-wrench"></i>
           <span>캠핑장비</span></a>
       </li>
@@ -177,7 +177,7 @@
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="/camp/campingTipList">
+        <a class="nav-link" href="/camp/campingToolTalkList">
           <i class="fas fa-fw fa-table"></i>
           <span>캠핑 수칙</span></a>
       </li>

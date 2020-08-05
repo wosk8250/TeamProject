@@ -5,21 +5,26 @@
 <style>
 .camping_content{
 text-align: center;
-
+position:  relative;
 
 }
 .camping_img{
 text-align: center;
+position:  relative;
 
 }
 .oriImg{
  
 	width : 200px; 
  	height: auto; 
- 	line-height : 100px;
- 	margin-left:  200px;
+  	line-height : 100px; 
+    left:50%;
+    top:50%;
+    margin-left:150px;
+    margin-right:150px;
+    margin-top:100px;
 	vertical-align: middle;
-	margin-bottom:  100px;
+	margin-bottom:  100px; 
 
 }
 .content_first{
@@ -192,14 +197,14 @@ $(function(){
 				<tbody>
 				<tr>
 					<td>
-								<div class="camping_content">
-									<pre class="camping_pre">${reviewVo.review_content}</pre>
-								</div>
+			
 							<div class="camping_img">
 								<c:forEach items="${fileNoListImg}" var="filesVo">
 									<img src="/upload/displayImg?fileName=${filesVo.files }" alt="사진 미등록" class="oriImg"/>
 								</c:forEach>
-
+							</div>
+							<div class="camping_content">
+									<pre class="camping_pre">${reviewVo.review_content}</pre>
 							</div>
 					</td>
 				</tr>
