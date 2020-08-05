@@ -98,7 +98,7 @@ position:  relative;
 
 		<c:if test="${sessionScope.checkAdmin eq 9 }">
 
-				<a href="/admin/campingTipModifyForm/${campingTipVo.campingtip_title}/${checkBoard}"class="btn btn-info">수정</a>				
+				<a href="/admin/campingTipModifyForm/${campingTipVo.campingtip_title}"class="btn btn-info">수정</a>				
 				<a href="/admin/campingTipDelete?campingtip_no=${campingTipVo.campingtip_no}"class="btn btn-danger">삭제</a>		
 		</c:if>		
 

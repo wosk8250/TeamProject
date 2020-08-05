@@ -19,7 +19,7 @@ public interface CampingReviewService {
 
 	//캠핑장 후기 등록 파일 조회
 	public List<FilesVo> filesList(String table_name) throws Exception;
-	
+	// (캠핑장 후기 내용)이미지 보여주기  filesNoFilsList(파일번호 조회)
 	public List<FilesVo> filesNoFilesList(int files_no) throws Exception;
 	
 	//캠핑후기 수정 폼
@@ -32,7 +32,7 @@ public interface CampingReviewService {
 	//캠핑장 후기 수정 파일 조회
 	public List<FilesVo> modifyFileList(String table_name)throws Exception;
 	
-	//캠핑장 후기 게시물 갯수 검색
+	//캠핑장 후기 게시물 갯수 
 	public int campingReviewListCount() throws Exception;
 	
 	//캠핑장 후기 페이징

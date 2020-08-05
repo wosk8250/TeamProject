@@ -14,7 +14,7 @@ public interface CampingReviewDao {
 	
 	//파일 조회
 	public List<FilesVo> filesList(String table_name) throws Exception;
-	
+	// (캠핑장 후기 내용)이미지 보여주기  filesNo(파일번호)
 	public List<FilesVo> filesNoFilesList(int files_no) throws Exception;
 	
 	

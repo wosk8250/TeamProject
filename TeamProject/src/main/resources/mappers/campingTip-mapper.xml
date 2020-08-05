@@ -7,7 +7,8 @@
 	
 	<!-- 캠핑장 수칙 목록 -->
 	<select id="campingTipList"  resultType="CampingTipVo">
-		select * from tbl_camping_tip
+		  select * from  tbl_camping_tip
+        where campingtip_admin = 0 order by  campingtip_no
 	</select>
 	<!--  캠핑장 수칙 내용  보기 -->
 	<select id="singleContentsCampingTip" resultType="CampingTipVo">
@@ -21,4 +22,31 @@
 		campingtip_view  =  campingtip_view + 1
 		where campingtip_no = #{campingtip_no}
 	</update>
+	<!-- 캠핑 수칙 이미지 조회 -->
+	<select id="filesList" resultType="FilesVo">
+		select *  from tbl_files where table_name = #{table_name}
+	</select>
+	<!--  캠핑장 수칙 내용 이미지 보기 -->
+	<select id="filesNoFilesList" resultType="FilesVo">
+	      select * from tbl_files
+        where files_no = #{files_no}
+	</select>
+	<!-- 캠핑장 수칙 게시물 수 조회 -->
+	<select id="campingTipListCount" resultType="int">
+	      select count(*) from
+            tbl_camping_tip where campingtip_admin = 0
+	</select>
+	<!-- 캠핑장 수칙 페이징 -->
+	<select id="campingTipListPage" resultType="CampingTipVo">
+		      select * from (select
+				rownum rnum, a.* from(select * from tbl_camping_tip where
+					campingtip_admin = 0 order
+						by campingtip_no desc) a)
+						where rnum between #{startRow} and #{endRow}
+	</select>
+	<!-- 캠핑장 수칙 검색 -->
+	<select id="campingTipSearch" resultType="CampingTipVo">
+	select * from tbl_camping_tip where campingtip_title = #{campingtip_title}
+	</select>
+	
 </mapper>
