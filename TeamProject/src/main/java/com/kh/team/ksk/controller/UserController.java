@@ -80,6 +80,7 @@ public class UserController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception {
 		session.invalidate();// 세션 무효화 -> 로그아웃
+		session.setAttribute("checkBoard", "camp");
 		return "redirect:/camp/home";
 	}
 
