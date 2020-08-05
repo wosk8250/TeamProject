@@ -13,11 +13,11 @@
 			float:right;
 		}
  </style>
- <c:choose>
- <c:when test="${checkBoard == 'admin'}">
+  <c:choose>
+ <c:when test="${sessionScope.checkBoard == 'admin'}">
  <%@ include file="../include/adminheader.jsp" %>
  </c:when>
- <c:when test="${checkBoard eq 'camp'}">
+ <c:when test="${sessionScope.checkBoard eq 'camp'}">
 <%@ include file="../include/topImgHeader.jsp" %>
  </c:when>
  </c:choose>
@@ -49,15 +49,15 @@
 				<dd>${campNoticeVo.notice_content}</dd>
 			</dl>
 			
-			<c:if test="${checkAdmin eq 9 }">
+			<c:if test="${sessionScope.checkAdmin eq 9 }">
 			<a href="/admin/noticeDelete?notice_no=${campNoticeVo.notice_no}" class="btn btn-info" >삭제</a>
 			<a href="/admin/noticeModifyForm?notice_no=${campNoticeVo.notice_no}" class="btn btn-danger" >수정</a>
  </c:if>
  <c:choose>
- <c:when test="${checkBoard == 'admin'}">
+ <c:when test="${sessionScope.checkBoard == 'admin'}">
 			<a href="/admin/notice" class="btn btn-success" >목록</a>
  </c:when>
- <c:when test="${checkBoard eq 'camp'}">
+ <c:when test="${sessionScope.checkBoard eq 'camp'}">
 			<a  href="/camp/campNoticeList"class="btn btn-success">목록</a>
  </c:when>
  </c:choose>

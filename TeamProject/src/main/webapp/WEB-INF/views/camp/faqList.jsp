@@ -55,7 +55,7 @@ $(function () {
 					<tr>
 						<td>${faqVo.faq_no}</td>
 						<td width="450" id="td_title">
-							<a href="/camp/selectByfaq/${faqVo.faq_no}/${checkBoard}">${faqVo.faq_title}</a>
+							<a href="/camp/selectByfaq/${faqVo.faq_no}">${faqVo.faq_title}</a>
 						</td>
 						<td>${faqVo.faq_writer}</td>
 						<td>${faqVo.faq_date}</td>

@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:choose>
+ <c:when test="${sessionScope.checkBoard == 'admin'}">
+ <%@ include file="../include/adminheader.jsp" %>
+ </c:when>
+ <c:when test="${sessionScope.checkBoard eq 'camp'}">
 <%@ include file="../include/header.jsp" %>
-
+ </c:when>
+ </c:choose>
 <style>
 .camping_content{
 text-align: center;
@@ -252,10 +259,20 @@ $(function(){
 		</div>
 	</div>
 
+		<c:if test="${sessionScope.checkAdmin eq 9 }">
+				<a href="/admin/campingTalkDelete?campingtip_no=${campingTipVo.campingtip_no}"class="btn btn-danger">삭제</a>				
+ </c:if>
 
-
-	
+ <c:choose>
+ <c:when test="${sessionScope.checkBoard eq 'admin'}">
+				<a href="/admin/review"class="btn btn-success">목록</a>				
+ </c:when>
+ <c:when test="${sessionScope.checkBoard eq 'camp'}">
 					<a href="/camp/campingReviewList"class="btn btn-success" id= "btnList">목록</a>		
+ </c:when>
+ </c:choose>
+ 
+ 
 			<c:if test="${sessionScope.user_id==reviewVo.review_id}">
 				<a  href="/camp/campingReviewModifyForm/${review_no}" class="btn btn-warning" id ="btnUpdate">수정</a>		
 				<a  href="/camp/campingReviewDelete/${review_no}" class="btn btn-danger" id="btnDelete">삭제</a>	
