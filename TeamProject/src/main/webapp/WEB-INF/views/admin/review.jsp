@@ -56,7 +56,7 @@
       
       
       events: [
-        {
+        {	
           title: '예약',
           textColor : '#000000',
           start: '2020-08-08',

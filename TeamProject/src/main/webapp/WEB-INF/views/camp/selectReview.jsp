@@ -1,30 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:choose>
+ <c:when test="${sessionScope.checkBoard == 'admin'}">
+ <%@ include file="../include/adminheader.jsp" %>
+ </c:when>
+ <c:when test="${sessionScope.checkBoard eq 'camp'}">
 <%@ include file="../include/header.jsp" %>
-
+ </c:when>
+ </c:choose>
 <style>
 .camping_content{
 text-align: center;
-position:  relative;
+
 
 }
 .camping_img{
 text-align: center;
-position:  relative;
 
 }
 .oriImg{
  
 	width : 200px; 
  	height: auto; 
-  	line-height : 100px; 
-    left:50%;
-    top:50%;
-    margin-left:150px;
-    margin-right:150px;
-    margin-top:100px;
+ 	line-height : 100px;
+ 	margin-left:  200px;
 	vertical-align: middle;
-	margin-bottom:  100px; 
+	margin-bottom:  100px;
 
 }
 .content_first{
@@ -197,14 +199,14 @@ $(function(){
 				<tbody>
 				<tr>
 					<td>
-			
+								<div class="camping_content">
+									<pre class="camping_pre">${reviewVo.review_content}</pre>
+								</div>
 							<div class="camping_img">
 								<c:forEach items="${fileNoListImg}" var="filesVo">
 									<img src="/upload/displayImg?fileName=${filesVo.files }" alt="사진 미등록" class="oriImg"/>
 								</c:forEach>
-							</div>
-							<div class="camping_content">
-									<pre class="camping_pre">${reviewVo.review_content}</pre>
+
 							</div>
 					</td>
 				</tr>
@@ -257,10 +259,20 @@ $(function(){
 		</div>
 	</div>
 
+		<c:if test="${sessionScope.checkAdmin eq 9 }">
+				<a href="/admin/campingTalkDelete?campingtip_no=${campingTipVo.campingtip_no}"class="btn btn-danger">삭제</a>				
+ </c:if>
 
-
-	
+ <c:choose>
+ <c:when test="${sessionScope.checkBoard eq 'admin'}">
+				<a href="/admin/review"class="btn btn-success">목록</a>				
+ </c:when>
+ <c:when test="${sessionScope.checkBoard eq 'camp'}">
 					<a href="/camp/campingReviewList"class="btn btn-success" id= "btnList">목록</a>		
+ </c:when>
+ </c:choose>
+ 
+ 
 			<c:if test="${sessionScope.user_id==reviewVo.review_id}">
 				<a  href="/camp/campingReviewModifyForm/${review_no}" class="btn btn-warning" id ="btnUpdate">수정</a>		
 				<a  href="/camp/campingReviewDelete/${review_no}" class="btn btn-danger" id="btnDelete">삭제</a>	
@@ -275,6 +287,7 @@ $(function(){
 
 	
 </div>
+
 
 
 

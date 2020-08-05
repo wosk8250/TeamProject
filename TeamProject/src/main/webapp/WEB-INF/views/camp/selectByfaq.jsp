@@ -8,12 +8,13 @@
  }
  
  </style>
+ 
  <c:choose>
- <c:when test="${checkBoard == 'admin'}">
+ <c:when test="${sessionScope.checkBoard == 'admin'}">
  <%@ include file="../include/adminheader.jsp" %>
  </c:when>
- <c:when test="${checkBoard eq 'camp'}">
-<%@ include file="../include/topImgHeader.jsp" %>
+ <c:when test="${sessionScope.checkBoard eq 'camp'}">
+<%@ include file="../include/header.jsp" %>
  </c:when>
  </c:choose>
 <style>
@@ -56,15 +57,15 @@ pre {
 			<pre>${faqVo.faq_content}</pre>
 			</div>
 			<div style="text-align: right;">
- <c:if test="${checkAdmin eq 9 }">
+ <c:if test="${sessionScope.checkAdmin eq 9 }">
 			<a href="/admin/faqModifyForm/${faqVo.faq_no}" class="btn btn-info" >수정</a>
 			<a href="/admin/faqDelete/${faqVo.faq_no}" class="btn btn-danger" >삭제</a>
  </c:if>
  <c:choose>
- <c:when test="${checkBoard == 'admin'}">
+ <c:when test="${sessionScope.checkBoard == 'admin'}">
 			<a href="/admin/faq" class="btn btn-success" >목록</a>
  </c:when>
- <c:when test="${checkBoard eq 'camp'}">
+ <c:when test="${sessionScope.checkBoard eq 'camp'}">
 			<a href="/camp/faqList" class="btn btn-success" >목록</a>
  </c:when>
  </c:choose>

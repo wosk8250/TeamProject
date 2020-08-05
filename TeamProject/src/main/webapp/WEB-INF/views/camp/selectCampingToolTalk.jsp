@@ -94,6 +94,7 @@ margin-left:  20px;
 		<c:if test="${sessionScope.checkAdmin eq 9 }">
 				<a href="/admin/campingTalkDelete?campingtip_no=${campingTipVo.campingtip_no}"class="btn btn-danger">삭제</a>				
  </c:if>
+ 
  <c:choose>
  <c:when test="${sessionScope.checkBoard eq 'admin'}">
 				<a href="/admin/campingTalk"class="btn btn-success">목록</a>				
