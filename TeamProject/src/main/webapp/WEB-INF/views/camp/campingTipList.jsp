@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
+
 <style>
 	div {
 		color: black;
@@ -23,46 +24,47 @@ $(function(){
 // 		console.log("test");
 		var page = $(this).attr("href").trim();
 // 		console.log("page:", page);	
-		$("#reviewFrmPage > input[name=page]").val(page);
-		$("#reviewFrmPage").submit();
-	});
+		$("#reviewTipFrmPage > input[name=page]").val(page);
+		$("#reviewTipFrmPage").submit();
+	}); 
 	$("select[name=perPage]").change(function(){
+		
 		var perPage = $(this).val();
-		var i = $("#reviewFrmPage >input[name=perPage]").val(perPage);
-		$("#reviewFrmPage").submit();
+		var i = $("#reviewTipFrmPage >input[name=perPage]").val(perPage);
+
+		$("#reviewTipFrmPage").submit();
 	});
 	$("#searchReview").click(function(){
+		
 		var TipTitle = $("#textReview").val();
 		console.log("TipTitle:",TipTitle);
-		location.href="/camp/campingTipList?campingtip_title=" + TipTitle;
+	location.href="/camp/campingTipList?campingtip_title=" + TipTitle;
 	});
 	
 });
 </script>
 
-<%@ include file = "../include/campingTipFrmPage.jsp" %>
+<div>
+	<select name="perPage" class="form-inline">
+		<c:forEach begin="5" end="30" step="5" var="i">
+			<option value="${i}"
+				<c:if test="${i == pagingDto.perPage}">selected</c:if>>${i}줄씩
+				보기</option>
+		</c:forEach>
+	</select>
+</div>
 
+
+<%@ include file = "../include/campingTipFrmPage.jsp" %>
 <div class="container-fluid">
 	<div class="row">
-				<div class="col-md-4">
-									<select name="perPage" class="form-inline">
-						<c:forEach begin="5" end="30" step="5" var="i">
-							<option value="${i}"
-								<c:if test="${i == pagingDto.perPage}">selected</c:if>
-								>${i}줄씩 보기</option>
-						</c:forEach>
-					</select>	
+				<div class="col-md-2">
 				</div>
-				<div class="col-md-4">
-					<select name="searchCnd" id="searchCnd" class="form-group" title="검색조건선택">
-						<option value="0">제목</option>
-					</select>
-					<input type="text" class="form-group" id="textReview"/>
-					<button class="btn btn-success" id="searchReview">검색</button>
-				</div>
-				<div class="col-md-4"></div>
+				<div class="col-md-5"></div>
+				<div class="col-md-5"></div>
 	</div>
 </div>
+
 
 <div class="container-fluid">
 	<div class="row">
@@ -98,13 +100,6 @@ $(function(){
 					<td>${CampingTipVo.campingtip_writer}</td>
 					<td>${CampingTipVo.campingtip_date}</td>
 					<td>${CampingTipVo.campingtip_view}</td>
-						
-						
-						
-						
-						
-			
-	
 					</tr>
 				<tr>
 			
@@ -118,6 +113,30 @@ $(function(){
 
 	</div>
 </div>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-1"></div>
+		<div class="col-md-10"></div>
+		<div class="col-md-1"></div>
+	</div>
+	<div class="container-fluid">
+	<div class="row">
+				<div class="col-md-4">
+								
+				</div>
+				<div class="col-md-4">
+					<select name="searchCnd" id="searchCnd" class="form-group" title="검색조건선택">
+						<option value="0">제목</option>
+					</select>
+					<input type="text" class="form-group" id="textReview"/>
+					<button class="btn btn-success" id="searchReview">검색</button>
+				</div>
+				<div class="col-md-4"></div>
+	</div>
+</div>
+</div>
+
+
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-5"></div>
@@ -141,14 +160,14 @@ $(function(){
 					</c:if>
 				</ul>
 			</nav>
-				
-				
-				
 				</div>
 				<div class="col-md-3"></div>
 			</div>
 		</div>
+		
+		<div class="col-md-12 text-center">
 
+		</div>
 
 
 

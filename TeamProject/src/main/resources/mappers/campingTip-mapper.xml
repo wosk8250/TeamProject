@@ -46,7 +46,9 @@
 	</select>
 	<!-- 캠핑장 수칙 검색 -->
 	<select id="campingTipSearch" resultType="CampingTipVo">
-	select * from tbl_camping_tip where campingtip_title = #{campingtip_title}
+	select * from tbl_camping_tip where  campingtip_title like '%' || #{campingtip_title} || '%'
+		and campingtip_admin = 0
+	
 	</select>
 	
 </mapper>

@@ -3,8 +3,8 @@ package com.kh.team.sjy.persitence;
 import java.util.List;
 
 import com.kh.team.domain.CampNoticeVo;
-import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.myReviewPagingDto;
+
 
 public interface CampNoticeDao {
 
@@ -17,14 +17,11 @@ public interface CampNoticeDao {
 	// 조회수 
 	public void updateNoticeView(int notice_no ) throws Exception;
 	
-	//자주묻는 질문
-	public List<FaqVo> faqList(myReviewPagingDto pagingDto) throws Exception;
+	//캠핑장 공지사항 게시물 갯수 
+	public int campingNoticeListCount(myReviewPagingDto myReviewPagingDto)throws Exception;
+	//캠핑장 수칙 페이징
+	public List<CampNoticeVo> noticeListPage(myReviewPagingDto myReviewPagingDto)throws Exception;
+
 	
-	//자주묻는 질문 갯수
-	public int getCount(myReviewPagingDto pagingDto) throws Exception;
-	
-	public FaqVo selectByfaq(int faq_no) throws Exception;
-	
-	//자주묻는 질문 뷰카운트
-	public void faqViewCount(int faq_no) throws Exception;
+
 }

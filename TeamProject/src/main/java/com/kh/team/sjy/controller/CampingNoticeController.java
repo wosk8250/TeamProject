@@ -4,37 +4,47 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.kh.team.domain.CampNoticeVo;
-import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.myReviewPagingDto;
 import com.kh.team.sjy.persitence.CampNoticeDaoImpl;
+import com.kh.team.sjy.service.CampingNoticeService;
 
 @Controller
 @RequestMapping(value="/camp")
-public class CampNoticeController {
+public class CampingNoticeController {
 	
 	@Inject
 	private  CampNoticeDaoImpl campNoticeDaoImpl;
+	@Inject
+	private CampingNoticeService campingNoticeService;
 	
 	
 	//공지사항 목록
 	@RequestMapping(value="/campNoticeList",method= RequestMethod.GET)
-	public String campNoticeList(Model model)throws Exception{
-		List<CampNoticeVo> list = campNoticeDaoImpl.campNoticeList();
+	public String campNoticeList(myReviewPagingDto myReviewPagingDto,Model model)throws Exception{
+		System.out.println("myReviewPagingDto" + myReviewPagingDto);
+	
+			
+	
+		myReviewPagingDto.setmyReviewPageInfo();
+		int totalCount = campingNoticeService.campingNoticeListCount(myReviewPagingDto);
+		myReviewPagingDto.setTotalCount(totalCount);
+		List<CampNoticeVo> list = campingNoticeService.noticeListPage(myReviewPagingDto);
+	
 		model.addAttribute("list",list);
-	return "/camp/campNoticeList";
+		model.addAttribute("pagingDto", myReviewPagingDto);
+	
+		return "camp/campNoticeList";
+			
 	}
 	
 	//공지사항 글 내용
@@ -50,30 +60,6 @@ public class CampNoticeController {
 		
 	}
 	
-	//자주묻는 질문
-	@RequestMapping(value="/faqList", method= RequestMethod.GET)
-	public void faqList(Model model, myReviewPagingDto pagingDto)throws Exception{
-		pagingDto.setmyReviewPageInfo();
-		int totalCount = campNoticeDaoImpl.getCount(pagingDto);
-		pagingDto.setTotalCount(totalCount);
-		System.out.println("pagingDto:"+ pagingDto);
-		System.out.println("totalCount:"+ totalCount);
-		List<FaqVo> faqList = campNoticeDaoImpl.faqList(pagingDto);
-		model.addAttribute("pagingDto", pagingDto);
-		model.addAttribute("faqList",faqList);
-		
-	}
-	
-	//자주 묻는 질문보기
-	@Transactional
-	@RequestMapping(value="/selectByfaq/{faq_no}", method= RequestMethod.GET)
-	public String selectByfaq(@PathVariable("faq_no") int faq_no,Model model)throws Exception{
-		//뷰 추가
-		
-		campNoticeDaoImpl.faqViewCount(faq_no);
-		FaqVo faqVo = campNoticeDaoImpl.selectByfaq(faq_no);
-		model.addAttribute("faqVo", faqVo);
-		return "/camp/selectByfaq";
-	}
+
 	
 }

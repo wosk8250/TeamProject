@@ -32,18 +32,24 @@ public class CampingTipConroller {
 	@RequestMapping(value="/campingTipList" , method = RequestMethod.GET  )
 	public String CampTipList(myReviewPagingDto myReviewPagingDto, Model model , String campingtip_title)throws Exception{
 		List <CampingTipVo> list = null;
+		System.out.println("myReviewPagingDto:"+ myReviewPagingDto);
 		if( campingtip_title == null) {
 			myReviewPagingDto.setmyReviewPageInfo();
-			int totalCount = campingTipService.campingTipListCount();
+			int totalCount = campingTipService.campingTipListCount(myReviewPagingDto);
 			myReviewPagingDto.setTotalCount(totalCount);
 			list = campingTipService.campingTipListPage(myReviewPagingDto);
+
 		}else {
+			
 			list = campingTipService.campingTipSearch(campingtip_title);
+		
+	
+		
 		}
 	
-		 
 		model.addAttribute("list",list);	
 		model.addAttribute("pagingDto", myReviewPagingDto);
+	
 		return  "camp/campingTipList";
 	}
 	//캠핑 수칙 글 내용

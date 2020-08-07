@@ -12,6 +12,8 @@ public class myReviewPagingDto {
 	private String user_id;
 	private String location;
 	private String area;
+	private String textReview;
+	private String searchCnd;
 	
 	
 	public myReviewPagingDto() {
@@ -30,8 +32,11 @@ public class myReviewPagingDto {
 		this.startPage = this.endPage - 10 + 1;
 	}
 	
-	public myReviewPagingDto(int page, int perPage, int startRow, int endRow, int startPage, int endPage, int totalPage,
-			int totalCount) {
+	
+
+
+public myReviewPagingDto(int page, int perPage, int startRow, int endRow, int startPage, int endPage, int totalPage,
+			int totalCount, String user_id, String location, String area, String textReview, String searchCnd) {
 		super();
 		this.page = page;
 		this.perPage = perPage;
@@ -41,7 +46,25 @@ public class myReviewPagingDto {
 		this.endPage = endPage;
 		this.totalPage = totalPage;
 		this.totalCount = totalCount;
+		this.user_id = user_id;
+		this.location = location;
+		this.area = area;
+		this.textReview = textReview;
+		this.searchCnd = searchCnd;
 	}
+
+//	public myReviewPagingDto(int page, int perPage, int startRow, int endRow, int startPage, int endPage, int totalPage,
+//			int totalCount) {
+//		super();
+//		this.page = page;
+//		this.perPage = perPage;
+//		this.startRow = startRow;
+//		this.endRow = endRow;
+//		this.startPage = startPage;
+//		this.endPage = endPage;
+//		this.totalPage = totalPage;
+//		this.totalCount = totalCount;
+//	}
 	
 	public String getLocation() {
 		return location;
@@ -129,12 +152,38 @@ public class myReviewPagingDto {
 		this.user_id = user_id;
 	}
 
+	public String getTextReview() {
+		return textReview;
+	}
+
+	public void setTextReview(String textReview) {
+		this.textReview = textReview;
+	}
+	
+
+	public String getSearchCnd() {
+		return searchCnd;
+	}
+
+	public void setSearchCnd(String searchCnd) {
+		this.searchCnd = searchCnd;
+	}
+
 	@Override
 	public String toString() {
 		return "myReviewPagingDto [page=" + page + ", perPage=" + perPage + ", startRow=" + startRow + ", endRow="
 				+ endRow + ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage=" + totalPage
-				+ ", totalCount=" + totalCount + ", user_id=" + user_id + "]";
+				+ ", totalCount=" + totalCount + ", user_id=" + user_id + ", location=" + location + ", area=" + area
+				+ ", textReview=" + textReview + ", searchCnd=" + searchCnd + "]";
 	}
+
+
+//	@Override
+//	public String toString() {
+//		return "myReviewPagingDto [page=" + page + ", perPage=" + perPage + ", startRow=" + startRow + ", endRow="
+//				+ endRow + ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage=" + totalPage
+//				+ ", totalCount=" + totalCount + ", user_id=" + user_id + "]";
+//	}
 	
 
 	

@@ -1,6 +1,8 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+    
 <%@ include file="../include/header.jsp" %>
 <style>
 	div {
@@ -17,12 +19,50 @@
 		background-color: #4f6fcc25;
 	}
 </style>
+<script>
+$(function (){
+	$("#searchReview").click(function(){
+		var searchCnd = $("select[name=searchCnd]").val();
+		var textReview = $("#textReview").val();
+		$("#reviewNoitceFrmPage > input[name=searchCnd]").val(searchCnd);
+		$("#reviewNoitceFrmPage > input[name=textReview]").val(textReview);
+		$("#reviewNoitceFrmPage").submit();
+	});
+	// n줄씩 보기
+	$("select[name=perPage]").change(function(){
+		var perPage = $(this).val();
+		var i = $("#reviewNoitceFrmPage >input[name=perPage]").val(perPage);
+		$("#reviewNoitceFrmPage").submit();
+	});
+	//페이지 번호
+	$("a.page-link").click(function(e){
+		e.preventDefault();
+		var page = $(this).attr("href").trim();
+		$("#reviewNoitceFrmPage > input[name=page]").val(page);
+		$("#reviewNoitceFrmPage").submit();
+	});
+	
+	
+});
+</script>
+
+<%@ include file="../include/campingNoticeFrmPage.jsp" %>
+<div>
+	<select name="perPage" class="form-inline">
+		<c:forEach begin="5" end="30" step="5" var="i">
+			<option value="${i}"
+				<c:if test="${i == pagingDto.perPage}">selected</c:if>>${i}줄씩
+				보기</option>
+		</c:forEach>
+	</select>
+</div>
+
 <div class="container-fluid">
 	<div class="row">
 				<div class="col-md-1">
 		</div>
 		<div class="col-md-10">
-		<h2>캠핑 수칙</h2>
+		<h2>공지 사항</h2>
 			<hr>
 		<div class="table-responsive">
 			<table class="table table-hover">
@@ -49,11 +89,70 @@
 				</tbody>
 			</table>
 				</div>
-
 		</div>
 	</div>
 </div>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-1"></div>
+		<div class="col-md-10"></div>
+		<div class="col-md-1"></div>
+	</div>
+	<div class="container-fluid">
+	<div class="row">
+				<div class="col-md-4">
+								
+				</div>
+				<div class="col-md-4">
+					<select name="searchCnd" id="searchCnd" class="form-group" title="검색조건선택">
+						<option value="t"
+						 <c:if test="${pagingDto.searchCnd == 't' }">selected</c:if>
+						 >제목</option>
+						<option value="n"
+						 <c:if test="${pagingDto.searchCnd == 'n' }">selected</c:if>
+						>번호</option>
+					</select>
+					<input type="text" class="form-group" id="textReview" name ="textReview"
+						 value="${pagingDto.textReview }"/>
+					<button class="btn btn-success" id="searchReview">검색</button>
+				</div>
+				<div class="col-md-4"></div>
+	</div>
+</div>
+</div>
 
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-5"></div>
+				<div class="col-md-4">
+							<nav>
+				<ul class="pagination">
+				<c:if test="${pagingDto.startPage != 1}">
+					<li class="page-item">
+						<a class="page-link" href="${pagingDto.startPage - 1}">이전</a>
+					</li>
+				</c:if>
+					<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="page">
+					<li class="page-item">
+						<a class="page-link" href="${page}">${page}</a>
+					</li>
+					</c:forEach>
+					<c:if test="${pagingDto.endPage < pagingDto.totalPage}">
+					<li class="page-item">
+						<a class="page-link" href="${pagingDto.endPage + 1}">다음</a>
+					</li>
+					</c:if>
+				</ul>
+			</nav>
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+		</div>
+		
+		<div class="col-md-12 text-center">
+
+		</div>
 
 
 

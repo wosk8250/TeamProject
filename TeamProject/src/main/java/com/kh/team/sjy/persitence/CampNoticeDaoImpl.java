@@ -8,13 +8,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.CampNoticeVo;
-import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.myReviewPagingDto;
+
 
 @Repository
 public class CampNoticeDaoImpl implements CampNoticeDao {
 	
-	private static final String NAMESPACE="mappers.campNotice-mapper."; 
+	private static final String NAMESPACE="mappers.campingNotice-mapper."; 
 	
 	@Inject
 	private SqlSession sqlSession;
@@ -37,29 +37,16 @@ public class CampNoticeDaoImpl implements CampNoticeDao {
 		sqlSession.update(NAMESPACE + "updateNoticeView", notice_no );
 		
 	}
-	//자주묻는 질문 리스트
+	//갯수
 	@Override
-	public List<FaqVo> faqList(myReviewPagingDto pagingDto) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "faqList",pagingDto);
+	public int campingNoticeListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "campingNoticeListCount" , myReviewPagingDto);
 	}
-	
+	//페이징
+	@Override
+	public List<CampNoticeVo> noticeListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "noticeListPage" , myReviewPagingDto );
+	}
 
-	@Override
-	public int getCount(myReviewPagingDto pagingDto) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "getCount", pagingDto);
-	}
-
-	//자주묻는 질문 보기
-	@Override
-	public FaqVo selectByfaq(int faq_no) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "selectByfaq", faq_no);
-	}
-	
-	//자주묻는 질문 뷰카운트
-	@Override
-	public void faqViewCount(int faq_no) throws Exception {
-		sqlSession.update(NAMESPACE + "faqViewCount", faq_no);
-	}
-	
 
 }

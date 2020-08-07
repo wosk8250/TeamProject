@@ -33,8 +33,8 @@ public class CampingTipServiceImpl implements CampingTipService {
 	}
 
 	@Override
-	public int campingTipListCount() throws Exception {
-		return campingTipDao.campingTipListCount();
+	public int campingTipListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
+		return campingTipDao.campingTipListCount(myReviewPagingDto);
 	}
 
 	@Override
