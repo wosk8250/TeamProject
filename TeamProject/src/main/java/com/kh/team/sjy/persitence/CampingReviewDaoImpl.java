@@ -40,10 +40,12 @@ public class CampingReviewDaoImpl implements CampingReviewDao {
 		return sqlSession.selectList(NAMESPACE +"campingReviewList");
 		
 	}
+	//파일 조회
 	@Override
 	public List<FilesVo> filesList(String table_name) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "filesList", table_name);
 	}
+	// (캠핑장 후기 내용)이미지 보여주기  filesNoFilsList(파일번호 조회)
 	@Override
 	public List<FilesVo> filesNoFilesList(int files_no) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "filesNoFilesList", files_no);

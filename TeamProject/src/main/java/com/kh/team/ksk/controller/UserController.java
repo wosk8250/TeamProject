@@ -65,7 +65,7 @@ public class UserController {
 					session.removeAttribute("tergetLoction");
 					return "redirect:" + tergetLoction;
 				}
-				return "redirect:/camp/home";
+				return "redirect:/camp/main";
 			}
 		} catch (NullPointerException e) {
 			rttr.addFlashAttribute("message", "fail");
@@ -80,7 +80,7 @@ public class UserController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception {
 		session.invalidate();// 세션 무효화 -> 로그아웃
-		return "redirect:/camp/home";
+		return "redirect:/camp/main";
 	}
 
 	// 회원가입 폼

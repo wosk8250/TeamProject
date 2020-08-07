@@ -535,7 +535,7 @@ public class AdminDaoImpl implements AdminDao {
 	public int waitForRegistrationCampCount() throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "waitForRegistrationCampCount");
 	}
-	
-	
+
+
 
 }

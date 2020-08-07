@@ -1,6 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file ="../include/adminheader.jsp" %>
+
+
+<style>
+	div {
+		color: black;
+	}
+	table {
+		text-align: center;
+		color: black;
+	}
+	#td_title {
+		text-align: center;
+	}
+	th {
+		background-color: #4f6fcc25;
+	}
+</style>
+
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
 $(function() {
@@ -32,9 +50,14 @@ $(function() {
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
+	<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
 		
-			<table class="table">
+				<h2>벌점 내역</h2>
+			<hr>
+			<div class="table-responsive">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>코드</th>
@@ -83,12 +106,21 @@ $(function() {
 					</c:forEach>
 				</tbody>
 			</table>
+			</div>
 		</div>
 		
 	</div>
+<div class="col-md-1">
+		</div>
+		<div class="container-fluid">
+	<div class="row">
+		
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
 	<a id="modal-338047" href="#modal-container-338047" role="button"
 		class="btn btn-primary" data-toggle="modal">벌점 등록</a>
-
+		</div>
 	<div class="modal fade" id="modal-container-338047" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -121,7 +153,8 @@ $(function() {
 		</div>
 
 	</div>
-
+</div>
+</div>
 </div>
     
 

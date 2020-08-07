@@ -1,9 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file ="../include/adminheader.jsp" %>
+
+<style>
+	div {
+		color: black;
+	}
+	table {
+		text-align: center;
+		color: black;
+	}
+	#td_title {
+		text-align: center;
+	}
+	th {
+		background-color: #4f6fcc25;
+	}
+</style>
+
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
-$(function ()) {
+$(function () {
 
 	$(".page-link").click(function(e) {
 		e.preventDefault();
@@ -31,7 +48,9 @@ $(function ()) {
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
+	<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
 			<select name="perPage" class="form-inline">
 			<c:forEach begin="5" end="30" step="5" var="i">
 				<option value="${i}"
@@ -39,7 +58,10 @@ $(function ()) {
 				>${i}줄씩 보기</option>
 			</c:forEach>
 			</select>
-			<table class="table">
+				<h2>등록 대기중인 캠핑장</h2>
+			<hr>
+			<div class="table-responsive">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>글번호</th>

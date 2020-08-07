@@ -93,6 +93,7 @@ margin-left:  20px;
 			</table>
 		<c:if test="${sessionScope.checkAdmin eq 9 }">
 				<a href="/admin/campingTalkDelete?campingtip_no=${campingTipVo.campingtip_no}"class="btn btn-danger">삭제</a>				
+				<a href="/admin/campingTipModifyForm/${campingTipVo.campingtip_title}"class="btn btn-info">수정</a>				
  </c:if>
  
  <c:choose>
@@ -100,7 +101,6 @@ margin-left:  20px;
 				<a href="/admin/campingTalk"class="btn btn-success">목록</a>				
  </c:when>
  <c:when test="${sessionScope.checkBoard eq 'camp'}">
-				<a href="/admin/campingTipModifyForm/${campingTipVo.campingtip_title}/${checkBoard}"class="btn btn-info">수정</a>				
 				<a href="/camp/campingToolTalkList"class="btn btn-success" id= "btnList">목록</a>		
  </c:when>
  </c:choose>

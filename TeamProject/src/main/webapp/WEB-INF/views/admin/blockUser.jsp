@@ -10,6 +10,20 @@ button.demeritBtn {
 	width: 400px !important;
 	height: 600px !important;
 }
+div {
+		color: black;
+	}
+	table {
+		text-align: center;
+		color: black;
+	}
+	#td_title {
+		text-align: center;
+	}
+	th {
+		background-color: #4f6fcc25;
+	}
+
 </style>
 
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -56,8 +70,9 @@ button.demeritBtn {
 
 <div class="container-fluid">
 	<div class="row">
-
-		<div class="col-md-12">
+<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
 			<select name="perPage" class="form-inline">
 				<c:forEach begin="5" end="30" step="5" var="i">
 					<option value="${i}"
@@ -65,10 +80,13 @@ button.demeritBtn {
 						보기</option>
 				</c:forEach>
 			</select>
-			<table class="table">
+		<h2>정지된 유저</h2>
+			<hr>
+			<div class="table-responsive">
+			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>아이디</th>
+						<th width="450">아이디</th>
 						<th>이름</th>
 						<th>휴대폰번호</th>
 						<th>정지시간</th>
@@ -148,6 +166,7 @@ button.demeritBtn {
 					</c:forEach>
 				</tbody>
 			</table>
+			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="row">
