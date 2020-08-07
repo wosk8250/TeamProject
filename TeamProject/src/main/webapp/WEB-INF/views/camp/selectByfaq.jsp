@@ -14,7 +14,7 @@
  <%@ include file="../include/adminheader.jsp" %>
  </c:when>
  <c:when test="${sessionScope.checkBoard eq 'camp'}">
-<%@ include file="../include/topImgHeader.jsp" %>
+<%@ include file="../include/header.jsp" %>
  </c:when>
  </c:choose>
 <style>

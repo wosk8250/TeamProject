@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
 import com.kh.team.domain.CampingTalkVo;
@@ -182,8 +183,8 @@ public class AdminController {
 
 	// 캠핑장 글쓰기
 	@RequestMapping(value = "/campRun", method = RequestMethod.POST)
-	public String campInsertRun(CampVo campVo) throws Exception {
-		adminService.campInsertRun(campVo);
+	public String campInsertRun(CampVo campVo, AmenitiesVo amenitiesVo) throws Exception {
+		adminService.campInsertRun(campVo, amenitiesVo);
 
 		return "redirect:/admin/camp";
 	}

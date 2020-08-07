@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampingNameVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
@@ -28,6 +29,13 @@ public class AdminDaoImpl implements AdminDao {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "mappers.admin-mapper.";
 
+	
+	//시퀀스
+	@Override
+	public int getNextVal() throws Exception{
+		return sqlSession.selectOne(NAMESPACE + "getNextVal");
+	}
+	
 	// 사용자 조회
 	@Override
 	public List<UserVo> userList() throws Exception {
@@ -60,6 +68,11 @@ public class AdminDaoImpl implements AdminDao {
 		sqlSession.insert(NAMESPACE + "campInsertRun", campVo);
 	}
 
+	//캠핑장 부대 시설 입력
+	public void campAmenities(AmenitiesVo amenitiesVo) throws Exception{
+		sqlSession.insert(NAMESPACE + "campAmenities", amenitiesVo);
+	}
+	
 	// 캠핑장 수정폼
 	@Override
 	public CampVo campModifyForm(String camp_address) throws Exception {
