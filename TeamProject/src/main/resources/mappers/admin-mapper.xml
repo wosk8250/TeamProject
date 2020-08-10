@@ -10,7 +10,7 @@
 	</select>
 	<!-- 유저 아이디 조회 -->
 	<select id="userList" resultType="UserVo">
-		select * from tbl_user where admin = 0
+		select * from tbl_user where admin = 0 or admin = 2
 	</select>
 	<!-- 정지된유저 아이디 조회 -->
 	<select id="blockUserList" resultType="UserVo">

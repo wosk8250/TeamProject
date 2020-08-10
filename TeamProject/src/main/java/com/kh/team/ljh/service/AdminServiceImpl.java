@@ -168,6 +168,8 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void campingTipModifyRun(CampingTipVo campingTipVo) throws Exception {
 		
+		System.out.println(campingTipVo);
+		
 		if(campingTipVo.getFiles() != null){
 			
 			String files[] = campingTipVo.getFiles();
