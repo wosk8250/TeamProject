@@ -15,10 +15,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
 import com.kh.team.domain.CampingTalkVo;
@@ -29,12 +32,14 @@ import com.kh.team.domain.EmailDto;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.PagingDto;
+import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
 import com.kh.team.domain.myReviewPagingDto;
 import com.kh.team.ksk.service.UserService;
 import com.kh.team.ljh.service.AdminService;
 import com.kh.team.ljh.utile.DateUtile;
+import com.kh.team.ljh.utile.ReservationDate;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
@@ -182,8 +187,8 @@ public class AdminController {
 
 	// 캠핑장 글쓰기
 	@RequestMapping(value = "/campRun", method = RequestMethod.POST)
-	public String campInsertRun(CampVo campVo) throws Exception {
-		adminService.campInsertRun(campVo);
+	public String campInsertRun(CampVo campVo, AmenitiesVo amenitiesVo) throws Exception {
+		adminService.campInsertRun(campVo, amenitiesVo);
 
 		return "redirect:/admin/camp";
 	}
@@ -218,7 +223,7 @@ public class AdminController {
 	@RequestMapping(value = "/campModifyRun", method = RequestMethod.POST)
 	public String campModifyRun(CampVo campVo) throws Exception {
 		adminService.campModifyRun(campVo);
-		return "redirect:/admin/camp";
+		return "redirect:/camp/camp";
 	}
 
 	// 캠핑장 삭제 처리
@@ -264,7 +269,7 @@ public class AdminController {
 	@RequestMapping(value = "/campingtipRun", method = RequestMethod.POST)
 	public String campingTipInsertRun(CampingTipVo campingTipVo) throws Exception {
 		adminService.campingTipInsertRun(campingTipVo);
-		return "redirect:/admin/campingTip";
+		return "";
 	}
 
 	// 캠핑 수칙 수정 폼
@@ -350,6 +355,22 @@ public class AdminController {
 			moadel.addAttribute("list", list);
 		}
 		
+		
+		//예약날짜에 캠프번호 예약날짜 다불러와서 정지시키기
+		//넘겨줄 날짜 리스트에 추가
+		List<ReservationVo> reservationVo = adminService.reservationDateList(0);
+
+		
+		ArrayList<String> reserveDate = new ArrayList<>();
+		for (ReservationVo reservationVo2 : reservationVo) {
+			reserveDate.addAll(ReservationDate.BetweenDates(reservationVo2.getStartdate(),reservationVo2.getEnddate()));
+		}
+//		for (int i = 0; i < abc.length; i++) {
+//			reserveDate.add("'" + abc[i] + "'");
+		
+//		}
+		//날짜 보내기
+		moadel.addAttribute("date", reserveDate);
 		return "admin/review";
 		
 	}
@@ -387,7 +408,7 @@ public class AdminController {
 	@RequestMapping(value = "noticeModifyRun", method = RequestMethod.GET)
 	public String noticeModifyRun(CampNoticeVo campNoticeVo) throws Exception {
 		adminService.noticeModifyRun(campNoticeVo);
-		return "redirect:/admin/notice";
+		return "redirect:/camp/singleContentsCampNotice/" + campNoticeVo.getNotice_no();
 	}
 
 	// 공지사항 삭제처리
@@ -423,7 +444,7 @@ public class AdminController {
 	@RequestMapping(value = "/faqModifyRun", method = RequestMethod.GET)
 	public String faqModifyRun(FaqVo faqVo) throws Exception {
 		adminService.faqModifyRun(faqVo);
-		return "redirect:/admin/faq";
+		return "redirect:/camp/selectByfaq/" + faqVo.getFaq_no();
 	}
 
 	// 자주묻는질문 삭제처리
@@ -496,7 +517,6 @@ public class AdminController {
 			myReviewPagingDto.setmyReviewPageInfo();
 			int totalCount = adminService.waitForRegistrationCampCount();
 			myReviewPagingDto.setTotalCount(totalCount);
-			System.out.println(totalCount);
 			List<CampVo> list = adminService.waitForRegistrationCamp(myReviewPagingDto);
 			
 			model.addAttribute("list", list);
@@ -536,6 +556,51 @@ public class AdminController {
 			
 			return "redirect:/admin/waitForRegistrationCamp";
 		}
+		//예약 등록
+		@RequestMapping(value="/reservationDate",method = RequestMethod.POST)
+		public String reservationDate(ReservationVo reservationVo) throws Exception{
+
+			
+			
+			reservationVo.setUser_id("yaya");
+			
+			
+			
+			
+			adminService.reservationDate(reservationVo);
+			
+			//날짜 입력 시작날짜 끝나는날짜 캠프번호 유저아이디를 입력
+			
+			//날짜 삭제 캠프번호와 유저아이디 시작날짜 끝나는날짜를 찾아서 삭제
+
+			//유저가 로그인하면 예약한거 볼수있게하기
+			
+
+			
+			return "/camp/main";
+		}
+
+		@ResponseBody
+		@RequestMapping(value="/reservationDateConfirm",method =RequestMethod.POST)
+		public String reservationDateConfirm(@RequestBody ReservationVo reservationVo)throws Exception{
+
+			ArrayList<String> reservationDate = ReservationDate.BetweenDates(reservationVo.getStartdate(), reservationVo.getEnddate());
+			List<ReservationVo> list = adminService.reservationDateList(0);
+
+			for (ReservationVo reservationVo2 : list) {
+				ArrayList<String> nowReservationDate = ReservationDate.BetweenDates(reservationVo2.getStartdate(), reservationVo2.getEnddate());
+				for (int i = 0; i < reservationDate.size(); i++) {
+					for (int j = 0; j < nowReservationDate.size(); j++) {
+						if(reservationDate.get(i).equals(nowReservationDate.get(j))) {
+							return "false";
+						}
+					}
+				}
+			}
+			
+			return null;
+					
+			
+		}
 		
-	
 }

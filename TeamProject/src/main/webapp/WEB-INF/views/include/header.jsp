@@ -40,12 +40,9 @@ $(function () {
 	var last = link.lastIndexOf("/");
 	var loc = link.substring(17, last);
 	var loc2 = loc.substring(0, 4);
-	console.log(link);
-	console.log(loc);
-	console.log(loc2);
-	if(loc2 == "camp"){
+	if(loc == "camp"){
 		$("#topImg").attr("src","/resources/image/Service_center.jpg");
-	} else if (loc2 == "user"){
+	} else if (loc == "user"){
 		$("#topImg").attr("src","/resources/image/myPage_top.jpg");
 	}else{
 		$("#topImg").attr("src","/resources/image/business.jpg");
@@ -174,12 +171,12 @@ $(function () {
           <span>자주 묻는 질문</span></a>
       </li>
       <!-- 관리자 로그인 할때 보이기 -->
+      <c:choose>
+      	<c:when test="${sessionScope.checkAdmin == 9}">
       <hr class="sidebar-divider">
        <div class="sidebar-heading">
        기타
       </div>
-      <c:choose>
-      	<c:when test="${sessionScope.checkAdmin == 9}">
       		<li class="nav-item">
 				<a class="nav-link" href="/admin/camp">
 				<i class="fas fa-fw fa-table"></i>

@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../include/adminheader.jsp"%>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.2.0/main.css">
+
+
+
 
 <style>
 	div {
@@ -19,10 +21,10 @@
 		background-color: #4f6fcc25;
 	}
 </style>
-
-<script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> 
+	<script>
 	$(function() {
 
 		var msg = "${msg}"
@@ -49,47 +51,103 @@
 			var reviewTitle = $("#textReview").val();
 			location.href = "/admin/review?review_title=" + reviewTitle;
 		});
+		
+		//-----------------예약 달력------------------
+		var disabledDays = ${date};
+		console.log(disabledDays);
+		$( "#startDate" ).datepicker({
+		    nextText: '다음 달',
+		    prevText: '이전 달', 
+		    dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+		    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
+		    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		    dateFormat: "yy-mm-dd",
+		    minDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
+		   beforeShowDay: disableAllTheseDays,
+		    onClose: function( selectedDate ) {    
+		        $("#endDate").datepicker( "option", "minDate", selectedDate );
+		        $("#endDate").focus();
+		    }    
+		});
 
-	});
+		$('#startDate').datepicker('setDate', '+0');
+
+		function disableAllTheseDays(date) { 
+			   var m = date.getMonth(), d = date.getDate(), y = date.getFullYear(); 
+			   for (i = 0; i < disabledDays.length; i++) { 
+			       if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) { 
+			           return [false]; 
+			       } 
+			   } 
+			   return [true]; 
+			}
+
+		$( "#endDate" ).datepicker({
+		    nextText: '다음 달',
+		    prevText: '이전 달', 
+		    dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+		    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
+		    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		    dateFormat: "yy-mm-dd",
+		    minDate: 0,   
+		    beforeShowDay: disableAllTheseDays,
+		    onClose: function( selectedDate ) {    
+
+		        $("#startDate").datepicker( "option", "maxDate", selectedDate );
+		        var url = "/admin/reservationDateConfirm";
+		        var sendData = {"startdate" : $("#startDate").val(), "enddate" : $("#endDate").val()};
+		        $.ajax({
+		        	"type" : "post",
+		        	"url" : url,
+		        	"dataType" : "text",
+		        	"data" : JSON.stringify(sendData),
+					"headers" : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "post"
+					},
+					"success" :function(rData){
+						
+						if(rData == "false"){
+							alert("예약을 할 수 없습니다");
+							location.href="/admin/review";
+						}
+						
+					}
+		        	
+		        });
+		        	
+		        
+		        
+		        
+		        
+		    }    
+		});   
+
+		$("#startDate").focusout(function() {
+
+		});
+
+		function disableAllTheseDays(date) {
+		var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+		for (i = 0; i < disabledDays.length; i++) {
+		  if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) {
+		      return [false];
+		  }
+		}
+		return [true];
+		}
+		
+		
+});
+		
+		
+	
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.2.0/main.js"></script>
-			<script>
 
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: ''
-      },
-      initialDate: '2020-08-03',
-      selectable: true,
-      
-      
-      
-      events: [
-        {	
-          title: '예약',
-          textColor : '#000000',
-          start: '2020-08-08',
-          end: '2020-08-10',
-        },
-        {
-        	title: '예약',
-            textColor : '#000000',
-        	start: '2020-08-15',
-          end: '2020-08-18',
-        }
-      ]
-    });
-
-    calendar.render();
-  });
-
-</script>
 
 <%@include file="../include/adminReviewFrmPage.jsp"%>
 
@@ -99,41 +157,16 @@
 		</div>
 		<div class="col-md-10">
 
-  <div id="contextMenu" class="dropdown clearfix">
-            <ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu"
-                style="display:block;position:static;margin-bottom:5px;">
-                <li><a tabindex="-1" href="#">카테고리1</a></li>
-                <li><a tabindex="-1" href="#">카테고리2</a></li>
-                <li><a tabindex="-1" href="#">카테고리3</a></li>
-                <li><a tabindex="-1" href="#">카테고리4</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="-1" href="#" data-role="close">Close</a></li>
-            </ul>
-        </div>
 
-
-			 <div id='calendar'></div>
-			
-			
-
-
-
-
-			<div id="map" style="width: 100%; height: 400px;"></div>
-			<!-- 지도크기 -->
-
-			<script type="text/javascript"
-				src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=a3pn1ogugq"></script>
-			<script>
-				var map = new naver.maps.Map('map', mapOptions);
-				
-				var mapOptions = {
-					center : new naver.maps.LatLng(35.554606, 129.322896),//위도,경도
-					zoom : 15
-				};
-			</script>
-
-
+<form role="form" method="post" action="/admin/reservationDate">
+<div style="margin: 20px">
+입실일
+<input type="text" id=startDate name="startdate">
+퇴실일
+<input type="text" id="endDate" name="enddate">
+</div>
+<button type="submit" id="reservationBtn">예약</button>
+</form>
 
 
 			<select name="perPage" class="form-inline">
