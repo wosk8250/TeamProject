@@ -49,11 +49,12 @@ div {
 
 		$(".demeritBtn").click(
 				function() {
+					var user = "blockuser";
 					var demerit_content = $(this).parent().find("select")
 							.select().val();
 					var user_id = $(this).attr("data-userId");
 					location.href = "/admin/userDemerit/" + user_id + "/"
-							+ demerit_content;
+							+ demerit_content + "/" + user;
 
 				});
 		$(".searchId").click(function() {
@@ -179,8 +180,11 @@ div {
 			</div>
 		</div>
 
+		<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-12 text-center">
+		<div class="col-md-1">
+		</div>
+			<div class="col-md-10 text-center">
 				<nav>
 					<ul class="pagination">
 						<c:if test="${pagingDto.startPage != 1}">
@@ -199,6 +203,9 @@ div {
 					</ul>
 				</nav>
 			</div>
+			<div class="col-md-1">
+		</div>
+		</div>
 		</div>
 	</div>
 </div>
