@@ -40,12 +40,9 @@ $(function () {
 	var last = link.lastIndexOf("/");
 	var loc = link.substring(17, last);
 	var loc2 = loc.substring(0, 4);
-	console.log(link);
-	console.log(loc);
-	console.log(loc2);
-	if(loc2 == "camp"){
+	if(loc == "camp"){
 		$("#topImg").attr("src","/resources/image/Service_center.jpg");
-	} else if (loc2 == "user"){
+	} else if (loc == "user"){
 		$("#topImg").attr("src","/resources/image/myPage_top.jpg");
 	}else{
 		$("#topImg").attr("src","/resources/image/business.jpg");

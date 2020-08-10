@@ -1,8 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-<script src="/resources/vendor/jquery/jquery.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.2.0/main.css">
+<script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
+<script src="/resources/vendor/jquery/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.2.0/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: ''
+      },
+      initialDate: '2020-08-03',
+      selectable: true,
+      
+      
+      
+      events: [
+        {	
+          title: '예약',
+          textColor : '#000000',
+          start: '2020-08-08',
+          end: '2020-08-10',
+        },
+        {
+        	title: '예약',
+            textColor : '#000000',
+        	start: '2020-08-15',
+          end: '2020-08-18',
+        }
+      ]
+    });
+
+    calendar.render();
+  });
+
+</script>
 	<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-4">
@@ -39,13 +78,18 @@
 					</tr>
 				</tbody>
 			</table>
+			
 		</div>
 		<div class="col-md-4">
+		
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+		<div id='calendar'></div>
 		</div>
+		<div class="col-md-2"></div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">

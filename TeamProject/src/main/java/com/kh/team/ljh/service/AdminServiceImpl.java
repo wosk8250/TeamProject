@@ -9,6 +9,7 @@ import org.aspectj.internal.lang.annotation.ajcDeclareAnnotation;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampingNameVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
@@ -57,7 +58,10 @@ public class AdminServiceImpl implements AdminService {
 	// 캠핑장 입력
 	@Transactional
 	@Override
-	public void campInsertRun(CampVo campVo) throws Exception {
+	public void campInsertRun(CampVo campVo, AmenitiesVo amenitiesVo) throws Exception {
+		int camp_no = adminDao.getNextVal();
+		campVo.setCamp_no(camp_no);
+		amenitiesVo.setCamp_no(camp_no);
 		if(campVo.getThumbnail() != null) {
 			String files[] = campVo.getFiles();
 			String filename = files[0];
@@ -77,6 +81,7 @@ public class AdminServiceImpl implements AdminService {
 			campVo.setThumbnail("사진없음");
 			adminDao.campInsertRun(campVo);
 		}
+		adminDao.campAmenities(amenitiesVo);//부대 시설
 		
 		AreaCampingNameVo areaCampingNameVo = new AreaCampingNameVo(0, campVo.getCamp_location(), campVo.getCamp_area(),
 				campVo.getCamp_name());

@@ -3,6 +3,7 @@ package com.kh.team.ljh.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampingNameVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
@@ -32,7 +33,7 @@ public interface AdminService {
 	public List<CampVo> campList() throws Exception;
 
 	// 캠핑장 글쓰기
-	public void campInsertRun(CampVo campVo) throws Exception;
+	public void campInsertRun(CampVo campVo, AmenitiesVo amenitiesVo) throws Exception;
 
 	// 캠핑장 수정 글 내용
 	public CampVo campModifyForm(String camp_address) throws Exception;

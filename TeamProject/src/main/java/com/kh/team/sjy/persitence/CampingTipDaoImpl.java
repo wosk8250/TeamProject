@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.CampingTipVo;
+import com.kh.team.domain.FilesVo;
+import com.kh.team.domain.myReviewPagingDto;
 
 @Repository
 public class CampingTipDaoImpl implements CampingTipDao {
@@ -35,6 +37,31 @@ public class CampingTipDaoImpl implements CampingTipDao {
 	public void updateCampingTipView(int campingtip_no) throws Exception {
 		sqlSession.update(NAMESPACE +"updateCampingTipView", campingtip_no);
 		
+	}
+	//파일 조회
+	@Override
+	public List<FilesVo> filesList(String table_name) throws Exception {
+		return sqlSession.selectList(NAMESPACE +"filesList" , table_name);
+	}
+	//(캠핑장 수칙 ) 이미지 보여주기  filesNoFilsList(파일번호 조회)
+	@Override
+	public List<FilesVo> filesNoFilesList(int files_no) throws Exception {
+		return sqlSession.selectList(NAMESPACE +"filesNoFilesList" , files_no);
+	}
+
+	@Override
+	public int campingTipListCount() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "campingTipListCount");
+	}
+
+	@Override
+	public List<CampingTipVo> campingTipListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE +"campingTipListPage" , myReviewPagingDto);
+	}
+
+	@Override
+	public List<CampingTipVo> campingTipSearch(String campingtip_title) throws Exception {
+		return sqlSession.selectList(NAMESPACE +"campingTipSearch" , campingtip_title );
 	}
 
 }

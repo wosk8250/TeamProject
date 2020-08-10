@@ -61,11 +61,12 @@ public class CampingReviewServiceImpl implements CampingReviewService {
 		return campingReivewDao.campingReviewList();
 	}
 
+	//캠핑장 후기 등록 파일 조회
 	@Override
 	public List<FilesVo> filesList(String table_name) throws Exception {
 		return campingReivewDao.filesList(table_name);
 	}
-
+	// (캠핑장 후기 내용)이미지 보여주기  filesNoFilsList(파일번호 조회)
 	@Override
 	public List<FilesVo> filesNoFilesList(int files_no) throws Exception {
 		return campingReivewDao.filesNoFilesList(files_no);
@@ -119,12 +120,12 @@ public class CampingReviewServiceImpl implements CampingReviewService {
 		return campingReivewDao.modifyFileList(table_name);
 	}
 
-	//캠핑장 후기 게시물 갯수 검색
+	//캠핑장 후기 게시물 갯수 
 	@Override
 	public int campingReviewListCount() throws Exception {
 		return campingReivewDao.campingReviewListCount();
 	}
-
+	//캠핑장 후기 페이징
 	@Override
 	public List<ReviewVo> campingReviewListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
 		return campingReivewDao.campingReviewListPage(myReviewPagingDto);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.CampVo;
 import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.ReviewVo;
@@ -38,12 +39,13 @@ public class BusinessController {
 
 	// 캠핑장 글쓰기 처리
 	@RequestMapping(value = "/campRun", method = RequestMethod.POST)
-	public String campInsert(CampVo campVo, HttpServletRequest request) throws Exception {
+	public String campInsert(CampVo campVo, AmenitiesVo amenitiesVo, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		String user_id = (String)session.getAttribute("user_id");
 		campVo.setUser_id(user_id);
 		System.out.println(campVo);
-		adminService.campInsertRun(campVo);
+		System.out.println(amenitiesVo);
+		adminService.campInsertRun(campVo, amenitiesVo);
 
 
 		return "redirect:/camp/main";

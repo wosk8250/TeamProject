@@ -3,6 +3,7 @@ package com.kh.team.ljh.persistence;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampingNameVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
@@ -19,6 +20,8 @@ import com.kh.team.domain.myReviewPagingDto;
 import com.kh.team.sjy.persitence.CampNoticeDao;
 
 public interface AdminDao {
+	
+	public int getNextVal() throws Exception;
 	// 사용자 조회
 	public List<UserVo> userList() throws Exception;
 
@@ -33,6 +36,9 @@ public interface AdminDao {
 
 	// 캠핑장 입력
 	public void campInsertRun(CampVo campVo) throws Exception;
+	
+	//캠핑장 부대 시설 입력
+	public void campAmenities(AmenitiesVo amenitiesVo) throws Exception;
 
 	// 캠핑장 수정 글 내용
 	public CampVo campModifyForm(String camp_address) throws Exception;
