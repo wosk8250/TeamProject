@@ -19,15 +19,6 @@ public class CampingFaqDaoImpl implements CampingFaqDao {
 	@Inject
 	private SqlSession sqlSession;
 
-	@Override
-	public List<FaqVo> faqList(myReviewPagingDto pagingDto) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "faqList",pagingDto);
-	}
-
-	@Override
-	public int getCount(myReviewPagingDto pagingDto) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "getCount", pagingDto);
-	}
 
 	@Override
 	public FaqVo selectByfaq(int faq_no) throws Exception {
@@ -40,6 +31,17 @@ public class CampingFaqDaoImpl implements CampingFaqDao {
 	public void faqViewCount(int faq_no) throws Exception {
 		sqlSession.update(NAMESPACE + "faqViewCount", faq_no);
 
+	}
+	//자주묻는 질문 게시물 갯수
+	@Override
+	public int campingFaqListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "campingFaqListCount" , myReviewPagingDto );
+	}
+
+	//페이징
+	@Override
+	public List<FaqVo> faqListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "faqListPage" , myReviewPagingDto);
 	}
 
 }

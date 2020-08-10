@@ -8,7 +8,14 @@
  }
  
  </style>
- 
+ <script>
+ $(function(){
+	$("#campFaq").click(function(e){
+		e.preventDefault();
+		$("#reviewFaqFrmPage").submit();
+	});
+ });
+ </script>
  <c:choose>
  <c:when test="${sessionScope.checkBoard == 'admin'}">
  <%@ include file="../include/adminheader.jsp" %>
@@ -30,6 +37,7 @@ pre {
 	font-size: 15px;
 }
 </style>
+<%@ include file="../include/campingFaqFrmPage.jsp"  %>
 <div class="container-fluid">
 	<div class="row" style="color: black;" >
 	<br>
@@ -38,7 +46,7 @@ pre {
 		<div class="col-md-8">
 		
 			<h3 style="padding: 10px;">
-				자주 묻는 질문 1231 ${checkBoard}
+				자주 묻는 질문 
 			</h3>
 			<div class="row" id="faq_title">
 				<div class="col-md-6">
@@ -52,9 +60,9 @@ pre {
 			</div>
 			<div id="faq_content">
 			<h4 class="text-center" style="margin-bottom: 30px;">
-				<b>${faqVo.faq_title}</b>
+				<b>${faqVo.faq_content}</b>
 			</h4>
-			<pre>${faqVo.faq_content}</pre>
+			
 			</div>
 			<div style="text-align: right;">
  <c:if test="${sessionScope.checkAdmin eq 9 }">
@@ -66,7 +74,7 @@ pre {
 			<a href="/admin/faq" class="btn btn-success" >목록</a>
  </c:when>
  <c:when test="${sessionScope.checkBoard eq 'camp'}">
-			<a href="/camp/faqList" class="btn btn-success" >목록</a>
+			<a href="/camp/campingFaqList" class="btn btn-success" id="campFaq">목록</a>
  </c:when>
  </c:choose>
 			</div>

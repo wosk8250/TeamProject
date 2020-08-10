@@ -17,7 +17,7 @@ public interface CampNoticeDao {
 	// 조회수 
 	public void updateNoticeView(int notice_no ) throws Exception;
 	
-	//캠핑장 공지사항 게시물 갯수 
+	//캠핑장 공지사항 게시물 개수 
 	public int campingNoticeListCount(myReviewPagingDto myReviewPagingDto)throws Exception;
 	//캠핑장 수칙 페이징
 	public List<CampNoticeVo> noticeListPage(myReviewPagingDto myReviewPagingDto)throws Exception;

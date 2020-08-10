@@ -37,7 +37,7 @@ public class CampNoticeDaoImpl implements CampNoticeDao {
 		sqlSession.update(NAMESPACE + "updateNoticeView", notice_no );
 		
 	}
-	//갯수
+	//개수
 	@Override
 	public int campingNoticeListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "campingNoticeListCount" , myReviewPagingDto);

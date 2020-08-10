@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.myReviewPagingDto;
 import com.kh.team.sjy.persitence.CampingFaqDaoImpl;
+import com.kh.team.sjy.service.CampingFaqService;
 
 
 
@@ -23,32 +24,36 @@ import com.kh.team.sjy.persitence.CampingFaqDaoImpl;
 public class CampingFaqController {
 	@Inject
 	private  CampingFaqDaoImpl campingFaqDaoImpl;
+	@Inject
+	private CampingFaqService campingFaqService;
 	
 
 	
 	//자주묻는 질문
-	@RequestMapping(value="/faqList", method= RequestMethod.GET)
-	public void faqList(Model model, myReviewPagingDto pagingDto)throws Exception{
-		pagingDto.setmyReviewPageInfo();
-		int totalCount = campingFaqDaoImpl.getCount(pagingDto);
-		pagingDto.setTotalCount(totalCount);
-		System.out.println("pagingDto:"+ pagingDto);
-		System.out.println("totalCount:"+ totalCount);
-		List<FaqVo> faqList = campingFaqDaoImpl.faqList(pagingDto);
-		model.addAttribute("pagingDto", pagingDto);
-		model.addAttribute("faqList",faqList);
+	@RequestMapping(value="/campingFaqList", method= RequestMethod.GET)
+	public String faqList(Model model, myReviewPagingDto myReviewPagingDto)throws Exception{
+		myReviewPagingDto.setmyReviewPageInfo();
+		int totalCount = campingFaqService.campingFaqListCount(myReviewPagingDto);
+		myReviewPagingDto.setTotalCount(totalCount);
+		List<FaqVo> list = campingFaqService.faqListPage(myReviewPagingDto);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pagingDto", myReviewPagingDto);
+		
+		return "camp/campingFaqList";
 		
 	}
 	
 	//자주 묻는 질문보기
 	@Transactional
 	@RequestMapping(value="/selectByfaq/{faq_no}", method= RequestMethod.GET)
-	public String selectByfaq(@PathVariable("faq_no") int faq_no,Model model)throws Exception{
+	public String selectByfaq(@PathVariable("faq_no") int faq_no,Model model,myReviewPagingDto myReviewPagingDto)throws Exception{
 		//뷰 추가
 		
 		campingFaqDaoImpl.faqViewCount(faq_no);
 		FaqVo faqVo = campingFaqDaoImpl.selectByfaq(faq_no);
 		model.addAttribute("faqVo", faqVo);
+		model.addAttribute("pagingDto", myReviewPagingDto);
 		return "/camp/selectByfaq";
 	}
 }

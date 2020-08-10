@@ -42,7 +42,14 @@ $(function (){
 		$("#reviewNoitceFrmPage").submit();
 	});
 	
-	
+	//현재 페이지 액티브
+	$("a.page-link").each(function(){
+		var page =$(this).attr("href");
+		if(page == "${pagingDto.page}"){
+			$(this).parent().addClass("active");
+			return;
+		}
+	});
 });
 </script>
 
@@ -108,9 +115,9 @@ $(function (){
 						<option value="t"
 						 <c:if test="${pagingDto.searchCnd == 't' }">selected</c:if>
 						 >제목</option>
-						<option value="n"
-						 <c:if test="${pagingDto.searchCnd == 'n' }">selected</c:if>
-						>번호</option>
+						<option value="w"
+						 <c:if test="${pagingDto.searchCnd == 'w' }">selected</c:if>
+						>내용</option>
 					</select>
 					<input type="text" class="form-group" id="textReview" name ="textReview"
 						 value="${pagingDto.textReview }"/>

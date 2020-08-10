@@ -44,8 +44,8 @@
   		  			<when test='searchCnd == "t"'>
   		  				where notice_title like '%' || #{textReview} || '%' and notice_admin = 0
   		  			</when>
-  		  			<when test='searchCnd == "n"'>
-  		  				where notice_no like '%' || #{textReview} || '%' and notice_admin = 0 
+  		  			<when test='searchCnd == "w"'>
+  		  				where notice_content like '%' || #{textReview} || '%' and notice_admin = 0 
   		  			</when>
   		  			<otherwise>
   		  			where notice_admin = 0

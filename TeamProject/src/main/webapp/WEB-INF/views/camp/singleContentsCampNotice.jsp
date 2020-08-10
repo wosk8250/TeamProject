@@ -21,6 +21,15 @@
 <%@ include file="../include/header.jsp" %>
  </c:when>
  </c:choose>
+ <script>
+ $(function(){
+		$("#campList").click(function(e){
+			e.preventDefault();
+			$("#reviewNoitceFrmPage").submit();
+		});
+ });
+ </script>
+<%@ include file="../include/campingNoticeFrmPage.jsp" %>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -58,7 +67,7 @@
 			<a href="/admin/notice" class="btn btn-success" >목록</a>
  </c:when>
  <c:when test="${sessionScope.checkBoard eq 'camp'}">
-			<a  href="/camp/campNoticeList"class="btn btn-success">목록</a>
+			<a  href="/camp/campingNoticeList"class="btn btn-success" id="campList">목록</a>
  </c:when>
  </c:choose>
 			
