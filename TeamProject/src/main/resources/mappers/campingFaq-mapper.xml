@@ -8,7 +8,7 @@
 
 	
 	<!-- 자주묻는 질문 보기 -->
-	<select id="selectByfaq" resultType="FaqVo">
+	<select id="selectByFaq" resultType="FaqVo">
 		select * from tbl_faq
 		where faq_no = #{faq_no}
 	</select>

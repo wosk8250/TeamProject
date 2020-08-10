@@ -21,8 +21,8 @@ public class CampingFaqDaoImpl implements CampingFaqDao {
 
 
 	@Override
-	public FaqVo selectByfaq(int faq_no) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "selectByfaq", faq_no);
+	public FaqVo selectByFaq(int faq_no) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "selectByFaq", faq_no);
 	}
 
 	

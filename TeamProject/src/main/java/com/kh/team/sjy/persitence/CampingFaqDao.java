@@ -8,7 +8,7 @@ import com.kh.team.domain.myReviewPagingDto;
 public interface CampingFaqDao {
 
 	
-	public FaqVo selectByfaq(int faq_no) throws Exception;
+	public FaqVo selectByFaq(int faq_no) throws Exception;
 	
 	//자주묻는 질문 뷰카운트
 	public void faqViewCount(int faq_no) throws Exception;
