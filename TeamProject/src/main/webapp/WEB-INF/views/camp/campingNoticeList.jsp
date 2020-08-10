@@ -62,21 +62,24 @@ $(function (){
 </script>
 
 <%@ include file="../include/campingNoticeFrmPage.jsp" %>
-<div>
-	<select name="perPage" class="form-inline">
-		<c:forEach begin="5" end="30" step="5" var="i">
-			<option value="${i}"
-				<c:if test="${i == pagingDto.perPage}">selected</c:if>>${i}줄씩
-				보기</option>
-		</c:forEach>
-	</select>
-</div>
+
 
 <div class="container-fluid">
 	<div class="row">
 				<div class="col-md-1">
 		</div>
 		<div class="col-md-10">
+			<select name="perPage" class="form-inline">
+		<c:forEach begin="5" end="30" step="5" var="i">
+			<option value="${i}"
+				<c:if test="${i == pagingDto.perPage}">selected</c:if>>${i}줄씩
+				보기</option>
+		</c:forEach>
+			</select>
+		
+		
+		
+		
 		<h2>공지 사항</h2>
 			<hr>
 		<div class="table-responsive">
