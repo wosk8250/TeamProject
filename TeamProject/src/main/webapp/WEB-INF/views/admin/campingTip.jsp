@@ -47,7 +47,13 @@ if(msg == "delete"){
 			var campingtip_title = $("#textCampingTip").val();
 			location.href="/admin/campingTip?campingtip_title=" + campingtip_title;
 		});
-
+		$("a.page-link").each(function(){
+			var page =$(this).attr("href");
+			if(page == "${pagingDto.page}"){
+				$(this).parent().addClass("active");
+				return;
+			}
+		}); 
 
 	});
 </script>
@@ -94,6 +100,9 @@ if(msg == "delete"){
 			</table>
 			</div>
 		</div>
+					<div>
+					<a class="btn btn-primary" href="/admin/campingTipForm">작성</a>
+					</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4"></div>
@@ -105,7 +114,9 @@ if(msg == "delete"){
 			</div>
 		</div>
 		<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-5">
+		</div>
+		<div class="col-md-4">
 			<nav>
 				<ul class="pagination">
 				<c:if test="${pagingDto.startPage != 1}">
@@ -125,14 +136,11 @@ if(msg == "delete"){
 					</c:if>
 				</ul>
 			</nav>
-					<div>
-					<a class="btn btn-primary" href="/admin/campingTipForm">작성</a>
-					</div>
+		</div>
+		<div class="col-md-3">
 		</div>
 	</div>
 	</div>
-	<div class="col-md-1">
-		</div>
 	
 </div>
 </div>
