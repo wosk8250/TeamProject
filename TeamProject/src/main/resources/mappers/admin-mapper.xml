@@ -336,7 +336,9 @@
 	</update>
 	<!-- 회원 강제탈퇴 -->
 	<delete id="deleteUser">
-		delete from tbl_user where user_id = #{user_id}
+		update tbl_user
+		set admin = 9
+		where user_id = #{user_id}
 	</delete>
 	<delete id="deleteUserByReview">
 		delete from tbl_review where review_id = #{user_id}

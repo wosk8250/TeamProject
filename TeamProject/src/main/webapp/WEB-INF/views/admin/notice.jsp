@@ -43,7 +43,13 @@ $(function() {
 		var notice_title = $("#textNotice").val();
 		location.href="/admin/notice?notice_title=" + notice_title;
 	});
-
+	$("a.page-link").each(function(){
+		var page =$(this).attr("href");
+		if(page == "${pagingDto.page}"){
+			$(this).parent().addClass("active");
+			return;
+		}
+	}); 
 	
 	});
 
@@ -73,7 +79,7 @@ $(function() {
 					<tr>
 						<th>글번호</th>
 						<th>제목</th>
-						<th>날짜</th>
+						<th>등록일</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -89,6 +95,9 @@ $(function() {
 				</tbody>
 			</table>
 		</div>
+	<div>
+	<a class="btn btn-primary" href="/admin/noticeForm">작성</a>
+	</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4"></div>
@@ -100,7 +109,9 @@ $(function() {
 			</div>
 		</div>
 		<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-5">
+		</div>
+		<div class="col-md-4">
 			<nav>
 				<ul class="pagination">
 				<c:if test="${pagingDto.startPage != 1}">
@@ -120,9 +131,8 @@ $(function() {
 					</c:if>
 				</ul>
 			</nav>
-	<div>
-	<a class="btn btn-primary" href="/admin/noticeForm">작성</a>
-	</div>
+		</div>
+		<div class="col-md-3">
 		</div>
 	</div>
 	</div>

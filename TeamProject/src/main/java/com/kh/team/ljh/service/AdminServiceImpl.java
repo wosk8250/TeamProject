@@ -386,9 +386,6 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	@Override
 	public void deleteUser(String user_id) throws Exception {
-			adminDao.deleteUserByReview(user_id);
-			adminDao.deleteUserByCampTalk(user_id);
-			adminDao.deleteUserByDemerit(user_id);
 			adminDao.deleteUser(user_id);
 	}
 

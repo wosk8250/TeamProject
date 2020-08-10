@@ -139,7 +139,13 @@
 		return [true];
 		}
 		
-		
+		$("a.page-link").each(function(){
+			var page =$(this).attr("href");
+			if(page == "${pagingDto.page}"){
+				$(this).parent().addClass("active");
+				return;
+			}
+		}); 
 });
 		
 		
@@ -186,7 +192,7 @@
 						<th>이미지</th>
 						<th>제목</th>
 						<th>아이디</th>
-						<th>날짜</th>
+						<th>등록일</th>
 						<th>캠핑장</th>
 					</tr>
 				</thead>
@@ -222,9 +228,9 @@
 		</div>
 		<div class="container-fluid">
 		<div class="row">
-		<div class="col-md-1">
+		<div class="col-md-5">
 		</div>
-			<div class="col-md-10 text-center">
+			<div class="col-md-4 text-center">
 				<nav>
 					<ul class="pagination">
 						<c:if test="${pagingDto.startPage != 1}">
@@ -243,7 +249,7 @@
 					</ul>
 				</nav>
 			</div>
-			<div class="col-md-1">
+			<div class="col-md-3">
 		</div>
 		</div>
 		</div>
