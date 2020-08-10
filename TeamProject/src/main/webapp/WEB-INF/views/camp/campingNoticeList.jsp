@@ -49,6 +49,14 @@ $(function (){
 			$(this).parent().addClass("active");
 			return;
 		}
+	}); 
+	$("a.notice_title").click(function(e){
+		e.preventDefault();
+		var notice_no=$(this).attr("data-notice_no");
+		console.log("notice_no:", notice_no);
+		$("#reviewNoitceFrmPage > input[name=notice_no]").val(notice_no);
+		$("#reviewNoitceFrmPage").attr("action", $(this).attr("href"));
+		$("#reviewNoitceFrmPage").submit();
 	});
 });
 </script>
@@ -87,7 +95,7 @@ $(function (){
 				
 					<tr>
 						<td>${CampNoticeVo.notice_no}</td>
-						<td><a href="/camp/singleContentsCampNotice/${CampNoticeVo.notice_no}">${CampNoticeVo.notice_title}</a></td>
+						<td><a href="/camp/singleContentsCampNotice/${CampNoticeVo.notice_no}" class="notice_title" data-notice_no="${CampNoticeVo.notice_no}">${CampNoticeVo.notice_title}</a></td>
 						<td>${CampNoticeVo.notice_writer}</td>
 						<td>${CampNoticeVo.notice_date}</td>
 						<td>${CampNoticeVo.notice_view}</td>

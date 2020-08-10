@@ -1,17 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-     <style>
-		.btn{
-			float:right; 
-			margin: 20px;
-		}
-			dd{
-			text-indent:10%;
-		 }
-		a{
-			float:right;
-		}
+     <script src="/resources/vendor/jquery/jquery.js"></script>
+  <style>
+ .btn{
+ 	float:right; 
+ 	margin: 20px;
+ }
+ #faq_title {
+	border-top: 3px solid;
+	border-bottom : 1px solid;
+	padding: 10px 30px;
+}
+#faq_content {
+	padding: 50px 50px;
+}
+pre {
+	font-size: 15px;
+}
+  
  </style>
   <c:choose>
  <c:when test="${sessionScope.checkBoard == 'admin'}">
@@ -23,7 +30,7 @@
  </c:choose>
  <script>
  $(function(){
-		$("#campList").click(function(e){
+		$("#campNotice").click(function(e){
 			e.preventDefault();
 			$("#reviewNoitceFrmPage").submit();
 		});
@@ -31,33 +38,32 @@
  </script>
 <%@ include file="../include/campingNoticeFrmPage.jsp" %>
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-					<h3>공지사항</h3>
-			<ul class="nav">
-				<li class="nav-item">
-					<h4>${campNoticeVo.notice_title}</h4> 
-				</li>
-
-				<li class="nav-item dropdown ml-md-auto">
-				<li class="nav-item">
-					<a class="nav-link active" >${campNoticeVo.notice_writer}</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" >${campNoticeVo.notice_date}</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link disabled">${campNoticeVo.notice_view}</a>
-				</li>
-				
-			</ul>
+	<div class="row" style="color: black;" >
+	<br>
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
+		
+			<h3 style="padding: 10px;">
+				공지사항
+			</h3>
+			<div class="row" id="faq_title">
+				<div class="col-md-6">
+					<h3 class="text-left">
+					${campNoticeVo.notice_title}
+					</h3>
+				</div>
+				<div class="col-md-6" align="right">
+						${campNoticeVo.notice_writer} | ${campNoticeVo.notice_date}| 조회수 ${campNoticeVo.notice_view}
+				</div>
+			</div>
+			<div id="faq_content">
+			<h4 class="text-center" style="margin-bottom: 30px;">
+				<b>${campNoticeVo.notice_content}</b>
+			</h4>
 			
-			
-			
-			<dl>
-				<dd>${campNoticeVo.notice_content}</dd>
-			</dl>
-			
+			</div>
+			<div style="text-align: right;">
 			<c:if test="${sessionScope.checkAdmin eq 9 }">
 			<a href="/admin/noticeDelete?notice_no=${campNoticeVo.notice_no}" class="btn btn-info" >삭제</a>
 			<a href="/admin/noticeModifyForm?notice_no=${campNoticeVo.notice_no}" class="btn btn-danger" >수정</a>
@@ -66,11 +72,13 @@
  <c:when test="${sessionScope.checkBoard == 'admin'}">
 			<a href="/admin/notice" class="btn btn-success" >목록</a>
  </c:when>
- <c:when test="${sessionScope.checkBoard eq 'camp'}">
-			<a  href="/camp/campingNoticeList"class="btn btn-success" id="campList">목록</a>
+<c:when test="${sessionScope.checkBoard eq 'camp'}">
+			<a  href="/camp/campingNoticeList"class="btn btn-success" id="campNotice">목록</a>
  </c:when>
  </c:choose>
-			
+			</div>
+		</div>
+		<div class="col-md-2">
 		</div>
 	</div>
 </div>
