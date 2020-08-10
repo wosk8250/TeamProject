@@ -17,10 +17,7 @@ public class CampingFaqServiceImpl implements CampingFaqService {
 	private CampingFaqDao campingFaqDao;
 
 	
-	@Override
-	public FaqVo selectByFaq(int faq_no) throws Exception {
-		return campingFaqDao.selectByFaq(faq_no);
-	}
+
 	@Override
 	public int campingFaqListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
 		return campingFaqDao.campingFaqListCount(myReviewPagingDto);
