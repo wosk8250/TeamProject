@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <!-- 페이지 정보 폼(링크용) -->
-<form id="campRun" role="form" action="/business/campRun" method="post" enctype="multipart/form-data">
+<form id="campModifyRun" role="form" action="/business/campModifyRun" method="post" enctype="multipart/form-data">
 	<!-- 부대시설 -->
 	<input type="hidden" name="power" id="power"/>                <!-- 전기 -->
 	<input type="hidden" name="wifi" id="wifi"/>                  <!-- 와이파이 -->
@@ -18,12 +18,24 @@
 	<input type="hidden" name="camp_area" id="camp_area" />       <!-- 지역 -->
 	<input type="hidden" name="camp_location" id="camp_location" /><!-- 시도명 -->
 	<input type="hidden" name="camp_content" id="camp_content"/>  <!-- 소개 -->
-	
-	<input type="file" id="file" name="file[]" multiple="multiple"><!-- 파일 -->
-		<div id="uploadedList"></div>
-	<br/>
-	<div>
-	<button type="submit" class="btn btn-primary">완료</button>
-	</div>
+	<input type="hidden" name="camp_no" id="camp_no" value="${campVo.camp_no}"/>  <!-- 캠핑장 번호 -->
+	<input type="file" id="file" name="file[]" multiple="multiple">
+		<div id = "fileLoad">
+		<div id="uploadedList">
+		</div>
+				<c:forEach items="${fileList}" var="filesVo">
+					<div class="img" data-filename="${filesVo.files}">
+					<img alt="실패" src="/upload/displayImg?fileName=${filesVo.thumbnailName}" /><br/>
+					<span>${filesVo.orgFileName}</span>
+					<a href="${filesVo.files}" class="attach-del modify-file"><span class="pull-right">x</span></a>
+					</div>
+				</c:forEach>
+		<br/>
+		</div>
+			
+		<div>
+		
+		<button type="submit" class="btn btn-primary">완료</button>
+		</div>
 
 </form>

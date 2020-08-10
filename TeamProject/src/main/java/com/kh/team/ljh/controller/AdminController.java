@@ -24,7 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
-import com.kh.team.domain.CampingTalkVo;
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.DemeritCodeVo;
 import com.kh.team.domain.DemeritVo;
@@ -195,9 +194,11 @@ public class AdminController {
 
 	// 캠핑장 수정 글
 	@RequestMapping(value = "/campModifyForm", method = RequestMethod.GET)
-	public String campModifyForm(String camp_address, Model model) throws Exception {
-		CampVo campVo = adminService.campModifyForm(camp_address);
+	public String campModifyForm(int camp_no, Model model) throws Exception {
+		CampVo campVo = adminService.campModifyForm(camp_no);
+		AmenitiesVo amenitiesVo = adminService.selectByAmenities(camp_no);
 		model.addAttribute("campVo", campVo);
+		model.addAttribute("amenitiesVo", amenitiesVo);
 		List<FilesVo> list = adminService.filesList(campVo.getTable_name());
 		List<FilesVo> fileList = new ArrayList<>();
 		for (FilesVo filesVo : list) {
@@ -221,9 +222,9 @@ public class AdminController {
 
 	// 캠핑장 수정 처리
 	@RequestMapping(value = "/campModifyRun", method = RequestMethod.POST)
-	public String campModifyRun(CampVo campVo) throws Exception {
-		adminService.campModifyRun(campVo);
-		return "redirect:/camp/camp";
+	public String campModifyRun(CampVo campVo, AmenitiesVo amenitiesVo) throws Exception {
+		adminService.campModifyRun(campVo, amenitiesVo);
+		return "redirect:/admin/camp";
 	}
 
 	// 캠핑장 삭제 처리
@@ -315,32 +316,11 @@ public class AdminController {
 		return "redirect:/admin/campingTip";
 	}
 
-	// 캠핑 이야기 조회
-	@RequestMapping(value = "/campingTalk", method = RequestMethod.GET)
-	public String campingTalkList(myReviewPagingDto myReviewPagingDto,Model model,String campingtalk_title) throws Exception {
-		if(campingtalk_title == null) {
-		myReviewPagingDto.setmyReviewPageInfo();
-		int totalCount = adminService.campingTalkPostsCount();
-		myReviewPagingDto.setTotalCount(totalCount);
-		List<CampingTalkVo> list = adminService.campingTalkListPage(myReviewPagingDto);
-		model.addAttribute("list", list);
-		model.addAttribute("pagingDto", myReviewPagingDto);
-		} else {
-			List<CampingTalkVo> list =  adminService.searchCampingTalk(campingtalk_title);
-			model.addAttribute("list", list);
-		}
-		return "admin/campingTalk";
-	}
+	
 	
 	
 
-	// 캠핑 이야기 삭제
-	@RequestMapping(value = "/campingTalkDelete", method = RequestMethod.GET)
-	public String campingTalkDelete(int campingTalk_no, RedirectAttributes attr) throws Exception {
-		adminService.campingTalkDelete(campingTalk_no);
-		attr.addFlashAttribute("msg", "delete");
-		return "redirect:/admin/campingTalk";
-	}
+
 
 	// 캠핑 후기 조회
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
@@ -590,10 +570,5 @@ public class AdminController {
 			}
 			
 			return null;
-					
-			
 		}
-		
-		
-		
 }

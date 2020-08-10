@@ -7,7 +7,6 @@ import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampingNameVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
-import com.kh.team.domain.CampingTalkVo;
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.DemeritCodeVo;
 import com.kh.team.domain.DemeritVo;
@@ -36,10 +35,13 @@ public interface AdminService {
 	public void campInsertRun(CampVo campVo, AmenitiesVo amenitiesVo) throws Exception;
 
 	// 캠핑장 수정 글 내용
-	public CampVo campModifyForm(String camp_address) throws Exception;
+	public CampVo campModifyForm(int camp_no) throws Exception;
+	
+	//부대시설 조회
+	public AmenitiesVo selectByAmenities(int camp_no) throws Exception;
 
 	// 캠핑장 수정 글 처리
-	public void campModifyRun(CampVo campVo) throws Exception;
+	public void campModifyRun(CampVo campVo, AmenitiesVo amenitiesVo) throws Exception;
 
 	// 캠핑장 삭제 처리
 	public void campDelete(int camp_no) throws Exception;
@@ -58,12 +60,6 @@ public interface AdminService {
 
 	// 캠핑수칙 삭제 처리
 	public void campingTipDelete(int campingtip_no) throws Exception;
-
-	// 캠핑 이야기 조회
-	public List<CampingTalkVo> campingTalkList() throws Exception;
-
-	// 캠핑 이야기 삭제
-	public void campingTalkDelete(int campingTalk_no) throws Exception;
 
 	// 후기 조회
 	public List<ReviewVo> reviewList() throws Exception;
@@ -133,12 +129,8 @@ public interface AdminService {
 	// 캠핑후기 게시물 갯수 검색
 	public int reviewPostsCount() throws Exception;
 
-	// 캠핑이야기 페이징
-	public List<CampingTalkVo> campingTalkListPage(myReviewPagingDto myReviewPagingDto) throws Exception;
 
-	// 캠핑이야기 게시물 갯수 검색
-	public int campingTalkPostsCount() throws Exception;
-
+	
 	// 유저 벌점내용 조회
 	public List<DemeritVo> demeritList() throws Exception;
 
@@ -184,8 +176,6 @@ public interface AdminService {
 	// 리뷰 검색
 	public List<ReviewVo> searchReview(String review_title) throws Exception;
 
-	// 캠핑이야기 검색
-	public List<CampingTalkVo> searchCampingTalk(String campingtalk_title) throws Exception;
 
 	// 자주묻는질문 검색
 	public List<FaqVo> searchFaq(String faq_title) throws Exception;
@@ -199,7 +189,6 @@ public interface AdminService {
 	// 삭제된 글 조회
 		public List<CampVo> deletePagingCampList(myReviewPagingDto myReviewPagingDto)throws Exception;
 		public List<CampingTipVo> deletePagingCampingTipList(myReviewPagingDto myReviewPagingDto)throws Exception;
-		public List<CampingTalkVo> deletePagingCampTalkList(myReviewPagingDto myReviewPagingDto)throws Exception;
 		public List<FaqVo> deletePagingFaqList(myReviewPagingDto myReviewPagingDto)throws Exception;
 		public List<CampNoticeVo> deletePagingNoticeList(myReviewPagingDto myReviewPagingDto)throws Exception;
 		public List<ReviewVo> deletePagingReviewList(myReviewPagingDto myReviewPagingDto)throws Exception;
@@ -208,7 +197,6 @@ public interface AdminService {
 	//삭제된글 갯수 조회
 	public int deleteCampCount() throws Exception;
 	public int deleteCampingTipCount() throws Exception;
-	public int deleteCampTalkCount() throws Exception;
 	public int deleteFaqCount() throws Exception;
 	public int deleteNoticeCount() throws Exception;
 	public int deleteReviewCount() throws Exception;
@@ -225,7 +213,6 @@ public interface AdminService {
 		public void deleteCampReEnrollment(String camp_no)throws Exception;
 		//삭제된 게시글 제목으로 검색
 		public List<CampingTipVo> delelteCampingTipPost(String campingtip_title) throws Exception;
-		public List<CampingTalkVo> deleteCampingTalkPost(String campingtalk_title) throws Exception;
 		public List<FaqVo> deleteFaqPost(String faq_title) throws Exception;
 		public List<CampNoticeVo> deleteNoticePost(String notice_title) throws Exception;
 		public List<ReviewVo> deleteReviewPost(String review_title) throws Exception;

@@ -26,16 +26,32 @@
 		tbl_camp(camp_no,camp_address,camp_phone,camp_name,camp_content,camp_http,camp_location,camp_area,thumbnail,camp_admin, user_id)
 		values(#{camp_no},#{camp_address},#{camp_phone},#{camp_name},#{camp_content},#{camp_http},#{camp_location},#{camp_area},#{thumbnail}, 2, #{user_id})
 	</insert>
-	<!-- 캠핑장 부대 시설 -->
+	<!-- 캠핑장 부대 시설 입력-->
 	<insert id="campAmenities">
 		insert into
 		tbl_amenities(power, wifi, hotwater, trail, mart, park, camp_no)
 		values(#{power}, #{wifi}, #{hotwater}, #{trail}, #{mart}, #{park}, #{camp_no})
 	</insert>
-	<!-- 캠핑장 주소로 찾기 -->
+	<!-- 캠핑장 부대 시설 수정-->
+	<update id="updateAmenities">
+		update tbl_amenities set
+		power = #{power},
+		wifi = #{wifi},
+		hotwater = #{hotwater},
+		trail = #{trail},
+		mart = #{mart},
+		park = #{park}
+		where camp_no = #{camp_no}
+	</update>
+	<!-- 캠핑장 찾기 -->
 	<select id="campModifyForm" resultType="CampVo">
 		select * from tbl_camp
-		where camp_address = #{camp_address}
+		where camp_no = #{camp_no}
+	</select>
+	<!-- 캠핑장 부대 시설 조회-->
+	<select id="selectByAmenities" resultType="AmenitiesVo">
+		select * from tbl_Amenities
+		where camp_no = #{camp_no}
 	</select>
 	<!-- 캠핑장 수정 처리 -->
 	<update id="campModifyRun">
@@ -48,9 +64,7 @@
 		camp_location = #{camp_location},
 		camp_area = #{camp_area},
 		thumbnail = #{thumbnail}
-		where camp_no =
-		#{camp_no}
-
+		where camp_no = #{camp_no}
 	</update>
 	<!-- 캠핑장 삭제 처리 -->
 	<update id="campDeleteRun">
@@ -91,13 +105,7 @@
 		where
 		campingtip_no = #{campingtip_no}
 	</update>
-	<!-- 캠핑 이야기 삭제 -->
-	<update id="campingTalkDelete">
-		update tbl_camptalk
-		set campingtalk_admin = 1
-		where
-		campingtalk_no = #{campingtalk_no}
-	</update>
+	
 	<!-- 후기 삭제 -->
 	<update id="reviewDelete">
 		update tbl_review
@@ -268,22 +276,8 @@
 		select count(*) from
 		tbl_review where review_admin = 0
 	</select>
-	<!-- 캠핑이야기 페이징 -->
-	<select id="campingTalkListPage" resultType="CampingTalkVo">
-		select * from
-		(select rownum rnum, a.*
-		from
-		(select * from tbl_camptalk where
-		campingtalk_admin = 0 order by
-		campingtalk_no desc) a)
-		where rnum
-		between #{startRow} and #{endRow}
-	</select>
-	<!-- 캠핑이야기 게시물 수 조회 -->
-	<select id="campingTalkPostsCount" resultType="int">
-		select count(*)
-		from tbl_camptalk where campingtalk_admin = 0
-	</select>
+
+	
 	<!-- 유저 벌점 조회 -->
 	<select id="userDemeritRef" resultType="int">
 		select user_demerit from
@@ -343,9 +337,7 @@
 	<delete id="deleteUserByReview">
 		delete from tbl_review where review_id = #{user_id}
 	</delete>
-	<delete id="deleteUserByCampTalk">
-		delete from tbl_camptalk where campingtalk_id = #{user_id}
-	</delete>
+	
 	<delete id="deleteUserByDemerit">
 		delete from tbl_demerit where user_id = #{user_id}
 	</delete>
@@ -381,10 +373,7 @@
 	<select id="searchReview" resultType="ReviewVo">
 		select * from tbl_review where review_title = #{review_title}
 	</select>
-	<!-- 캠핑이야기 검색 -->
-	<select id="searchCampingTalk" resultType="CampingTalkVo">
-		select * from tbl_camptalk where campingtalk_title = #{campingtalk_title}
-	</select>
+	
 	<!-- 자주묻는질문 검색 -->
 	<select id="searchFaq" resultType="FaqVo">
 		select * from tbl_faq where faq_title = #{faq_title}
@@ -400,7 +389,6 @@
 	
 	<!-- 삭제된 글갯수 조회 -->
 	<select id="deleteCampingTipCount" resultType="int">select count(*) from tbl_camping_tip where campingtip_admin = 1</select>
-	<select id="deleteCampTalkCount" resultType="int">select count(*) from tbl_camptalk where campingtalk_admin = 1</select>
 	<select id="deleteFaqCount" resultType="int">select count(*) from tbl_faq where faq_admin = 1</select>
 	<select id="deleteNoticeCount" resultType="int">select count(*) from tbl_notice where notice_admin = 1</select>
 	<select id="deleteReviewCount" resultType="int">select count(*) from tbl_review where review_admin = 1</select>
@@ -419,16 +407,7 @@
 		where rnum between
 		#{startRow} and #{endRow}
 	</select>
-	<select id="deletePagingCampTalkList" resultType="CampingTalkVo">
-	select * from
-		(select rownum rnum, a.*
-		from
-		(select * from tbl_camptalk where
-		campingtalk_admin = 1 order by
-		campingtalk_no desc) a)
-		where rnum
-		between #{startRow} and #{endRow}
-	</select>
+	
 	<select id="deletePagingFaqList" resultType="FaqVo">
 		select * from (select rownum
 		rnum, a.*
@@ -465,7 +444,6 @@
 	
 	<!-- 삭제된 게시물 검색 등록 -->
 	<select id="delelteCampingTipPost" resultType="CampingTipVo">select * from tbl_camping_tip where campingtip_title = #{campingtip_title} and campingtip_admin = 1</select>
-	<select id="deleteCampingTalkPost" resultType="CampingTalkVo">select * from tbl_camptalk where campingtalk_title = #{campingtalk_title} and campingtalk_admin = 1</select>
 	<select id="deleteFaqPost" resultType="FaqVo">select * from tbl_faq where faq_title = #{faq_title} and faq_admin = 1</select>
 	<select id="deleteNoticePost" resultType="CampNoticeVo">select * from tbl_notice where notice_title = #{notice_title} and notice_admin = 1</select>
 	<select id="deleteReviewPost" resultType="ReviewVo">select * from tbl_review where review_title = #{review_title} and review_admin = 1</select>

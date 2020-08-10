@@ -13,7 +13,6 @@ import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampingNameVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
-import com.kh.team.domain.CampingTalkVo;
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.DemeritCodeVo;
 import com.kh.team.domain.DemeritVo;
@@ -62,7 +61,8 @@ public class AdminServiceImpl implements AdminService {
 		int camp_no = adminDao.getNextVal();
 		campVo.setCamp_no(camp_no);
 		amenitiesVo.setCamp_no(camp_no);
-		if(campVo.getThumbnail() != null) {
+		System.out.println("캠프 인서트 런 1 : " + campVo);
+		if(campVo.getFiles() != null) {
 			String files[] = campVo.getFiles();
 			String filename = files[0];
 			int slashIndex = filename.lastIndexOf("/");
@@ -71,7 +71,9 @@ public class AdminServiceImpl implements AdminService {
 			String thumbnailName = front + "sm_" + rear;
 			campVo.setThumbnail(thumbnailName);
 			adminDao.campInsertRun(campVo);
-			campVo = adminDao.campModifyForm(campVo.getCamp_address());
+			System.out.println("캠프 인서트 런 2 : " + campVo);
+			System.out.println("캠프 인서트 런 2 : " + campVo.getTable_name());
+			campVo = adminDao.campModifyForm(campVo.getCamp_no());
 			for (int i = 0; i < files.length; i++) {
 				FilesVo filesVo = new FilesVo(campVo.getCamp_no(), files[i], campVo.getTable_name());
 				adminDao.fileInsertRun(filesVo);
@@ -90,14 +92,14 @@ public class AdminServiceImpl implements AdminService {
 
 	// 캠핑장 수정 폼
 	@Override
-	public CampVo campModifyForm(String camp_address) throws Exception {
-		return adminDao.campModifyForm(camp_address);
+	public CampVo campModifyForm(int camp_no) throws Exception {
+		return adminDao.campModifyForm(camp_no);
 	}
 
 	// 캠핑장 수정 처리
 	@Transactional
 	@Override
-	public void campModifyRun(CampVo campVo) throws Exception {
+	public void campModifyRun(CampVo campVo, AmenitiesVo amenitiesVo) throws Exception {
 		
 		if(campVo.getFiles() != null){
 			String files[] = campVo.getFiles();
@@ -115,6 +117,7 @@ public class AdminServiceImpl implements AdminService {
 			campVo.setThumbnail("사진없음");
 		}
 		adminDao.campModifyRun(campVo);
+		adminDao.updateAmenities(amenitiesVo);
 	}
 
 	// 캠핑장 삭제 처리
@@ -162,6 +165,11 @@ public class AdminServiceImpl implements AdminService {
 	public CampingTipVo campingTipModifyForm(String campingtip_title) throws Exception {
 		return adminDao.campingTipModifyForm(campingtip_title);
 	}
+	//부대시설 조회
+	@Override
+	public AmenitiesVo selectByAmenities(int camp_no) throws Exception {
+		return adminDao.selectByAmenities(camp_no);
+	}
 
 	// 캠핑 수칙 수정 처리
 	@Transactional
@@ -199,16 +207,8 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.campingTipDelete(campingtip_no);
 	}
 
-	// 캠핑 이야기 조회
-	@Override
-	public List<CampingTalkVo> campingTalkList() throws Exception {
-		return adminDao.campingTalkList();
-	}
+	
 
-	@Override
-	public void campingTalkDelete(int campingTalk_no) throws Exception {
-		adminDao.campingTalkDelete(campingTalk_no);
-	}
 
 	// 후기 조회
 	@Override
@@ -334,15 +334,8 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.reviewPostsCount();
 	}
 
-	@Override
-	public List<CampingTalkVo> campingTalkListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
-		return adminDao.campingTalkListPage(myReviewPagingDto);
-	}
+	
 
-	@Override
-	public int campingTalkPostsCount() throws Exception {
-		return adminDao.campingTalkPostsCount();
-	}
 
 	@Override
 	public List<DemeritVo> demeritList() throws Exception {
@@ -419,10 +412,6 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.searchReview(review_title);
 	}
 
-	@Override
-	public List<CampingTalkVo> searchCampingTalk(String campingtalk_title) throws Exception {
-		return adminDao.searchCampingTalk(campingtalk_title);
-	}
 
 	@Override
 	public List<FaqVo> searchFaq(String faq_title) throws Exception {
@@ -449,10 +438,7 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.deletePagingCampingTipList(myReviewPagingDto);
 	}
 
-	@Override
-	public List<CampingTalkVo> deletePagingCampTalkList(myReviewPagingDto myReviewPagingDto) throws Exception {
-		return adminDao.deletePagingCampTalkList(myReviewPagingDto);
-	}
+	
 
 	@Override
 	public List<FaqVo> deletePagingFaqList(myReviewPagingDto myReviewPagingDto) throws Exception {
@@ -479,10 +465,7 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.deleteCampingTipCount();
 	}
 
-	@Override
-	public int deleteCampTalkCount() throws Exception {
-		return adminDao.deleteCampTalkCount();
-	}
+	
 
 	@Override
 	public int deleteFaqCount() throws Exception {
@@ -525,10 +508,7 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.delelteCampingTipPost(campingtip_title);
 	}
 
-	@Override
-	public List<CampingTalkVo> deleteCampingTalkPost(String campingtalk_title) throws Exception {
-		return adminDao.deleteCampingTalkPost(campingtalk_title);
-	}
+	
 
 	@Override
 	public List<FaqVo> deleteFaqPost(String faq_title) throws Exception {
@@ -574,6 +554,9 @@ public class AdminServiceImpl implements AdminService {
 	public List<ReservationVo> reservationDateList(int camp_no) {
 		return adminDao.reservationDateList(camp_no);
 	}
+
+
+
 
 
 
