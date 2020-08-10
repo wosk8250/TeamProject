@@ -46,11 +46,14 @@
   		  			<when test='searchCnd == "w"'>
   		  				where faq_content like '%' || #{textReview} || '%' and faq_admin = 0 
   		  			</when>
-  		  			<otherwise>
-  		  			where faq_admin = 0
-  		  			</otherwise>
+					<otherwise>
+					where faq_admin = 0
+					</otherwise>
   		  		</choose>
     		</if> 	
+    	<if test="searchCnd == null">
+  		  			where faq_admin = 0
+  		 </if>
  	</sql>	
 	
 	
