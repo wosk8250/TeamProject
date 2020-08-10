@@ -59,9 +59,6 @@ public class CampingTipDaoImpl implements CampingTipDao {
 		return sqlSession.selectList(NAMESPACE +"campingTipListPage" , myReviewPagingDto);
 	}
 
-	@Override
-	public List<CampingTipVo> campingTipSearch(String campingtip_title) throws Exception {
-		return sqlSession.selectList(NAMESPACE +"campingTipSearch" , campingtip_title );
-	}
+
 
 }

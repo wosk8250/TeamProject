@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <style>
 	div {
 		color: black;
@@ -19,6 +19,24 @@
 </style>
 <script>
 $(function(){
+	$("#searchReview").click(function(){
+		var searchCnd = $("select[name=searchCnd]").val();
+		var textReview = $("#textReview").val();
+		$("#reviewTipFrmPage > input[name=searchCnd]").val(searchCnd);
+		$("#reviewTipFrmPage > input[name=textReview]").val(textReview);
+		$("#reviewTipFrmPage").submit();
+	});
+	
+	$("select[name=perPage]").change(function(){
+		
+		var perPage = $(this).val();
+		var i = $("#reviewTipFrmPage >input[name=perPage]").val(perPage);
+
+		$("#reviewTipFrmPage").submit();
+	});
+
+	
+	
 	$(".page-link").click(function(e){
 		e.preventDefault();
 // 		console.log("test");
@@ -27,18 +45,23 @@ $(function(){
 		$("#reviewTipFrmPage > input[name=page]").val(page);
 		$("#reviewTipFrmPage").submit();
 	}); 
-	$("select[name=perPage]").change(function(){
-		
-		var perPage = $(this).val();
-		var i = $("#reviewTipFrmPage >input[name=perPage]").val(perPage);
 
-		$("#reviewTipFrmPage").submit();
+	//현재 페이지 액티브
+	$("a.page-link").each(function(){
+		var page =$(this).attr("href");
+		if(page == "${pagingDto.page}"){
+			$(this).parent().addClass("active");
+			return;
+		}
 	});
-	$("#searchReview").click(function(){
+	
+	$("a.tip_title").click(function(e){
+		e.preventDefault();
+		var campingtip_no =$(this).attr("data-campingtip_no");
+		$("#reviewTipFrmPage > input[name=campingtip_no]").val(campingtip_no);
+		$("#reviewTipFrmPage").attr("action", $(this).attr("href"));
+		$("#reviewTipFrmPage").submit();
 		
-		var TipTitle = $("#textReview").val();
-		console.log("TipTitle:",TipTitle);
-	location.href="/camp/campingTipList?campingtip_title=" + TipTitle;
 	});
 	
 });
@@ -97,7 +120,7 @@ $(function(){
 					<td>${CampingTipVo.campingtip_no}</td>
 					<td><img src="/upload/displayCampingImg?fileName=${CampingTipVo.campingtip_img}" alt="사진 등록"/>
 					</td>
-					<td><h6><a href="/camp/singleContentsCampingTip/${CampingTipVo.campingtip_no}">${CampingTipVo.campingtip_title}</a></h6>
+					<td><h6><a href="/camp/singleContentsCampingTip/${CampingTipVo.campingtip_no}" class="tip_title" data-campingtip_no="${CampingTipVo.campingtip_no }">${CampingTipVo.campingtip_title}</a></h6>
 					</td>
 					<td>${CampingTipVo.campingtip_writer}</td>
 					<td>${CampingTipVo.campingtip_date}</td>
@@ -128,9 +151,15 @@ $(function(){
 				</div>
 				<div class="col-md-4">
 					<select name="searchCnd" id="searchCnd" class="form-group" title="검색조건선택">
-						<option value="0">제목</option>
+						<option value="t"
+							 <c:if test="${pagingDto.searchCnd == 't' }">selected</c:if>
+						>제목</option>
+						<option value="w"
+						 <c:if test="${pagingDto.searchCnd == 'w' }">selected</c:if>
+						>내용</option>
 					</select>
-					<input type="text" class="form-group" id="textReview"/>
+					<input type="text" class="form-group" id="textReview" name ="textReview"
+						 value="${pagingDto.textReview }"/>
 					<button class="btn btn-success" id="searchReview">검색</button>
 				</div>
 				<div class="col-md-4"></div>

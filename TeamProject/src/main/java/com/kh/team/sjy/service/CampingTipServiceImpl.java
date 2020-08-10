@@ -42,10 +42,7 @@ public class CampingTipServiceImpl implements CampingTipService {
 		return campingTipDao.campingTipListPage(myReviewPagingDto);
 	}
 
-	@Override
-	public List<CampingTipVo> campingTipSearch(String campingtip_title) throws Exception {
-		return campingTipDao.campingTipSearch(campingtip_title);
-	}
+	
 
 
 

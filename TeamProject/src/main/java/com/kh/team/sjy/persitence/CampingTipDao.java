@@ -24,8 +24,7 @@ public interface CampingTipDao {
 	
 	//캠핑장 수칙 페이징
 	public List<CampingTipVo> campingTipListPage(myReviewPagingDto myReviewPagingDto)throws Exception;
-	//캠핑장 수칙 검색
-	public List<CampingTipVo> campingTipSearch(String campingtip_title)throws Exception;
+
 	
 
 	

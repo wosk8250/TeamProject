@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- 
+ <script src="/resources/vendor/jquery/jquery.js"></script>
  <style>
  .btn{
 float:right;
@@ -36,8 +36,18 @@ position:  relative;
 	margin-bottom:  100px; 
 
 }
-
  </style>
+ <script>
+ $(function(){
+		$("#campTip").click(function(e){
+			e.preventDefault();
+//	 		console.log("클릭");
+			$("#reviewTipFrmPage").submit();
+			
+		});
+	 });
+ </script>
+ 
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <c:choose>
  <c:when test="${sessionScope.checkBoard == 'admin'}">
@@ -50,7 +60,7 @@ position:  relative;
  
 
 
-
+<%@ include file="../include/campingTipFrmPage.jsp" %>
 
 <div class="container-fluid">
 	<div class="row" style="color: black;" >
@@ -107,7 +117,7 @@ position:  relative;
 				<a href="/admin/campingTip"class="btn btn-success">목록</a>				
  </c:when>
  <c:when test="${sessionScope.checkBoard eq 'camp'}">
-				<a href="/camp/campingTipList"class="btn btn-success">목록</a>				
+				<a href="/camp/campingTipList"class="btn btn-success" id="campTip">목록</a>				
  </c:when>
  </c:choose>
 		
