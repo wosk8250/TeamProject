@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@include file="../include/adminheader.jsp"%>
-
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 
 #uploadedList > div {
@@ -21,7 +20,14 @@
 
 
 </style>
-
+<c:choose>
+ <c:when test="${sessionScope.checkBoard == 'admin'}">
+ <%@ include file="../include/adminheader.jsp" %>
+ </c:when>
+ <c:when test="${sessionScope.checkBoard eq 'camp'}">
+<%@ include file="../include/header.jsp" %>
+ </c:when>
+ </c:choose>
 
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
@@ -99,7 +105,7 @@ $(function() {
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<form role="form" id="campingModifyRun" action="/admin/campingTipModifyRun" method="post"  enctype="multipart/form-data">
+			<form role="form" id="campingModifyRun" action="/camp/singleContentsCampingTip/${campingTipVo.campingtip_no}" method="get"  enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="campingtip_title"> 제목 </label> 
 					<input type="text" class="form-control" id="campingtip_title" name="campingtip_title" value="${campingTipVo.campingtip_title}" />

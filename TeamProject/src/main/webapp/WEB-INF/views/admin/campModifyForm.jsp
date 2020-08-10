@@ -3,6 +3,15 @@
 
 <%@include file="../include/adminheader.jsp"%>
 
+
+<c:choose>
+ <c:when test="${sessionScope.checkBoard == 'admin'}">
+ <%@ include file="../include/adminheader.jsp" %>
+ </c:when>
+ <c:when test="${sessionScope.checkBoard eq 'camp'}">
+<%@ include file="../include/header.jsp" %>
+ </c:when>
+ </c:choose>
 <style>
 
 #uploadedList > div {

@@ -12,6 +12,7 @@ import com.kh.team.domain.DemeritCodeVo;
 import com.kh.team.domain.DemeritVo;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.FilesVo;
+import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
 import com.kh.team.domain.myReviewPagingDto;
@@ -250,5 +251,9 @@ public interface AdminDao {
 	public void notRegistCamp(int camp_no)throws Exception;
 	//등록대기 캠핑장 갯수
 	public int waitForRegistrationCampCount() throws Exception;
+	//예약 입력
+	public void reservationDate(ReservationVo reservationVo) throws Exception;
+	//예약 조회
+	public List<ReservationVo> reservationDateList(int camp_no);
 	
 }

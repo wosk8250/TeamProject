@@ -485,7 +485,15 @@
 	<select id="waitForRegistrationCampCount" resultType="int">
 		select count(*) from tbl_camp where camp_admin = 2
 	</select>
-	
-	
+	<!-- 예약 조회 -->
+	<select id="reservationDateList" resultType="ReservationVo">
+	select * from tbl_reservation
+	where camp_no = #{camp_no}
+	</select>
+	<!-- 예약 입력 -->
+	<insert id="reservationDate">
+		insert into tbl_reservation(camp_no,startdate,enddate,user_id)
+		values(#{camp_no},#{startdate},#{enddate},#{user_id})
+	</insert>
 </mapper>
 

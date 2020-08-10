@@ -18,6 +18,7 @@ import com.kh.team.domain.DemeritCodeVo;
 import com.kh.team.domain.DemeritVo;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.FilesVo;
+import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
 import com.kh.team.domain.myReviewPagingDto;
@@ -558,6 +559,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int waitForRegistrationCampCount() throws Exception {
 		return adminDao.waitForRegistrationCampCount();
+	}
+
+	@Override
+	public void reservationDate(ReservationVo reservationVo) throws Exception {
+		adminDao.reservationDate(reservationVo);
+	}
+
+	@Override
+	public List<ReservationVo> reservationDateList(int camp_no) {
+		return adminDao.reservationDateList(camp_no);
 	}
 
 

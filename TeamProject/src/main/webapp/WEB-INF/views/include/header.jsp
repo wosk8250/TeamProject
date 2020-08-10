@@ -174,12 +174,12 @@ $(function () {
           <span>자주 묻는 질문</span></a>
       </li>
       <!-- 관리자 로그인 할때 보이기 -->
+      <c:choose>
+      	<c:when test="${sessionScope.checkAdmin == 9}">
       <hr class="sidebar-divider">
        <div class="sidebar-heading">
        기타
       </div>
-      <c:choose>
-      	<c:when test="${sessionScope.checkAdmin == 9}">
       		<li class="nav-item">
 				<a class="nav-link" href="/admin/camp">
 				<i class="fas fa-fw fa-table"></i>
