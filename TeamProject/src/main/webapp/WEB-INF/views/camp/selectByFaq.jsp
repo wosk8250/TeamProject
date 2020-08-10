@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <script src="/resources/vendor/jquery/jquery.js"></script>
   <style>
  .btn{
  	float:right; 
@@ -12,7 +13,9 @@
  $(function(){
 	$("#campFaq").click(function(e){
 		e.preventDefault();
+// 		console.log("클릭");
 		$("#reviewFaqFrmPage").submit();
+		
 	});
  });
  </script>
@@ -37,7 +40,9 @@ pre {
 	font-size: 15px;
 }
 </style>
-<%@ include file="../include/campingFaqFrmPage.jsp"  %>
+
+<%@ include file="../include/campingFaqFrmPage.jsp" %>
+
 <div class="container-fluid">
 	<div class="row" style="color: black;" >
 	<br>
@@ -74,7 +79,7 @@ pre {
 			<a href="/admin/faq" class="btn btn-success" >목록</a>
  </c:when>
  <c:when test="${sessionScope.checkBoard eq 'camp'}">
-			<a href="/camp/campingFaqList" class="btn btn-success" id="campFaq">목록</a>
+			<a href="/camp/campingFaqList" 	 class="btn btn-success" id="campFaq">목록</a>
  </c:when>
  </c:choose>
 			</div>

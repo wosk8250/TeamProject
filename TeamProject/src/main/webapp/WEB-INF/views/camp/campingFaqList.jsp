@@ -52,6 +52,14 @@ $(function () {
 				return;
 			}
 		});
+		$("a.faq_title").click(function(e){
+			e.preventDefault();
+			var faq_no = $(this).attr("data-faq_no");
+			console.log("faq_no:", faq_no);
+			$("#reviewFaqFrmPage > input[name=faq_no]").val(faq_no);
+			$("#reviewFaqFrmPage").attr("action", $(this).attr("href"));
+			$("#reviewFaqFrmPage").submit();
+		});
 });
 </script>
 <%@ include file="../include/campingFaqFrmPage.jsp" %>
@@ -88,7 +96,7 @@ $(function () {
 					<tr>
 						<td>${faqVo.faq_no}</td>
 						<td width="450" id="td_title">
-							<a href="/camp/selectByFaq/${faqVo.faq_no}">${faqVo.faq_title}</a>
+							<a href="/camp/selectByFaq/${faqVo.faq_no}" class="faq_title" data-faq_no="${faqVo.faq_no }">${faqVo.faq_title}</a>
 						</td>
 						<td>${faqVo.faq_writer}</td>
 						<td>${faqVo.faq_date}</td>
