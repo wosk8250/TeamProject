@@ -14,12 +14,15 @@ public class adminInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
+		String user_id = (String)session.getAttribute("user_id");
 		String checkAdmin = (String)session.getAttribute("checkAdmin");
-		System.out.println("checkAdmin : " + checkAdmin);
-		//로그인 되어있지 않은 상태
-		if (!checkAdmin.equals("9")) {
-			System.out.println("인터셉트(메인 페이지로) : " + checkAdmin);
-			response.sendRedirect("/camp/home");
+		
+		//관리자 인터셉트
+		if (user_id == null || user_id.equals("")) { // 세션에 아이디가 없을때
+			response.sendRedirect("/camp/main");
+			return false;
+		} else 	if (!checkAdmin.equals("9")) {// 세션에 admin이 없을때
+			response.sendRedirect("/camp/main");
 			return false;
 		}
 		return true;

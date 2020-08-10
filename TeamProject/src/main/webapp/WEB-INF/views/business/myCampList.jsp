@@ -105,7 +105,7 @@ $(function () {
 						</td>
 						<td>${campVo.camp_name}</td>
 						<td>${campVo.camp_address}</td>
-						<td><a class="btn btn-warning" href="/business/campModify?camp_address=${campVo.camp_address}">수정</a> </td>
+						<td><a class="btn btn-warning" href="/business/campModify?camp_no=${campVo.camp_no}">수정</a> </td>
 					</tr>
 				</c:forEach>
 				</tbody>

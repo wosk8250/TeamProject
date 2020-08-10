@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class LogoutInterceptor extends HandlerInterceptorAdapter {
+public class BusinessInterceptor extends HandlerInterceptorAdapter {
 
 	//이전 수행
 	@Override
@@ -15,17 +15,14 @@ public class LogoutInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		HttpSession session = request.getSession();
 		String user_id = (String)session.getAttribute("user_id");
-		//로그인 되어있지 않은 상태
-		if (user_id == null || user_id.equals("")) {
-			System.out.println(" 유저 인터셉트(로그인 페이지로)");
-			String uri = request.getRequestURI();//가려고 했던 페이지
-			String queryString = request.getQueryString();
-			String tergetLoction = uri;
-			if(queryString != null) {
-				tergetLoction += "?" + queryString;
-			}
-			session.setAttribute("tergetLoction", tergetLoction);
-			response.sendRedirect("/user/login");
+		String checkAdmin = (String)session.getAttribute("checkAdmin");
+		
+		//사업자 인터셉트
+		if (user_id == null || user_id.equals("")) {// 세션에 아이디가 없을때
+			response.sendRedirect("/camp/main");
+			return false;
+		} else 	if (!checkAdmin.equals("2")) {// 세션에 admin이 없을때
+			response.sendRedirect("/camp/main");
 			return false;
 		}
 		return true;

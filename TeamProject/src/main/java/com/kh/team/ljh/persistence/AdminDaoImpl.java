@@ -73,17 +73,28 @@ public class AdminDaoImpl implements AdminDao {
 		sqlSession.insert(NAMESPACE + "campAmenities", amenitiesVo);
 	}
 	
+	//캠핑장 부대 시설 수정
+	@Override
+	public void updateAmenities(AmenitiesVo amenitiesVo) throws Exception {
+		sqlSession.update(NAMESPACE + "updateAmenities",amenitiesVo);
+	}
+	
 	// 캠핑장 수정폼
 	@Override
-	public CampVo campModifyForm(String camp_address) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "campModifyForm", camp_address);
+	public CampVo campModifyForm(int camp_no) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "campModifyForm", camp_no);
 
+	}
+	
+	//부대시설 조회
+	@Override
+	public AmenitiesVo selectByAmenities(int camp_no) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "selectByAmenities", camp_no);
 	}
 
 	// 캠핑장 수정 처리
 	@Override
 	public void campModifyRun(CampVo campVo) throws Exception {
-		
 		sqlSession.update(NAMESPACE + "campModifyRun", campVo);
 	}
 
@@ -151,7 +162,7 @@ public class AdminDaoImpl implements AdminDao {
 	// 사진 입력
 	@Override
 	public void fileInsertRun(FilesVo filesVo) throws Exception {
-		System.out.println(filesVo);
+		System.out.println("어드민 다오 : " +filesVo);
 		sqlSession.insert(NAMESPACE + "fileInsertRun", filesVo);
 
 	}
@@ -535,6 +546,9 @@ public class AdminDaoImpl implements AdminDao {
 	public int waitForRegistrationCampCount() throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "waitForRegistrationCampCount");
 	}
+
+
+
 
 
 
