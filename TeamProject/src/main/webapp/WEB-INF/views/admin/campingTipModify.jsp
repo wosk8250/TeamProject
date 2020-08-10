@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@include file="../include/adminheader.jsp"%>
-
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 
 #uploadedList > div {
@@ -21,7 +20,14 @@
 
 
 </style>
-
+<c:choose>
+ <c:when test="${sessionScope.checkBoard == 'admin'}">
+ <%@ include file="../include/adminheader.jsp" %>
+ </c:when>
+ <c:when test="${sessionScope.checkBoard eq 'camp'}">
+<%@ include file="../include/header.jsp" %>
+ </c:when>
+ </c:choose>
 
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
@@ -85,8 +91,18 @@ $(function() {
 	$("#campingModifyRun").submit(function() {
 		var upDiv = $("#uploadedList > div");
 		upDiv.each(function(index) {
-			var filename = $(this).attr("data-filename");
-			var hiddenInput = "<input type='hidden' name='files["+index+"]' value='"+filename+"'/>";
+			var filename  = $(this).attr("data-filename");
+			var hiddenInput = "<input type='hidden' name='files["+index+"]' value= '"+ filename+"' />";
+			$("#campingModifyRun").prepend(hiddenInput);
+		});
+	});
+	$("#a").click(function() {
+		console.log($("#campingModifyRun"));
+		var upDiv = $("#uploadedList > div");
+		upDiv.each(function(index) {
+			var filename  = $(this).attr("data-filename");
+			var hiddenInput = "<input type='hidden' name='files["+index+"]' value= '"+ filename+"' />";
+			console.log(hiddenInput);
 			$("#campingModifyRun").prepend(hiddenInput);
 		});
 	});
@@ -99,6 +115,7 @@ $(function() {
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
+		<button id="a">as</button>
 			<form role="form" id="campingModifyRun" action="/admin/campingTipModifyRun" method="post"  enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="campingtip_title"> 제목 </label> 

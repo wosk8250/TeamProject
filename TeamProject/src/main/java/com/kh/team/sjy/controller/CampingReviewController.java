@@ -176,7 +176,7 @@ public class CampingReviewController {
 	public String campingReviewModifyRun(ReviewVo reviewVo , RedirectAttributes rttr) throws Exception{
 		rttr.addFlashAttribute("msg","modify");
 		campingReviewService.campingReviewModifyRun(reviewVo);
-		return "redirect:/camp/campingReviewList";
+		return "redirect:/camp/selectReview/" + reviewVo.getReview_no();
 	}
 	
 	//캠핑장 후기 삭제 처리

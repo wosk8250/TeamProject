@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.campingFaq-mapper">
+	
+
+	
+	<!-- 자주묻는 질문 보기 -->
+	<select id="selectByFaq" resultType="FaqVo">
+		select * from tbl_faq
+		where faq_no = #{faq_no}
+	</select>
+	<!-- 자주 묻는 질문 조회수 -->
+	<update id="faqViewCount">
+		update tbl_faq set
+    		faq_view = faq_view + 1
+		where faq_no = #{review_no}
+	</update>
+	
+	<!-- 자주묻는 질문 게시물 수 -->
+	<select id="campingFaqListCount" resultType="int">
+	         select count(*) from tbl_faq
+ 				<include refid="search"></include>
+	</select>
+	
+	<!-- 자주묻는 질문 페이징 -->
+	<select id="faqListPage" resultType="FaqVo">
+	        	        	select *
+						from(select rownum rnum, a.*
+    						  from(select * from tbl_faq
+									<include refid="search"></include>
+          					  order by faq_no desc) a)
+						where rnum between #{startRow} and #{endRow}
+	
+	</select>
+	
+	<!--  검색 -->
+ 	<sql id ="search">
+    		<if test="searchCnd != null">
+  		  		<choose>
+  		  			<when test='searchCnd == "t"'>
+  		  				where faq_title like '%' || #{textReview} || '%' and faq_admin = 0
+  		  			</when>
+  		  			<when test='searchCnd == "w"'>
+  		  				where faq_content like '%' || #{textReview} || '%' and faq_admin = 0 
+  		  			</when>
+  		  			<otherwise>
+  		  			where faq_admin = 0
+  		  			</otherwise>
+  		  		</choose>
+    		</if> 	
+ 	</sql>	
+	
+	
+	
+	
+</mapper>

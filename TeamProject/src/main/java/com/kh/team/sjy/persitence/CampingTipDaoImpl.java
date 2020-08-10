@@ -50,8 +50,8 @@ public class CampingTipDaoImpl implements CampingTipDao {
 	}
 
 	@Override
-	public int campingTipListCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "campingTipListCount");
+	public int campingTipListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "campingTipListCount", myReviewPagingDto);
 	}
 
 	@Override

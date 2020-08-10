@@ -15,8 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.domain.AmenitiesVo;
@@ -30,12 +32,14 @@ import com.kh.team.domain.EmailDto;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.PagingDto;
+import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
 import com.kh.team.domain.myReviewPagingDto;
 import com.kh.team.ksk.service.UserService;
 import com.kh.team.ljh.service.AdminService;
 import com.kh.team.ljh.utile.DateUtile;
+import com.kh.team.ljh.utile.ReservationDate;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
@@ -254,7 +258,7 @@ public class AdminController {
 		}
 		model.addAttribute("list", list);
 		model.addAttribute("pagingDto", myReviewPagingDto);
-		return "admin/campingTip";
+		return "/admin/campingTip";
 	}
 
 	// 캠핑 수칙 입력 폼
@@ -299,6 +303,8 @@ public class AdminController {
 	// 캠핑 수칙 수정 처리
 	@RequestMapping(value = "/campingTipModifyRun", method = RequestMethod.POST)
 	public String campingModifyRun(CampingTipVo campingTipVo) throws Exception {
+		
+		
 		adminService.campingTipModifyRun(campingTipVo);
 		return "redirect:/camp/singleContentsCampingTip/" + campingTipVo.getCampingtip_no() ;
 	}
@@ -353,6 +359,22 @@ public class AdminController {
 			moadel.addAttribute("list", list);
 		}
 		
+		
+		//예약날짜에 캠프번호 예약날짜 다불러와서 정지시키기
+		//넘겨줄 날짜 리스트에 추가
+		List<ReservationVo> reservationVo = adminService.reservationDateList(0);
+
+		
+		ArrayList<String> reserveDate = new ArrayList<>();
+		for (ReservationVo reservationVo2 : reservationVo) {
+			reserveDate.addAll(ReservationDate.BetweenDates(reservationVo2.getStartdate(),reservationVo2.getEnddate()));
+		}
+//		for (int i = 0; i < abc.length; i++) {
+//			reserveDate.add("'" + abc[i] + "'");
+		
+//		}
+		//날짜 보내기
+		moadel.addAttribute("date", reserveDate);
 		return "admin/review";
 		
 	}
@@ -390,7 +412,7 @@ public class AdminController {
 	@RequestMapping(value = "noticeModifyRun", method = RequestMethod.GET)
 	public String noticeModifyRun(CampNoticeVo campNoticeVo) throws Exception {
 		adminService.noticeModifyRun(campNoticeVo);
-		return "redirect:/admin/notice";
+		return "redirect:/camp/singleContentsCampNotice/" + campNoticeVo.getNotice_no();
 	}
 
 	// 공지사항 삭제처리
@@ -426,7 +448,7 @@ public class AdminController {
 	@RequestMapping(value = "/faqModifyRun", method = RequestMethod.GET)
 	public String faqModifyRun(FaqVo faqVo) throws Exception {
 		adminService.faqModifyRun(faqVo);
-		return "redirect:/admin/faq";
+		return "redirect:/camp/selectByfaq/" + faqVo.getFaq_no();
 	}
 
 	// 자주묻는질문 삭제처리
@@ -438,8 +460,8 @@ public class AdminController {
 	}
 	
 	//유저 벌점 입력 & 조회 & 정지
-		@RequestMapping(value="/userDemerit/{user_id}/{demerit_content}",method=RequestMethod.GET)
-		public String userDemerit(@PathVariable("user_id") String user_id,@PathVariable("demerit_content") String demerit_content) throws Exception{
+		@RequestMapping(value="/userDemerit/{user_id}/{demerit_content}/{user}",method=RequestMethod.GET)
+		public String userDemerit(@PathVariable("user_id") String user_id,@PathVariable("demerit_content") String demerit_content,@PathVariable("user")String user) throws Exception{
 			DemeritCodeVo demeritCodeVo = adminService.selectDemeritCode(demerit_content);
 			LocalDateTime time = LocalDateTime.now();
 			DemeritVo demeritVo = new DemeritVo(0, demeritCodeVo.getDemerit_code(), demeritCodeVo.getDemerit_content(), user_id, demeritCodeVo.getDemerit_value(), String.valueOf(time));
@@ -452,19 +474,23 @@ public class AdminController {
 				userVo.setUser_id(user_id);
 				userVo.setUser_stopdate(user_stopdate);
 				adminService.userBlockTimeUpdate(userVo);
-			}
-			if(50 <= userDemerit && userDemerit < 100) {
+			}else if(50 <= userDemerit && userDemerit < 100) {
 				String user_stopdate = String.valueOf(time.plusMonths(1));
 				UserVo userVo = new UserVo();
 				userVo.setUser_id(user_id);
 				userVo.setUser_stopdate(user_stopdate);
 				adminService.userBlockTimeUpdate(userVo);
+			}else if(userDemerit >= 100) {
+			adminService.deleteUser(user_id);
 			}
-			if(userDemerit == 100) {
-				adminService.deleteUser(user_id);
-			}
+			String returnStr = null;
 			
-			return "redirect:/admin/user";
+			if(user.equals("user")) {
+				returnStr = "redirect:/admin/user";
+			}else {
+				returnStr = "redirect:/admin/blockUser";
+			}
+			return returnStr;
 		}
 		
 		//벌점 내역 조회
@@ -499,7 +525,6 @@ public class AdminController {
 			myReviewPagingDto.setmyReviewPageInfo();
 			int totalCount = adminService.waitForRegistrationCampCount();
 			myReviewPagingDto.setTotalCount(totalCount);
-			System.out.println(totalCount);
 			List<CampVo> list = adminService.waitForRegistrationCamp(myReviewPagingDto);
 			
 			model.addAttribute("list", list);
@@ -539,6 +564,38 @@ public class AdminController {
 			
 			return "redirect:/admin/waitForRegistrationCamp";
 		}
+		//예약 등록
+		@RequestMapping(value="/reservationDate",method = RequestMethod.POST)
+		public String reservationDate(ReservationVo reservationVo) throws Exception{
+			
+			reservationVo.setUser_id("yaya");
+			adminService.reservationDate(reservationVo);
+			return "/camp/main";
+		}
+
+		@ResponseBody
+		@RequestMapping(value="/reservationDateConfirm",method =RequestMethod.POST)
+		public String reservationDateConfirm(@RequestBody ReservationVo reservationVo)throws Exception{
+
+			ArrayList<String> reservationDate = ReservationDate.BetweenDates(reservationVo.getStartdate(), reservationVo.getEnddate());
+			List<ReservationVo> list = adminService.reservationDateList(0);
+
+			for (ReservationVo reservationVo2 : list) {
+				ArrayList<String> nowReservationDate = ReservationDate.BetweenDates(reservationVo2.getStartdate(), reservationVo2.getEnddate());
+				for (int i = 0; i < reservationDate.size(); i++) {
+					for (int j = 0; j < nowReservationDate.size(); j++) {
+						if(reservationDate.get(i).equals(nowReservationDate.get(j))) {
+							return "false";
+						}
+					}
+				}
+			}
+			
+			return null;
+					
+			
+		}
 		
-	
+		
+		
 }

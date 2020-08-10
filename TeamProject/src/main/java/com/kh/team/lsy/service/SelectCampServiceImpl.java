@@ -7,12 +7,16 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampLocationVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
+import com.kh.team.domain.CampingLocationVo;
+import com.kh.team.domain.CampRecommendVo;
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.PagingDto;
+import com.kh.team.domain.UserVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.lsy.persistence.SelectCampDao;
 
@@ -39,6 +43,7 @@ public class SelectCampServiceImpl implements SelectCampService {
 
 	@Override
 	public CampVo campingContent(int camp_no) throws Exception {
+		selectCampDao.viewcnt(camp_no);
 		return selectCampDao.campingContent(camp_no);
 	}
 
@@ -48,6 +53,30 @@ public class SelectCampServiceImpl implements SelectCampService {
 	}
 
 	@Override
+	public List<CampVo> searchList(String camp_area, String camp_location) throws Exception {
+		return selectCampDao.searchList(camp_area, camp_location);
+	}
+
+	@Override
+	public void recommend(int camp_no) throws Exception {
+		selectCampDao.recommend(camp_no);
+	}
+
+	@Override
+	public void recommendInsert(CampRecommendVo campRecommendVo) throws Exception {
+		selectCampDao.recommendInsert(campRecommendVo);
+	}
+
+	@Override
+	public CampRecommendVo recommendCheck(String user_id) throws Exception {
+		return selectCampDao.recommendCheck(user_id);
+	}
+
+	@Override
+	public List<String> areaLocationSelect(String camp_location) throws Exception {
+		return selectCampDao.areaLocationSelect(camp_location);
+	}
+
 	public List<ReviewVo> reviewTop5() throws Exception {
 		return selectCampDao.reviewTop5();
 	}
@@ -71,5 +100,11 @@ public class SelectCampServiceImpl implements SelectCampService {
 	public List<CampVo> recommendTop10() throws Exception {
 		return selectCampDao.recommendTop10();
 	}
+
+	@Override
+	public List<AmenitiesVo> amenitiesList() throws Exception {
+		return selectCampDao.amenitiesList();
+	}
+	
 
 }

@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../include/adminheader.jsp"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+ <c:choose>
+ <c:when test="${sessionScope.checkBoard == 'admin'}">
+ <%@ include file="../include/adminheader.jsp" %>
+ </c:when>
+ <c:when test="${sessionScope.checkBoard eq 'camp'}">
+<%@ include file="../include/header.jsp" %>
+ </c:when>
+ </c:choose>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -20,6 +27,8 @@
 					
 				</div>
 				<button type="submit" class="btn btn-primary">완료</button>
+				
+				
 			</form>
 		</div>
 	</div>

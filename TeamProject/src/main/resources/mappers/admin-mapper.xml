@@ -10,7 +10,7 @@
 	</select>
 	<!-- 유저 아이디 조회 -->
 	<select id="userList" resultType="UserVo">
-		select * from tbl_user where admin = 0
+		select * from tbl_user where admin = 0 or admin = 2
 	</select>
 	<!-- 정지된유저 아이디 조회 -->
 	<select id="blockUserList" resultType="UserVo">
@@ -350,7 +350,9 @@
 	</update>
 	<!-- 회원 강제탈퇴 -->
 	<delete id="deleteUser">
-		delete from tbl_user where user_id = #{user_id}
+		update tbl_user
+		set admin = 9
+		where user_id = #{user_id}
 	</delete>
 	<delete id="deleteUserByReview">
 		delete from tbl_review where review_id = #{user_id}
@@ -509,7 +511,15 @@
 	<select id="waitForRegistrationCampCount" resultType="int">
 		select count(*) from tbl_camp where camp_admin = 2
 	</select>
-	
-	
+	<!-- 예약 조회 -->
+	<select id="reservationDateList" resultType="ReservationVo">
+	select * from tbl_reservation
+	where camp_no = #{camp_no}
+	</select>
+	<!-- 예약 입력 -->
+	<insert id="reservationDate">
+		insert into tbl_reservation(camp_no,startdate,enddate,user_id)
+		values(#{camp_no},#{startdate},#{enddate},#{user_id})
+	</insert>
 </mapper>
 

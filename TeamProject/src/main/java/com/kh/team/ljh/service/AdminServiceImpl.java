@@ -19,6 +19,7 @@ import com.kh.team.domain.DemeritCodeVo;
 import com.kh.team.domain.DemeritVo;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.FilesVo;
+import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
 import com.kh.team.domain.myReviewPagingDto;
@@ -175,6 +176,8 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	@Override
 	public void campingTipModifyRun(CampingTipVo campingTipVo) throws Exception {
+		
+		System.out.println(campingTipVo);
 		
 		if(campingTipVo.getFiles() != null){
 			
@@ -392,9 +395,6 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	@Override
 	public void deleteUser(String user_id) throws Exception {
-			adminDao.deleteUserByReview(user_id);
-			adminDao.deleteUserByCampTalk(user_id);
-			adminDao.deleteUserByDemerit(user_id);
 			adminDao.deleteUser(user_id);
 	}
 
@@ -572,6 +572,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int waitForRegistrationCampCount() throws Exception {
 		return adminDao.waitForRegistrationCampCount();
+	}
+
+	@Override
+	public void reservationDate(ReservationVo reservationVo) throws Exception {
+		adminDao.reservationDate(reservationVo);
+	}
+
+	@Override
+	public List<ReservationVo> reservationDateList(int camp_no) {
+		return adminDao.reservationDateList(camp_no);
 	}
 
 

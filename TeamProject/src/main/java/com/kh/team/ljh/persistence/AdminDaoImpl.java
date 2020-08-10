@@ -18,6 +18,7 @@ import com.kh.team.domain.DemeritCodeVo;
 import com.kh.team.domain.DemeritVo;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.FilesVo;
+import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
 import com.kh.team.domain.myReviewPagingDto;
@@ -354,7 +355,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Override
 	public void deleteUser(String user_id) throws Exception {
-		sqlSession.delete(NAMESPACE + "deleteUser",user_id);
+		sqlSession.update(NAMESPACE + "deleteUser",user_id);
 	}
 
 	@Override
@@ -545,6 +546,16 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public int waitForRegistrationCampCount() throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "waitForRegistrationCampCount");
+	}
+
+	@Override
+	public void reservationDate(ReservationVo reservationVo) throws Exception {
+		sqlSession.insert(NAMESPACE + "reservationDate", reservationVo);
+	}
+
+	@Override
+	public List<ReservationVo> reservationDateList(int camp_no) {
+		return sqlSession.selectList(NAMESPACE + "reservationDateList",camp_no);
 	}
 
 
