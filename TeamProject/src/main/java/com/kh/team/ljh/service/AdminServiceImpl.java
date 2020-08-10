@@ -13,7 +13,6 @@ import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampingNameVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
-import com.kh.team.domain.CampingTalkVo;
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.DemeritCodeVo;
 import com.kh.team.domain.DemeritVo;
@@ -199,16 +198,8 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.campingTipDelete(campingtip_no);
 	}
 
-	// 캠핑 이야기 조회
-	@Override
-	public List<CampingTalkVo> campingTalkList() throws Exception {
-		return adminDao.campingTalkList();
-	}
+	
 
-	@Override
-	public void campingTalkDelete(int campingTalk_no) throws Exception {
-		adminDao.campingTalkDelete(campingTalk_no);
-	}
 
 	// 후기 조회
 	@Override
@@ -334,15 +325,8 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.reviewPostsCount();
 	}
 
-	@Override
-	public List<CampingTalkVo> campingTalkListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
-		return adminDao.campingTalkListPage(myReviewPagingDto);
-	}
+	
 
-	@Override
-	public int campingTalkPostsCount() throws Exception {
-		return adminDao.campingTalkPostsCount();
-	}
 
 	@Override
 	public List<DemeritVo> demeritList() throws Exception {
@@ -419,10 +403,6 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.searchReview(review_title);
 	}
 
-	@Override
-	public List<CampingTalkVo> searchCampingTalk(String campingtalk_title) throws Exception {
-		return adminDao.searchCampingTalk(campingtalk_title);
-	}
 
 	@Override
 	public List<FaqVo> searchFaq(String faq_title) throws Exception {
@@ -449,10 +429,7 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.deletePagingCampingTipList(myReviewPagingDto);
 	}
 
-	@Override
-	public List<CampingTalkVo> deletePagingCampTalkList(myReviewPagingDto myReviewPagingDto) throws Exception {
-		return adminDao.deletePagingCampTalkList(myReviewPagingDto);
-	}
+	
 
 	@Override
 	public List<FaqVo> deletePagingFaqList(myReviewPagingDto myReviewPagingDto) throws Exception {
@@ -479,10 +456,7 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.deleteCampingTipCount();
 	}
 
-	@Override
-	public int deleteCampTalkCount() throws Exception {
-		return adminDao.deleteCampTalkCount();
-	}
+	
 
 	@Override
 	public int deleteFaqCount() throws Exception {
@@ -525,10 +499,7 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.delelteCampingTipPost(campingtip_title);
 	}
 
-	@Override
-	public List<CampingTalkVo> deleteCampingTalkPost(String campingtalk_title) throws Exception {
-		return adminDao.deleteCampingTalkPost(campingtalk_title);
-	}
+	
 
 	@Override
 	public List<FaqVo> deleteFaqPost(String faq_title) throws Exception {
