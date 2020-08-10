@@ -4,22 +4,19 @@
 <script src="/resources/vendor/jquery/jquery.js"></script>
 
 <style>
-.warting {
-	padding :50px 20;
- }
-.writer_sort{
-	float:right;
-}
-#a_btn{
-	float:right;
-}
-#btnReviewWriting{
-	float:right;
-}
-.pagination{
-	margin-left: auto;
-	margin-right: auto;
-}
+div {
+		color: black;
+	}
+	table {
+		text-align: center;
+		color: black;
+	}
+	#td_title {
+		text-align: center;
+	}
+	th {
+		background-color: #4f6fcc25;
+	}
 
 </style>
 
@@ -49,28 +46,86 @@ $(function(){
 
 
 
-
+<div>
+	<select name="perPage" class="form-inline">
+		<c:forEach begin="5" end="30" step="5" var="i">
+			<option value="${i}"
+				<c:if test="${i == pagingDto.perPage}">selected</c:if>>${i}줄씩
+				보기</option>
+		</c:forEach>
+	</select>
+</div>
 
 <%@ include file = "../include/campingReviewFrmPage.jsp" %>
 <div class="container-fluid">
 	<div class="row">
 				<div class="col-md-2">
-				<h3>캠핑후기</h3>
 				</div>
 				<div class="col-md-5"></div>
 				<div class="col-md-5"></div>
 	</div>
 </div>
+
+
 <div class="container-fluid">
 	<div class="row">
-				<div class="col-md-4">
-									<select name="perPage" class="form-inline">
-						<c:forEach begin="5" end="30" step="5" var="i">
-							<option value="${i}"
-								<c:if test="${i == pagingDto.perPage}">selected</c:if>
-								>${i}줄씩 보기</option>
+		<div class="col-md-1">
+		</div>
+				<div class="col-md-10">
+<h2>캠핑 후기</h2>
+			<hr>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th></th>
+						<th width="450">제목</th>
+						<th>작성자</th>
+						<th>등록일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				
+				
+				<tbody>
+
+				<c:forEach items="${list}" var="reviewVo">
+
+							<tr>
+								<td>${reviewVo.review_no}</td>
+								<td><img
+									src="/upload/displayCampingImg?fileName=${reviewVo.review_img}"
+									alt="사진 등록" /></td>
+								<td><a href="/camp/selectReview/${reviewVo.review_no}">[${reviewVo.review_campingname}]${reviewVo.review_title}</a></td>
+								<td>${reviewVo.review_id}</td>
+								<td>${reviewVo.review_date}</td>
+								<td>${reviewVo.review_view}</td>
+							</tr>
+
 						</c:forEach>
-					</select>	
+				</tbody>
+			</table>
+			</div>
+				</div>
+
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+	<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<a href="/camp/campingReviewWritingForm"class="btn btn-primary" id="a_btn" >
+				글쓰기
+			</a>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+	<div class="container-fluid">
+	<div class="row">
+				<div class="col-md-4">
+								
 				</div>
 				<div class="col-md-4">
 					<select name="searchCnd" id="searchCnd" class="form-group" title="검색조건선택">
@@ -82,57 +137,6 @@ $(function(){
 				<div class="col-md-4"></div>
 	</div>
 </div>
-
-<div class="container-fluid">
-	<div class="row">
-				<div class="col-md-12">
-
-			<table class="table" >
-
-				<tbody>
-
-				<c:forEach items="${list}" var="reviewVo">
-
-					<tr>
-						<td  colspan="2">
-							<img src="/upload/displayCampingImg?fileName=${reviewVo.review_img}" alt="사진 등록"/>
-						</td>
-	
-						<td colspan="2">
-						<div class="warting">
-							<h6><a href="/camp/selectReview/${reviewVo.review_no}">[${reviewVo.review_campingname}]${reviewVo.review_title}</a></h6>
-							<p>${reviewVo.review_content } <br/>
-	
-							
-							</p>
-					</div>
-						<div class="writer_sort" >
-						<a>${reviewVo.review_id}</a>
-						<a>|</a>
-						<a>${reviewVo.review_date}</a>
-						<a>|</a>
-						<a>${reviewVo.review_view}</a>
-				</div>
-						</td>
-	
-					</tr>
-				<tr>
-			
-				</c:forEach>
-				</tbody>
-			</table>
-				</div>
-
-	</div>
-</div>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<a href="/camp/campingReviewWritingForm"class="btn btn-primary" id="a_btn" >
-				글쓰기
-			</a>
-		</div>
-	</div>
 </div>
 		<div class="container-fluid">
 			<div class="row">

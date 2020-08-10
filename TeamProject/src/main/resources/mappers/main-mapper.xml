@@ -46,6 +46,7 @@
 		select * 
 		from(select rownum rnum, a.* 
     		from(select * from tbl_review
+    			where review_admin = 0
         		order by review_no desc)a) 
 		where rnum between 1 and 5
 	</select>
@@ -54,6 +55,7 @@
 		select * 
 		from(select rownum rnum, a.* 
     		from(select * from tbl_notice
+    			where notice_admin = 0
         		order by notice_no desc)a) 
 		where rnum between 1 and 5
 	</select>
@@ -62,6 +64,7 @@
 		select * 
 		from(select rownum rnum, a.* 
     		from(select * from tbl_camping_tip
+    			where campingtip_admin = 0
         		order by CampingTip_no desc)a) 
 		where rnum between 1 and 5
 	</select>
@@ -70,6 +73,7 @@
 		select * 
 		from(select rownum rnum, a.* 
     		from(select * from tbl_faq
+    			where faq_admin = 0
         		order by faq_no desc)a) 
 		where rnum between 1 and 5
 	</select>
@@ -79,6 +83,7 @@
 		select * 
 		from(select rownum rnum, a.* 
     		from(select * from tbl_camp
+    			where camp_admin = 0
         		order by recommend desc)a) 
 		where rnum between 1 and 10
 	</select>

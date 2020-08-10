@@ -40,12 +40,9 @@ $(function () {
 	var last = link.lastIndexOf("/");
 	var loc = link.substring(17, last);
 	var loc2 = loc.substring(0, 4);
-	console.log(link);
-	console.log(loc);
-	console.log(loc2);
-	if(loc2 == "camp"){
+	if(loc == "camp"){
 		$("#topImg").attr("src","/resources/image/Service_center.jpg");
-	} else if (loc2 == "user"){
+	} else if (loc == "user"){
 		$("#topImg").attr("src","/resources/image/myPage_top.jpg");
 	}else{
 		$("#topImg").attr("src","/resources/image/business.jpg");
@@ -143,41 +140,9 @@ $(function () {
           <i class="fas fa-fw fa-table"></i>
           <span>캠핑후기</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/camp/campingToolTalkList">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>캠핑장비</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>캠핑후기</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <!-- <h6 class="collapse-header">Custom Components:</h6> -->
-            <a class="collapse-item" href="buttons.html">후기</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
-          </div>
-        </div>
-      </li>
+      
 
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
-          </div>
-        </div>
-      </li>
+     
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -208,6 +173,10 @@ $(function () {
       <!-- 관리자 로그인 할때 보이기 -->
       <c:choose>
       	<c:when test="${sessionScope.checkAdmin == 9}">
+      <hr class="sidebar-divider">
+       <div class="sidebar-heading">
+       기타
+      </div>
       		<li class="nav-item">
 				<a class="nav-link" href="/admin/camp">
 				<i class="fas fa-fw fa-table"></i>

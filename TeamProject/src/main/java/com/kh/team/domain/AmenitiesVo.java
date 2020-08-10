@@ -2,19 +2,19 @@ package com.kh.team.domain;
 
 public class AmenitiesVo {
 
-	private String power;	
-	private String wifi;	
-	private String hotwater;
-	private String trail;	
-	private String mart;	
-	private String park;	
-	private String camp_no;
+	private String power = "0";	
+	private String wifi = "0";	
+	private String hotwater = "0";
+	private String trail = "0";	
+	private String mart = "0";	
+	private String park = "0";	
+	private int camp_no;
 	public AmenitiesVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public AmenitiesVo(String power, String wifi, String hotwater, String trail, String mart, String park,
-			String camp_no) {
+			int camp_no) {
 		super();
 		this.power = power;
 		this.wifi = wifi;
@@ -60,10 +60,10 @@ public class AmenitiesVo {
 	public void setPark(String park) {
 		this.park = park;
 	}
-	public String getCamp_no() {
+	public int getCamp_no() {
 		return camp_no;
 	}
-	public void setCamp_no(String camp_no) {
+	public void setCamp_no(int camp_no) {
 		this.camp_no = camp_no;
 	}
 	@Override
@@ -71,7 +71,7 @@ public class AmenitiesVo {
 		return "AmenitiesVo [power=" + power + ", wifi=" + wifi + ", hotwater=" + hotwater + ", trail=" + trail
 				+ ", mart=" + mart + ", park=" + park + ", camp_no=" + camp_no + "]";
 	}
-	
+
 	
 	
 }

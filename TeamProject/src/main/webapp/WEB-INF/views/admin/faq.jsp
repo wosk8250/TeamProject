@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file ="../include/adminheader.jsp" %>
+
+<style>
+	div {
+		color: black;
+	}
+	table {
+		text-align: center;
+		color: black;
+	}
+	#td_title {
+		text-align: center;
+	}
+	th {
+		background-color: #4f6fcc25;
+	}
+</style>
+
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
 $(function() {
@@ -35,7 +52,9 @@ $(".searchFaq").click(function() {
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
 			<select name="perPage" class="form-inline">
 			<c:forEach begin="5" end="30" step="5" var="i">
 				<option value="${i}"
@@ -43,12 +62,15 @@ $(".searchFaq").click(function() {
 				>${i}줄씩 보기</option>
 			</c:forEach>
 			</select>
-			<table class="table">
+				<h2>자주묻는 질문</h2>
+			<hr>
+			<div class="table-responsive">
+			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>글번호</th>
-						<th>제목</th>
-						<th>날짜</th>
+						<th>번호</th>
+					<th width="450">제목</th>
+						<th>등록일</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -63,6 +85,7 @@ $(".searchFaq").click(function() {
 				</c:forEach>
 				</tbody>
 			</table>
+			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="row">
@@ -74,8 +97,11 @@ $(".searchFaq").click(function() {
 				<div class="col-md-4"></div>
 			</div>
 		</div>
+		<div class="container-fluid">
 		<div class="row">
-		<div class="col-md-12 text-center">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
 			<nav>
 				<ul class="pagination">
 				<c:if test="${pagingDto.startPage != 1}">
@@ -95,10 +121,20 @@ $(".searchFaq").click(function() {
 					</c:if>
 				</ul>
 			</nav>
+			<div>
+	<a class="btn btn-primary" href="/admin/faqForm">작성</a>
+			</div>
+		</div>
+		<div class="col-md-1">
 		</div>
 	</div>
 	</div>
-	<a class="btn btn-primary" href="/admin/faqForm">작성</a>
+	</div>
+	
+
+
+
+
 </div>
     
 
