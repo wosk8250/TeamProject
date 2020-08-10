@@ -76,6 +76,7 @@ if(msg == "delete"){
 						<th>글번호</th>
 						<th>이미지</th>
 						<th width="450">제목</th>
+						<th>등록일</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -86,6 +87,7 @@ if(msg == "delete"){
 							<img src="/upload/displayImg?fileName=${campingTipVo.campingtip_img}" alt="사진등록" />
 						</td>
 						<td><a href="/camp/singleContentsCampingTip/${campingTipVo.campingtip_no}">${campingTipVo.campingtip_title}</a></td>
+						<td>${campingTipVo.campingtip_date}</td>
 					</tr>
 				</c:forEach>
 				</tbody>

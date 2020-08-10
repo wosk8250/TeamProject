@@ -344,7 +344,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Override
 	public void deleteUser(String user_id) throws Exception {
-		sqlSession.delete(NAMESPACE + "deleteUser",user_id);
+		sqlSession.update(NAMESPACE + "deleteUser",user_id);
 	}
 
 	@Override

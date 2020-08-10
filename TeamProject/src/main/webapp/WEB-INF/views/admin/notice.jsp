@@ -73,7 +73,7 @@ $(function() {
 					<tr>
 						<th>글번호</th>
 						<th>제목</th>
-						<th>날짜</th>
+						<th>등록일</th>
 					</tr>
 				</thead>
 				<tbody>

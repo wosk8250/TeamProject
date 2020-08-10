@@ -186,7 +186,7 @@
 						<th>이미지</th>
 						<th>제목</th>
 						<th>아이디</th>
-						<th>날짜</th>
+						<th>등록일</th>
 						<th>캠핑장</th>
 					</tr>
 				</thead>
