@@ -194,9 +194,11 @@ public class AdminController {
 
 	// 캠핑장 수정 글
 	@RequestMapping(value = "/campModifyForm", method = RequestMethod.GET)
-	public String campModifyForm(String camp_address, Model model) throws Exception {
-		CampVo campVo = adminService.campModifyForm(camp_address);
+	public String campModifyForm(int camp_no, Model model) throws Exception {
+		CampVo campVo = adminService.campModifyForm(camp_no);
+		AmenitiesVo amenitiesVo = adminService.selectByAmenities(camp_no);
 		model.addAttribute("campVo", campVo);
+		model.addAttribute("amenitiesVo", amenitiesVo);
 		List<FilesVo> list = adminService.filesList(campVo.getTable_name());
 		List<FilesVo> fileList = new ArrayList<>();
 		for (FilesVo filesVo : list) {
@@ -220,9 +222,9 @@ public class AdminController {
 
 	// 캠핑장 수정 처리
 	@RequestMapping(value = "/campModifyRun", method = RequestMethod.POST)
-	public String campModifyRun(CampVo campVo) throws Exception {
-		adminService.campModifyRun(campVo);
-		return "redirect:/camp/camp";
+	public String campModifyRun(CampVo campVo, AmenitiesVo amenitiesVo) throws Exception {
+		adminService.campModifyRun(campVo, amenitiesVo);
+		return "redirect:/admin/camp";
 	}
 
 	// 캠핑장 삭제 처리

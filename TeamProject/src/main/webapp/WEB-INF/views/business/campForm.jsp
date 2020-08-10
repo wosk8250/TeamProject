@@ -28,7 +28,6 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
 $(function () {
-	
 	$("#file").change(function (e) {
 		var	file = e.target.files;
 		var formData = new FormData();
@@ -75,8 +74,6 @@ $(function () {
 		});		
 	});
 	
-	var arr = []; 
-
 	//부대시설 체크박스
 	var amenities = ["#camping_power","#camping_wifi","#camping_hotwater","#camping_trail","#camping_mart","#camping_park"];
 	for (var i = 0; i < amenities.length; i++) {
@@ -89,9 +86,20 @@ $(function () {
 		});
 	}
 
-		var insert = ["#camp_name","#camp_address","#camp_phone","#camp_http","#camp_area","#camp_location","#camp_content","#power","#wifi","#hotwater","#trail","#mart","#park"];
-		var write = ["#camping_name","#roadFullAddr","#camping_phone","#camping_http","#siNm","#sggNm","#camping_content","#camping_power","#camping_wifi","#camping_hotwater","#camping_trail","#camping_mart","#camping_park"];
+	var insert = ["#camp_name","#camp_address","#camp_phone","#camp_http","#camp_area","#camp_location","#camp_content","#power","#wifi","#hotwater","#trail","#mart","#park"];
+	var write = ["#camping_name","#roadFullAddr","#camping_phone","#camping_http","#siNm","#sggNm","#camping_content","#camping_power","#camping_wifi","#camping_hotwater","#camping_trail","#camping_mart","#camping_park"];
+	var writecheck = ["#camping_name","#roadFullAddr","#camping_phone","#camping_http","#camping_content"];
 	$("#campRun").submit(function(e) {
+// 		e.preventDefault();
+		for (var i = 0; i < writecheck.length; i++) { //null체크
+			if($(writecheck[i]).val() == null || $(writecheck[i]).val() == ""){
+				var id = $(writecheck[i]).attr("id");
+				console.log(id);
+				alert("공란없이 작성해주세요");
+				return false;
+			}
+		}
+		
 		for (var i = 0; i < write.length; i++) {//작성한 내용 insertCampFem에 입력
 			$(insert[i]).val($(write[i]).val());
 		}
@@ -108,47 +116,17 @@ $(function () {
 });//$function
 </script>
 <script language="javascript">
-// opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
-//document.domain = "abc.go.kr";
 
 function goPopup(){
-	// 주소검색을 수행할 팝업 페이지를 호출합니다.
-	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
 	var pop = window.open("/popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	
-	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
-    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
 }
-
 
 function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
 		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
 		document.form.roadFullAddr.value = roadFullAddr;//주소
-		document.form.roadAddrPart1.value = roadAddrPart1;
-		document.form.roadAddrPart2.value = roadAddrPart2;
-		document.form.addrDetail.value = addrDetail;
-		document.form.engAddr.value = engAddr;
-		document.form.jibunAddr.value = jibunAddr;
-		document.form.zipNo.value = zipNo;
-		document.form.admCd.value = admCd;
-		document.form.rnMgtSn.value = rnMgtSn;
-		document.form.bdMgtSn.value = bdMgtSn;
-		document.form.detBdNmList.value = detBdNmList;
-		document.form.bdNm.value = bdNm;
-		document.form.bdKdcd.value = bdKdcd;
 		document.form.siNm.value = siNm;//지역
 		document.form.sggNm.value = sggNm;//시도 명
-		document.form.emdNm.value = emdNm;
-		document.form.liNm.value = liNm;
-		document.form.rn.value = rn;
-		document.form.udrtYn.value = udrtYn;
-		document.form.buldMnnm.value = buldMnnm;
-		document.form.buldSlno.value = buldSlno;
-		document.form.mtYn.value = mtYn;
-		document.form.lnbrMnnm.value = lnbrMnnm;
-		document.form.lnbrSlno.value = lnbrSlno;
-		document.form.emdNo.value = emdNo;
-		
 }
 
 </script>
@@ -156,7 +134,6 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
-<!-- 			<form id="campRun" role="form" action="/business/campRun" method='post' enctype="multipart/form-data"> -->
 				<div class="form-group">
 				<table class="table table-boardered">
 					<tr>
@@ -173,28 +150,6 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 										<input type="text" class="form-control" style="width:500px;" id="roadFullAddr"  name="roadFullAddr" readonly />
 										<input type="hidden"  style="width:500px;" id="siNm"  name="siNm" />
 										<input type="hidden"  style="width:500px;" id="sggNm"  name="sggNm" />
-										<input type="hidden"  style="width:500px;" id="roadAddrPart1"  name="roadAddrPart1" />
-										<input type="hidden"  style="width:500px;" id="addrDetail"  name="addrDetail" />
-										<input type="hidden"  style="width:500px;" id="roadAddrPart2"  name="roadAddrPart2" />
-										<input type="hidden"  style="width:500px;" id="engAddr"  name="engAddr" />
-										<input type="hidden"  style="width:500px;" id="jibunAddr"  name="jibunAddr" />
-										<input type="hidden"  style="width:500px;" id="zipNo"  name="zipNo" />
-										<input type="hidden"  style="width:500px;" id="admCd"  name="admCd" />
-										<input type="hidden"  style="width:500px;" id="rnMgtSn"  name="rnMgtSn" />
-										<input type="hidden"  style="width:500px;" id="bdMgtSn"  name="bdMgtSn" />
-										<input type="hidden"  style="width:500px;" id="detBdNmList"  name="detBdNmList" />
-										<input type="hidden"  style="width:500px;" id="bdNm"  name="bdNm" />
-										<input type="hidden"  style="width:500px;" id="bdKdcd"  name="bdKdcd" />
-										<input type="hidden"  style="width:500px;" id="emdNm"  name="emdNm" />
-										<input type="hidden"  style="width:500px;" id="liNm"  name="liNm" />
-										<input type="hidden"  style="width:500px;" id="rn"  name="rn" />
-										<input type="hidden"  style="width:500px;" id="udrtYn"  name="udrtYn" />
-										<input type="hidden"  style="width:500px;" id="buldMnnm"  name="buldMnnm" />
-										<input type="hidden"  style="width:500px;" id="buldSlno"  name="buldSlno" />
-										<input type="hidden"  style="width:500px;" id="mtYn"  name="mtYn" />
-										<input type="hidden"  style="width:500px;" id="lnbrMnnm"  name="lnbrMnnm" />
-										<input type="hidden"  style="width:500px;" id="lnbrSlno"  name="lnbrSlno" />
-										<input type="hidden"  style="width:500px;" id="emdNo"  name="emdNo" />
 								</div>
 							</form>
 						</td>
@@ -225,13 +180,6 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				</table>
 				</div>
 				<%@ include file="../include/insertCampFrm.jsp" %>
-<!-- 				<input type="file" id="file" name="file[]" multiple="multiple"> -->
-<!-- 				<div id="uploadedList"></div> -->
-<!-- 				<br/> -->
-<!-- 				<div> -->
-<!-- 				<button type="submit" class="btn btn-primary">완료</button> -->
-<!-- 				</div> -->
-<!-- 			</form> -->
 		</div>
 		<div class="col-md-1"></div>
 	</div>

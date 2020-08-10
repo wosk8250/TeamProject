@@ -61,7 +61,8 @@ public class AdminServiceImpl implements AdminService {
 		int camp_no = adminDao.getNextVal();
 		campVo.setCamp_no(camp_no);
 		amenitiesVo.setCamp_no(camp_no);
-		if(campVo.getThumbnail() != null) {
+		System.out.println("캠프 인서트 런 1 : " + campVo);
+		if(campVo.getFiles() != null) {
 			String files[] = campVo.getFiles();
 			String filename = files[0];
 			int slashIndex = filename.lastIndexOf("/");
@@ -70,7 +71,9 @@ public class AdminServiceImpl implements AdminService {
 			String thumbnailName = front + "sm_" + rear;
 			campVo.setThumbnail(thumbnailName);
 			adminDao.campInsertRun(campVo);
-			campVo = adminDao.campModifyForm(campVo.getCamp_address());
+			System.out.println("캠프 인서트 런 2 : " + campVo);
+			System.out.println("캠프 인서트 런 2 : " + campVo.getTable_name());
+			campVo = adminDao.campModifyForm(campVo.getCamp_no());
 			for (int i = 0; i < files.length; i++) {
 				FilesVo filesVo = new FilesVo(campVo.getCamp_no(), files[i], campVo.getTable_name());
 				adminDao.fileInsertRun(filesVo);
@@ -89,14 +92,14 @@ public class AdminServiceImpl implements AdminService {
 
 	// 캠핑장 수정 폼
 	@Override
-	public CampVo campModifyForm(String camp_address) throws Exception {
-		return adminDao.campModifyForm(camp_address);
+	public CampVo campModifyForm(int camp_no) throws Exception {
+		return adminDao.campModifyForm(camp_no);
 	}
 
 	// 캠핑장 수정 처리
 	@Transactional
 	@Override
-	public void campModifyRun(CampVo campVo) throws Exception {
+	public void campModifyRun(CampVo campVo, AmenitiesVo amenitiesVo) throws Exception {
 		
 		if(campVo.getFiles() != null){
 			String files[] = campVo.getFiles();
@@ -114,6 +117,7 @@ public class AdminServiceImpl implements AdminService {
 			campVo.setThumbnail("사진없음");
 		}
 		adminDao.campModifyRun(campVo);
+		adminDao.updateAmenities(amenitiesVo);
 	}
 
 	// 캠핑장 삭제 처리
@@ -160,6 +164,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public CampingTipVo campingTipModifyForm(String campingtip_title) throws Exception {
 		return adminDao.campingTipModifyForm(campingtip_title);
+	}
+	//부대시설 조회
+	@Override
+	public AmenitiesVo selectByAmenities(int camp_no) throws Exception {
+		return adminDao.selectByAmenities(camp_no);
 	}
 
 	// 캠핑 수칙 수정 처리
@@ -545,6 +554,9 @@ public class AdminServiceImpl implements AdminService {
 	public List<ReservationVo> reservationDateList(int camp_no) {
 		return adminDao.reservationDateList(camp_no);
 	}
+
+
+
 
 
 

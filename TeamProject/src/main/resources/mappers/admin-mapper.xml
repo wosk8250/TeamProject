@@ -26,16 +26,32 @@
 		tbl_camp(camp_no,camp_address,camp_phone,camp_name,camp_content,camp_http,camp_location,camp_area,thumbnail,camp_admin, user_id)
 		values(#{camp_no},#{camp_address},#{camp_phone},#{camp_name},#{camp_content},#{camp_http},#{camp_location},#{camp_area},#{thumbnail}, 2, #{user_id})
 	</insert>
-	<!-- 캠핑장 부대 시설 -->
+	<!-- 캠핑장 부대 시설 입력-->
 	<insert id="campAmenities">
 		insert into
 		tbl_amenities(power, wifi, hotwater, trail, mart, park, camp_no)
 		values(#{power}, #{wifi}, #{hotwater}, #{trail}, #{mart}, #{park}, #{camp_no})
 	</insert>
-	<!-- 캠핑장 주소로 찾기 -->
+	<!-- 캠핑장 부대 시설 수정-->
+	<update id="updateAmenities">
+		update tbl_amenities set
+		power = #{power},
+		wifi = #{wifi},
+		hotwater = #{hotwater},
+		trail = #{trail},
+		mart = #{mart},
+		park = #{park}
+		where camp_no = #{camp_no}
+	</update>
+	<!-- 캠핑장 찾기 -->
 	<select id="campModifyForm" resultType="CampVo">
 		select * from tbl_camp
-		where camp_address = #{camp_address}
+		where camp_no = #{camp_no}
+	</select>
+	<!-- 캠핑장 부대 시설 조회-->
+	<select id="selectByAmenities" resultType="AmenitiesVo">
+		select * from tbl_Amenities
+		where camp_no = #{camp_no}
 	</select>
 	<!-- 캠핑장 수정 처리 -->
 	<update id="campModifyRun">
@@ -48,9 +64,7 @@
 		camp_location = #{camp_location},
 		camp_area = #{camp_area},
 		thumbnail = #{thumbnail}
-		where camp_no =
-		#{camp_no}
-
+		where camp_no = #{camp_no}
 	</update>
 	<!-- 캠핑장 삭제 처리 -->
 	<update id="campDeleteRun">

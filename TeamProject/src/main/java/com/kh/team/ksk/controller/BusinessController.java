@@ -43,20 +43,20 @@ public class BusinessController {
 		HttpSession session = request.getSession();
 		String user_id = (String)session.getAttribute("user_id");
 		campVo.setUser_id(user_id);
-		System.out.println(campVo);
-		System.out.println(amenitiesVo);
+		System.out.println("비지니스 컨트롤러 campVo : "+ campVo);
 		adminService.campInsertRun(campVo, amenitiesVo);
 
 
-		return "redirect:/camp/main";
+		return "redirect:/camp/campingReviewList";
 	}
 	
-	//캠핑장 수정 폼
+	// 캠핑장 수정 글
 	@RequestMapping(value = "/campModify", method = RequestMethod.GET)
-	public String campModify(String camp_address, Model model) throws Exception {
-		System.out.println("camp_address" + camp_address);
-		CampVo campVo = adminService.campModifyForm(camp_address);
+	public String campModifyForm(int camp_no, Model model) throws Exception {
+		CampVo campVo = adminService.campModifyForm(camp_no);
+		AmenitiesVo amenitiesVo = adminService.selectByAmenities(camp_no);
 		model.addAttribute("campVo", campVo);
+		model.addAttribute("amenitiesVo", amenitiesVo);
 		List<FilesVo> list = adminService.filesList(campVo.getTable_name());
 		List<FilesVo> fileList = new ArrayList<>();
 		for (FilesVo filesVo : list) {
@@ -79,9 +79,11 @@ public class BusinessController {
 	}
 	//캠핑장 수정 처리
 	@RequestMapping(value = "/campModifyRun", method = RequestMethod.POST)
-	public String campModifyRun(CampVo campVo) throws Exception {
-		
-		adminService.campModifyRun(campVo);
+	public String campModifyRun(CampVo campVo, AmenitiesVo amenitiesVo, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		String user_id = (String)session.getAttribute("user_id");
+		campVo.setUser_id(user_id);
+		adminService.campModifyRun(campVo, amenitiesVo);
 		return "redirect:/camp/main";
 	}
 	

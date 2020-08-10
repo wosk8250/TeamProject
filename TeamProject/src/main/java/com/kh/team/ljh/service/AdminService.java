@@ -35,10 +35,13 @@ public interface AdminService {
 	public void campInsertRun(CampVo campVo, AmenitiesVo amenitiesVo) throws Exception;
 
 	// 캠핑장 수정 글 내용
-	public CampVo campModifyForm(String camp_address) throws Exception;
+	public CampVo campModifyForm(int camp_no) throws Exception;
+	
+	//부대시설 조회
+	public AmenitiesVo selectByAmenities(int camp_no) throws Exception;
 
 	// 캠핑장 수정 글 처리
-	public void campModifyRun(CampVo campVo) throws Exception;
+	public void campModifyRun(CampVo campVo, AmenitiesVo amenitiesVo) throws Exception;
 
 	// 캠핑장 삭제 처리
 	public void campDelete(int camp_no) throws Exception;
