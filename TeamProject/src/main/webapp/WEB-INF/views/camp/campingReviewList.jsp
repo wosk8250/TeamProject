@@ -46,15 +46,7 @@ $(function(){
 
 
 
-<div>
-	<select name="perPage" class="form-inline">
-		<c:forEach begin="5" end="30" step="5" var="i">
-			<option value="${i}"
-				<c:if test="${i == pagingDto.perPage}">selected</c:if>>${i}줄씩
-				보기</option>
-		</c:forEach>
-	</select>
-</div>
+
 
 <%@ include file = "../include/campingReviewFrmPage.jsp" %>
 <div class="container-fluid">
@@ -72,6 +64,15 @@ $(function(){
 		<div class="col-md-1">
 		</div>
 				<div class="col-md-10">
+	<select name="perPage" class="form-inline">
+		<c:forEach begin="5" end="30" step="5" var="i">
+			<option value="${i}"
+				<c:if test="${i == pagingDto.perPage}">selected</c:if>>${i}줄씩
+				보기</option>
+		</c:forEach>
+	</select>				
+				
+				
 <h2>캠핑 후기</h2>
 			<hr>
 		<div class="table-responsive">

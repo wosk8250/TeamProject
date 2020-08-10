@@ -42,7 +42,13 @@ $(".searchFaq").click(function() {
 	var faq_title = $("#textFaq").val();
 	location.href="/admin/faq?faq_title=" + faq_title;
 });
-
+$("a.page-link").each(function(){
+	var page =$(this).attr("href");
+	if(page == "${pagingDto.page}"){
+		$(this).parent().addClass("active");
+		return;
+	}
+}); 
 
 });
 
@@ -86,7 +92,9 @@ $(".searchFaq").click(function() {
 				</tbody>
 			</table>
 			</div>
-		</div>
+			<div>
+	<a class="btn btn-primary" href="/admin/faqForm">작성</a>
+			</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4"></div>
@@ -99,9 +107,9 @@ $(".searchFaq").click(function() {
 		</div>
 		<div class="container-fluid">
 		<div class="row">
-		<div class="col-md-1">
+		<div class="col-md-5">
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-4">
 			<nav>
 				<ul class="pagination">
 				<c:if test="${pagingDto.startPage != 1}">
@@ -121,12 +129,10 @@ $(".searchFaq").click(function() {
 					</c:if>
 				</ul>
 			</nav>
-			<div>
-	<a class="btn btn-primary" href="/admin/faqForm">작성</a>
-			</div>
 		</div>
-		<div class="col-md-1">
+		<div class="col-md-3">
 		</div>
+	</div>
 	</div>
 	</div>
 	</div>
