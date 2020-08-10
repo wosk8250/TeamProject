@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ include file="../include/topImgHeader.jsp" %>
+    <%@ include file="../include/header.jsp" %>
 <style>
 	.d-lg-block {
 		background-image: url("/resources/image/userUpdate.svg");
@@ -35,6 +34,11 @@ $(function () {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<ul class="nav nav-tabs nav-fill">
+				<c:if test="${sessionScope.checkAdmin == 2}">
+					<li class="nav-item">
+						<a class="nav-link" id="mylink" href="/business/myCampList">내가 올린 캠핑장</a>
+					</li>
+				</c:if>
 				<li class="nav-item">
 					<a class="nav-link" id="mylink" href="/user/myReviewList">내가 작성한 후기</a>
 				</li>

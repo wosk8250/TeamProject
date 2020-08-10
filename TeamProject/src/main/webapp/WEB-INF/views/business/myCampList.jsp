@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/topImgHeader.jsp" %>
+<%@ include file="../include/header.jsp" %>
 <style>
 	div {
 		color: black;
@@ -32,21 +32,41 @@ $(function () {
 	$("a.page-link").click(function(e) {
 		e.preventDefault(); // 브라우저의 기본기능(a:링크) 막기
 		var page = $(this).attr("href").trim();
-		$("#myReviewFrmPage > input[name=page]").val(page);
-		$("#myReviewFrmPage").submit();
+		console.log(page);
+		console.log(page);
+		$("#frmPage > input[name=page]").val(page);
+		$("#frmPage").attr("action","/business/myCampList");
+		var v = $("#frmPage").attr("action");
+		console.log($("#frmPage").attr("action"));
+		$("#frmPage").submit();
+	});
+	
+	//캠핑장 글 보기
+	$("a.a_title").click(function(e) {
+		e.preventDefault();
+		var camp_no = $(this).attr("data-camp_no");
+		$("#mainFrmPage > input[name=camp_no]").val(camp_no);
+		$("#mainFrmPage").attr("action", $(this).attr("href"));
+		$("#mainFrmPage").submit();
 	});
 });
 </script>
 
 <%@ include file="../include/myReviewFrmPage.jsp" %>
+<%@ include file="../board/mainFrmPage.jsp" %>
 
 <div class="container-fluid">
 	<div class="row" style="margin-bottom: 30px;">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<ul class="nav nav-tabs nav-fill">
+			<c:if test="${sessionScope.checkAdmin == 2}">
 				<li class="nav-item">
-					<a class="nav-link active" id="mylink-active" href="/user/myReviewList">내가 작성한 후기</a>
+					<a class="nav-link active" id="mylink-active" href="/business/myCampList">내가 올린 캠핑장</a>
+				</li>
+			</c:if>
+				<li class="nav-item">
+					<a class="nav-link" id="mylink" href="/user/myReviewList">내가 작성한 후기</a>
 				</li>
 				<li class="nav-item select">
 					<a class="nav-link" id="mylink" href="/user/profile">회원정보</a>
@@ -71,9 +91,9 @@ $(function () {
 					<tr>
 						<th>번호</th>
 						<th width="450">제목</th>
-						<th>작성자</th>
 						<th>캠핑장 이름</th>
-						<th>등록일</th>
+						<th>주소</th>
+						<th>수정</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -81,24 +101,13 @@ $(function () {
 				<tr>
 						<td>${campVo.camp_no}</td>
 						<td width="450" id="td-title">
-							<a href="/board/campingContent/${campVo.camp_no}">${campVo.camp_name}</a>
+							<a href="/board/campingContent" class="a_title" data-camp_no="${campVo.camp_no}">${campVo.camp_name}</a>
 						</td>
-						<td>작성자</td>
-						<td>캠핑장 이름</td>
+						<td>${campVo.camp_name}</td>
 						<td>${campVo.camp_address}</td>
+						<td><a class="btn btn-warning" href="/business/campModify?camp_address=${campVo.camp_address}">수정</a> </td>
 					</tr>
 				</c:forEach>
-<%-- 				<c:forEach items="${reviewList}" var="reviewVo"> --%>
-<!-- 					<tr> -->
-<%-- 						<td>${reviewVo.review_no}</td> --%>
-<!-- 						<td width="450" id="td-title"> -->
-<%-- 							<a href="/camp/selectReview/${reviewVo.review_no}">${reviewVo.review_title}</a> --%>
-<!-- 						</td> -->
-<%-- 						<td>${reviewVo.review_id}</td> --%>
-<%-- 						<td>${reviewVo.review_campingname}</td> --%>
-<%-- 						<td>${reviewVo.review_date}</td> --%>
-<!-- 					</tr> -->
-<%-- 				</c:forEach> --%>
 				</tbody>
 			</table>
 			</div>

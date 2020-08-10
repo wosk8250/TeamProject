@@ -251,5 +251,4 @@ public interface AdminDao {
 	//등록대기 캠핑장 갯수
 	public int waitForRegistrationCampCount() throws Exception;
 	
-	
 }

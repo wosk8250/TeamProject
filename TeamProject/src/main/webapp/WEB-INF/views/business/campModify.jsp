@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@include file="../include/adminheader.jsp"%>
+<%@ include file="../include/header.jsp" %>
 
 <style>
 
@@ -97,7 +97,7 @@ $(function() {
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<form role="form" id="campModifyRun" action="/admin/campModifyRun" method="post"  enctype="multipart/form-data">
+			<form role="form" id="campModifyRun" action="/business/campModifyRun" method="post"  enctype="multipart/form-data">
 				<div class="form-group">
 
 					<label for="camp_title"> 제목 </label> 
@@ -113,6 +113,11 @@ $(function() {
 					<input type="text" class="form-control" id="camp_location" name="camp_location" value="${campVo.camp_location}"/>
 					<span>구</span>
 					<input type="text" class="form-control" id="camp_area" name="camp_area" value="${campVo.camp_area}"/>
+					<span>위도</span>
+					<input type="text" class="form-control" id="latitude" name="latitude" value="${campVo.latitude}"/>
+					<span>경도</span>
+					<input type="text" class="form-control" id="inclination" name="inclination" value="${campVo.inclination}"/>
+					
 					<input type="hidden" class="form-group" id="camp_no" name="camp_no" value="${campVo.camp_no}"/>
 					
 					<input type="hidden" class="form-group" id="table_name" name="table_name" value="${campVo.table_name}"/>

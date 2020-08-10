@@ -8,12 +8,12 @@
 	<!-- 시군 -->
 	
 	<select id="locationArea" resultType="string">
-		select distinct camp_location from tbl_camp_location where camp_area = #{camp_area}
+		select distinct camp_location from tbl_camp where camp_area = #{camp_area}
 	</select>
 	
 		
 	<select id="campSelect" resultType="AreaCampLocationVo">
-		select distinct camp_area from tbl_camp_location
+		select distinct camp_area from tbl_camp
 	</select>
 
 	<!-- 캠핑장 상세페이지 -->	
@@ -39,6 +39,48 @@
 
 	<select id="searchList" resultType="CampVo">
 		select * from tbl_camp where camp_area = #{camp_area} and camp_location = #{camp_location}
+	</select>
+	
+	<!-- 리뷰5개 -->
+	<select id="reviewTop5" resultType="ReviewVo">
+		select * 
+		from(select rownum rnum, a.* 
+    		from(select * from tbl_review
+        		order by review_no desc)a) 
+		where rnum between 1 and 5
+	</select>
+	<!-- 공지사항5개 -->
+	<select id="noticeTop5" resultType="CampNoticeVo">
+		select * 
+		from(select rownum rnum, a.* 
+    		from(select * from tbl_notice
+        		order by notice_no desc)a) 
+		where rnum between 1 and 5
+	</select>
+	<!-- 캠핑수칙 5개 -->
+	<select id="tipTop5" resultType="CampingTipVo">
+		select * 
+		from(select rownum rnum, a.* 
+    		from(select * from tbl_camping_tip
+        		order by CampingTip_no desc)a) 
+		where rnum between 1 and 5
+	</select>
+	<!-- 질문 5개 -->
+	<select id="faqTop5" resultType="faqVo">
+		select * 
+		from(select rownum rnum, a.* 
+    		from(select * from tbl_faq
+        		order by faq_no desc)a) 
+		where rnum between 1 and 5
+	</select>
+	
+	<!-- 추천수 높은 순 캠핑장 보기 -->
+	<select id="recommendTop10" resultType="campVo">
+		select * 
+		from(select rownum rnum, a.* 
+    		from(select * from tbl_camp
+        		order by recommend desc)a) 
+		where rnum between 1 and 10
 	</select>
 	
 	<select id="capingOption" resultType="AmenitiesVo">
@@ -70,7 +112,11 @@
 	
 	<!-- 지역별 베스트 -->
 	<select id="areaLocationSelect" resultType="String">
-		select * from tbl_camp where camp_location = #{camp_location};
+		select * from tbl_camp where camp_location = #{camp_location}
+	</select>
+	
+	<select id="amenitiesList" resultType="AmenitiesVo">
+		select * from tbl_amenities
 	</select>
 	
 </mapper>

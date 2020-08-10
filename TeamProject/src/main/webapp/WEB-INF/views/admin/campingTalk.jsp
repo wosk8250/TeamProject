@@ -61,10 +61,9 @@ $(function() {
 					<tr>
 						<td>${campingTalkVo.campingtalk_no}</td>
 						<td></td>
-						<td>${campingTalkVo.campingtalk_title}</td>
+						<td><a href="/camp/selectCampingToolTalk/${campingTalkVo.campingtalk_no}">${campingTalkVo.campingtalk_title}</a></td>
 						<td>${campingTalkVo.campingtalk_date}</td>
 						<td>${campingTalkVo.campingtalk_id}</td>
-						<td><a href="/admin/campingTalkDelete?campingTalk_no=${campingTalkVo.campingtalk_no}" class="btn btn-warning">삭제</a></td>
 					</tr>
 				</c:if>
 				</c:forEach>

@@ -11,11 +11,15 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampLocationVo;
+import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
 import com.kh.team.domain.CampingLocationVo;
 import com.kh.team.domain.CampRecommendVo;
+import com.kh.team.domain.CampingTipVo;
+import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.PagingDto;
 import com.kh.team.domain.UserVo;
+import com.kh.team.domain.ReviewVo;
 
 @Repository
 public class SelectCampDaoImpl implements SelectCampDao {
@@ -84,4 +88,34 @@ public class SelectCampDaoImpl implements SelectCampDao {
 		return sqlSession.selectOne(NAMESPACE + "areaLocationSelect", camp_location);
 	}
 
+	@Override
+	public List<ReviewVo> reviewTop5() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "reviewTop5");
+	}
+
+	@Override
+	public List<CampNoticeVo> noticeTop5() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "noticeTop5");
+	}
+
+	@Override
+	public List<CampingTipVo> tipTop5() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "tipTop5");
+	}
+
+	@Override
+	public List<FaqVo> faqTop5() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "faqTop5");
+	}
+
+	@Override
+	public List<CampVo> recommendTop10() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "recommendTop10");
+	}
+
+	@Override
+	public List<AmenitiesVo> amenitiesList() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "amenitiesList");
+	}
+	
 }

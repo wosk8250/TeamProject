@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +25,7 @@ import com.kh.team.domain.CampingTalkVo;
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.DemeritCodeVo;
 import com.kh.team.domain.DemeritVo;
+import com.kh.team.domain.EmailDto;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.PagingDto;
@@ -36,6 +43,8 @@ public class AdminController {
 	private AdminService adminService;
 	@Inject
 	private UserService userService;
+	@Inject
+	private JavaMailSender javaMailSender;
 
 	// 유저 조회
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
@@ -120,14 +129,14 @@ public class AdminController {
 			List<FaqVo> list = adminService.searchFaq(faq_title);
 			model.addAttribute("list", list);
 		}
-		model.addAttribute("checkBoard", "admin");
+		
 		return "admin/faq";
 		
 	}
 
 	// 캠핑장 조회
 	@RequestMapping(value = "/camp", method = RequestMethod.GET)
-	public String adminCampList(myReviewPagingDto myReviewPagingDto,Model model,String camp_name) throws Exception {
+	public String adminCampList(HttpSession session,myReviewPagingDto myReviewPagingDto,Model model,String camp_name) throws Exception {
 		myReviewPagingDto.setmyReviewPageInfo();
 		int totalCount = adminService.campPostsCount();
 		myReviewPagingDto.setTotalCount(totalCount);
@@ -138,6 +147,7 @@ public class AdminController {
 			list = adminService.searchCamp(camp_name);
 		}
 		
+		session.setAttribute("checkBoard", "admin");
 		model.addAttribute("list", list);
 
 		model.addAttribute("pagingDto", myReviewPagingDto);
@@ -207,7 +217,6 @@ public class AdminController {
 	// 캠핑장 수정 처리
 	@RequestMapping(value = "/campModifyRun", method = RequestMethod.POST)
 	public String campModifyRun(CampVo campVo) throws Exception {
-		
 		adminService.campModifyRun(campVo);
 		return "redirect:/admin/camp";
 	}
@@ -240,7 +249,6 @@ public class AdminController {
 		}else {
 		list =  adminService.searchCampingTip(campingtip_title);
 		}
-		
 		model.addAttribute("list", list);
 		model.addAttribute("pagingDto", myReviewPagingDto);
 		return "admin/campingTip";
@@ -260,8 +268,8 @@ public class AdminController {
 	}
 
 	// 캠핑 수칙 수정 폼
-	@RequestMapping(value = "/campingTipModifyForm", method = RequestMethod.GET)
-	public String campingModifyForm(String campingtip_title, Model model) throws Exception {
+	@RequestMapping(value = "/campingTipModifyForm/{campingtip_title}", method = RequestMethod.GET)
+	public String campingModifyForm(@PathVariable("campingtip_title") String campingtip_title, Model model) throws Exception {
 		CampingTipVo campingTipVo = adminService.campingTipModifyForm(campingtip_title);
 		model.addAttribute("campingTipVo", campingTipVo);
 		List<FilesVo> list = adminService.filesList(campingTipVo.getTable_name());
@@ -289,8 +297,7 @@ public class AdminController {
 	@RequestMapping(value = "/campingTipModifyRun", method = RequestMethod.POST)
 	public String campingModifyRun(CampingTipVo campingTipVo) throws Exception {
 		adminService.campingTipModifyRun(campingTipVo);
-
-		return "redirect:/admin/campingTip";
+		return "redirect:/camp/singleContentsCampingTip/" + campingTipVo.getCampingtip_no() ;
 	}
 
 	// 캠핑 수칙 삭제 처리
@@ -483,112 +490,6 @@ public class AdminController {
 			return "redirect:/admin/demerit";
 		}
 		
-		//삭제된 글 보기
-		@RequestMapping(value="/deleteList",method=RequestMethod.GET)
-		public String deleteList(myReviewPagingDto myReviewPagingDto,Model model) throws Exception{
-				myReviewPagingDto.setmyReviewPageInfo();
-				int deleteCampingTipCount = adminService.deleteCampingTipCount();
-				int deleteCampTalkCount = adminService.deleteCampTalkCount();
-				int deleteFaqCount = adminService.deleteFaqCount();
-				int deleteNoticeCount = adminService.deleteNoticeCount();
-				int deleteReviewCount = adminService.deleteReviewCount();
-				int totalCount = deleteCampingTipCount + deleteCampTalkCount + deleteFaqCount + deleteNoticeCount + deleteReviewCount;
-				myReviewPagingDto.setTotalCount(totalCount);
-				
-				List<CampingTipVo> campingTipVoList = adminService.deletePagingCampingTipList(myReviewPagingDto);
-				List<CampingTalkVo> campingTalkList = adminService.deletePagingCampTalkList(myReviewPagingDto);
-				List<FaqVo> faqList = adminService.deletePagingFaqList(myReviewPagingDto);
-				List<CampNoticeVo> noticeList = adminService.deletePagingNoticeList(myReviewPagingDto);
-				List<ReviewVo> reviewList = adminService.deletePagingReviewList(myReviewPagingDto);
-				
-				model.addAttribute("campingTipVoList",campingTipVoList );
-				model.addAttribute("campingTalkList",campingTalkList );
-				model.addAttribute("noticeList",noticeList );
-				model.addAttribute("faqList",faqList );
-				model.addAttribute("reviewList",reviewList );
-				model.addAttribute("pagingDto", myReviewPagingDto);
-				return "admin/deleteList";
-		}
-		@RequestMapping(value="/deleteList/{board}",method=RequestMethod.GET)
-		public String deleteList(myReviewPagingDto myReviewPagingDto,Model model,@PathVariable("board") String board) throws Exception{
-			myReviewPagingDto.setmyReviewPageInfo();
-		
-			 if (board.equals("캠핑 후기")) {
-				
-				int deleteReviewCount = adminService.deleteReviewCount();
-				myReviewPagingDto.setTotalCount(deleteReviewCount);
-				List<ReviewVo> reviewList = adminService.deletePagingReviewList(myReviewPagingDto);
-				model.addAttribute("reviewList",reviewList );
-				
-			}else if (board.equals("캠핑 이야기")) {
-				
-				int deleteCampTalkCount = adminService.deleteCampTalkCount();
-				myReviewPagingDto.setTotalCount(deleteCampTalkCount);
-				List<CampingTalkVo> campingTalkList = adminService.deletePagingCampTalkList(myReviewPagingDto);
-				model.addAttribute("campingTalkList",campingTalkList );
-				
-			}else if (board.equals("공지사항")) {
-				
-				int deleteNoticeCount = adminService.deleteNoticeCount();
-				myReviewPagingDto.setTotalCount(deleteNoticeCount);
-				List<CampNoticeVo> noticeList = adminService.deletePagingNoticeList(myReviewPagingDto);
-				model.addAttribute("noticeList",noticeList );
-				
-			}else if (board.equals("캠핑 수칙")) {
-				
-				int deleteCampingTipCount = adminService.deleteCampingTipCount();
-				myReviewPagingDto.setTotalCount(deleteCampingTipCount);
-				List<CampingTipVo> campingTipVoList = adminService.deletePagingCampingTipList(myReviewPagingDto);
-				model.addAttribute("campingTipVoList",campingTipVoList );
-				
-			}else if (board.equals("자주 묻는 질문")) {
-				
-				int deleteFaqCount = adminService.deleteFaqCount();
-				myReviewPagingDto.setTotalCount(deleteFaqCount);
-				List<FaqVo> faqList = adminService.deletePagingFaqList(myReviewPagingDto);
-				model.addAttribute("faqList",faqList );
-				
-			}
-			model.addAttribute("pagingDto", myReviewPagingDto);
-			return "admin/deleteList";
-		}
-		
-		@RequestMapping(value="/deleteList/{board}/{textTitle}",method=RequestMethod.GET)
-		public String deleteList(myReviewPagingDto myReviewPagingDto,Model model,@PathVariable("board") String board,@PathVariable("textTitle") String textTitle) throws Exception{
-			myReviewPagingDto.setmyReviewPageInfo();
-			
-			if (board.equals("캠핑 후기")) {
-				List<ReviewVo> list = adminService.deleteReviewPost(textTitle);
-				model.addAttribute("reviewList", list);
-				
-			}else if (board.equals("캠핑 이야기")) {
-				List<CampingTalkVo> list = adminService.deleteCampingTalkPost(textTitle);
-				model.addAttribute("campingTalkList", list);
-				
-			}else if (board.equals("공지사항")) {
-				List<CampNoticeVo> list = adminService.deleteNoticePost(textTitle);
-				model.addAttribute("noticeList", list);
-				
-			}else if (board.equals("캠핑 수칙")) {
-				List<CampingTipVo> list = adminService.delelteCampingTipPost(textTitle);
-				model.addAttribute("campingTipVoList", list);
-				
-			}else if (board.equals("자주 묻는 질문")) {
-				List<FaqVo> list = adminService.deleteFaqPost(textTitle);
-				model.addAttribute("faqList", list);
-				
-			}
-			
-			return "admin/deleteList";
-		}
-		
-		//삭제된 캠핑장 글 재등록
-		@RequestMapping(value="/deleteCampReEnrollment",method=RequestMethod.GET)
-		public String deleteCampReEnrollment(String camp_no) throws Exception{
-			adminService.deleteCampReEnrollment(camp_no);
-			return "redirect:/admin/deleteCamp";
-		}
-		
 		//등록 대기 캠핑장 조회
 		@RequestMapping(value="/waitForRegistrationCamp",method=RequestMethod.GET)
 		public String waitForRegistrationCamp(Model model,myReviewPagingDto myReviewPagingDto) throws Exception{
@@ -615,8 +516,26 @@ public class AdminController {
 		@RequestMapping(value="/notRegistCamp/{camp_no}" , method = RequestMethod.GET)
 		public String notRegistCamp(@PathVariable("camp_no") int camp_no)throws Exception  {
 			adminService.notRegistCamp(camp_no);
+			
+			EmailDto emailDto = new EmailDto();
+			emailDto.setTo("janjan44@naver.com");
+			emailDto.setContents("등록이 거절되엇습니다");
+			
+			MimeMessagePreparator preparator = new MimeMessagePreparator() {
+				
+				@Override
+				public void prepare(MimeMessage mimeMessage) throws Exception {
+					MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
+					helper.setFrom(emailDto.getFrom());
+					helper.setTo(emailDto.getTo());
+					helper.setSubject("camping club입니다");
+					helper.setText(emailDto.getContents());
+				}
+			};
+			javaMailSender.send(preparator);
+			
 			return "redirect:/admin/waitForRegistrationCamp";
 		}
 		
-
+	
 }

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 
-<%@include file="../include/adminheader.jsp"%>
+<%@ include file="../include/header.jsp" %>
 <style>
 
 #uploadedList > div {
@@ -13,6 +13,10 @@
 .btn {
 	resize: both;
 	float: right;
+}
+
+.form-control{
+	margin: 10px;
 }
 
 </style>
@@ -89,6 +93,8 @@ $(function () {
 					<input type="text" class="form-control" id="camp_http" name="camp_http" placeholder="홈페이지 주소"/>
 					<input type="text" class="form-control" id="camp_location" name="camp_location" placeholder="지역"/>
 					<input type="text" class="form-control" id="camp_area" name="camp_area" placeholder="시&구"/>
+					<input type="text" class="form-control" id="latitude" name="latitude" placeholder="위도"/>
+					<input type="text" class="form-control" id="inclination" name="inclination" placeholder="경도"/>
 				</div>
 				<div class="form-group">
 				<textarea class="form-control" id="camp_content" name="camp_content" rows="25" style="resize:none; width:100%;" ></textarea>

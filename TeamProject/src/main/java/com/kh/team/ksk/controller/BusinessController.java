@@ -46,12 +46,13 @@ public class BusinessController {
 		adminService.campInsertRun(campVo);
 
 
-		return "redirect:/camp/home";
+		return "redirect:/camp/main";
 	}
 	
 	//캠핑장 수정 폼
 	@RequestMapping(value = "/campModify", method = RequestMethod.GET)
 	public String campModify(String camp_address, Model model) throws Exception {
+		System.out.println("camp_address" + camp_address);
 		CampVo campVo = adminService.campModifyForm(camp_address);
 		model.addAttribute("campVo", campVo);
 		List<FilesVo> list = adminService.filesList(campVo.getTable_name());
@@ -79,7 +80,7 @@ public class BusinessController {
 	public String campModifyRun(CampVo campVo) throws Exception {
 		
 		adminService.campModifyRun(campVo);
-		return "redirect:/camp/home";
+		return "redirect:/camp/main";
 	}
 	
 	//삭제
@@ -87,16 +88,10 @@ public class BusinessController {
 	public String campDelete(int camp_no, RedirectAttributes attr) throws Exception {
 		attr.addFlashAttribute("msg", "delete");
 		adminService.campDelete(camp_no);
-		return "redirect:/admin/camp";
+		return "redirect:/camp/main";
 
 	}
 	
-//	//내가 등록한 캠핑장 목록
-//	@RequestMapping(value = "/myCampList", method = RequestMethod.GET)
-//	public String MycampList(String user_id) throws Exception{
-//		businessService.myCampList(user_id);
-//		return user_id;
-//	}
 	
 	//내가 등록한 캠핑장 목록-페이징
 	@RequestMapping(value = "/myCampList", method = RequestMethod.GET)
@@ -116,12 +111,5 @@ public class BusinessController {
 		System.out.println(myCampList);
 		return "business/myCampList";
 	}
-	
-	//캠핑장 선택
-//	@RequestMapping(value = "/selectMycamp", method = RequestMethod.GET)
-//	public String selectMycamp(String user_id) throws Exception{
-//		businessService.selectMyCamp(camp_no);
-//		return user_id;
-//	}
 
 }

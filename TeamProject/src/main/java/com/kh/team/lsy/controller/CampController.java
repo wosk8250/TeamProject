@@ -3,6 +3,7 @@ package com.kh.team.lsy.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +20,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampLocationVo;
 import com.kh.team.domain.CampRecommendVo;
+import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
+import com.kh.team.domain.CampingTipVo;
+import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.PagingDto;
 import com.kh.team.domain.UserVo;
+import com.kh.team.domain.ReviewVo;
 import com.kh.team.lsy.service.SelectCampService;
 
 @Controller
@@ -31,6 +36,7 @@ public class CampController {
 	@Inject
 	private SelectCampService selectCampService;
 	
+
 	@RequestMapping(value = "/home" , method = RequestMethod.GET)
 	public String home(Model model,  PagingDto pagingDto) throws Exception {
 		pagingDto.setPageInfo();
@@ -39,10 +45,13 @@ public class CampController {
 
 		List<AreaCampLocationVo> list = selectCampService.campSelect();
 		List<CampVo> campList = selectCampService.campList(pagingDto);
+		List<AmenitiesVo> amenitiesList = selectCampService.amenitiesList();
+		
 		
 		System.out.println("list" + list);
 		model.addAttribute("list" , list);
 		model.addAttribute("campList" , campList);
+		model.addAttribute("amenitiesList", amenitiesList);
 
 		return "camp/home";
 	}
@@ -101,16 +110,27 @@ public class CampController {
 	
 	@RequestMapping(value = "/areaLocationSelect/{camp_location}", method = RequestMethod.GET)
 	public List<String> areaLocationSelect(@PathVariable("camp_location") String camp_location) throws Exception {
-		
 		List<String> list3 = selectCampService.areaLocationSelect(camp_location);
 		return list3;
 	}
 	
-	
 	//메인 페이지
 	@RequestMapping(value = "/main" , method = RequestMethod.GET)
-	public void main() throws Exception {
-		
+	public String main(Model model,HttpSession session) throws Exception {
+		List<AreaCampLocationVo> list = selectCampService.campSelect();
+		List<ReviewVo> reviewVo = selectCampService.reviewTop5();
+		List<CampNoticeVo> CampNoticeVo = selectCampService.noticeTop5();
+		List<CampingTipVo> CampingTipVo = selectCampService.tipTop5();
+		List<FaqVo> faqVo = selectCampService.faqTop5();
+		List<CampVo> campVo = selectCampService.recommendTop10();
+		session.setAttribute("checkBoard", "camp");
+		model.addAttribute("list" , list);//검색
+		model.addAttribute("reviewVo" , reviewVo);//후기 리스트
+		model.addAttribute("CampNoticeVo" , CampNoticeVo);// 공지사항
+		model.addAttribute("CampingTipVo" , CampingTipVo);// 수칙리스트
+		model.addAttribute("faqVo" , faqVo);//질문 리스트
+		model.addAttribute("campVo" , campVo);//추천수 많은 캠핑장10
+		return "camp/main";
 	}
 	
 }
