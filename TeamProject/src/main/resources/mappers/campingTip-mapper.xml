@@ -35,6 +35,7 @@
 	<select id="campingTipListCount" resultType="int">
 	      select count(*) from
             tbl_camping_tip 	<include refid="search"></include>
+	</select>
 	<!-- 캠핑장 수칙 페이징 -->
 	<select id="campingTipListPage" resultType="CampingTipVo">
 		      select * from (select
