@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+    <script src="/resources/vendor/jquery/jquery.js"></script>
 <style>
 	div {
 		color: black;
@@ -22,17 +22,17 @@ $(function(){
 	$("#searchReview").click(function(){
 		var searchCnd = $("select[name=searchCnd]").val();
 		var textReview = $("#textReview").val();
-		$("#reviewTipFrmPage > input[name=searchCnd]").val(searchCnd);
-		$("#reviewTipFrmPage > input[name=textReview]").val(textReview);
-		$("#reviewTipFrmPage").submit();
+		$("#campingTipFrmPage > input[name=searchCnd]").val(searchCnd);
+		$("#campingTipFrmPage > input[name=textReview]").val(textReview);
+		$("#campingTipFrmPage").submit();
 	});
 	
 	$("select[name=perPage]").change(function(){
 		
 		var perPage = $(this).val();
-		var i = $("#reviewTipFrmPage >input[name=perPage]").val(perPage);
+		var i = $("#campingTipFrmPage >input[name=perPage]").val(perPage);
 
-		$("#reviewTipFrmPage").submit();
+		$("#campingTipFrmPage").submit();
 	});
 
 	
@@ -42,8 +42,8 @@ $(function(){
 // 		console.log("test");
 		var page = $(this).attr("href").trim();
 // 		console.log("page:", page);	
-		$("#reviewTipFrmPage > input[name=page]").val(page);
-		$("#reviewTipFrmPage").submit();
+		$("#campingTipFrmPage > input[name=page]").val(page);
+		$("#campingTipFrmPage").submit();
 	}); 
 
 	//현재 페이지 액티브
@@ -57,10 +57,9 @@ $(function(){
 	
 	$("a.tip_title").click(function(e){
 		e.preventDefault();
-		var campingtip_no =$(this).attr("data-campingtip_no");
-		$("#reviewTipFrmPage > input[name=campingtip_no]").val(campingtip_no);
-		$("#reviewTipFrmPage").attr("action", $(this).attr("href"));
-		$("#reviewTipFrmPage").submit();
+		var campingTip_no =$(this).attr("data-campingtip_no");
+		$("#campingTipFrmPage").attr("action", $(this).attr("href"));
+		$("#campingTipFrmPage").submit();
 		
 	});
 	

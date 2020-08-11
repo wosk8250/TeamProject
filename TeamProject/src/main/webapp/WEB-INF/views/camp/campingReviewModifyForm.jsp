@@ -174,6 +174,7 @@ $(function(){
 					
 		 			$("#camp_name option:eq(1)").remove();			 			
 						$("#camp_name	 option").remove();
+		 			$("#review_campingname option").remove();			 			
 						
 
 						$.each(rData, function(index) {
@@ -300,7 +301,8 @@ $(function(){
 									</tr>
 									<tr>
 										<th scope="row" class="gray">
-											<label for="camp_name">캠핑장!</label>
+											<label for="camp_name">캠핑장221</label>
+								
 										</th>
 										<td>
 											<select title="시/도" id="review_area" name="review_area">

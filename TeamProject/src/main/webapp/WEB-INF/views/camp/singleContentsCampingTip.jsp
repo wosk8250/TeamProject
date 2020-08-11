@@ -6,7 +6,7 @@
 float:right;
 margin-left:  20px;
 margin-bottom:  200px;
-}
+}	
 #reviewTip_title {
 	border-top: 3px solid;
 	border-bottom : 1px solid;
@@ -42,7 +42,7 @@ position:  relative;
 		$("#campTip").click(function(e){
 			e.preventDefault();
 //	 		console.log("클릭");
-			$("#reviewTipFrmPage").submit();
+			$("#campingTipFrmPage").submit();
 			
 		});
 	 });

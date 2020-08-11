@@ -34,8 +34,7 @@
 	<!-- 캠핑장 수칙 게시물 수 조회 -->
 	<select id="campingTipListCount" resultType="int">
 	      select count(*) from
-            tbl_camping_tip where campingtip_admin = 0
-	</select>
+            tbl_camping_tip 	<include refid="search"></include>
 	<!-- 캠핑장 수칙 페이징 -->
 	<select id="campingTipListPage" resultType="CampingTipVo">
 		      select * from (select
@@ -56,11 +55,14 @@
   		  			<when test='searchCnd == "w"'>
   		  				where campingtip_content like '%' || #{textReview} || '%' and campingtip_admin = 0 
   		  			</when>
-  		  			<otherwise>
-  		  			where campingtip_admin = 0
-  		  			</otherwise>
+					<otherwise>
+					where campingtip_admin = 0
+					</otherwise>
   		  		</choose>
     		</if> 	
+    		<if test="searchCnd == null">
+    			where campingtip_admin = 0
+    		</if>
  	</sql>	
 	
 	

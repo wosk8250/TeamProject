@@ -94,10 +94,10 @@ public class CampingReviewDaoImpl implements CampingReviewDao {
 		sqlSession.update(NAMESPACE + "campingReviewView" , review_no);
 		
 	}
-	//캠핑장 후기 게시물 갯수 검색
+	//캠핑장 후기 게시물 개수 
 	@Override
-	public int campingReviewListCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE +"campingReviewListCount");
+	public int campingReviewListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE +"campingReviewListCount" ,myReviewPagingDto);
 	}
 	//캠핑장 후기 페이징
 	@Override
@@ -111,11 +111,7 @@ public class CampingReviewDaoImpl implements CampingReviewDao {
 		return sqlSession.selectOne(NAMESPACE + "campingReviewCampNo" ,  camp_name);
 	}
 	
-	//캠핑장 후기 검색
-	@Override
-	public List<ReviewVo> campingReviewSearch(String review_title) throws Exception {
-		return sqlSession.selectList(NAMESPACE +"campingReviewSearch" ,review_title);
-	}
+
 
 
 
