@@ -86,21 +86,65 @@ $(function () {
 		});
 	}
 
-	var insert = ["#camp_name","#camp_address","#camp_phone","#camp_http","#camp_area","#camp_location","#camp_content","#power","#wifi","#hotwater","#trail","#mart","#park"];
-	var write = ["#camping_name","#roadFullAddr","#camping_phone","#camping_http","#siNm","#sggNm","#camping_content","#camping_power","#camping_wifi","#camping_hotwater","#camping_trail","#camping_mart","#camping_park"];
+	var insert = ["#camp_name","#camp_address","#camp_phone","#camp_http","#camp_area","#camp_location","#camp_content","#power","#wifi","#hotwater","#trail","#mart","#park", "#camp_peakweekdays", "#camp_peakweekend", "#camp_weekdays", "#camp_weekend"];
+	var write = ["#camping_name","#roadFullAddr","#camping_phone","#camping_http","#sggNm","#siNm","#camping_content","#camping_power","#camping_wifi","#camping_hotwater","#camping_trail","#camping_mart","#camping_park", "#camping_peakweekdays", "#camping_peakweekend", "#camping_weekdays", "#camping_weekend"];
 	var writecheck = ["#camping_name","#roadFullAddr","#camping_phone","#camping_http","#camping_content"];
+	//요금표
+	var campFare = ["#camp_peakweekdays", "#camp_peakweekend", "#camp_weekdays", "#camp_weekend"];
+	var fare = ["#camping_peakweekdays", "#camping_peakweekend", "#camping_weekdays", "#camping_weekend"];
+	//계절
+	var season = ["#spring","#summer","#autumn","#winter"];
+	
+	
+	
+	for (var i = 0; i < fare.length; i++) {
+		$(fare[i]).focusin(function() {
+			$(this).val("");
+		});
+		
+		//요금표 3자리마다 콤마 찍기
+		$(fare[i]).focusout(function() {
+			
+			function addComma(num) {
+				  var regexp = /\B(?=(\d{3})+(?!\d))/g;
+				  return num.toString().replace(regexp, ',');
+				}
+			var addnum = addComma($(this).val());
+			$(this).val(addnum);
+		});
+	}
+	
 	$("#campRun").submit(function(e) {
 // 		e.preventDefault();
-		for (var i = 0; i < writecheck.length; i++) { //null체크
+		
+		//영업 날짜
+		var operating = $("#operating option:selected").val();
+		$("#operatingday").val(operating);
+		//영업 날짜 끝
+		
+		//영업기간 선택
+		var operation = "";
+		for (var i = 0; i < season.length; i++) {
+			if($(season[i]).is(":checked") == true){
+				operation += $(season[i]).val() + ",";
+			}
+		}
+		var last = operation.lastIndexOf(",");
+		var camp_operation = operation.substring(0,last);
+		$("#camp_operation").val(camp_operation);
+		//영업기간 선택 끝
+		
+		//null체크
+		for (var i = 0; i < writecheck.length; i++) { 
 			if($(writecheck[i]).val() == null || $(writecheck[i]).val() == ""){
 				var id = $(writecheck[i]).attr("id");
-				console.log(id);
 				alert("공란없이 작성해주세요");
 				return false;
 			}
 		}
 		
-		for (var i = 0; i < write.length; i++) {//작성한 내용 insertCampFem에 입력
+		//작성한 내용 insertCampFem에 입력
+		for (var i = 0; i < write.length; i++) {
 			$(insert[i]).val($(write[i]).val());
 		}
 		
@@ -174,8 +218,60 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 						</td>
 					</tr>
 					<tr>
+						<td class="td_title" width="140">영업기간 : </td>
+						<td>
+							<input type="checkbox" id="spring" value="봄">봄
+							<input type="checkbox" class="checkbox" id="summer" value="여름">여름
+							<input type="checkbox" class="checkbox" id="autumn" value="가을">가을
+							<input type="checkbox" class="checkbox" id="winter" value="겨울">겨울
+						</td>
+					</tr>
+					<tr>
+						<td class="td_title" width="140">영업일 : </td>
+						<td>
+							<select style="margin-bottom: 10px;" id="operating">
+								<option>평일</option>
+								<option>주말</option>
+								<option>평일 + 주말</option>
+							</select>
+							<table style="text-align: center;">
+								<thead>
+									<tr>
+										<th>가격</th>
+										<th>주간</th>
+										<th>주말(공휴일)</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											성수기
+										</td>
+										<td>
+											<input type="text" class="form-control" id="camping_peakweekdays" value="0">
+										</td>
+										<td>
+											<input type="text" class="form-control" id="camping_peakweekend" value="0">
+										</td>
+									</tr>
+									<tr>
+										<td>
+											비성수기
+										</td>
+										<td>
+											<input type="text" class="form-control" id="camping_weekdays" value="0">
+										</td>
+										<td>
+											<input type="text" class="form-control" id="camping_weekend" value="0">
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+					<tr>
 						<td class="td_title" width="140">소개 : </td>
-						<td><textarea class="form-control" id="camping_content" rows="25" style="resize:none; width:100%;" ></textarea></td>
+						<td><textarea class="form-control" id="camping_content" rows="20" style="resize:none; width:100%;" ></textarea></td>
 					</tr>
 				</table>
 				</div>

@@ -61,7 +61,6 @@ public class AdminServiceImpl implements AdminService {
 		int camp_no = adminDao.getNextVal();
 		campVo.setCamp_no(camp_no);
 		amenitiesVo.setCamp_no(camp_no);
-		System.out.println("캠프 인서트 런 1 : " + campVo);
 		if(campVo.getFiles() != null) {
 			String files[] = campVo.getFiles();
 			String filename = files[0];
@@ -71,8 +70,6 @@ public class AdminServiceImpl implements AdminService {
 			String thumbnailName = front + "sm_" + rear;
 			campVo.setThumbnail(thumbnailName);
 			adminDao.campInsertRun(campVo);
-			System.out.println("캠프 인서트 런 2 : " + campVo);
-			System.out.println("캠프 인서트 런 2 : " + campVo.getTable_name());
 			campVo = adminDao.campModifyForm(campVo.getCamp_no());
 			for (int i = 0; i < files.length; i++) {
 				FilesVo filesVo = new FilesVo(campVo.getCamp_no(), files[i], campVo.getTable_name());
