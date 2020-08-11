@@ -43,6 +43,15 @@ public class BusinessController {
 		HttpSession session = request.getSession();
 		String user_id = (String)session.getAttribute("user_id");
 		campVo.setUser_id(user_id);
+		//캠핑장 소개글 글자 자르기
+		String camp_intro = "";
+		if(campVo.getCamp_content().length() >=15) {
+			String sub = campVo.getCamp_content();
+			camp_intro = sub.substring(0, 15) + "...";
+		} else {
+			camp_intro = campVo.getCamp_content();
+		}
+		campVo.setCamp_intro(camp_intro);
 		adminService.campInsertRun(campVo, amenitiesVo);
 
 
@@ -82,6 +91,15 @@ public class BusinessController {
 		HttpSession session = request.getSession();
 		String user_id = (String)session.getAttribute("user_id");
 		campVo.setUser_id(user_id);
+		
+		String camp_intro = "";
+		if(campVo.getCamp_content().length() >=15) {
+			String sub = campVo.getCamp_content();
+			camp_intro = sub.substring(0, 15) + "...";
+		} else {
+			camp_intro = campVo.getCamp_content();
+		}
+		campVo.setCamp_intro(camp_intro);
 		adminService.campModifyRun(campVo, amenitiesVo);
 		return "redirect:/camp/main";
 	}

@@ -25,6 +25,7 @@ public class CampVo {
 	private String camp_weekend;
 	private String camp_peakweekdays;
 	private String camp_peakweekend;
+	private String camp_intro;
 	
 	public CampVo() {
 		super();
@@ -225,6 +226,16 @@ public class CampVo {
 	}
 
 
+	public String getCamp_intro() {
+		return camp_intro;
+	}
+
+
+	public void setCamp_intro(String camp_intro) {
+		this.camp_intro = camp_intro;
+	}
+
+
 	@Override
 	public String toString() {
 		return "CampVo [camp_no=" + camp_no + ", camp_address=" + camp_address + ", camp_phone=" + camp_phone
@@ -234,8 +245,10 @@ public class CampVo {
 				+ ", recommend=" + recommend + ", viewcnt=" + viewcnt + ", operatingday=" + operatingday + ", user_id="
 				+ user_id + ", camp_operation=" + camp_operation + ", camp_weekdays=" + camp_weekdays
 				+ ", camp_weekend=" + camp_weekend + ", camp_peakweekdays=" + camp_peakweekdays + ", camp_peakweekend="
-				+ camp_peakweekend + "]";
+				+ camp_peakweekend + ", camp_intro=" + camp_intro + "]";
 	}
+
+
 
 
 
