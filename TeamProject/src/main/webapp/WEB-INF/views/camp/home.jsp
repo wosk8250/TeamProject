@@ -64,7 +64,6 @@ th, td {
 }
 </style>
 <script>
-
 	$(function() {
 		$("#areaDo").change(function() {
 			
@@ -298,9 +297,9 @@ th, td {
 				<tbody>
 <!-- 				style="background-color: #F9FFFF;" -->
 				<c:forEach items="${campList}" var="CampVo">
-						<th><img width="200" height="200" src="/resources/image/1594178025406.jpg"></th>
+						<th><img width="200" height="200" src="/upload/displayCampingImg?fileName=${CampVo.thumbnail}"></th>
 						<th><h2><a href="/camp/campingContent" class="a_title" data-camp_no="${CampVo.camp_no}"><i class="str">[${CampVo.camp_area} ${CampVo.camp_location}] ${CampVo.camp_name}</i></a></h2></br>
-							${CampVo.camp_content}</br></br>
+							<span id="contentSpan">${CampVo.camp_intro}</span></br></br>
 							<img width="20" height="20" src="/resources/image/locations.png">&nbsp${CampVo.camp_address}
 							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 							<span><img width="20" height="20" src="/resources/image/calling1.png">&nbsp${CampVo.camp_phone}</span>

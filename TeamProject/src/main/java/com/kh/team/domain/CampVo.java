@@ -28,6 +28,7 @@ public class CampVo {
 	private String camp_weekend;
 	private String camp_peakweekdays;
 	private String camp_peakweekend;
+	private String camp_intro;
 	
 	public CampVo() {
 		super();
@@ -47,6 +48,16 @@ public class CampVo {
 	}
 	
 	
+
+	public String getCamp_intro() {
+		return camp_intro;
+	}
+
+
+	public void setCamp_intro(String camp_intro) {
+		this.camp_intro = camp_intro;
+	}
+
 
 	public String getCamp_peakweekdays() {
 		return camp_peakweekdays;
@@ -263,8 +274,8 @@ public class CampVo {
 				+ ", inclination=" + inclination + ", latitude=" + latitude + ", user_id=" + user_id + ", user_email="
 				+ user_email + ", camp_operation=" + camp_operation + ", camp_weekdays=" + camp_weekdays
 				+ ", camp_weekend=" + camp_weekend + ", camp_peakweekdays=" + camp_peakweekdays + ", camp_peakweekend="
-				+ camp_peakweekend + "]";
+				+ camp_peakweekend + ", camp_intro=" + camp_intro + "]";
 	}
 
-
+	
 }

@@ -60,7 +60,7 @@ ul.tabs li.current {
 width : 70%
  } 
 
- #tableSize1 { 
+#tableSize1 { 
 	width : 70% 
  }
 
@@ -130,7 +130,7 @@ width : 70%
 <div class="containers">
 	<article class="imgArticle">
 		<div>
-			<img width="400" height="400" src="/resources/image/camping01.jpg">
+			<img width="500" height="500" src="/upload/displayCampingImg?fileName=${campVo.thumbnail}">
 		</div>
 	</article>
 
@@ -187,6 +187,13 @@ width : 70%
 	<!-- 탭 메뉴 내용 시작 -->
 	<div id="tab-1" class="tab-content current">
 		<div class="row">
+			<div class="col-md-12">
+			<table>
+				<tr>
+				<td>${campVo.camp_content}</td>
+				</tr>
+<div class="container-fluid">
+	<div class="row">
 		<div class="col-md-12">
 			<table class="table">
 				<thead>
@@ -280,6 +287,11 @@ width : 70%
 			</table>
 		</div>
 	</div>
+</div>
+			</table>
+			</div>
+		</div>
+		<hr>
 	</div>
 	
 </div>
