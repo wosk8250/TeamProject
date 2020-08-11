@@ -49,17 +49,14 @@ public class CampingReviewController {
 	
 	//캠핑장 후기 목록 
 	@RequestMapping(value="/campingReviewList", method=RequestMethod.GET)
-	public String campingReviewList(myReviewPagingDto myReviewPagingDto, Model model, String review_title)throws Exception{
-		List<ReviewVo>  list = null;
-		if (review_title == null) {
+	public String campingReviewList(myReviewPagingDto myReviewPagingDto, Model model)throws Exception{
 			myReviewPagingDto.setmyReviewPageInfo();
-			int totalCount = campingReviewService.campingReviewListCount();
+			int totalCount = campingReviewService.campingReviewListCount(myReviewPagingDto);
 //			System.out.println("totalCount:" + totalCount);
 			myReviewPagingDto.setTotalCount(totalCount);	
-			 list = campingReviewService.campingReviewListPage(myReviewPagingDto);
-		}else {
-			 list = campingReviewService.campingReviewSearch(review_title);
-		}
+			List<ReviewVo>  list = campingReviewService.campingReviewListPage(myReviewPagingDto);
+	
+	
 		model.addAttribute("list", list);
 		model.addAttribute("pagingDto", myReviewPagingDto);		
 		
@@ -98,7 +95,7 @@ public class CampingReviewController {
 	
 	//캠핑장 글 내용
 	@RequestMapping(value="/selectReview/{review_no}", method = RequestMethod.GET)
-	public String selectReview(@PathVariable("review_no")int review_no , Model model) throws Exception{
+	public String selectReview(@PathVariable("review_no")int review_no , Model model , myReviewPagingDto myReviewPagingDto) throws Exception{
 	
 		System.out.println("review_no:" + review_no);
 		ReviewVo reviewVo = campingReviewDaoImpl.selectReview(review_no);
@@ -127,6 +124,7 @@ public class CampingReviewController {
 		model.addAttribute("list",list);
 		model.addAttribute("fileList",fileList);
 		model.addAttribute("fileNoListImg",fileNoListImg);
+		model.addAttribute("pagingDto", myReviewPagingDto);
 
 		return "/camp/selectReview";
 	}

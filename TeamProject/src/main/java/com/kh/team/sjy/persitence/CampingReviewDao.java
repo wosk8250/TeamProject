@@ -48,8 +48,8 @@ public interface CampingReviewDao {
 	//캠핑장 후기 조회수
 	public void campingReviewView(int review_no)throws Exception;
 	
-	//캠핑장 후기 게시물 갯수 검색
-	public int campingReviewListCount()throws Exception;
+	//캠핑장 후기 게시물 개수 
+	public int campingReviewListCount(myReviewPagingDto myReviewPagingDto)throws Exception;
 	
 	//캠핑장 후기 페이징
 	public List<ReviewVo> campingReviewListPage(myReviewPagingDto myReviewPagingDto)throws Exception;
@@ -57,8 +57,7 @@ public interface CampingReviewDao {
 	//campingReviewCampNo
 	public int campingReviewCampNo(String camp_name)throws Exception;
 	
-	//캠핑장 후기 검색
-	public List<ReviewVo> campingReviewSearch(String review_title)throws Exception;
+
 	
 	
 }	

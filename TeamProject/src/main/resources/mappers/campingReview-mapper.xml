@@ -88,13 +88,13 @@
 		<!-- 캠핑장 후기 게시물 수 조회 -->
 	<select id="campingReviewListCount" resultType="int">
 	    select count(*) from
-			tbl_review where review_admin = 0
+			tbl_review  <include refid="search"></include>
 	</select>
 	<!--  캠핑장 후기 페이징 -->
 	<select id="campingReviewListPage" resultType="ReviewVo">
 	      select * from (select
-				rownum rnum, a.* from(select * from tbl_review where
-					review_admin = 0 order
+				rownum rnum, a.* from(select * from tbl_review 
+				<include refid="search"></include> order
 						by review_no desc) a)
 						where rnum between #{startRow} and #{endRow}
 	</select>
@@ -103,9 +103,29 @@
 	select camp_no from tbl_camp where camp_name = #{camp_name}
 	</select>
 	
-	<!--  캠핑장 후기 검색 -->
-	<select id="campingReviewSearch" resultType="ReviewVo">
-	select * from tbl_review where review_title = #{review_title}
-	</select>
+
+	
+			<!--  검색 -->
+ 	<sql id ="search">
+    		<if test="searchCnd != null">
+  		  		<choose>
+  		  			<when test='searchCnd == "t"'>
+  		  				where review_title like '%' || #{textReview} || '%' and review_admin = 0
+  		  			</when>
+  		  			<when test='searchCnd == "w"'>
+  		  				where review_content like '%' || #{textReview} || '%' and review_admin = 0 
+  		  			</when>
+					<otherwise>
+					where review_admin = 0
+					</otherwise>
+  		  		</choose>
+    		</if> 	
+    		<if test="searchCnd == null">
+    			where review_admin = 0
+    		</if>
+ 	</sql>
+	
+
+	
 	
 </mapper>
