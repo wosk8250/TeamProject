@@ -30,18 +30,19 @@ $(function() {
 	$(".page-link").click(function(e) {
 		e.preventDefault();
 		var page = $(this).attr("href").trim();
-		$("#noticeFrmPage > input[name=page]").val(page);
-		$("#noticeFrmPage").submit();
+		$("#reviewNoitceFrmPage > input[name=page]").val(page);
+		$("#reviewNoitceFrmPage").submit();
 	});
 	
 	$("select[name=perPage]").change(function() {
 		var perPage = $(this).val();
 		var i = $("#noticeFrmPage > input[name=perPage]").val(perPage);
-	 	$("#noticeFrmPage").submit();
+	 	$("#reviewNoitceFrmPage").submit();
 	});
 	$(".searchNotice").click(function() {
-		var notice_title = $("#textNotice").val();
-		location.href="/admin/notice?notice_title=" + notice_title;
+		var textReview = $("#textReview").val();
+		$("#reviewNoitceFrmPage > input[name=textReview]").val(textReview);
+		$("#reviewNoitceFrmPage").submit();
 	});
 	$("a.page-link").each(function(){
 		var page =$(this).attr("href");
@@ -50,14 +51,27 @@ $(function() {
 			return;
 		}
 	}); 
-	
+	$("a.page-link").click(function(e){
+		e.preventDefault();
+		var page = $(this).attr("href").trim();
+		$("#reviewNoitceFrmPage > input[name=page]").val(page);
+		$("#reviewNoitceFrmPage").submit();
+	});
+	$("a.notice_title").click(function(e){
+		e.preventDefault();
+		var notice_no=$(this).attr("data-notice_no");
+		console.log("notice_no:", notice_no);
+		$("#reviewNoitceFrmPage > input[name=notice_no]").val(notice_no);
+		$("#reviewNoitceFrmPage").attr("action", $(this).attr("href"));
+		$("#reviewNoitceFrmPage").submit();
+	});
 	});
 
 
 
 </script>
 
-<%@include file ="../include/adminNoticeFrmPage.jsp" %>
+<%@ include file="../include/campingNoticeFrmPage.jsp" %>
 
 <div class="container-fluid">
 	<div class="row">
@@ -87,7 +101,7 @@ $(function() {
 					<c:if test="${campNoticeVo.notice_admin == 0}">
 					<tr>
 						<td>${campNoticeVo.notice_no}</td>
-						<td><a href="/camp/singleContentsCampNotice/${campNoticeVo.notice_no}">${campNoticeVo.notice_title}</a></td>
+						<td><a href="/camp/singleContentsCampNotice/${campNoticeVo.notice_no}" class="notice_title" data-notice_no="${campNoticeVo.notice_no}">${campNoticeVo.notice_title}</a></td>
 						<td>${campNoticeVo.notice_date}</td>
 					</tr>
 					</c:if>

@@ -34,7 +34,7 @@
 	<!-- 캠핑장 수칙 게시물 수 조회 -->
 	<select id="campingTipListCount" resultType="int">
 	      select count(*) from
-            tbl_camping_tip <include refid="search"></include>
+            tbl_camping_tip where campingtip_admin = 0
 	</select>
 	<!-- 캠핑장 수칙 페이징 -->
 	<select id="campingTipListPage" resultType="CampingTipVo">

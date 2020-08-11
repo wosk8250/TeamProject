@@ -114,7 +114,7 @@ position:  relative;
 
  <c:choose>
  <c:when test="${sessionScope.checkBoard == 'admin'}">
-				<a href="/admin/campingTip"class="btn btn-success">목록</a>				
+				<a href="/admin/campingTip"class="btn btn-success" id="campTip">목록</a>				
  </c:when>
  <c:when test="${sessionScope.checkBoard eq 'camp'}">
 				<a href="/camp/campingTipList"class="btn btn-success" id="campTip">목록</a>				

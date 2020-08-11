@@ -215,20 +215,38 @@
 	</select>
 	<!-- 캠핑수칙 페이징 -->
 	<select id="campingTipListPage" resultType="CampingTipVo">
-		select * from (select
-		rownum rnum, a.*
-		from
-		(select * from tbl_camping_Tip where
-		campingtip_admin = 0 order by
-		campingtip_no desc) a)
+		  select * from (select			
+	rownum rnum, a.*		
+	from		
+	(select * from tbl_camping_Tip where		
+	campingtip_admin = 0 order by		
+	campingtip_no desc) a)		
+			
+	where rnum between		
+	#{startRow} and #{endRow}		
+			
 
-		where rnum between
-		#{startRow} and #{endRow}
 	</select>
+		<!--  수칙 페이징 -->
+ 	<sql id ="search">
+    		<if test="searchCnd != null">
+  		  		<choose>
+  		  			<when test='searchCnd == "t"'>
+  		  				where campingtip_title like '%' || #{textReview} || '%' and campingtip_admin = 0
+  		  			</when>
+  		  			<when test='searchCnd == "w"'>
+  		  				where campingtip_content like '%' || #{textReview} || '%' and campingtip_admin = 0 
+  		  			</when>
+  		  			<otherwise>
+  		  			where campingtip_admin = 0
+  		  			</otherwise>
+  		  		</choose>
+    		</if> 	
+ 	</sql>	
 	<!-- 캠핑수칙 게시물 수 조회 -->
 	<select id="campingTipPostsCount" resultType="int">
-		select count(*)
-		from tbl_camping_tip where campingtip_admin = 0
+		select count(*) from
+            tbl_camping_tip where campingtip_admin = 0
 	</select>
 	<!-- 자주묻는질문 페이징 -->
 	<select id="faqListPage" resultType="FaqVo">
