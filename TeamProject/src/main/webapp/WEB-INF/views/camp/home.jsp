@@ -44,6 +44,24 @@
 	float: left;
 	margin-left: 50%;
  }
+.trTable {
+	width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+}
+
+th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }
+  
+.listTable {
+	display: flex;
+	justify-content: center;
+}
+.str {
+	color: gray;
+}
 </style>
 <script>
 	$(function() {
@@ -104,18 +122,20 @@
 					"success" : function(rData) {
 						console.log(rData);
 						
-						
-						
-						
-						
 						$("#camPingTable").remove();
 						
 						output += "<div class='row'>";
 						output += "<div class='col-md-12' id='campingDiv'>";
 						output += "<table class='table' id='camPingTable'>";
 						output += "<thead>";
-						output += "<tr>";
-						output += "<th>" + rData.length + '개의 캠핑장이 검색되었습니다.' + "</th>"; 
+						output += "<tr style='background-color: #E1E5E6' class='trTable'>";
+						output += "<th>" + rData.length + '개의 캠핑장이 검색되었습니다.' + "</th>";
+						output += "<th>" + "</th>";
+						output += "<th>" + "</th>";
+						output += "<th>" + "</th>";
+						output += "<th>" + "</th>";
+						output += "<th>" + "</th>";
+						output += "<th>" + "</th>";
 //							output += "<th>" + "</th>";
 //							output += "<th>" + "</th>";
 //							output += "<th>" + "</th>";
@@ -144,9 +164,8 @@
 							
 							
 							output += "<tr>";
-							output += "<td>" + "<h2>" + "<a href='/camp/campingContent?camp_no="+ item.camp_no +"' class='a_title' data-camp_no='" + item.camp_no + "'>" + item.camp_name + "</a>" + "</h2>" + "</td>";
-							output += "<td>" + item.camp_phone + "</td>";
-							output += "<td>" + item.camp_location + "</td>";
+							output += "<th>" + "<h2>" + "<a href='/camp/campingContent?camp_no="+ item.camp_no +"' class='a_title' data-camp_no='" + item.camp_no + "'>" + item.camp_name + "</a>" + "</h2>" + "</br>" + item.camp_content + "</br>" + "</br>" + item.camp_address + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + "<span>" + item.camp_phone +"</span>";
+							output += "</th>";
 							output += "<td>" + "<img width='200' height='200' src='/resources/image/1594178025406.jpg'>" + "</td>";
 							output += "<td>" + '조회 수 :' + item.viewcnt + "</td>";
 							output += "<td>" + '추천 수 :' + item.recommend + "</td>";
@@ -199,6 +218,8 @@
 		});
 
 	});
+	
+	$('#viewbtn').prop('disabled', true);
 </script>
 
 <%@ include file="../board/mainFrmPage.jsp" %>
@@ -254,12 +275,13 @@
 		</div>
 	</div>
 	</br>
-	<div class="row">
+	<div class="listTable">
 		<div class="col-md-12" id="campingDiv">
 			<table id="camPingTable">
 				<thead>
-					<tr style="background-color: #FAFAFA"> 
+					<tr style="background-color: #E1E5E6" class="trTable"> 
 						<th>지역별 인기 캠핑장 목록</th>
+						<th></th>
 						<th></th>
 						<th></th>
 						<th></th>
@@ -274,20 +296,18 @@
 					</tr>
 				</thead>
 				<tbody>
+<!-- 				style="background-color: #F9FFFF;" -->
 				<c:forEach items="${campList}" var="CampVo">
-					<tr style="background-color: #e6f4fa;">
 						<th><img width="200" height="200" src="/resources/image/1594178025406.jpg"></th>
-						<th><h2>[${CampVo.camp_area} ${CampVo.camp_location}] <a href="/camp/campingContent" class="a_title" data-camp_no="${CampVo.camp_no}">${CampVo.camp_name}</a></h2></th>
-						<tr>
-						<td>${CampVo.camp_content}</td>
-						</tr>
-						<td>${CampVo.camp_phone}</td>
-							<td style="display: none">조회수 : ${CampVo.viewcnt}</td>
-							<td style="display: none">추천수 : ${CampVo.recommend}</td>
-							<td>
+						<th><h2><a href="/camp/campingContent" class="a_title" data-camp_no="${CampVo.camp_no}"><i class="str">[${CampVo.camp_area} ${CampVo.camp_location}] ${CampVo.camp_name}</i></a></h2></br>
+							${CampVo.camp_content}</br></br>
+							<img width="20" height="20" src="/resources/image/locations.png">&nbsp${CampVo.camp_address}
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							<span><img width="20" height="20" src="/resources/image/calling1.png">&nbsp${CampVo.camp_phone}</span>
+						</th>
+							<th>
 							<div class="camp_item_box">
 							<c:forEach items="${amenitiesList}" var="optionVo">
-							
 							<ul>
 							<c:if test="${optionVo.wifi == '1' and optionVo.camp_no == CampVo.camp_no}">
 									<li>무선인터넷 <i class="fa fa-wifi" aria-hidden="true"></i></li>
@@ -310,51 +330,15 @@
 							</ul>
 							</c:forEach>
 							</div>
-						</td>
+						</th>
+						<td><button id="viewbtn" type="btn" class="btn btn-sm btn-success">조회수 : ${CampVo.viewcnt}</button></br>
+							<button type="recommendbtn" class="btn btn-sm btn-danger">추천수 : ${CampVo.recommend}</button></td>
+					</tr>
 			 		</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	
-	<div class="c_list update">
-					<a href="/bsite/camp/info/read.do?c_no=1345&amp;viewType=read01&amp;listOrdrTrget=last_updusr_pnttm" class="dc_none"><span class="skip">캠핑장정보 더보기</span>
-						<div class="img_box">
-							<img src="/img/2018/layout/noimg.jpg" alt="별수하야영장에 등록된 이미지가 업습니다.">
-								<div class="clist_icon">
-								<ul>
-									<li><i class="con_tip c03"><span class="skip">산</span></i></li>
-									<li><i class="con_tip con_update"><span class="skip">최근 한달 내 업데이트</span></i></li>
-									</ul>
-							</div>
-						</div> </a>
-					<div class="camp_cont">
-						<p class="item_group">
-							<span class="item_t01">관광사업자 등록업체</span>
-							<span class="item_t02">리뷰수 0</span> <span class="item_t03">조회수 4882</span> <span class="item_t04">추천수 1</span>
-						</p>
-						<h2 class="camp_tt">
-							<a href="/bsite/camp/info/read.do?c_no=1345&amp;viewType=read01&amp;listOrdrTrget=last_updusr_pnttm">[충청북도 제천시] 별수하야영장</a>
-						</h2>
-						<span class="camp_stt">산속 맑은 공기와 시원한 계곡물을 함께 즐기는 캠핑장</span> <span class="camp_txt"> <a href="/bsite/camp/info/read.do?c_no=1345&amp;viewType=read01&amp;listOrdrTrget=last_updusr_pnttm"><span class="skip">캠핑장정보 더보기</span> 별수하 야영장은 충북 제천시 백운면에 자리 잡고 있다. 제천시청을 기점으로 약 26km 거리에 있으며, 자동차를 타고...</a>
-								</span>
-						<ul class="camp_info01">
-							<li class="addr">충청북도 제천시 백운면 운학리  171 </li>
-							</ul>
-						<!--아이콘모음-->
-						<div class="camp_item_box">
-								<ul>
-									<li><i class="ico_volt"><span>전기</span></i></li>
-									<li><i class="ico_wifi"><span>와이파이</span></i></li>
-									<li><i class="ico_wood"><span>장작판매</span></i></li>
-									<li><i class="ico_hotwater"><span>온수</span></i></li>
-									<li><i class="ico_pool"><span>물놀이장</span></i></li>
-									<li><i class="ico_ico_sports"><span>운동시설</span></i></li>
-									</ul>
-							</div>
-						<!--//아이콘모음-->
-					</div>
-				</div>
 	
 	<div class="row">
 		<div class="col-md-12 text-center" >

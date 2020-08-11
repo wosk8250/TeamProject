@@ -34,10 +34,40 @@ ul.tabs li.current {
 	display: flex;
 	justify-content: center;
 }
+
 .maps {
 	display: flex;
 	justify-content: center;
 }
+
+.imgArticle {
+	margin: 50px;
+}
+
+.mapDiv {
+	margin: 0 auto 0 auto;
+}
+
+.spanDiv {
+	display: flex;
+	justify-content: center;
+}
+
+.str {
+	color: red;
+}
+#tableSize {
+width : 70%
+ } 
+
+#tableSize1 { 
+	width : 70% 
+ }
+ 
+.table table-bordered {
+	margin: 0 auto 0 auto;
+}
+
 </style>
 
 <script src="/resources/vendor/jquery/jquery.js"></script>
@@ -100,12 +130,11 @@ ul.tabs li.current {
 
 	});
 </script>
+
 <div class="containers">
-	<%-- ${campVo} --%>
-	<%-- ${CampRecommendVo} --%>
-	<article>
+	<article class="imgArticle">
 		<div>
-			<img width="400" height="400" src="/resources/image/camp01.jpg">
+			<img width="400" height="400" src="/resources/image/camping01.jpg">
 		</div>
 	</article>
 
@@ -165,7 +194,6 @@ ul.tabs li.current {
 			<div class="col-md-12">
 			<table>
 				<tr>
-					<th>${campVo.camp_content}</th>
 				</tr>
 			</table>
 			</div>
@@ -180,7 +208,7 @@ ul.tabs li.current {
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<table class="table table-bordered">
+			<table class="table table-bordered" id="tableSize1">
 				<h2>일반캠핑</h2>
 				</thead>
 				<tbody>
@@ -206,7 +234,7 @@ ul.tabs li.current {
 				</tbody>
 			</table>
 			
-			<table class="table table-bordered">
+			<table class="table table-bordered" id="tableSize">
 				<h2>글램핑</h2>
 				</thead>
 				<tbody>
@@ -234,17 +262,11 @@ ul.tabs li.current {
 	</div>
 </div>
 </div>
-
+	<span class="spanDiv"><h2>[${campVo.camp_name} : 위치정보]</h2></span>
 </br>
-<div class="maps">
-	<p style="margin-top: -12px">
-		<em class="link"> <a href="javascript:void(0);"
-			onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
-				혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요. </a>
-		</em>
-	</p>
-</div>
-	<div id="map" style="width: 100%; height: 350px;"></div>
+	</br>
+	<div class="mapDiv" id="map" style="width: 60%; height: 350px;">
+	</div>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6a7370418a9ba06a9222aff299cacd04&libraries=services"></script>
 	<script>
@@ -293,6 +315,31 @@ ul.tabs li.current {
 							}
 						});
 	</script>
+	</br>
+	<div class="maps">
+	<p style="margin-top: -12px">
+		<em class="link"> <a href="javascript:void(0);"
+			onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
+				혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요. </a>
+		</em>
+	</p>
+</div>
+</br>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							* 사이트에 등록된 정보는 현장상황과 다소 다를 수 있으니<i class="str"> 애완동물 동반 여부, 부가 시설물, 추가차량 </i>등 원활한 캠핑을 위해 꼭 필요한 사항은 해당 캠핑장에 미리 확인하시기 바랍니다.
+						</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>
 </div>
 
 <%@ include file="../include/footer.jsp"%>
