@@ -261,8 +261,12 @@ $(function(){
 		$("#campingReviewModifyRun").prepend(hiddenInput);
 		});
 	});
-
-}); //$(function()
+	$("#campingReviewModifyRun").submit(function(){
+		$("#reviewFrmPage > input").prependTo("#campingReviewModifyRun");
+		$("campingReviewModifyRun").submit();
+	});
+		
+	}) //$(function()
 </script>
 <div class="container-fluid">
 	<div class="row">
@@ -301,7 +305,7 @@ $(function(){
 									</tr>
 									<tr>
 										<th scope="row" class="gray">
-											<label for="camp_name">캠핑장221</label>
+											<label for="camp_name">캠핑장</label>
 								
 										</th>
 										<td>

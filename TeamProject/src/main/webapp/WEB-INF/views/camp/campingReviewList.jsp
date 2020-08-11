@@ -119,9 +119,15 @@ $(function(){
 
 							<tr>
 								<td>${reviewVo.review_no}</td>
-								<td><img
+								<td>
+
+
+											<img
 									src="/upload/displayCampingImg?fileName=${reviewVo.review_img}"
-									alt="사진 등록" /></td>
+									alt="사진 등록" />
+
+							</td>
+									
 								<td><a href="/camp/selectReview/${reviewVo.review_no}" class="review_title" data-review_no="${reviewVo.review_no}">[${reviewVo.review_campingname}]${reviewVo.review_title}</a></td>
 								<td>${reviewVo.review_id}</td>
 								<td>${reviewVo.review_date}</td>

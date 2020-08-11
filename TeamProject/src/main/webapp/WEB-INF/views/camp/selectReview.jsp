@@ -177,6 +177,17 @@ $(function(){
 	});
 	
 	
+	$("#btnUpdate").click(function(e){
+		e.preventDefault();
+		$("#reviewFrmPage").attr("action", $(this).attr("href"))
+				.submit();
+	});
+	
+	$("#btnDelete").click(function(e){
+		e.preventDefault();
+		$("#reviewFrmPage").attr("action", $(this).attr("href"))
+							.submit();
+	});
 	
 	
 });
