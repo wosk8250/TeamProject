@@ -39,6 +39,7 @@ import com.kh.team.ksk.service.UserService;
 import com.kh.team.ljh.service.AdminService;
 import com.kh.team.ljh.utile.DateUtile;
 import com.kh.team.ljh.utile.ReservationDate;
+import com.kh.team.ljh.utile.UrlUtil;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
@@ -338,21 +339,6 @@ public class AdminController {
 		}
 		
 		
-		//예약날짜에 캠프번호 예약날짜 다불러와서 정지시키기
-		//넘겨줄 날짜 리스트에 추가
-		List<ReservationVo> reservationVo = adminService.reservationDateList(0);
-
-		
-		ArrayList<String> reserveDate = new ArrayList<>();
-		for (ReservationVo reservationVo2 : reservationVo) {
-			reserveDate.addAll(ReservationDate.BetweenDates(reservationVo2.getStartdate(),reservationVo2.getEnddate()));
-		}
-//		for (int i = 0; i < abc.length; i++) {
-//			reserveDate.add("'" + abc[i] + "'");
-		
-//		}
-		//날짜 보내기
-		moadel.addAttribute("date", reserveDate);
 		return "admin/review";
 		
 	}
@@ -380,25 +366,30 @@ public class AdminController {
 
 	// 공지사항 수정폼
 	@RequestMapping(value = "/noticeModifyForm", method = RequestMethod.GET)
-	public String noticeModifyForm(int notice_no, Model model) throws Exception {
+	public String noticeModifyForm(int notice_no, Model model,PagingDto pagingDto) throws Exception {
 		CampNoticeVo campNoticeVo = adminService.noticeModifyForm(notice_no);
 		model.addAttribute("campNoticeVo", campNoticeVo);
 		return "admin/noticeModifyForm";
 	}
 
 	// 공지사항 수정처리
-	@RequestMapping(value = "noticeModifyRun", method = RequestMethod.GET)
-	public String noticeModifyRun(CampNoticeVo campNoticeVo) throws Exception {
+	@RequestMapping(value = "/noticeModifyRun", method = RequestMethod.GET)
+	public String noticeModifyRun(CampNoticeVo campNoticeVo,PagingDto pagingDto) throws Exception {
+		System.out.println(campNoticeVo);
 		adminService.noticeModifyRun(campNoticeVo);
-		return "redirect:/camp/singleContentsCampNotice/" + campNoticeVo.getNotice_no();
+		String url = UrlUtil.makePagingUrl(campNoticeVo.getNotice_no(),"/camp/singleContentsCampNotice", pagingDto);
+		System.out.println(pagingDto);
+		System.out.println(url);
+		return "redirect:" + url;
 	}
 
 	// 공지사항 삭제처리
 	@RequestMapping(value = "/noticeDelete", method = RequestMethod.GET)
-	public String noticeRun(int notice_no, RedirectAttributes attr) throws Exception {
+	public String noticeRun(int notice_no, RedirectAttributes attr,PagingDto pagingDto) throws Exception {
 		adminService.noticeDeleteRun(notice_no);
+		String url = UrlUtil.makePagingUrl("/admin/notice", pagingDto);
 		attr.addFlashAttribute("msg", "delete");
-		return "redirect:/admin/notice";
+		return "redirect:" + url;
 	}
 
 	// 자주묻는질문 작성폼
@@ -542,33 +533,5 @@ public class AdminController {
 			
 			return "redirect:/admin/waitForRegistrationCamp";
 		}
-		//예약 등록
-		@RequestMapping(value="/reservationDate",method = RequestMethod.POST)
-		public String reservationDate(ReservationVo reservationVo) throws Exception{
-			
-			reservationVo.setUser_id("yaya");
-			adminService.reservationDate(reservationVo);
-			return "/camp/main";
-		}
-
-		@ResponseBody
-		@RequestMapping(value="/reservationDateConfirm",method =RequestMethod.POST)
-		public String reservationDateConfirm(@RequestBody ReservationVo reservationVo)throws Exception{
-
-			ArrayList<String> reservationDate = ReservationDate.BetweenDates(reservationVo.getStartdate(), reservationVo.getEnddate());
-			List<ReservationVo> list = adminService.reservationDateList(0);
-
-			for (ReservationVo reservationVo2 : list) {
-				ArrayList<String> nowReservationDate = ReservationDate.BetweenDates(reservationVo2.getStartdate(), reservationVo2.getEnddate());
-				for (int i = 0; i < reservationDate.size(); i++) {
-					for (int j = 0; j < nowReservationDate.size(); j++) {
-						if(reservationDate.get(i).equals(nowReservationDate.get(j))) {
-							return "false";
-						}
-					}
-				}
-			}
-			
-			return null;
-		}
+		
 }

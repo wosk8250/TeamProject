@@ -95,6 +95,7 @@ public class AdminDaoImpl implements AdminDao {
 	// 캠핑장 수정 처리
 	@Override
 	public void campModifyRun(CampVo campVo) throws Exception {
+		System.out.println("다오 캠핑장 수정 : " + campVo);
 		sqlSession.update(NAMESPACE + "campModifyRun", campVo);
 	}
 

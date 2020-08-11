@@ -21,6 +21,17 @@
   <!-- Custom styles for this template-->
   <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script>
+jQuery.browser = {};
+(function () {
+    jQuery.browser.msie = false;
+    jQuery.browser.version = 0;
+    if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+        jQuery.browser.msie = true;
+        jQuery.browser.version = RegExp.$1;
+    }
+})();
+</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	
@@ -74,19 +85,24 @@ $(function () {
 	          <div class="bg-white py-2 collapse-inner rounded">
 	            <!-- <h6 class="collapse-header">Custom Components:</h6> -->
 	            <a class="collapse-item" href="/user/myReviewList"> 내가 작성한 후기</a>
-	            <c:if test="${sessionScope.checkAdmin == 2}">
-	            <a class="collapse-item" href="/business/myCampList"> 내가 올린 캠핑장</a>
-	            </c:if>
 	            <a class="collapse-item" href="/user/profile">프로필 </a>
 	            <a class="collapse-item" href="/user/updateInfo"> 프로필 수정</a>
 	            <a class="collapse-item" href="/user/updatePw"> 비밀번호 수정</a>
 	          </div>
 	        </div>
 	        <c:if test="${sessionScope.checkAdmin == 2}">
-				<a class="nav-link" href="/business/campForm">
-	        		<i class="fas fa-home fa-sm fa-fw mr-2"></i>
-	        		<span>캠핑장 등록</span>
-	        	</a>
+			<li class="nav-item"><a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMyCamp" aria-expanded="true" aria-controls="collapseTwo">
+	          <i class="fas fa-home fa-sm fa-fw mr-2"></i>
+	          <span>캠핑장 등록</span>
+	        </a>
+	        <div id="collapseMyCamp" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+	          <div class="bg-white py-2 collapse-inner rounded">
+	            <!-- <h6 class="collapse-header">Custom Components:</h6> -->
+	            <a class="collapse-item" href="/business/campForm"> 캠핑장 등록</a>
+	            <a class="collapse-item" href="/business/myCampList"> 내가 올린 캠핑장</a>
+
+	          </div>
+	        </div>
 	        </c:if>
 			<a class="nav-link" href="/user/logout">
         		<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>

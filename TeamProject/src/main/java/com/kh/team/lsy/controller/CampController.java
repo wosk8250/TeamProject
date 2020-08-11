@@ -1,5 +1,6 @@
 package com.kh.team.lsy.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,7 +26,10 @@ import com.kh.team.domain.CampVo;
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.PagingDto;
+import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.UserVo;
+import com.kh.team.ljh.service.AdminService;
+import com.kh.team.ljh.utile.ReservationDate;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.lsy.service.SelectCampService;
 
@@ -35,7 +39,8 @@ public class CampController {
 	
 	@Inject
 	private SelectCampService selectCampService;
-	
+	@Inject
+	private AdminService adminService;
 
 	@RequestMapping(value = "/home" , method = RequestMethod.GET)
 	public String home(Model model,  PagingDto pagingDto) throws Exception {
@@ -81,6 +86,15 @@ public class CampController {
 	public void campingContent(@RequestParam("camp_no") int camp_no, Model model) throws Exception {
 		CampVo campVo = selectCampService.campingContent(camp_no);
 		model.addAttribute(campVo);
+		
+		List<ReservationVo> reservationVo = adminService.reservationDateList(camp_no);
+		ArrayList<String> reserveDate = new ArrayList<>();
+		
+		for (ReservationVo reservationVo2 : reservationVo) {
+			reserveDate.addAll(ReservationDate.BetweenDates(reservationVo2.getStartdate(),reservationVo2.getEnddate()));
+		}
+		model.addAttribute("date", reserveDate);
+	
 	}
 	
 	@Transactional
@@ -132,5 +146,32 @@ public class CampController {
 		model.addAttribute("campVo" , campVo);//추천수 많은 캠핑장10
 		return "camp/main";
 	}
+	
+	//예약 등록
+		@RequestMapping(value="/reservationDate",method = RequestMethod.POST)
+		public String reservationDate(ReservationVo reservationVo) throws Exception{
+			adminService.reservationDate(reservationVo);
+			return "/camp/main";
+			}
+	//예약 불가
+		@ResponseBody
+		@RequestMapping(value="/reservationDateConfirm",method =RequestMethod.POST)
+		public String reservationDateConfirm(@RequestBody ReservationVo reservationVo)throws Exception{
+
+			ArrayList<String> reservationDate = ReservationDate.BetweenDates(reservationVo.getStartdate(), reservationVo.getEnddate());
+			List<ReservationVo> list = adminService.reservationDateList(reservationVo.getCamp_no());
+			for (ReservationVo reservationVo2 : list) {
+				ArrayList<String> nowReservationDate = ReservationDate.BetweenDates(reservationVo2.getStartdate(), reservationVo2.getEnddate());
+				for (int i = 0; i < reservationDate.size(); i++) {
+					for (int j = 0; j < nowReservationDate.size(); j++) {
+						if(reservationDate.get(i).equals(nowReservationDate.get(j))) {
+							return "false";
+						}
+					}
+				}
+			}
+				
+			return null;
+		}
 	
 }

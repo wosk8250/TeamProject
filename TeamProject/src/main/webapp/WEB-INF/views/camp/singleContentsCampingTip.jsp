@@ -42,7 +42,12 @@ position:  relative;
 		$("#campTip").click(function(e){
 			e.preventDefault();
 //	 		console.log("클릭");
-			$("#campingTipFrmPage").submit();
+			if("${sessionScope.admin}" == "camp"){
+				$("#campingTipFrmPage").submit();
+			}else{
+				$("#adminCampingTipFrmPage").submit();
+			}
+			
 			
 		});
 	 });
@@ -61,6 +66,7 @@ position:  relative;
 
 
 <%@ include file="../include/campingTipFrmPage.jsp" %>
+<%@ include file="../include/adminCampingTipFrmPage.jsp" %>
 
 <div class="container-fluid">
 	<div class="row" style="color: black;" >
@@ -114,7 +120,7 @@ position:  relative;
 
  <c:choose>
  <c:when test="${sessionScope.checkBoard == 'admin'}">
-				<a href="/admin/campingTip"class="btn btn-success">목록</a>				
+				<a href="/admin/campingTip"class="btn btn-success" id="campTip">목록</a>				
  </c:when>
  <c:when test="${sessionScope.checkBoard eq 'camp'}">
 				<a href="/camp/campingTipList"class="btn btn-success" id="campTip">목록</a>				

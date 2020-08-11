@@ -21,22 +21,38 @@ pre {
   
  </style>
   <c:choose>
- <c:when test="${sessionScope.checkBoard == 'admin'}">
+ <c:when test="${sessionScope.checkBoard eq 'admin'}">
  <%@ include file="../include/adminheader.jsp" %>
  </c:when>
  <c:when test="${sessionScope.checkBoard eq 'camp'}">
 <%@ include file="../include/header.jsp" %>
+
  </c:when>
  </c:choose>
  <script>
  $(function(){
 		$("#campNotice").click(function(e){
 			e.preventDefault();
-			$("#reviewNoitceFrmPage").submit();
+			if("${sessionScope.admin}" == "camp"){
+				$("#campingNoticeFrmPage").submit();
+			}else{
+				$("#adminNoticeFrmPage").submit();
+			}
+			
+		});
+		
+		$("#modifyBtn").click(function(e) {
+			e.preventDefault();
+			$("#adminNoticeFrmPage").attr("action", $(this).attr("href")).submit();
+		});
+		$("#deleteBtn").click(function(e) {
+			e.preventDefault();
+			$("#adminNoticeFrmPage").attr("action", $(this).attr("href")).submit();
 		});
  });
  </script>
 <%@ include file="../include/campingNoticeFrmPage.jsp" %>
+<%@ include file="../include/adminNoticeFrmPage.jsp" %>
 <div class="container-fluid">
 	<div class="row" style="color: black;" >
 	<br>
@@ -65,12 +81,12 @@ pre {
 			</div>
 			<div style="text-align: right;">
 			<c:if test="${sessionScope.checkAdmin eq 9 }">
-			<a href="/admin/noticeDelete?notice_no=${campNoticeVo.notice_no}" class="btn btn-info" >삭제</a>
-			<a href="/admin/noticeModifyForm?notice_no=${campNoticeVo.notice_no}" class="btn btn-danger" >수정</a>
+			<a id="deleteBtn" href="/admin/noticeDelete?notice_no=${campNoticeVo.notice_no}" class="btn btn-info" >삭제</a>
+			<a id="modifyBtn" href="/admin/noticeModifyForm?notice_no=${campNoticeVo.notice_no}" class="btn btn-danger" >수정</a>
  </c:if>
  <c:choose>
  <c:when test="${sessionScope.checkBoard == 'admin'}">
-			<a href="/admin/notice" class="btn btn-success" >목록</a>
+			<a href="/admin/notice" class="btn btn-success" id="campNotice" >목록</a>
  </c:when>
 <c:when test="${sessionScope.checkBoard eq 'camp'}">
 			<a  href="/camp/campingNoticeList"class="btn btn-success" id="campNotice">목록</a>

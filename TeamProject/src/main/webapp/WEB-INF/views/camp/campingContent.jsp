@@ -40,13 +40,108 @@ ul.tabs li.current {
 }
 </style>
 
-<script src="/resources/vendor/jquery/jquery.js"></script>
 
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script>
 	$(function() {
+		//-----------------예약 달력------------------
+		var disabledDays = ${date};
+		console.log(disabledDays);
+		$( "#startDate" ).datepicker({
+		    nextText: '다음 달',
+		    prevText: '이전 달', 
+		    dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+		    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
+		    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		    dateFormat: "yy-mm-dd",
+		    minDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
+		   beforeShowDay: disableAllTheseDays,
+		    onClose: function( selectedDate ) {    
+		        $("#endDate").datepicker( "option", "minDate", selectedDate );
+		        $("#endDate").focus();
+		    }    
+		});
+
+		$('#startDate').datepicker('setDate', '+0');
+
+		function disableAllTheseDays(date) { 
+			   var m = date.getMonth(), d = date.getDate(), y = date.getFullYear(); 
+			   for (i = 0; i < disabledDays.length; i++) { 
+			       if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) { 
+			           return [false]; 
+			       } 
+			   } 
+			   return [true]; 
+			}
+
+		$( "#endDate" ).datepicker({
+		    nextText: '다음 달',
+		    prevText: '이전 달', 
+		    dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+		    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
+		    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		    dateFormat: "yy-mm-dd",
+		    minDate: 0,   
+		    beforeShowDay: disableAllTheseDays,
+		    onClose: function( selectedDate ) {    
+
+		        $("#startDate").datepicker( "option", "maxDate", selectedDate );
+		        var url = "/camp/reservationDateConfirm";
+		        var sendData = {"startdate" : $("#startDate").val(), "enddate" : $("#endDate").val(),"camp_no" : "${campVo.camp_no}"};
+		        $.ajax({
+		        	"type" : "post",
+		        	"url" : url,
+		        	"dataType" : "text",
+		        	"data" : JSON.stringify(sendData),
+					"headers" : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "post"
+					},
+					"success" :function(rData){
+						
+						if(rData == "false"){
+							alert("예약을 할 수 없습니다");
+							$( "#startDate" ).val("");
+							$( "#endDate" ).val("");
+						}
+					}
+		        });
+		    }    
+		});   
+
+		$("#startDate").focusout(function() {
+
+		});
+
+		function disableAllTheseDays(date) {
+		var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+		for (i = 0; i < disabledDays.length; i++) {
+		  if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) {
+		      return [false];
+		  }
+		}
+		return [true];
+		}
+		
+		$("a.page-link").each(function(){
+			var page =$(this).attr("href");
+			if(page == "${pagingDto.page}"){
+				$(this).parent().addClass("active");
+				return;
+			}
+		}); 
+		
+		$("#reservationBtn").click(function() {
+			$("#reservationForm").submit();
+		});
+		//-------------------예약
+		
+		
 		$("#btnRecommend").click(
 				function() {
-
 					var user_id = "${sessionScope.user_id}";
 					var camp_no = "${campVo.camp_no}";
 					console.log(user_id);
@@ -98,6 +193,9 @@ ul.tabs li.current {
 			$("#" + tab_id).addClass('current');
 		})
 
+		
+		
+		
 	});
 </script>
 <div class="containers">
@@ -143,7 +241,51 @@ ul.tabs li.current {
 					<tr>
 						<th></th>
 						<td><button class="btn btn-sm btn-success" type="button" id="btnRecommend" name="btnRecommend">추천하기</button></td>
+						
+						<td>
+							 	 <a id="modal-649695" href="#modal-container-649695" role="button" class="btn btn-dark" data-toggle="modal">예약하기</a>
+			
+								<div class="modal fade" id="modal-container-649695" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="myModalLabel">
+													${campVo.camp_name} 예약하기
+												</h5> 
+												<button type="button" class="close" data-dismiss="modal">
+													<span aria-hidden="true">×</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<form id="reservationForm" role="form" method="post" action="/camp/reservationDate">
+												<div style="margin: 20px">
+												입실일<input type="text" id=startDate name="startdate"/>
+												</div>
+												<div style="margin: 20px">
+												퇴실일<input type="text" id="endDate" name="enddate"/>
+												</div>
+												<input type="hidden" name="camp_no" value="${campVo.camp_no}"/>
+												<input type="hidden" name="user_id" value="${sessionScope.user_id}"/>
+												</form>
+											</div>
+											<div class="modal-footer">
+												 
+												<button id="reservationBtn" type="button" class="btn btn-primary">
+													예약
+												</button> 
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">
+													닫기
+												</button>
+											</div>
+										</div>
+										
+								</div>
+				
+			</div>
+							
+						</td>
 					</tr>
+					
 				</tbody>
 			</table>
 		</div>
@@ -152,6 +294,11 @@ ul.tabs li.current {
 </div>
 
 <div class="container">
+
+
+						
+							
+							
 	<!-- 탭 메뉴 상단 시작 -->
 	<ul class="tabs">
 		<li class="tab-link current" data-tab="tab-1">캠핑장소개</li>

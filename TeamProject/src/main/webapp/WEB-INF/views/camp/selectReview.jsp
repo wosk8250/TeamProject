@@ -173,7 +173,14 @@ $(function(){
 
 	$("#campReview").click(function(e){
 		e.preventDefault();
-		$("#reviewFrmPage").submit();
+		if("${sessionScope.admin}" == "camp"){
+			$("#reviewFrmPage").submit();
+		}else{
+			$("#adminReviewFrmPage").submit();
+		}
+		
+			
+		
 	});
 	
 	
@@ -199,6 +206,7 @@ $(function(){
 
 
 <%@ include file="../include/campingReviewFrmPage.jsp" %>
+<%@ include file="../include/adminReviewFrmPage.jsp" %>
 
 <div class="container-fluid">
 	<div class="row" style="color: black;" >

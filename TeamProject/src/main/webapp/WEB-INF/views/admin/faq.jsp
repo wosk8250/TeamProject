@@ -29,14 +29,14 @@ if(msg == "delete"){
 $("a.page-link").click(function(e){
 	e.preventDefault();
 	var page = $(this).attr("href").trim();
-	$("#reviewFaqFrmPage > input[name=page]").val(page);
-	$("#reviewFaqFrmPage").submit();
+	$("#adminFaqFrmPage > input[name=page]").val(page);
+	$("#adminFaqFrmPage").submit();
 	});
 
 $("select[name=perPage]").change(function() {
 	var perPage = $(this).val();
-	var i = $("#reviewFaqFrmPage > input[name=perPage]").val(perPage);
- 	$("#reviewFaqFrmPage").submit();
+	var i = $("#adminFaqFrmPage > input[name=perPage]").val(perPage);
+ 	$("#adminFaqFrmPage").submit();
 });
 
 $("a.page-link").each(function(){
@@ -48,15 +48,15 @@ $("a.page-link").each(function(){
 }); 
 $(".searchFaq").click(function(){
 	var textReview = $("#textReview").val();
-	$("#reviewFaqFrmPage > input[name=textReview]").val(textReview);
-	$("#reviewFaqFrmPage").submit();
+	$("#adminFaqFrmPage > input[name=textReview]").val(textReview);
+	$("#adminFaqFrmPage").submit();
 });
 $("a.faq_title").click(function(e){
 	e.preventDefault();
 	var faq_no = $(this).attr("data-faq_no");
-	$("#reviewFaqFrmPage > input[name=faq_no]").val(faq_no);
-	$("#reviewFaqFrmPage").attr("action", $(this).attr("href"));
-	$("#reviewFaqFrmPage").submit();
+	$("#adminFaqFrmPage > input[name=faq_no]").val(faq_no);
+	$("#adminFaqFrmPage").attr("action", $(this).attr("href"));
+	$("#adminFaqFrmPage").submit();
 });
 
 
@@ -66,7 +66,7 @@ $("a.faq_title").click(function(e){
 
 </script>
 
-<%@ include file="../include/campingFaqFrmPage.jsp" %>
+<%@ include file="../include/adminFaqFrmPage.jsp" %>
 
 <div class="container-fluid">
 	<div class="row">
