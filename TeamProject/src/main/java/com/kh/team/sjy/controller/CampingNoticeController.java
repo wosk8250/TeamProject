@@ -47,7 +47,7 @@ public class CampingNoticeController {
 	//공지사항 글 내용
 	@Transactional
 	@RequestMapping(value="/singleContentsCampNotice/{notice_no}", method= RequestMethod.GET)
-	public String  singleContentsCampNotice(@PathVariable("notice_no") int notice_no,myReviewPagingDto myReviewPagingDto,  Model model,HttpServletRequest request)throws Exception{
+	public String  singleContentsCampNotice(@PathVariable("notice_no") int notice_no,myReviewPagingDto myReviewPagingDto,  Model model)throws Exception{
 //		System.out.println("notice_no:"+ notice_no);
 		CampNoticeVo campNoticeVo = campNoticeDaoImpl.singleContentsCampNotice(notice_no); //  공지사항 글내용
 		campNoticeDaoImpl.updateNoticeView(notice_no);  //조회수

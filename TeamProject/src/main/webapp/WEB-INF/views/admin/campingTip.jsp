@@ -34,19 +34,20 @@ if(msg == "delete"){
 	$(".page-link").click(function(e) {
 			e.preventDefault();
 			var page = $(this).attr("href").trim();
-			$("#adminCampingTipFrmPage > input[name=page]").val(page);
-			$("#adminCampingTipFrmPage").submit();
+			$("#reviewTipFrmPage > input[name=page]").val(page);
+			$("#reviewTipFrmPage").submit();
 		});
 
 		$("select[name=perPage]").change(function() {
 			var perPage = $(this).val();
-			var i = $("#adminCampingTipFrmPage > input[name=perPage]").val(perPage);
-			$("#adminCampingTipFrmPage").submit();
+			var i = $("#reviewTipFrmPage > input[name=perPage]").val(perPage);
+			$("#reviewTipFrmPage").submit();
 		});
 		$(".searchCampingTip").click(function() {
-			var campingtip_title = $("#textCampingTip").val();
-			location.href="/admin/campingTip?campingtip_title=" + campingtip_title;
-		});
+			var perPage = $(this).val();
+			var i = $("#reviewTipFrmPage >input[name=perPage]").val(perPage);
+			$("#reviewTipFrmPage").submit();
+			});
 		$("a.page-link").each(function(){
 			var page =$(this).attr("href");
 			if(page == "${pagingDto.page}"){
@@ -54,11 +55,23 @@ if(msg == "delete"){
 				return;
 			}
 		}); 
-
+		$("#searchReview").click(function(){
+			var textReview = $("#textReview").val();
+			$("#reviewTipFrmPage > input[name=textReview]").val(textReview);
+			$("#reviewTipFrmPage").submit();
+		});
+		$("a.tip_title").click(function(e){
+			e.preventDefault();
+			var campingtip_no =$(this).attr("data-campingtip_no");
+			$("#reviewTipFrmPage > input[name=campingtip_no]").val(campingtip_no);
+			$("#reviewTipFrmPage").attr("action", $(this).attr("href"));
+			$("#reviewTipFrmPage").submit();
+			
+		});
 	});
 </script>
 
-<%@include file ="../include/adminCampingTipFrmPage.jsp" %>
+<%@include file ="../include/campingTipFrmPage.jsp" %>
 
 <div class="container-fluid">
 	<div class="row">
@@ -86,14 +99,15 @@ if(msg == "delete"){
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${list}" var="campingTipVo">
+				<c:forEach items="${list}" var="CampingTipVo">
 					<tr>
-						<td>${campingTipVo.campingtip_no}</td>
+						<td>${CampingTipVo.campingtip_no}</td>
 						<td>
-							<img src="/upload/displayImg?fileName=${campingTipVo.campingtip_img}" alt="사진등록" />
+							<img src="/upload/displayImg?fileName=${CampingTipVo.campingtip_img}" alt="사진등록" />
 						</td>
-						<td><a href="/camp/singleContentsCampingTip/${campingTipVo.campingtip_no}">${campingTipVo.campingtip_title}</a></td>
-						<td>${campingTipVo.campingtip_date}</td>
+						<td>
+						<a href="/camp/singleContentsCampingTip/${CampingTipVo.campingtip_no}" class="tip_title" data-campingtip_no="${CampingTipVo.campingtip_no }">${CampingTipVo.campingtip_title}</a></td>
+						<td>${CampingTipVo.campingtip_date}</td>
 					</tr>
 				</c:forEach>
 				</tbody>

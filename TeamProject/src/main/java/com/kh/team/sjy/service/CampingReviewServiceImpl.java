@@ -120,10 +120,10 @@ public class CampingReviewServiceImpl implements CampingReviewService {
 		return campingReivewDao.modifyFileList(table_name);
 	}
 
-	//캠핑장 후기 게시물 갯수 
+	//캠핑장 후기 게시물 개수 
 	@Override
-	public int campingReviewListCount() throws Exception {
-		return campingReivewDao.campingReviewListCount();
+	public int campingReviewListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
+		return campingReivewDao.campingReviewListCount(myReviewPagingDto);
 	}
 	//캠핑장 후기 페이징
 	@Override
@@ -131,11 +131,7 @@ public class CampingReviewServiceImpl implements CampingReviewService {
 		return campingReivewDao.campingReviewListPage(myReviewPagingDto);
 	}
 
-	//캠핑장 후기 검색
-	@Override
-	public List<ReviewVo> campingReviewSearch(String review_title) throws Exception {
-		return campingReivewDao.campingReviewSearch(review_title);
-	}
+
 
 
 	

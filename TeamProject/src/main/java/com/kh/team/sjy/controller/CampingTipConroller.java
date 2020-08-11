@@ -3,8 +3,7 @@ package com.kh.team.sjy.controller;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,23 +29,12 @@ public class CampingTipConroller {
 	
 	//캠핑 수칙 목록
 	@RequestMapping(value="/campingTipList" , method = RequestMethod.GET  )
-	public String CampTipList(myReviewPagingDto myReviewPagingDto, Model model , String campingtip_title)throws Exception{
-		List <CampingTipVo> list = null;
-		System.out.println("myReviewPagingDto:"+ myReviewPagingDto);
-		if( campingtip_title == null) {
+	public String CampTipList(myReviewPagingDto myReviewPagingDto, Model model)throws Exception{
 			myReviewPagingDto.setmyReviewPageInfo();
 			int totalCount = campingTipService.campingTipListCount(myReviewPagingDto);
 			myReviewPagingDto.setTotalCount(totalCount);
-			list = campingTipService.campingTipListPage(myReviewPagingDto);
-
-		}else {
+			List <CampingTipVo> list = campingTipService.campingTipListPage(myReviewPagingDto);
 			
-			list = campingTipService.campingTipSearch(campingtip_title);
-		
-	
-		
-		}
-	
 		model.addAttribute("list",list);	
 		model.addAttribute("pagingDto", myReviewPagingDto);
 	
@@ -55,7 +43,7 @@ public class CampingTipConroller {
 	//캠핑 수칙 글 내용
 	@Transactional
 	@RequestMapping(value="/singleContentsCampingTip/{campingtip_no}", method= RequestMethod.GET)
-	public String singleContentsCampingTip(@PathVariable("campingtip_no") int campingtip_no,Model model)throws Exception{
+	public String singleContentsCampingTip(@PathVariable("campingtip_no") int campingtip_no,Model model, myReviewPagingDto myReviewPagingDto)throws Exception{
 		System.out.println("campingtip_no:"+ campingtip_no);
 		CampingTipVo campingTipVo = campingTipDaoImpl.singleContentsCampingTip(campingtip_no); //  캠핑수칙 글내용
 		List<CampingTipVo> tipList = campingTipService.campingTipList();
@@ -75,7 +63,7 @@ public class CampingTipConroller {
 		model.addAttribute("tipList",tipList);
 		model.addAttribute("fileList",fileList);
 		model.addAttribute("fileNoListImg",fileNoListImg);
-		
+		model.addAttribute("pagingDto", myReviewPagingDto);
 		
 		
 		

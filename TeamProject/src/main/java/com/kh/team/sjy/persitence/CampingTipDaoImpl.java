@@ -49,6 +49,7 @@ public class CampingTipDaoImpl implements CampingTipDao {
 		return sqlSession.selectList(NAMESPACE +"filesNoFilesList" , files_no);
 	}
 
+	// 캠핑장 수칙 게시물 개수 
 	@Override
 	public int campingTipListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "campingTipListCount", myReviewPagingDto);
@@ -59,9 +60,6 @@ public class CampingTipDaoImpl implements CampingTipDao {
 		return sqlSession.selectList(NAMESPACE +"campingTipListPage" , myReviewPagingDto);
 	}
 
-	@Override
-	public List<CampingTipVo> campingTipSearch(String campingtip_title) throws Exception {
-		return sqlSession.selectList(NAMESPACE +"campingTipSearch" , campingtip_title );
-	}
+
 
 }

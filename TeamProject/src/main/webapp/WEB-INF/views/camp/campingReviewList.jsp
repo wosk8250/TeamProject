@@ -22,6 +22,24 @@ div {
 
 <script>
 $(function(){
+	
+	$("#searchReview").click(function(){
+		var searchCnd = $("select[name=searchCnd]").val();
+		var textReview = $("#textReview").val();
+		$("#reviewFrmPage > input[name=searchCnd]").val(searchCnd);
+		$("#reviewFrmPage > input[name=textReview]").val(textReview);
+		$("#reviewFrmPage").submit();
+	});
+	
+	
+	$("select[name=perPage]").change(function(){
+		var perPage = $(this).val();
+// 	console.log("perPage:", perPage);
+	var i = $("#reviewFrmPage > input[name=perPage]").val(perPage);
+	$("#reviewFrmPage").submit();
+	});
+	
+	
 	$(".page-link").click(function(e){
 		e.preventDefault();
 // 		console.log("test");
@@ -30,16 +48,21 @@ $(function(){
 		$("#reviewFrmPage > input[name=page]").val(page);
 		$("#reviewFrmPage").submit();
 	});
-	$("select[name=perPage]").change(function(){
-		var perPage = $(this).val();
-// 	console.log("perPage:", perPage);
-	var i = $("#reviewFrmPage > input[name=perPage]").val(perPage);
-	$("#reviewFrmPage").submit();
+
+	//현재 페이지 액티브
+	$("a.page-link").each(function(){
+		var page =$(this).attr("href");
+		if(page == "${pagingDto.page}"){
+			$(this).parent().addClass("active");
+			return;
+		}
 	});
-	$("#searchReview").click(function(){
-		var reviewTitle = $("#textReview").val();
-		console.log("reviewTitle:",reviewTitle);
-		location.href="/camp/campingReviewList?review_title=" + reviewTitle;
+	$("a.review_title").click(function(e){
+		e.preventDefault();		
+		var campingReview_no = $(this).attr("data-review_no");
+		$("#reviewFrmPage").attr("action", $(this).attr("href"));
+		$("#reviewFrmPage").submit();		
+		
 	});
 });	
 </script>
@@ -99,7 +122,7 @@ $(function(){
 								<td><img
 									src="/upload/displayCampingImg?fileName=${reviewVo.review_img}"
 									alt="사진 등록" /></td>
-								<td><a href="/camp/selectReview/${reviewVo.review_no}">[${reviewVo.review_campingname}]${reviewVo.review_title}</a></td>
+								<td><a href="/camp/selectReview/${reviewVo.review_no}" class="review_title" data-review_no="${reviewVo.review_no}">[${reviewVo.review_campingname}]${reviewVo.review_title}</a></td>
 								<td>${reviewVo.review_id}</td>
 								<td>${reviewVo.review_date}</td>
 								<td>${reviewVo.review_view}</td>
@@ -130,9 +153,15 @@ $(function(){
 				</div>
 				<div class="col-md-4">
 					<select name="searchCnd" id="searchCnd" class="form-group" title="검색조건선택">
-						<option value="0">제목</option>
+						<option value="t"
+							 <c:if test="${pagingDto.searchCnd == 't' }">selected</c:if>
+						>제목</option>
+						<option value="w"
+						 <c:if test="${pagingDto.searchCnd == 'w' }">selected</c:if>
+						>내용</option>						
 					</select>
-					<input type="text" class="form-group" id="textReview"/>
+					<input type="text" class="form-group" id="textReview" name ="textReview"
+						 value="${pagingDto.textReview }"/>
 					<button class="btn btn-success" id="searchReview">검색</button>
 				</div>
 				<div class="col-md-4"></div>

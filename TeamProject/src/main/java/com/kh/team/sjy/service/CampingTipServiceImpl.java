@@ -32,6 +32,7 @@ public class CampingTipServiceImpl implements CampingTipService {
 		return campingTipDao.filesNoFilesList(files_no);
 	}
 
+	//캠핑장 수칙 게시물 개수 
 	@Override
 	public int campingTipListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
 		return campingTipDao.campingTipListCount(myReviewPagingDto);
@@ -42,10 +43,7 @@ public class CampingTipServiceImpl implements CampingTipService {
 		return campingTipDao.campingTipListPage(myReviewPagingDto);
 	}
 
-	@Override
-	public List<CampingTipVo> campingTipSearch(String campingtip_title) throws Exception {
-		return campingTipDao.campingTipSearch(campingtip_title);
-	}
+	
 
 
 

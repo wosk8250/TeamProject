@@ -76,7 +76,7 @@ pre {
  </c:if>
  <c:choose>
  <c:when test="${sessionScope.checkBoard == 'admin'}">
-			<a href="/admin/faq" class="btn btn-success" >목록</a>
+			<a href="/admin/faq" class="btn btn-success" id="campFaq">목록</a>
  </c:when>
  <c:when test="${sessionScope.checkBoard eq 'camp'}">
 			<a href="/camp/campingFaqList" 	 class="btn btn-success" id="campFaq">목록</a>

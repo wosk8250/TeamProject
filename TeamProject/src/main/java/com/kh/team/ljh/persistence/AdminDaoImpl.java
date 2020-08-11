@@ -12,7 +12,6 @@ import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampingNameVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
-import com.kh.team.domain.CampingTalkVo;
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.DemeritCodeVo;
 import com.kh.team.domain.DemeritVo;
@@ -137,17 +136,7 @@ public class AdminDaoImpl implements AdminDao {
 		sqlSession.update(NAMESPACE + "campingTipDelete", campingtip_no);
 	}
 
-	// 캠핑 이야기 조회
-	@Override
-	public List<CampingTalkVo> campingTalkList() throws Exception {
-		return sqlSession.selectList(NAMESPACE + "campingTalkList");
-	}
-	// 캠핑 이야기 삭제
 
-	@Override
-	public void campingTalkDelete(int campingTalk_no) throws Exception {
-		sqlSession.update(NAMESPACE + "campingTalkDelete", campingTalk_no);
-	}
 	// 캠핑 후기 조회
 
 	@Override
@@ -300,15 +289,8 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectOne(NAMESPACE + "reviewPostsCount");
 	}
 
-	@Override
-	public List<CampingTalkVo> campingTalkListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "campingTalkListPage", myReviewPagingDto);
-	}
-
-	@Override
-	public int campingTalkPostsCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "campingTalkPostsCount");
-	}
+	
+	
 
 	@Override
 	public List<DemeritVo> demeritList() throws Exception {
@@ -364,10 +346,7 @@ public class AdminDaoImpl implements AdminDao {
 		sqlSession.delete(NAMESPACE + "deleteUserByReview",user_id);
 	}
 
-	@Override
-	public void deleteUserByCampTalk(String user_id) throws Exception {
-		sqlSession.delete(NAMESPACE + "deleteUserByCampTalk",user_id);
-	}
+	
 
 	@Override
 	public void deleteUserByDemerit(String user_id) throws Exception {
@@ -404,10 +383,7 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectList(NAMESPACE + "searchReview", review_title);
 	}
 
-	@Override
-	public List<CampingTalkVo> searchCampingTalk(String campingtalk_title) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "searchCampingTalk", campingtalk_title);
-	}
+	
 
 	@Override
 	public List<FaqVo> searchFaq(String faq_title) throws Exception {
@@ -434,10 +410,6 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectList(NAMESPACE + "deletePagingCampingTipList",myReviewPagingDto);
 	}
 
-	@Override
-	public List<CampingTalkVo> deletePagingCampTalkList(myReviewPagingDto myReviewPagingDto) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "deletePagingCampTalkList",myReviewPagingDto);
-	}
 
 	@Override
 	public List<FaqVo> deletePagingFaqList(myReviewPagingDto myReviewPagingDto) throws Exception {
@@ -462,11 +434,6 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public int deleteCampingTipCount() throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "deleteCampingTipCount");
-	}
-
-	@Override
-	public int deleteCampTalkCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "deleteCampTalkCount");
 	}
 
 	@Override
@@ -509,11 +476,7 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectList(NAMESPACE + "delelteCampingTipPost", campingtip_title);
 	}
 
-	@Override
-	public List<CampingTalkVo> deleteCampingTalkPost(String campingtalk_title) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "deleteCampingTalkPost", campingtalk_title);
-	}
-
+	
 	@Override
 	public List<FaqVo> deleteFaqPost(String faq_title) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "deleteFaqPost",faq_title);
@@ -559,7 +522,7 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectList(NAMESPACE + "reservationDateList",camp_no);
 	}
 
-
+	
 
 
 
