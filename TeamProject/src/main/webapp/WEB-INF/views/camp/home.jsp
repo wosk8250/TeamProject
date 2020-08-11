@@ -64,6 +64,7 @@ th, td {
 }
 </style>
 <script>
+
 	$(function() {
 		$("#areaDo").change(function() {
 			
@@ -161,14 +162,13 @@ th, td {
 							console.log("CampVo", "${CampVo}");
 							console.log(output);
 							
-							
-							
 							output += "<tr>";
-							output += "<th>" + "<h2>" + "<a href='/camp/campingContent?camp_no="+ item.camp_no +"' class='a_title' data-camp_no='" + item.camp_no + "'>" + item.camp_name + "</a>" + "</h2>" + "</br>" + item.camp_content + "</br>" + "</br>" + item.camp_address + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + "<span>" + item.camp_phone +"</span>";
+							output += "<th>" + "<img width='200' height='200' src='/resources/image/1594178025406.jpg'>" + "</th>";
+							output += "<th>" + "<h2>" + "<a href='/camp/campingContent' class='a_title' data-camp_no='" + item.camp_no + "'>"+ "<i class='str'>" + '[' + item.camp_area + item.camp_location + ']' + item.camp_name + "</i>" + "</a>" + "</h2>" + "</br>" + item.camp_content + "</br>" + "</br>" + "<img width='20' height='20' src='/resources/image/locations.png'>"+ '&nbsp' +item.camp_address + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + "<span>"+ "<img width='20' height='20' src='/resources/image/calling1.png'>" + '&nbsp' + item.camp_phone +"</span>";
 							output += "</th>";
-							output += "<td>" + "<img width='200' height='200' src='/resources/image/1594178025406.jpg'>" + "</td>";
-							output += "<td>" + '조회 수 :' + item.viewcnt + "</td>";
-							output += "<td>" + '추천 수 :' + item.recommend + "</td>";
+							output += "<td>" + "<button id='viewbtn' type='btn' class='btn btn-sm btn-success'>" + '조회 수 :' + item.viewcnt + "</button>" + "</br>";
+							output += "<button type='recommendbtn' class='btn btn-sm btn-danger'>" + '추천 수 :' + item.recommend + "</button>";
+							output += "</td>";
 							output += "</tr>";
 // 							$("#campingDiv").append(output);
 							
