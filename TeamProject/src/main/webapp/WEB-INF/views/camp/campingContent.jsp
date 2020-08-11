@@ -64,9 +64,6 @@ width : 70%
 	width : 70% 
  }
  
-.table table-bordered {
-	margin: 0 auto 0 auto;
-}
 
 </style>
 
