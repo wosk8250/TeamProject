@@ -154,7 +154,7 @@ $(function () {
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="/camp/campNoticeList">
+        <a class="nav-link" href="/camp/campingNoticeList">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>공지사항</span></a>
       </li>
@@ -166,7 +166,7 @@ $(function () {
           <span>캠핑 수칙</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/camp/faqList">
+        <a class="nav-link" href="/camp/campingFaqList">
           <i class="fas fa-fw fa-table"></i>
           <span>자주 묻는 질문</span></a>
       </li>

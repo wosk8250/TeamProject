@@ -48,11 +48,13 @@ div {
 
 		$(".demeritBtn").click(
 				function() {
+					var user = "user";
+					
 					var demerit_content = $(this).parent().find("select")
 							.select().val();
 					var user_id = $(this).attr("data-userId");
 					location.href = "/admin/userDemerit/" + user_id + "/"
-							+ demerit_content;
+							+ demerit_content + "/" + user ;
 
 				});
 		$(".searchId").click(function() {

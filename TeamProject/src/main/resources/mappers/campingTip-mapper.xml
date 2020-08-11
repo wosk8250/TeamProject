@@ -34,19 +34,38 @@
 	<!-- 캠핑장 수칙 게시물 수 조회 -->
 	<select id="campingTipListCount" resultType="int">
 	      select count(*) from
-            tbl_camping_tip where campingtip_admin = 0
+            tbl_camping_tip 	<include refid="search"></include>
 	</select>
 	<!-- 캠핑장 수칙 페이징 -->
 	<select id="campingTipListPage" resultType="CampingTipVo">
 		      select * from (select
-				rownum rnum, a.* from(select * from tbl_camping_tip where
-					campingtip_admin = 0 order
+				rownum rnum, a.* from(select * from tbl_camping_tip 
+					<include refid="search"></include> order
 						by campingtip_no desc) a)
 						where rnum between #{startRow} and #{endRow}
 	</select>
-	<!-- 캠핑장 수칙 검색 -->
-	<select id="campingTipSearch" resultType="CampingTipVo">
-	select * from tbl_camping_tip where campingtip_title = #{campingtip_title}
-	</select>
+
+	
+		<!--  검색 -->
+ 	<sql id ="search">
+    		<if test="searchCnd != null">
+  		  		<choose>
+  		  			<when test='searchCnd == "t"'>
+  		  				where campingtip_title like '%' || #{textReview} || '%' and campingtip_admin = 0
+  		  			</when>
+  		  			<when test='searchCnd == "w"'>
+  		  				where campingtip_content like '%' || #{textReview} || '%' and campingtip_admin = 0 
+  		  			</when>
+					<otherwise>
+					where campingtip_admin = 0
+					</otherwise>
+  		  		</choose>
+    		</if> 	
+    		<if test="searchCnd == null">
+    			where campingtip_admin = 0
+    		</if>
+ 	</sql>	
+	
+	
 	
 </mapper>

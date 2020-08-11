@@ -47,7 +47,13 @@ if(msg == "delete"){
 			var campingtip_title = $("#textCampingTip").val();
 			location.href="/admin/campingTip?campingtip_title=" + campingtip_title;
 		});
-
+		$("a.page-link").each(function(){
+			var page =$(this).attr("href");
+			if(page == "${pagingDto.page}"){
+				$(this).parent().addClass("active");
+				return;
+			}
+		}); 
 
 	});
 </script>
@@ -76,6 +82,7 @@ if(msg == "delete"){
 						<th>글번호</th>
 						<th>이미지</th>
 						<th width="450">제목</th>
+						<th>등록일</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -86,12 +93,16 @@ if(msg == "delete"){
 							<img src="/upload/displayImg?fileName=${campingTipVo.campingtip_img}" alt="사진등록" />
 						</td>
 						<td><a href="/camp/singleContentsCampingTip/${campingTipVo.campingtip_no}">${campingTipVo.campingtip_title}</a></td>
+						<td>${campingTipVo.campingtip_date}</td>
 					</tr>
 				</c:forEach>
 				</tbody>
 			</table>
 			</div>
 		</div>
+					<div>
+					<a class="btn btn-primary" href="/admin/campingTipForm">작성</a>
+					</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4"></div>
@@ -103,7 +114,9 @@ if(msg == "delete"){
 			</div>
 		</div>
 		<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-5">
+		</div>
+		<div class="col-md-4">
 			<nav>
 				<ul class="pagination">
 				<c:if test="${pagingDto.startPage != 1}">
@@ -123,14 +136,11 @@ if(msg == "delete"){
 					</c:if>
 				</ul>
 			</nav>
-					<div>
-					<a class="btn btn-primary" href="/admin/campingTipForm">작성</a>
-					</div>
+		</div>
+		<div class="col-md-3">
 		</div>
 	</div>
 	</div>
-	<div class="col-md-1">
-		</div>
 	
 </div>
 </div>

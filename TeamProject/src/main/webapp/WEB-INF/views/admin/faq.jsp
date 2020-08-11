@@ -26,29 +26,47 @@ console.log(msg);
 if(msg == "delete"){
 	alert("게시글 삭제완료");
 }	
-$(".page-link").click(function(e) {
+$("a.page-link").click(function(e){
 	e.preventDefault();
 	var page = $(this).attr("href").trim();
-	$("#faqFrmPage > input[name=page]").val(page);
-	$("#faqFrmPage").submit();
-});
+	$("#reviewFaqFrmPage > input[name=page]").val(page);
+	$("#reviewFaqFrmPage").submit();
+	});
 
 $("select[name=perPage]").change(function() {
 	var perPage = $(this).val();
-	var i = $("#faqFrmPage > input[name=perPage]").val(perPage);
- 	$("#faqFrmPage").submit();
+	var i = $("#reviewFaqFrmPage > input[name=perPage]").val(perPage);
+ 	$("#reviewFaqFrmPage").submit();
 });
-$(".searchFaq").click(function() {
-	var faq_title = $("#textFaq").val();
-	location.href="/admin/faq?faq_title=" + faq_title;
+
+$("a.page-link").each(function(){
+	var page =$(this).attr("href");
+	if(page == "${pagingDto.page}"){
+		$(this).parent().addClass("active");
+		return;
+	}
+}); 
+$(".searchFaq").click(function(){
+	var textReview = $("#textReview").val();
+	$("#reviewFaqFrmPage > input[name=textReview]").val(textReview);
+	$("#reviewFaqFrmPage").submit();
 });
+$("a.faq_title").click(function(e){
+	e.preventDefault();
+	var faq_no = $(this).attr("data-faq_no");
+	$("#reviewFaqFrmPage > input[name=faq_no]").val(faq_no);
+	$("#reviewFaqFrmPage").attr("action", $(this).attr("href"));
+	$("#reviewFaqFrmPage").submit();
+});
+
+
 
 
 });
 
 </script>
 
-<%@include file ="../include/adminFaqFrmPage.jsp" %>
+<%@ include file="../include/campingFaqFrmPage.jsp" %>
 
 <div class="container-fluid">
 	<div class="row">
@@ -75,18 +93,20 @@ $(".searchFaq").click(function() {
 				</thead>
 				<tbody>
 				<c:forEach items="${list}" var="faqVo">
-				<c:if test="${faqVo.faq_admin == 0}">
 					<tr>
 						<td>${faqVo.faq_no}</td>
-						<td><a href="/camp/selectByfaq/${faqVo.faq_no}">${faqVo.faq_title}</a></td>
+						<td>
+							<a href="/camp/selectByFaq/${faqVo.faq_no}" class="faq_title" data-faq_no="${faqVo.faq_no }">${faqVo.faq_title}</a>
+						</td>
 						<td>${faqVo.faq_date}</td>
 					</tr>
-				</c:if>
 				</c:forEach>
 				</tbody>
 			</table>
 			</div>
-		</div>
+			<div>
+	<a class="btn btn-primary" href="/admin/faqForm">작성</a>
+			</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-4"></div>
@@ -99,9 +119,9 @@ $(".searchFaq").click(function() {
 		</div>
 		<div class="container-fluid">
 		<div class="row">
-		<div class="col-md-1">
+		<div class="col-md-5">
 		</div>
-		<div class="col-md-10">
+		<div class="col-md-4">
 			<nav>
 				<ul class="pagination">
 				<c:if test="${pagingDto.startPage != 1}">
@@ -121,12 +141,10 @@ $(".searchFaq").click(function() {
 					</c:if>
 				</ul>
 			</nav>
-			<div>
-	<a class="btn btn-primary" href="/admin/faqForm">작성</a>
-			</div>
 		</div>
-		<div class="col-md-1">
+		<div class="col-md-3">
 		</div>
+	</div>
 	</div>
 	</div>
 	</div>

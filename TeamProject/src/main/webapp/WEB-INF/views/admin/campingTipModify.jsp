@@ -91,8 +91,18 @@ $(function() {
 	$("#campingModifyRun").submit(function() {
 		var upDiv = $("#uploadedList > div");
 		upDiv.each(function(index) {
-			var filename = $(this).attr("data-filename");
-			var hiddenInput = "<input type='hidden' name='files["+index+"]' value='"+filename+"'/>";
+			var filename  = $(this).attr("data-filename");
+			var hiddenInput = "<input type='hidden' name='files["+index+"]' value= '"+ filename+"' />";
+			$("#campingModifyRun").prepend(hiddenInput);
+		});
+	});
+	$("#a").click(function() {
+		console.log($("#campingModifyRun"));
+		var upDiv = $("#uploadedList > div");
+		upDiv.each(function(index) {
+			var filename  = $(this).attr("data-filename");
+			var hiddenInput = "<input type='hidden' name='files["+index+"]' value= '"+ filename+"' />";
+			console.log(hiddenInput);
 			$("#campingModifyRun").prepend(hiddenInput);
 		});
 	});
@@ -105,7 +115,8 @@ $(function() {
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<form role="form" id="campingModifyRun" action="/camp/singleContentsCampingTip/${campingTipVo.campingtip_no}" method="get"  enctype="multipart/form-data">
+		<button id="a">as</button>
+			<form role="form" id="campingModifyRun" action="/admin/campingTipModifyRun" method="post"  enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="campingtip_title"> 제목 </label> 
 					<input type="text" class="form-control" id="campingtip_title" name="campingtip_title" value="${campingTipVo.campingtip_title}" />

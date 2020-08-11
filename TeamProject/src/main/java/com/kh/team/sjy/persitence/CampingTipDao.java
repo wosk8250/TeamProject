@@ -20,11 +20,12 @@ public interface CampingTipDao {
 	//(캠핑장 수칙 ) 이미지 보여주기  filesNoFilsList(파일번호 조회)
 	public List<FilesVo> filesNoFilesList(int files_no) throws Exception;
 	// 캠핑장 수칙 게시물 갯수 검색
-	public int campingTipListCount()throws Exception;
+	public int campingTipListCount(myReviewPagingDto myReviewPagingDto)throws Exception;
 	
 	//캠핑장 수칙 페이징
 	public List<CampingTipVo> campingTipListPage(myReviewPagingDto myReviewPagingDto)throws Exception;
-	//캠핑장 수칙 검색
-	public List<CampingTipVo> campingTipSearch(String campingtip_title)throws Exception;
+
+	
+
 	
 }

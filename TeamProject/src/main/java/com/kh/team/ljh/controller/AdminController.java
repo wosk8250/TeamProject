@@ -24,7 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
-import com.kh.team.domain.CampingTalkVo;
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.DemeritCodeVo;
 import com.kh.team.domain.DemeritVo;
@@ -195,9 +194,11 @@ public class AdminController {
 
 	// 캠핑장 수정 글
 	@RequestMapping(value = "/campModifyForm", method = RequestMethod.GET)
-	public String campModifyForm(String camp_address, Model model) throws Exception {
-		CampVo campVo = adminService.campModifyForm(camp_address);
+	public String campModifyForm(int camp_no, Model model) throws Exception {
+		CampVo campVo = adminService.campModifyForm(camp_no);
+		AmenitiesVo amenitiesVo = adminService.selectByAmenities(camp_no);
 		model.addAttribute("campVo", campVo);
+		model.addAttribute("amenitiesVo", amenitiesVo);
 		List<FilesVo> list = adminService.filesList(campVo.getTable_name());
 		List<FilesVo> fileList = new ArrayList<>();
 		for (FilesVo filesVo : list) {
@@ -221,9 +222,9 @@ public class AdminController {
 
 	// 캠핑장 수정 처리
 	@RequestMapping(value = "/campModifyRun", method = RequestMethod.POST)
-	public String campModifyRun(CampVo campVo) throws Exception {
-		adminService.campModifyRun(campVo);
-		return "redirect:/camp/camp";
+	public String campModifyRun(CampVo campVo, AmenitiesVo amenitiesVo) throws Exception {
+		adminService.campModifyRun(campVo, amenitiesVo);
+		return "redirect:/admin/camp";
 	}
 
 	// 캠핑장 삭제 처리
@@ -256,7 +257,7 @@ public class AdminController {
 		}
 		model.addAttribute("list", list);
 		model.addAttribute("pagingDto", myReviewPagingDto);
-		return "admin/campingTip";
+		return "/admin/campingTip";
 	}
 
 	// 캠핑 수칙 입력 폼
@@ -269,7 +270,7 @@ public class AdminController {
 	@RequestMapping(value = "/campingtipRun", method = RequestMethod.POST)
 	public String campingTipInsertRun(CampingTipVo campingTipVo) throws Exception {
 		adminService.campingTipInsertRun(campingTipVo);
-		return "";
+		return "redirect:/admin/campingTip";
 	}
 
 	// 캠핑 수칙 수정 폼
@@ -301,6 +302,8 @@ public class AdminController {
 	// 캠핑 수칙 수정 처리
 	@RequestMapping(value = "/campingTipModifyRun", method = RequestMethod.POST)
 	public String campingModifyRun(CampingTipVo campingTipVo) throws Exception {
+		
+		
 		adminService.campingTipModifyRun(campingTipVo);
 		return "redirect:/camp/singleContentsCampingTip/" + campingTipVo.getCampingtip_no() ;
 	}
@@ -313,32 +316,11 @@ public class AdminController {
 		return "redirect:/admin/campingTip";
 	}
 
-	// 캠핑 이야기 조회
-	@RequestMapping(value = "/campingTalk", method = RequestMethod.GET)
-	public String campingTalkList(myReviewPagingDto myReviewPagingDto,Model model,String campingtalk_title) throws Exception {
-		if(campingtalk_title == null) {
-		myReviewPagingDto.setmyReviewPageInfo();
-		int totalCount = adminService.campingTalkPostsCount();
-		myReviewPagingDto.setTotalCount(totalCount);
-		List<CampingTalkVo> list = adminService.campingTalkListPage(myReviewPagingDto);
-		model.addAttribute("list", list);
-		model.addAttribute("pagingDto", myReviewPagingDto);
-		} else {
-			List<CampingTalkVo> list =  adminService.searchCampingTalk(campingtalk_title);
-			model.addAttribute("list", list);
-		}
-		return "admin/campingTalk";
-	}
+	
 	
 	
 
-	// 캠핑 이야기 삭제
-	@RequestMapping(value = "/campingTalkDelete", method = RequestMethod.GET)
-	public String campingTalkDelete(int campingTalk_no, RedirectAttributes attr) throws Exception {
-		adminService.campingTalkDelete(campingTalk_no);
-		attr.addFlashAttribute("msg", "delete");
-		return "redirect:/admin/campingTalk";
-	}
+
 
 	// 캠핑 후기 조회
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
@@ -456,8 +438,8 @@ public class AdminController {
 	}
 	
 	//유저 벌점 입력 & 조회 & 정지
-		@RequestMapping(value="/userDemerit/{user_id}/{demerit_content}",method=RequestMethod.GET)
-		public String userDemerit(@PathVariable("user_id") String user_id,@PathVariable("demerit_content") String demerit_content) throws Exception{
+		@RequestMapping(value="/userDemerit/{user_id}/{demerit_content}/{user}",method=RequestMethod.GET)
+		public String userDemerit(@PathVariable("user_id") String user_id,@PathVariable("demerit_content") String demerit_content,@PathVariable("user")String user) throws Exception{
 			DemeritCodeVo demeritCodeVo = adminService.selectDemeritCode(demerit_content);
 			LocalDateTime time = LocalDateTime.now();
 			DemeritVo demeritVo = new DemeritVo(0, demeritCodeVo.getDemerit_code(), demeritCodeVo.getDemerit_content(), user_id, demeritCodeVo.getDemerit_value(), String.valueOf(time));
@@ -470,19 +452,23 @@ public class AdminController {
 				userVo.setUser_id(user_id);
 				userVo.setUser_stopdate(user_stopdate);
 				adminService.userBlockTimeUpdate(userVo);
-			}
-			if(50 <= userDemerit && userDemerit < 100) {
+			}else if(50 <= userDemerit && userDemerit < 100) {
 				String user_stopdate = String.valueOf(time.plusMonths(1));
 				UserVo userVo = new UserVo();
 				userVo.setUser_id(user_id);
 				userVo.setUser_stopdate(user_stopdate);
 				adminService.userBlockTimeUpdate(userVo);
+			}else if(userDemerit >= 100) {
+			adminService.deleteUser(user_id);
 			}
-			if(userDemerit == 100) {
-				adminService.deleteUser(user_id);
-			}
+			String returnStr = null;
 			
-			return "redirect:/admin/user";
+			if(user.equals("user")) {
+				returnStr = "redirect:/admin/user";
+			}else {
+				returnStr = "redirect:/admin/blockUser";
+			}
+			return returnStr;
 		}
 		
 		//벌점 내역 조회
@@ -559,24 +545,9 @@ public class AdminController {
 		//예약 등록
 		@RequestMapping(value="/reservationDate",method = RequestMethod.POST)
 		public String reservationDate(ReservationVo reservationVo) throws Exception{
-
-			
 			
 			reservationVo.setUser_id("yaya");
-			
-			
-			
-			
 			adminService.reservationDate(reservationVo);
-			
-			//날짜 입력 시작날짜 끝나는날짜 캠프번호 유저아이디를 입력
-			
-			//날짜 삭제 캠프번호와 유저아이디 시작날짜 끝나는날짜를 찾아서 삭제
-
-			//유저가 로그인하면 예약한거 볼수있게하기
-			
-
-			
 			return "/camp/main";
 		}
 
@@ -599,8 +570,5 @@ public class AdminController {
 			}
 			
 			return null;
-					
-			
 		}
-		
 }

@@ -1,7 +1,9 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="../include/header.jsp"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+    
+<%@ include file="../include/header.jsp" %>
 <style>
 	div {
 		color: black;
@@ -18,34 +20,28 @@
 	}
 </style>
 <script>
-$(function(){
+$(function (){
 	$("#searchReview").click(function(){
 		var searchCnd = $("select[name=searchCnd]").val();
 		var textReview = $("#textReview").val();
-		$("#reviewTipFrmPage > input[name=searchCnd]").val(searchCnd);
-		$("#reviewTipFrmPage > input[name=textReview]").val(textReview);
-		$("#reviewTipFrmPage").submit();
+		$("#reviewNoitceFrmPage > input[name=searchCnd]").val(searchCnd);
+		$("#reviewNoitceFrmPage > input[name=textReview]").val(textReview);
+		$("#reviewNoitceFrmPage").submit();
 	});
-	
+	// n줄씩 보기
 	$("select[name=perPage]").change(function(){
-		
 		var perPage = $(this).val();
-		var i = $("#reviewTipFrmPage >input[name=perPage]").val(perPage);
-
-		$("#reviewTipFrmPage").submit();
+		var i = $("#reviewNoitceFrmPage >input[name=perPage]").val(perPage);
+		$("#reviewNoitceFrmPage").submit();
 	});
-
-	
-	
-	$(".page-link").click(function(e){
+	//페이지 번호
+	$("a.page-link").click(function(e){
 		e.preventDefault();
-// 		console.log("test");
 		var page = $(this).attr("href").trim();
-// 		console.log("page:", page);	
-		$("#reviewTipFrmPage > input[name=page]").val(page);
-		$("#reviewTipFrmPage").submit();
-	}); 
-
+		$("#reviewNoitceFrmPage > input[name=page]").val(page);
+		$("#reviewNoitceFrmPage").submit();
+	});
+	
 	//현재 페이지 액티브
 	$("a.page-link").each(function(){
 		var page =$(this).attr("href");
@@ -53,89 +49,65 @@ $(function(){
 			$(this).parent().addClass("active");
 			return;
 		}
-	});
-	
-	$("a.tip_title").click(function(e){
+	}); 
+	$("a.notice_title").click(function(e){
 		e.preventDefault();
-		var campingtip_no =$(this).attr("data-campingtip_no");
-		$("#reviewTipFrmPage > input[name=campingtip_no]").val(campingtip_no);
-		$("#reviewTipFrmPage").attr("action", $(this).attr("href"));
-		$("#reviewTipFrmPage").submit();
-		
+		var notice_no=$(this).attr("data-notice_no");
+		console.log("notice_no:", notice_no);
+		$("#reviewNoitceFrmPage > input[name=notice_no]").val(notice_no);
+		$("#reviewNoitceFrmPage").attr("action", $(this).attr("href"));
+		$("#reviewNoitceFrmPage").submit();
 	});
-	
 });
 </script>
 
-	
-
-
-<%@ include file = "../include/campingTipFrmPage.jsp" %>
-<div class="container-fluid">
-	<div class="row">
-				<div class="col-md-2">
-				</div>
-				<div class="col-md-5"></div>
-				<div class="col-md-5"></div>
-	</div>
-</div>
+<%@ include file="../include/campingNoticeFrmPage.jsp" %>
 
 
 <div class="container-fluid">
 	<div class="row">
-	
 				<div class="col-md-1">
 		</div>
-				<div class="col-md-10">
-					<select name="perPage" class="form-inline">
+		<div class="col-md-10">
+			<select name="perPage" class="form-inline">
 		<c:forEach begin="5" end="30" step="5" var="i">
 			<option value="${i}"
 				<c:if test="${i == pagingDto.perPage}">selected</c:if>>${i}줄씩
 				보기</option>
 		</c:forEach>
-	</select>
-				
-				
-				
-	<h2>캠핑 수칙</h2>
+			</select>
+		
+		
+		
+		
+		<h2>공지 사항</h2>
 			<hr>
 		<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>번호</th>
-						<th></th>
 						<th width="450">제목</th>
 						<th>작성자</th>
 						<th>등록일</th>
 						<th>조회수</th>
 					</tr>
 				</thead>
-				
 				<tbody>
-
-				<c:forEach items="${list}" var ="CampingTipVo">
-
+				<c:forEach items="${list}" var="CampNoticeVo">
+				
 					<tr>
-					<td>${CampingTipVo.campingtip_no}</td>
-					<td><img src="/upload/displayCampingImg?fileName=${CampingTipVo.campingtip_img}" alt="사진 등록"/>
-					</td>
-					<td><h6><a href="/camp/singleContentsCampingTip/${CampingTipVo.campingtip_no}" class="tip_title" data-campingtip_no="${CampingTipVo.campingtip_no }">${CampingTipVo.campingtip_title}</a></h6>
-					</td>
-					<td>${CampingTipVo.campingtip_writer}</td>
-					<td>${CampingTipVo.campingtip_date}</td>
-					<td>${CampingTipVo.campingtip_view}</td>
+						<td>${CampNoticeVo.notice_no}</td>
+						<td><a href="/camp/singleContentsCampNotice/${CampNoticeVo.notice_no}" class="notice_title" data-notice_no="${CampNoticeVo.notice_no}">${CampNoticeVo.notice_title}</a></td>
+						<td>${CampNoticeVo.notice_writer}</td>
+						<td>${CampNoticeVo.notice_date}</td>
+						<td>${CampNoticeVo.notice_view}</td>
 					</tr>
-				<tr>
-			
 				</c:forEach>
 				</tbody>
 			</table>
-			</div>
 				</div>
-				<div class="col-md-1">
 		</div>
-
 	</div>
 </div>
 <div class="container-fluid">
@@ -152,8 +124,8 @@ $(function(){
 				<div class="col-md-4">
 					<select name="searchCnd" id="searchCnd" class="form-group" title="검색조건선택">
 						<option value="t"
-							 <c:if test="${pagingDto.searchCnd == 't' }">selected</c:if>
-						>제목</option>
+						 <c:if test="${pagingDto.searchCnd == 't' }">selected</c:if>
+						 >제목</option>
 						<option value="w"
 						 <c:if test="${pagingDto.searchCnd == 'w' }">selected</c:if>
 						>내용</option>
@@ -202,4 +174,4 @@ $(function(){
 
 
 
-<%@ include file="../include/footer.jsp"%>
+<%@ include file="../include/footer.jsp" %>
