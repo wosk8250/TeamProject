@@ -73,17 +73,6 @@ $(function() {
 		});		
 	});
 	
-	//부대시설 체크박스
-	var amenities = ["#camping_power","#camping_wifi","#camping_hotwater","#camping_trail","#camping_mart","#camping_park"];
-	for (var i = 0; i < amenities.length; i++) {
-		$(amenities[i]).change(function () {
-			if($(this).is(":checked")){
-				$(this).val("1");
-			} else {
-				$(this).val("0");
-			}
-		});
-	}
 	
 	$("#fileLoad").on("click",".modify-file",function(e){
 		e.preventDefault();
@@ -96,12 +85,57 @@ $(function() {
 		});		
 	});
 
-	var insert = ["#camp_name","#camp_address","#camp_phone","#camp_http","#camp_area","#camp_location","#camp_content","#power","#wifi","#hotwater","#trail","#mart","#park"];
-	var write = ["#camping_name","#roadFullAddr","#camping_phone","#camping_http","#siNm","#sggNm","#camping_content","#camping_power","#camping_wifi","#camping_hotwater","#camping_trail","#camping_mart","#camping_park"];
+	var insert = ["#camp_name","#camp_address","#camp_phone","#camp_http","#camp_area","#camp_location","#camp_content","#power","#wifi","#hotwater","#trail","#mart","#park", "#camp_peakweekdays", "#camp_peakweekend", "#camp_weekdays", "#camp_weekend"];
+	var write = ["#camping_name","#roadFullAddr","#camping_phone","#camping_http","#siNm","#sggNm","#camping_content","#camping_power","#camping_wifi","#camping_hotwater","#camping_trail","#camping_mart","#camping_park", "#camping_peakweekdays", "#camping_peakweekend", "#camping_weekdays", "#camping_weekend"];
 	var writecheck = ["#camping_name","#roadFullAddr","#camping_phone","#camping_http","#camping_content"];
+	//요금표
+	var campFare = ["#camp_peakweekdays", "#camp_peakweekend", "#camp_weekdays", "#camp_weekend"];
+	var fare = ["#camping_peakweekdays", "#camping_peakweekend", "#camping_weekdays", "#camping_weekend"];
+	//계절
+	var season = ["#spring","#summer","#autumn","#winter"];
+	var seasonStr = ["봄","여름","가을","겨울"];
+	//부대시설
 	var am =["${amenitiesVo.power}","${amenitiesVo.wifi}","${amenitiesVo.hotwater}","${amenitiesVo.trail}","${amenitiesVo.mart}","${amenitiesVo.park}"];
+	var amenities = ["#camping_power","#camping_wifi","#camping_hotwater","#camping_trail","#camping_mart","#camping_park"];
+	
+
+	
+	
+	//요금표 3자리마다 콤마 찍기
+	for (var i = 0; i < fare.length; i++) {
+		$(fare[i]).focusout(function() {
+			
+			function addComma(num) {
+				  var regexp = /\B(?=(\d{3})+(?!\d))/g;
+				  return num.toString().replace(regexp, ',');
+				}
+			var addnum = addComma($(this).val());
+			$(this).val(addnum);
+		});
+	}
+	
+	for (var i = 0; i < seasonStr.length; i++) {
+		var camp_operation = "${campVo.camp_operation}";
+		if(camp_operation.indexOf(seasonStr[i]) != -1){
+			$(season[i]).attr("checked", true);
+		}
+	}
+	
+	//부대시설 체크상태 변경
+	for (var i = 0; i < amenities.length; i++) {
+		$(amenities[i]).change(function () {
+			if($(this).is(":checked")){
+				$(this).val("1");
+			} else {
+				$(this).val("0");
+			}
+		});
+	}
+	
+	//부대시설 체크
 	for (var i = 0; i < am.length; i++) {
 		if(am[i] == 1){
+			console.log(am[i]);
 			$(amenities[i]).attr("checked",true);
 			$(amenities[i]).val("1");
 		}
@@ -109,7 +143,26 @@ $(function() {
 	
 	$("#campModifyRun").submit(function(e) {
 // 		e.preventDefault();
-		for (var i = 0; i < writecheck.length; i++) { //null체크
+
+		//영업 날짜
+		var operating = $("#operating option:selected").val();
+		$("#operatingday").val(operating);
+		//영업 날짜 끝
+		
+		//영업기간 선택
+		var operation = "";
+		for (var i = 0; i < season.length; i++) {
+			if($(season[i]).is(":checked") == true){
+				operation += $(season[i]).val() + ",";
+			}
+		}
+		var last = operation.lastIndexOf(",");
+		var camp_operation = operation.substring(0,last);
+		$("#camp_operation").val(camp_operation);
+		//영업기간 선택 끝
+
+		//null체크
+		for (var i = 0; i < writecheck.length; i++) { 
 			if($(writecheck[i]).val() == null || $(writecheck[i]).val() == ""){
 				var id = $(writecheck[i]).attr("id");
 				console.log(id);
@@ -165,9 +218,9 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 								<input class="btn btn-primary btn-sm" type="button" onClick="goPopup();" value="검색" style="margin-right: 10px; float: left; "/>
 								<div id="list"></div>
 								<div id="callBackDiv">
-										<input type="text" class="form-control" style="width:500px;" id="roadFullAddr"  name="roadFullAddr" readonly  value="${campVo.camp_address}"/>
-										<input type="hidden"  style="width:500px;" id="siNm"  name="siNm" value="${campVo.camp_area}"/>
-										<input type="hidden"  style="width:500px;" id="sggNm"  name="sggNm" value="${campVo.camp_location}"/>
+									<input type="text" class="form-control" style="width:500px;" id="roadFullAddr"  name="roadFullAddr" readonly  value="${campVo.camp_address}"/>
+									<input type="hidden"  style="width:500px;" id="siNm"  name="siNm" value="${campVo.camp_area}"/>
+									<input type="hidden"  style="width:500px;" id="sggNm"  name="sggNm" value="${campVo.camp_location}"/>
 								</div>
 							</form>
 						</td>
@@ -191,36 +244,64 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 							<input class="checkbox" type="checkbox" id="camping_park" value="0">주차장
 						</td>
 					</tr>
+										<tr>
+						<td class="td_title" width="140">영업기간 : </td>
+						<td>
+							<input type="checkbox" id="spring" value="봄">봄
+							<input type="checkbox" class="checkbox" id="summer" value="여름">여름
+							<input type="checkbox" class="checkbox" id="autumn" value="가을">가을
+							<input type="checkbox" class="checkbox" id="winter" value="겨울">겨울
+						</td>
+					</tr>
+					<tr>
+						<td class="td_title" width="140">영업일 : </td>
+						<td>
+							<select style="margin-bottom: 10px;" id="operating">
+								<option <c:if test="${campVo.operatingday eq '평일'}"> selected</c:if>>평일</option>
+								<option <c:if test="${campVo.operatingday eq '주말'}"> selected</c:if>>주말</option>
+								<option <c:if test="${campVo.operatingday eq '평일 + 주말'}"> selected</c:if>>평일 + 주말</option>
+							</select>
+							<table style="text-align: center;">
+								<thead>
+									<tr>
+										<th>가격</th>
+										<th>주간</th>
+										<th>주말(공휴일)</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											성수기
+										</td>
+										<td>
+											<input type="text" class="form-control" id="camping_peakweekdays" value="${campVo.camp_peakweekdays}">
+										</td>
+										<td>
+											<input type="text" class="form-control" id="camping_peakweekend" value="${campVo.camp_peakweekend}">
+										</td>
+									</tr>
+									<tr>
+										<td>
+											비성수기
+										</td>
+										<td>
+											<input type="text" class="form-control" id="camping_weekdays" value="${campVo.camp_weekdays}">
+										</td>
+										<td>
+											<input type="text" class="form-control" id="camping_weekend" value="${campVo.camp_weekend}">
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
 					<tr>
 						<td class="td_title" width="140">소개 : </td>
 						<td><textarea class="form-control" id="camping_content" rows="25" style="resize:none; width:100%;" >${campVo.camp_content}</textarea></td>
 					</tr>
 				</table>
 				</div>
-<!-- 				<div class="form-group"> -->
-
-<%-- 				<textarea class="form-control" id="camp_content" name="camp_content" rows="25" style="resize:none; width:100%;" >${campVo.camp_content}</textarea> --%>
-					
-<!-- 				</div> -->
-<!-- 				<input type="file" id="file" name="file[]" multiple="multiple"> -->
-<!-- 				<div id = "fileLoad"> -->
-<!-- 				<div id="uploadedList"> -->
-<!-- 				</div> -->
-<%-- 						<c:forEach items="${fileList}" var="filesVo"> --%>
-<%-- 							<div class="img" data-filename="${filesVo.files}"> --%>
-<%-- 							<img alt="실패" src="/upload/displayImg?fileName=${filesVo.thumbnailName}" /><br/> --%>
-<%-- 							<span>${filesVo.orgFileName}</span> --%>
-<%-- 							<a href="${filesVo.files}" class="attach-del modify-file"><span class="pull-right">x</span></a> --%>
-<!-- 							</div> -->
-<%-- 						</c:forEach> --%>
-<!-- 				<br/> -->
-<!-- 				</div> -->
-					
-<!-- 				<div> -->
-				
-<!-- 				<button type="submit" class="btn btn-primary">완료</button> -->
-<!-- 				</div> -->
-<!-- 			</form> -->
 			<%@ include file="../include/modfiyCampFrm.jsp" %>
 		</div>
 		<div class="col-md-1"></div>

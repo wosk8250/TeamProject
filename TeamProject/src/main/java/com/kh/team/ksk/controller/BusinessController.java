@@ -43,7 +43,6 @@ public class BusinessController {
 		HttpSession session = request.getSession();
 		String user_id = (String)session.getAttribute("user_id");
 		campVo.setUser_id(user_id);
-		System.out.println("비지니스 컨트롤러 campVo : "+ campVo);
 		adminService.campInsertRun(campVo, amenitiesVo);
 
 
