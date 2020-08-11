@@ -56,23 +56,136 @@ ul.tabs li.current {
 .str {
 	color: red;
 }
-#tableSize {
-width : 70%
- } 
 
-#tableSize1 { 
-	width : 70% 
- }
+.str1 {
+	color: black;
+}
+
+#tableSize {
+	width: 120%
+}
+
+#note {
+	width: 100%;
+	text-align: center
+}
+#tabMenu {
+	width:60%;
+	rhight: 50px;
+	margin: auto;
+	text-align: center;
+}
+#tab-2 {
+	width:90%;
+	rhight: 50px;
+	
+	text-align: center;
+}
 
 </style>
 
-<script src="/resources/vendor/jquery/jquery.js"></script>
 
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script>
 	$(function() {
+		//-----------------예약 달력------------------
+		var disabledDays = ${date};
+		console.log(disabledDays);
+		$( "#startDate" ).datepicker({
+		    nextText: '다음 달',
+		    prevText: '이전 달', 
+		    dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+		    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
+		    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		    dateFormat: "yy-mm-dd",
+		    minDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
+		   beforeShowDay: disableAllTheseDays,
+		    onClose: function( selectedDate ) {    
+		        $("#endDate").datepicker( "option", "minDate", selectedDate );
+		        $("#endDate").focus();
+		    }    
+		});
+
+		$('#startDate').datepicker('setDate', '+0');
+
+		function disableAllTheseDays(date) { 
+			   var m = date.getMonth(), d = date.getDate(), y = date.getFullYear(); 
+			   for (i = 0; i < disabledDays.length; i++) { 
+			       if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) { 
+			           return [false]; 
+			       } 
+			   } 
+			   return [true]; 
+			}
+
+		$( "#endDate" ).datepicker({
+		    nextText: '다음 달',
+		    prevText: '이전 달', 
+		    dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+		    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
+		    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		    dateFormat: "yy-mm-dd",
+		    minDate: 0,   
+		    beforeShowDay: disableAllTheseDays,
+		    onClose: function( selectedDate ) {    
+
+		        $("#startDate").datepicker( "option", "maxDate", selectedDate );
+		        var url = "/camp/reservationDateConfirm";
+		        var sendData = {"startdate" : $("#startDate").val(), "enddate" : $("#endDate").val(),"camp_no" : "${campVo.camp_no}"};
+		        $.ajax({
+		        	"type" : "post",
+		        	"url" : url,
+		        	"dataType" : "text",
+		        	"data" : JSON.stringify(sendData),
+					"headers" : {
+						"Content-Type" : "application/json",
+						"X-HTTP-Method-Override" : "post"
+					},
+					"success" :function(rData){
+						
+						if(rData == "false"){
+							alert("예약을 할 수 없습니다");
+							$( "#startDate" ).val("");
+							$( "#endDate" ).val("");
+						}
+					}
+		        });
+		    }    
+		});   
+
+		$("#startDate").focusout(function() {
+
+		});
+
+		function disableAllTheseDays(date) {
+		var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+		for (i = 0; i < disabledDays.length; i++) {
+		  if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) {
+		      return [false];
+		  }
+		}
+		return [true];
+		}
+		
+		$("a.page-link").each(function(){
+			var page =$(this).attr("href");
+			if(page == "${pagingDto.page}"){
+				$(this).parent().addClass("active");
+				return;
+			}
+		}); 
+		
+		$("#reservationBtn").click(function() {
+			$("#reservationForm").submit();
+		});
+		//-------------------예약
+		
+		
 		$("#btnRecommend").click(
 				function() {
-
 					var user_id = "${sessionScope.user_id}";
 					var camp_no = "${campVo.camp_no}";
 					console.log(user_id);
@@ -124,10 +237,14 @@ width : 70%
 			$("#" + tab_id).addClass('current');
 		})
 
+		
+		
+		
 	});
 </script>
-
 <div class="containers">
+	<%-- ${campVo} --%>
+	<%-- ${CampRecommendVo} --%>
 	<article class="imgArticle">
 		<div>
 			<img width="500" height="500" src="/upload/displayCampingImg?fileName=${campVo.thumbnail}">
@@ -139,6 +256,7 @@ width : 70%
 		<div class="col-md-12">
 			<table class="table" id="recommendTable" name="recommendTable">
 				<thead>
+				<h2><i class="str1">${campVo.camp_name}</i></h2>
 					<tr>
 						<th>주소</th>
 						<td>${campVo.camp_address}</td>
@@ -167,8 +285,51 @@ width : 70%
 					</tr>
 					<tr>
 						<th></th>
-						<td><button class="btn btn-sm btn-success" type="button" id="btnRecommend" name="btnRecommend">추천하기</button></td>
+						<td><button class="btn btn-large btn-success" type="button" id="btnRecommend" name="btnRecommend">추천하기</button></td>
+						
+						<td>
+							 	 <a id="modal-649695" href="#modal-container-649695" role="button" class="btn btn-dark" data-toggle="modal">예약하기</a>
+			
+								<div class="modal fade" id="modal-container-649695" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="myModalLabel">
+													${campVo.camp_name} 예약하기
+												</h5> 
+												<button type="button" class="close" data-dismiss="modal">
+													<span aria-hidden="true">×</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<form id="reservationForm" role="form" method="post" action="/camp/reservationDate">
+												<div style="margin: 20px">
+												입실일<input type="text" id=startDate name="startdate"/>
+												</div>
+												<div style="margin: 20px">
+												퇴실일<input type="text" id="endDate" name="enddate"/>
+												</div>
+												<input type="hidden" name="camp_no" value="${campVo.camp_no}"/>
+												<input type="hidden" name="user_id" value="${sessionScope.user_id}"/>
+												</form>
+											</div>
+											<div class="modal-footer">
+												 
+												<button id="reservationBtn" type="button" class="btn btn-primary">
+													예약
+												</button> 
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">
+													닫기
+												</button>
+											</div>
+										</div>
+										
+								</div>
+			</div>
+							
+						</td>
 					</tr>
+					
 				</tbody>
 			</table>
 		</div>
@@ -190,122 +351,25 @@ width : 70%
 			<div class="col-md-12">
 			<table>
 				<tr>
-				<td>${campVo.camp_content}</td>
+					<th>${campVo.camp_content}</th>
 				</tr>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>
-							#
-						</th>
-						<th>
-							Product
-						</th>
-						<th>
-							Payment Taken
-						</th>
-						<th>
-							Status
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							1
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							Default
-						</td>
-					</tr>
-					<tr class="table-active">
-						<td>
-							1
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							Approved
-						</td>
-					</tr>
-					<tr class="table-success">
-						<td>
-							2
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							02/04/2012
-						</td>
-						<td>
-							Declined
-						</td>
-					</tr>
-					<tr class="table-warning">
-						<td>
-							3
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							03/04/2012
-						</td>
-						<td>
-							Pending
-						</td>
-					</tr>
-					<tr class="table-danger">
-						<td>
-							4
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							04/04/2012
-						</td>
-						<td>
-							Call in to confirm
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>
 			</table>
 			</div>
 		</div>
 		<hr>
 	</div>
-	
 </div>
 <div id="tab-2" class="tab-content">
 	<h2>● ${campVo.camp_name} 요금안내표</h2>
 	</br>
-<div class="container-fluid">
+<div class="container-fluid" id="tabMenu">
 	<div class="row">
 		<div class="col-md-12">
-			<table class="table table-bordered" id="tableSize1">
+			<table class="table table-bordered" id="tableSize">
 				<h2>일반캠핑</h2>
 				</thead>
 				<tbody>
-					<tr class="table-active">
+					<tr class="table-active" >
 						<th rowspan="2">구분</th>
 						<th colspan="2">평상시</th>
 						<th colspan="2">성수기</th>
@@ -326,40 +390,13 @@ width : 70%
 						</tr>
 				</tbody>
 			</table>
-			
-			<table class="table table-bordered" id="tableSize">
-				<h2>글램핑</h2>
-				</thead>
-				<tbody>
-					<tr class="table-active">
-						<th rowspan="2">구분</th>
-						<th colspan="2">평상시</th>
-						<th colspan="2">성수기</th>
-					</tr>
-					<tr>
-						<td>주중</td>
-						<td>주말</td>
-						<td>주중</td>
-						<td>주말</td>
-					</tr>
-					<tr>
-						<td>글램핑</td>
-						<td>${campVo.camp_weekdays}</td>
-						<td>${campVo.camp_weekend}</td>
-						<td>${campVo.camp_peakweekdays}</td>
-						<td>${campVo.camp_peakweekend}</td>
-						</tr>
-				</tbody>
-			</table>
 		</div>
 	</div>
 </div>
 </div>
-	<span class="spanDiv"><h2>[${campVo.camp_name} : 위치정보]</h2></span>
+
 </br>
-	</br>
-	<div class="mapDiv" id="map" style="width: 60%; height: 350px;">
-	</div>
+	<div class="mapDiv" id="map" style="width: 63%; height: 350px;"></div>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6a7370418a9ba06a9222aff299cacd04&libraries=services"></script>
 	<script>
@@ -419,7 +456,7 @@ width : 70%
 </div>
 </br>
 <div class="container-fluid">
-	<div class="row">
+	<div class="row" id="note">
 		<div class="col-md-12">
 			<table class="table">
 				<thead>

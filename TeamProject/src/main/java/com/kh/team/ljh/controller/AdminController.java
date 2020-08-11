@@ -338,21 +338,6 @@ public class AdminController {
 		}
 		
 		
-		//예약날짜에 캠프번호 예약날짜 다불러와서 정지시키기
-		//넘겨줄 날짜 리스트에 추가
-		List<ReservationVo> reservationVo = adminService.reservationDateList(0);
-
-		
-		ArrayList<String> reserveDate = new ArrayList<>();
-		for (ReservationVo reservationVo2 : reservationVo) {
-			reserveDate.addAll(ReservationDate.BetweenDates(reservationVo2.getStartdate(),reservationVo2.getEnddate()));
-		}
-//		for (int i = 0; i < abc.length; i++) {
-//			reserveDate.add("'" + abc[i] + "'");
-		
-//		}
-		//날짜 보내기
-		moadel.addAttribute("date", reserveDate);
 		return "admin/review";
 		
 	}
@@ -542,33 +527,5 @@ public class AdminController {
 			
 			return "redirect:/admin/waitForRegistrationCamp";
 		}
-		//예약 등록
-		@RequestMapping(value="/reservationDate",method = RequestMethod.POST)
-		public String reservationDate(ReservationVo reservationVo) throws Exception{
-			
-			reservationVo.setUser_id("yaya");
-			adminService.reservationDate(reservationVo);
-			return "/camp/main";
-		}
-
-		@ResponseBody
-		@RequestMapping(value="/reservationDateConfirm",method =RequestMethod.POST)
-		public String reservationDateConfirm(@RequestBody ReservationVo reservationVo)throws Exception{
-
-			ArrayList<String> reservationDate = ReservationDate.BetweenDates(reservationVo.getStartdate(), reservationVo.getEnddate());
-			List<ReservationVo> list = adminService.reservationDateList(0);
-
-			for (ReservationVo reservationVo2 : list) {
-				ArrayList<String> nowReservationDate = ReservationDate.BetweenDates(reservationVo2.getStartdate(), reservationVo2.getEnddate());
-				for (int i = 0; i < reservationDate.size(); i++) {
-					for (int j = 0; j < nowReservationDate.size(); j++) {
-						if(reservationDate.get(i).equals(nowReservationDate.get(j))) {
-							return "false";
-						}
-					}
-				}
-			}
-			
-			return null;
-		}
+		
 }

@@ -171,10 +171,4 @@ $(function () {
 		<div class="col-md-12 text-center">
 
 		</div>
-
-
-
-
-
-
 <%@ include file="../include/footer.jsp"%>

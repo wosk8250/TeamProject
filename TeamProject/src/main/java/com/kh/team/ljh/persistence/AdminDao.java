@@ -269,4 +269,5 @@ public interface AdminDao {
 	//예약 조회
 	public List<ReservationVo> reservationDateList(int camp_no);
 	
+	
 }

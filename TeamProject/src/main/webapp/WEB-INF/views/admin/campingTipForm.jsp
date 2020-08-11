@@ -89,7 +89,9 @@
 	<div class="row">
 		<div class="col-md-12">
 			<form id="campingTipRun" role="form" action="/admin/campingtipRun" method='post' enctype="multipart/form-data">
+				<div>제목</div>
 				<div class="form-group">
+				
 					<input type="text" class="form-control id="campingtip_title" name="campingtip_title" />
 				</div>
 				<div class="form-group">

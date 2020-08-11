@@ -32,13 +32,12 @@ public interface CampingReviewService {
 	//캠핑장 후기 수정 파일 조회
 	public List<FilesVo> modifyFileList(String table_name)throws Exception;
 	
-	//캠핑장 후기 게시물 갯수 
-	public int campingReviewListCount() throws Exception;
+	//캠핑장 후기 게시물 개수 
+	public int campingReviewListCount(myReviewPagingDto myReviewPagingDto) throws Exception;
 	
 	//캠핑장 후기 페이징
 	public List<ReviewVo> campingReviewListPage(myReviewPagingDto myReviewPagingDto)throws Exception;
 	
-	//캠핑장 후기 검색
-	public List<ReviewVo> campingReviewSearch(String review_title)throws Exception;
+
 
 }

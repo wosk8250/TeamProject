@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+     <script src="/resources/vendor/jquery/jquery.js"></script>
+    
      <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     
 <c:choose>
  <c:when test="${sessionScope.checkBoard == 'admin'}">
  <%@ include file="../include/adminheader.jsp" %>
@@ -167,12 +171,23 @@ $(function(){
 				});
 			});
 
-
+	$("#campReview").click(function(e){
+		e.preventDefault();
+		$("#reviewFrmPage").submit();
+	});
+	
+	
+	
 	
 });
+
+
+
+
 </script>
 
 
+<%@ include file="../include/campingReviewFrmPage.jsp" %>
 
 <div class="container-fluid">
 	<div class="row" style="color: black;" >
@@ -266,10 +281,10 @@ $(function(){
 
  <c:choose>
  <c:when test="${sessionScope.checkBoard eq 'admin'}">
-				<a href="/admin/review"class="btn btn-success">목록</a>				
+				<a href="/admin/review"class="btn btn-success" id="campReview">목록</a>				
  </c:when>
  <c:when test="${sessionScope.checkBoard eq 'camp'}">
-					<a href="/camp/campingReviewList"class="btn btn-success" id= "btnList">목록</a>		
+					<a href="/camp/campingReviewList"class="btn btn-success" id="campReview">목록</a>		
  </c:when>
  </c:choose>
  
