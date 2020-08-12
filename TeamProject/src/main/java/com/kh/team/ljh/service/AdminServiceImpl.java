@@ -81,7 +81,6 @@ public class AdminServiceImpl implements AdminService {
 			adminDao.campInsertRun(campVo);
 		}
 		adminDao.campAmenities(amenitiesVo);//부대 시설
-		
 		AreaCampingNameVo areaCampingNameVo = new AreaCampingNameVo(campVo.getCamp_no(), campVo.getCamp_area(), campVo.getCamp_location(),
 				campVo.getCamp_name());
 		adminDao.areaInsert(areaCampingNameVo);

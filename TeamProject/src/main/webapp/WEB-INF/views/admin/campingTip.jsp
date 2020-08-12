@@ -34,19 +34,19 @@ if(msg == "delete"){
 	$(".page-link").click(function(e) {
 			e.preventDefault();
 			var page = $(this).attr("href").trim();
-			$("#reviewTipFrmPage > input[name=page]").val(page);
-			$("#reviewTipFrmPage").submit();
+			$("#adminCampingTipFrmPage > input[name=page]").val(page);
+			$("#adminCampingTipFrmPage").submit();
 		});
 
 		$("select[name=perPage]").change(function() {
 			var perPage = $(this).val();
 			var i = $("#reviewTipFrmPage > input[name=perPage]").val(perPage);
-			$("#reviewTipFrmPage").submit();
+			$("#adminCampingTipFrmPage").submit();
 		});
 		$(".searchCampingTip").click(function() {
 			var perPage = $(this).val();
-			var i = $("#reviewTipFrmPage >input[name=perPage]").val(perPage);
-			$("#reviewTipFrmPage").submit();
+			var i = $("#adminCampingTipFrmPage >input[name=perPage]").val(perPage);
+			$("#adminCampingTipFrmPage").submit();
 			});
 		$("a.page-link").each(function(){
 			var page =$(this).attr("href");
@@ -57,21 +57,21 @@ if(msg == "delete"){
 		}); 
 		$("#searchReview").click(function(){
 			var textReview = $("#textReview").val();
-			$("#reviewTipFrmPage > input[name=textReview]").val(textReview);
-			$("#reviewTipFrmPage").submit();
+			$("#adminCampingTipFrmPage > input[name=textReview]").val(textReview);
+			$("#adminCampingTipFrmPage").submit();
 		});
 		$("a.tip_title").click(function(e){
 			e.preventDefault();
 			var campingtip_no =$(this).attr("data-campingtip_no");
-			$("#reviewTipFrmPage > input[name=campingtip_no]").val(campingtip_no);
-			$("#reviewTipFrmPage").attr("action", $(this).attr("href"));
-			$("#reviewTipFrmPage").submit();
+			$("#adminCampingTipFrmPage > input[name=campingtip_no]").val(campingtip_no);
+			$("#adminCampingTipFrmPage").attr("action", $(this).attr("href"));
+			$("#adminCampingTipFrmPage").submit();
 			
 		});
 	});
 </script>
 
-<%@include file ="../include/campingTipFrmPage.jsp" %>
+<%@include file ="../include/adminCampingTipFrmPage.jsp" %>
 
 <div class="container-fluid">
 	<div class="row">

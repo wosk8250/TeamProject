@@ -55,7 +55,7 @@ public class BusinessController {
 		adminService.campInsertRun(campVo, amenitiesVo);
 
 
-		return "redirect:/camp/campingReviewList";
+		return "redirect:/camp/main";
 	}
 	
 	// 캠핑장 수정 글

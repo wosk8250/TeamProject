@@ -48,10 +48,24 @@
 					});											
 																
 			$(".searchReview").click(function() {													
-				var reviewTitle = $("#textReview").val();												
-				location.href = "/admin/review?review_title=" + reviewTitle;												
-			});													
-																
+				var textReview = $("#textReview").val();
+				$("#adminReviewFrmPage > input[name=textReview]").val(textReview);
+				$("#adminReviewFrmPage").submit();
+				});													
+			$("a.page-link").each(function(){
+				var page =$(this).attr("href");
+				if(page == "${pagingDto.page}"){
+					$(this).parent().addClass("active");
+					return;
+				}
+			});
+			$("a.review_title").click(function(e){
+				e.preventDefault();		
+				var campingReview_no = $(this).attr("data-review_no");
+				$("#adminReviewFrmPage").attr("action", $(this).attr("href"));
+				$("#adminReviewFrmPage").submit();		
+				
+			});										
 														
 	});															
 																
@@ -100,7 +114,7 @@
 									<td><img							
 										src="/upload/displayImg?fileName=${reviewVo.review_img}"						
 										alt="사진없음" /></td>						
-									<td><a href="/camp/selectReview/${reviewVo.review_no}">${reviewVo.review_title}</a></td>							
+									<td><a href="/camp/selectReview/${reviewVo.review_no}" class="review_title" data-review_no="${reviewVo.review_no}">[${reviewVo.review_campingname}]${reviewVo.review_title}</a></td>
 									<td>${reviewVo.review_id}</td>							
 									<td>${reviewVo.review_date}</td>							
 									<td>${reviewVo.review_campingname}</td>							
