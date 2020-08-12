@@ -259,7 +259,7 @@ th, td {
 			   										 <option value="${areaDo.camp_area}">${areaDo.camp_area}</option>
 			   									 </c:forEach>
 										</select>
-										
+										&nbsp&nbsp&nbsp
 										<label>구 선택</label>
 										<select id="locationSi" name="locationSi" class="custom-select">
 							 			 <option value="11">전체/구</option>

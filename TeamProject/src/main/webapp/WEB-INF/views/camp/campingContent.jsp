@@ -245,7 +245,7 @@ ul.tabs li.current {
 	<%-- ${CampRecommendVo} --%>
 	<article class="imgArticle">
 		<div>
-			<img width="500" height="500" src="/upload/displayCampingImg?fileName=${campVo.thumbnail}">
+			<img width="450" height="450" src="/upload/displayCampingImg?fileName=${campVo.thumbnail}">
 		</div>
 	</article>
 
@@ -359,6 +359,7 @@ ul.tabs li.current {
 </div>
 <div id="tab-2" class="tab-content">
 	<h2>● ${campVo.camp_name} 요금안내표</h2>
+	</br>
 	</br>
 <div class="container-fluid" id="tabMenu">
 	<div class="row">
