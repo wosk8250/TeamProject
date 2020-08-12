@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.FilesVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.sjy.persitence.CampingTipDao;
 
 @Service
@@ -34,12 +34,12 @@ public class CampingTipServiceImpl implements CampingTipService {
 
 	//캠핑장 수칙 게시물 개수 
 	@Override
-	public int campingTipListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public int campingTipListCount(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return campingTipDao.campingTipListCount(myReviewPagingDto);
 	}
 
 	@Override
-	public List<CampingTipVo> campingTipListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampingTipVo> campingTipListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return campingTipDao.campingTipListPage(myReviewPagingDto);
 	}
 

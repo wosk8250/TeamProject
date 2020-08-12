@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.FilesVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 
 @Repository
 public class CampingTipDaoImpl implements CampingTipDao {
@@ -51,12 +51,12 @@ public class CampingTipDaoImpl implements CampingTipDao {
 
 	// 캠핑장 수칙 게시물 개수 
 	@Override
-	public int campingTipListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public int campingTipListCount(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "campingTipListCount", myReviewPagingDto);
 	}
 
 	@Override
-	public List<CampingTipVo> campingTipListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampingTipVo> campingTipListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE +"campingTipListPage" , myReviewPagingDto);
 	}
 

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +21,7 @@ import com.kh.team.domain.DemeritVo;
 import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.ksk.service.UserService;
 import com.kh.team.ljh.utile.DateUtile;
 
@@ -211,7 +213,7 @@ public class UserController {
 
 	// 내가 쓴 후기
 	@RequestMapping(value = "/myReviewList", method = RequestMethod.GET)
-	public String myReviewList(Model model, HttpServletRequest request, myReviewPagingDto pagingDto) throws Exception {
+	public String myReviewList(Model model, HttpServletRequest request, MyReviewPagingDto pagingDto) throws Exception {
 		HttpSession session = request.getSession();
 		String user_id = (String) session.getAttribute("user_id");
 		pagingDto.setUser_id(user_id);
@@ -234,7 +236,7 @@ public class UserController {
 	
 	//나의 예약목록
 	@RequestMapping(value = "/myReservation", method = RequestMethod.GET)
-	public String myReservation(Model model, HttpServletRequest request, myReviewPagingDto pagingDto)throws Exception{
+	public String myReservation(Model model, HttpServletRequest request, MyReviewPagingDto pagingDto)throws Exception{
 		HttpSession session = request.getSession();
 		String user_id = (String) session.getAttribute("user_id");
 		pagingDto.setUser_id(user_id);
@@ -248,6 +250,16 @@ public class UserController {
 		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("list", list);
 		return "/user/myReservation";
+	}
+
+	//예약 취소
+	@ResponseBody
+	@RequestMapping(value = "/cancelReservation/{startdate}/{user_id}", method = RequestMethod.DELETE)
+	public String cancelReservation(@PathVariable("startdate")String startdate, @PathVariable("user_id")String user_id)throws Exception{
+		System.out.println("startdate : " + startdate);
+		System.out.println("user_id : " + user_id);
+		userService.cancelReservation(startdate, user_id);
+		return "success";
 	}
 	
 

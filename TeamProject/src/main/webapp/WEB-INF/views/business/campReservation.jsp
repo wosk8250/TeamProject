@@ -32,35 +32,6 @@ $(function () {
 		$("#myReviewFrmPage > input[name=page]").val(page);
 		$("#myReviewFrmPage").submit();
 	});
-	
-	//예약취소
-	$("#tbl").on("click",".btnCancel",function () {
-		var that = $(this);
-		var startdate = $(this).attr("data-date");
-		var user_id = "${user_id}";
-		var url = "/user/cancelReservation/"+startdate+"/${user_id}";
-		console.log("startdate : " + startdate);
-		console.log("user_id : " + user_id);
-		console.log(url);
-		var sendData = {
-				"startdate" : startdate,
-				"user_id" : user_id
-		};
-		console.log("sendData : ", sendData);
-		$.ajax({
-			"type" : "delete",
-			"url" : url,
-			"dataType" : "text",
-			"headers" : {
-				"Content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "delete"
-			},
-			"success" : function (rData) {
-				console.log(rData);
-				that.parent().parent().hide(1000);
-			}
-		});
-	});
 });
 </script>
 
@@ -72,16 +43,13 @@ $(function () {
 		<div class="col-md-8">
 			<ul class="nav nav-tabs nav-fill">
 				<li class="nav-item">
-					<a class="nav-link" id="mylink" href="/user/myReviewList">내가 작성한 후기</a>
+					<a class="nav-link" id="mylink" href="/business/campForm">캠핑장 등록</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" id="mylink-active" href="/user/myReservation">예약목록</a>
+					<a class="nav-link" id="mylink" href="/business/myCampList">캠핑장 리스트</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" id="mylink" href="/user/profile">회원정보</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" id="mylink" href="/user/updateInfo">회원정보 수정</a>
+					<a class="nav-link active" id="mylink-active" href="/business/campReservation">캠핑장 예약현황</a>
 				</li>
 			</ul>
 		</div>
@@ -92,14 +60,14 @@ $(function () {
 		</div>
 		<div class="col-md-10">
 			<div class="table-responsive">
-			<table class="table table-hover" id="tbl">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>번호</th>
 						<th>캠핑장 이름</th>
 						<th>입실</th>
 						<th>퇴실</th>
-						<th>예약 취소</th>
+						<th>고객ID</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -109,9 +77,9 @@ $(function () {
 						<td>
 							<a href="/camp/selectReview/${reservationVo.camp_no}">${reservationVo.camp_name}</a>
 						</td>
-						<td id="startdate">${reservationVo.startdate}</td>
+						<td>${reservationVo.startdate}</td>
 						<td>${reservationVo.enddate}</td>
-						<td><button type="button" class="btn btn-warning btn-sm btnCancel" style="color: black;" data-date="${reservationVo.startdate}">예약 취소</button></td>
+						<td>${reservationVo.user_id}</td>
 					</tr>
 				</c:forEach>
 				</tbody>

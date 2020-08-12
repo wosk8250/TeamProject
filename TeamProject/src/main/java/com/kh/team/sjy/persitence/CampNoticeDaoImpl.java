@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.CampNoticeVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 
 
 @Repository
@@ -39,12 +39,12 @@ public class CampNoticeDaoImpl implements CampNoticeDao {
 	}
 	//개수
 	@Override
-	public int campingNoticeListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public int campingNoticeListCount(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "campingNoticeListCount" , myReviewPagingDto);
 	}
 	//페이징
 	@Override
-	public List<CampNoticeVo> noticeListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampNoticeVo> noticeListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "noticeListPage" , myReviewPagingDto );
 	}
 

@@ -2,6 +2,6 @@
     pageEncoding="UTF-8"%>
 
 <!-- 페이지 정보 폼(링크용) -->
-<form id="frmPage" action="/user/myReviewList" method="get">
+<form id="myReviewFrmPage" action="/user/myReviewList" method="get">
 	<input type="hidden" name="page" value="${pagingDto.page}"/>
 </form>

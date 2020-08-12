@@ -1,15 +1,15 @@
 package com.kh.team.domain;
 
-public class searchDto {
-	private String camp_location;
-	private String camp_area;
+public class SearchDto {
+	private String camp_area;//ex)울산광역시
+	private String camp_location;//ex)남구
 	
-	public searchDto() {
+	public SearchDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public searchDto(String camp_location, String camp_area) {
+	public SearchDto(String camp_location, String camp_area) {
 		super();
 		this.camp_location = camp_location;
 		this.camp_area = camp_area;
