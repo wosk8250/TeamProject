@@ -3,6 +3,7 @@ package com.kh.team.ksk.service;
 import java.util.List;
 
 import com.kh.team.domain.DemeritVo;
+import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
 import com.kh.team.domain.myReviewPagingDto;
@@ -38,6 +39,9 @@ public interface UserService {
 
 	// 리뷰 갯수
 	public int getCount(myReviewPagingDto pagingDto) throws Exception;
+	
+	// 예약 갯수
+	public int getReservationCount(myReviewPagingDto pagingDto) throws Exception;
 
 	// 회원 정지날짜
 	public String getStopDate(String user_id) throws Exception;
@@ -50,5 +54,8 @@ public interface UserService {
 	
 	//비번찾기
 	public boolean findPw(String user_id, String user_email) throws Exception;
-		
+	
+	//나의 예약 조회
+	public List<ReservationVo> myReservation(myReviewPagingDto pagingDto)throws Exception;
+
 }

@@ -5,6 +5,8 @@ public class ReservationVo {
 	private String startdate;
 	private String enddate;	
 	private String user_id;
+	private String camp_name;
+	private String host;
 	
 	
 	
@@ -47,11 +49,36 @@ public class ReservationVo {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
+
+
+	public String getCamp_name() {
+		return camp_name;
+	}
+
+
+	public void setCamp_name(String camp_name) {
+		this.camp_name = camp_name;
+	}
+
+
+	public String getHost() {
+		return host;
+	}
+
+
+	public void setHost(String host) {
+		this.host = host;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Reservation [camp_no=" + camp_no + ", startdate=" + startdate + ", enddate=" + enddate + ", user_id="
-				+ user_id + "]";
-	}	
+		return "ReservationVo [camp_no=" + camp_no + ", startdate=" + startdate + ", enddate=" + enddate + ", user_id="
+				+ user_id + ", camp_name=" + camp_name + ", host=" + host + "]";
+	}
+
+
+
 	
 	
 }

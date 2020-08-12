@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.DemeritVo;
+import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
 import com.kh.team.domain.myReviewPagingDto;
@@ -84,6 +85,12 @@ public class UserServiceImpl implements UserService {
 	public int getCount(myReviewPagingDto pagingDto) throws Exception {
 		return userDao.getCount(pagingDto);
 	}
+	
+	// 예약 갯수
+	@Override
+	public int getReservationCount(myReviewPagingDto pagingDto) throws Exception {
+		return userDao.getReservationCount(pagingDto);
+	}
 
 	// 회원 정지
 	@Override
@@ -111,6 +118,12 @@ public class UserServiceImpl implements UserService {
 			return false;
 		}
 		return true;
+	}
+
+	//나의 예약조회
+	@Override
+	public List<ReservationVo> myReservation(myReviewPagingDto pagingDto) throws Exception {
+		return userDao.myReservation(pagingDto);
 	}
 
 }

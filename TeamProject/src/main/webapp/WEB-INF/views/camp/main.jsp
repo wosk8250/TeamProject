@@ -67,7 +67,7 @@ $(function() {
 	var random = Math.floor(Math.random() * 9);
 	$("#img_bg").attr("src","/resources/image/main_bg0"+random+".jpg");
 	
-	//도시 선택
+	//군,구 불러오기
 	$("#areaDo").change(function() {
 		
 		var camp_area = $("#areaDo").val()
@@ -94,42 +94,6 @@ $(function() {
 		
 	});
 });
-
-
-$(function() {
-	$("#searchButton").click(function() {
-		
-		var selectDo = $("#areaDo").val();
-		var selectSi = $("#locationSi").val();
-		console.log(selectDo);
-		console.log(selectSi);
-		
-		var sendData = {
-			"camp_area"  : areaDo,
-			"camp_location"	: locationSi
-		};
-		
-		console.log(sendData);
-		
-		
-		var url = "/camp/searchCampList";
-		
-			$.ajax({
-				"type" : "post",
-				"url" : url,
-				"dataType" : "text",
-				"data" : JSON.stringify(sendData),
-				"headers" : {
-					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "post"
-				},
-				"success" : function(rData) {
-					console.log(rData);
-				}
-			});
-		});
-});
-
 </script>
 
 <div class="container-fluid" style="padding: 0px;">
@@ -156,8 +120,8 @@ $(function() {
    										 <label>지역 선택</label>
    										<select id="areaDo" name="areaDo" class="custom-select">
    											 <option value="1" selected>전체/도</option>
-		   									 <c:forEach items="${list}" var="areaDo">
-	   										 <option value="${areaDo.camp_area}">${areaDo.camp_area}</option>
+		   									 <c:forEach items="${list}" var="areaVo">
+	   										 <option value="${areaVo.camp_area}">${areaVo.camp_area}</option>
 		   									 </c:forEach>
 										</select>
 										
@@ -181,7 +145,9 @@ $(function() {
 						<div class="owl-carousel" id="owl-demo">
 							<c:forEach items="${campVo}" var="campVo">
 					            <div class="item">
+					            <a href="/camp/campingContent?camp_no=${campVo.camp_no }">
 					            <img src="/upload/displayCampingImg?fileName=${campVo.thumbnail}" alt="${campVo.thumbnail}"/>
+					            </a>
 					              <h4>${campVo.camp_name}</h4>
 					            </div>
 							</c:forEach>
