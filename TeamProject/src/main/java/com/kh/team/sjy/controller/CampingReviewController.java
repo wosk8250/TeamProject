@@ -173,9 +173,12 @@ public class CampingReviewController {
 	//캠핑장 후기 수정 처리
 	@RequestMapping(value="/campingReviewModifyRun", method = RequestMethod.POST)
 	public String campingReviewModifyRun(ReviewVo reviewVo , RedirectAttributes rttr,  myReviewPagingDto pagingDto) throws Exception{
+		System.out.println("/camp/selectReview,post, reviewVo:" + reviewVo);
+		System.out.println("/camp/selectReview,post, pagingDto:" + pagingDto);
 		rttr.addFlashAttribute("msg","modify");
 		campingReviewService.campingReviewModifyRun(reviewVo);
 		String url = CampingUrlUtil.modifyPagingUrl("/camp/selectReview", pagingDto, reviewVo.getReview_no());
+		System.out.println("/camp/selectReview,post, url:" + url);
 		return "redirect:" + url;
 	}
 	
