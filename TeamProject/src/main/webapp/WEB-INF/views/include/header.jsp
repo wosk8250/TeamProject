@@ -85,6 +85,7 @@ $(function () {
 	          <div class="bg-white py-2 collapse-inner rounded">
 	            <!-- <h6 class="collapse-header">Custom Components:</h6> -->
 	            <a class="collapse-item" href="/user/myReviewList"> 내가 작성한 후기</a>
+	            <a class="collapse-item" href="/user/myReservation"> 예약 목록</a>
 	            <a class="collapse-item" href="/user/profile">프로필 </a>
 	            <a class="collapse-item" href="/user/updateInfo"> 프로필 수정</a>
 	            <a class="collapse-item" href="/user/updatePw"> 비밀번호 수정</a>

@@ -265,6 +265,8 @@ ul.tabs li.current {
 												퇴실일<input type="text" id="endDate" name="enddate"/>
 												</div>
 												<input type="hidden" name="camp_no" value="${campVo.camp_no}"/>
+												<input type="hidden" name="camp_name" value="${campVo.camp_name}"/>
+												<input type="hidden" name="host" value="${campVo.user_id}"/>
 												<input type="hidden" name="user_id" value="${sessionScope.user_id}"/>
 												</form>
 											</div>

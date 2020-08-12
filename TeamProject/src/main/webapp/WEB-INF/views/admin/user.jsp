@@ -48,13 +48,21 @@ div {
 
 		$(".demeritBtn").click(
 				function() {
+				
 					var user = "user";
 					
 					var demerit_content = $(this).parent().find("select")
 							.select().val();
+					console.log(demerit_content);
+					if(demerit_content != null){
+						
 					var user_id = $(this).attr("data-userId");
 					location.href = "/admin/userDemerit/" + user_id + "/"
 							+ demerit_content + "/" + user ;
+					}else{
+						alert("벌점을 선택하세요");						
+					}
+					
 
 				});
 		$(".searchId").click(function() {

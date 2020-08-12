@@ -19,6 +19,7 @@ import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.PagingDto;
 import com.kh.team.domain.UserVo;
+import com.kh.team.domain.searchDto;
 import com.kh.team.domain.ReviewVo;
 
 @Repository
@@ -61,6 +62,10 @@ public class SelectCampDaoImpl implements SelectCampDao {
 		paramMap.put("camp_area", camp_area);
 		paramMap.put("camp_location", camp_location);
 		return sqlSession.selectList(NAMESPACE + "searchList", paramMap);
+	}
+	@Override
+	public List<CampVo> mainSearchList(searchDto searchDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "searchList", searchDto);
 	}
 
 	@Override
@@ -117,5 +122,7 @@ public class SelectCampDaoImpl implements SelectCampDao {
 	public List<AmenitiesVo> amenitiesList() throws Exception {
 		return sqlSession.selectList(NAMESPACE + "amenitiesList");
 	}
+
+
 	
 }
