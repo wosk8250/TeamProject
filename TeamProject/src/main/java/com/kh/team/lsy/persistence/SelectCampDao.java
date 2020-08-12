@@ -28,7 +28,6 @@ public interface SelectCampDao {
 	public CampVo campingContent(int camp_no) throws Exception;
 	
 	public int pageCount(PagingDto pagingDto) throws Exception;
-	
 
 	public List<CampVo> searchList(String camp_area, String camp_location, PagingDto pagingDto) throws Exception;
 	
