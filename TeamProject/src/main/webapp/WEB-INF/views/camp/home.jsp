@@ -49,7 +49,6 @@
     border-top: 1px solid #444444;
     border-collapse: collapse;
 }
-
 th, td {
     border-bottom: 1px solid #444444;
     padding: 10px;
@@ -132,7 +131,7 @@ th, td {
 						output += "<div class='col-md-12' id='campingDiv'>";
 						output += "<table class='table' id='camPingTable'>";
 						output += "<thead>";
-						output += "<tr style='background-color: #E1E5E6' class='trTable'>";
+						output += "<tr style='background-color: #E1E5E6; border-bottom: 3px solid black;' class='trTable'>";
 						output += "<th>" + rData.length + '개의 캠핑장이 검색되었습니다.' + "</th>";
 						output += "<th>" + "</th>";
 						output += "<th>" + "</th>";
