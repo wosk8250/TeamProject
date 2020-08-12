@@ -370,7 +370,6 @@ ul.tabs li.current {
 		<div class="col-md-12">
 			<table class="table table-bordered" id="tableSize">
 				<thead>
-				<h2>일반캠핑</h2>
 				</thead>
 				<tbody>
 					<tr class="table-active" >

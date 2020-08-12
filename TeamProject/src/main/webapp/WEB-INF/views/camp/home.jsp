@@ -205,7 +205,6 @@ th, td {
 // 								} else {
 // 									s2 = pageNo - pageNo % pageSize;
 // 								}
-// 								html.push("<a href=javascript:goPaging_" + token + '')
 // 							}
 // 						}
 						
