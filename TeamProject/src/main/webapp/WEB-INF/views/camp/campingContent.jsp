@@ -78,7 +78,6 @@ ul.tabs li.current {
 #tab-2 {
 	width:90%;
 	rhight: 50px;
-	
 	text-align: center;
 }
 

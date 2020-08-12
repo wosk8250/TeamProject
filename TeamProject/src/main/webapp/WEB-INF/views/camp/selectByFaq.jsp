@@ -14,7 +14,12 @@
 	$("#campFaq").click(function(e){
 		e.preventDefault();
 // 		console.log("클릭");
-		$("#reviewFaqFrmPage").submit();
+		if("${sessionScope.admin}" eq "camp"){
+			$("#campingFaqFrmPage").submit();
+		}else{
+			$("#adminFaqFrmPage").submit();
+		}
+		
 		
 	});
  });
@@ -42,6 +47,7 @@ pre {
 </style>
 
 <%@ include file="../include/campingFaqFrmPage.jsp" %>
+<%@ include file="../include/adminFaqFrmPage.jsp" %>
 
 <div class="container-fluid">
 	<div class="row" style="color: black;" >

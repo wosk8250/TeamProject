@@ -39,6 +39,7 @@ import com.kh.team.ksk.service.UserService;
 import com.kh.team.ljh.service.AdminService;
 import com.kh.team.ljh.utile.DateUtile;
 import com.kh.team.ljh.utile.ReservationDate;
+import com.kh.team.ljh.utile.UrlUtil;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
@@ -365,25 +366,30 @@ public class AdminController {
 
 	// 공지사항 수정폼
 	@RequestMapping(value = "/noticeModifyForm", method = RequestMethod.GET)
-	public String noticeModifyForm(int notice_no, Model model) throws Exception {
+	public String noticeModifyForm(int notice_no, Model model,PagingDto pagingDto) throws Exception {
 		CampNoticeVo campNoticeVo = adminService.noticeModifyForm(notice_no);
 		model.addAttribute("campNoticeVo", campNoticeVo);
 		return "admin/noticeModifyForm";
 	}
 
 	// 공지사항 수정처리
-	@RequestMapping(value = "noticeModifyRun", method = RequestMethod.GET)
-	public String noticeModifyRun(CampNoticeVo campNoticeVo) throws Exception {
+	@RequestMapping(value = "/noticeModifyRun", method = RequestMethod.GET)
+	public String noticeModifyRun(CampNoticeVo campNoticeVo,PagingDto pagingDto) throws Exception {
+		System.out.println(campNoticeVo);
 		adminService.noticeModifyRun(campNoticeVo);
-		return "redirect:/camp/singleContentsCampNotice/" + campNoticeVo.getNotice_no();
+		String url = UrlUtil.makePagingUrl(campNoticeVo.getNotice_no(),"/camp/singleContentsCampNotice", pagingDto);
+		System.out.println(pagingDto);
+		System.out.println(url);
+		return "redirect:" + url;
 	}
 
 	// 공지사항 삭제처리
 	@RequestMapping(value = "/noticeDelete", method = RequestMethod.GET)
-	public String noticeRun(int notice_no, RedirectAttributes attr) throws Exception {
+	public String noticeRun(int notice_no, RedirectAttributes attr,PagingDto pagingDto) throws Exception {
 		adminService.noticeDeleteRun(notice_no);
+		String url = UrlUtil.makePagingUrl("/admin/notice", pagingDto);
 		attr.addFlashAttribute("msg", "delete");
-		return "redirect:/admin/notice";
+		return "redirect:" + url;
 	}
 
 	// 자주묻는질문 작성폼

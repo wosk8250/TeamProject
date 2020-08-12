@@ -30,19 +30,19 @@ $(function() {
 	$(".page-link").click(function(e) {
 		e.preventDefault();
 		var page = $(this).attr("href").trim();
-		$("#reviewNoitceFrmPage > input[name=page]").val(page);
-		$("#reviewNoitceFrmPage").submit();
+		$("#adminNoticeFrmPage > input[name=page]").val(page);
+		$("#adminNoticeFrmPage").submit();
 	});
 	
 	$("select[name=perPage]").change(function() {
 		var perPage = $(this).val();
 		var i = $("#noticeFrmPage > input[name=perPage]").val(perPage);
-	 	$("#reviewNoitceFrmPage").submit();
+	 	$("#adminNoticeFrmPage").submit();
 	});
 	$(".searchNotice").click(function() {
 		var textReview = $("#textReview").val();
-		$("#reviewNoitceFrmPage > input[name=textReview]").val(textReview);
-		$("#reviewNoitceFrmPage").submit();
+		$("#adminNoticeFrmPage > input[name=textReview]").val(textReview);
+		$("#adminNoticeFrmPage").submit();
 	});
 	$("a.page-link").each(function(){
 		var page =$(this).attr("href");
@@ -54,16 +54,16 @@ $(function() {
 	$("a.page-link").click(function(e){
 		e.preventDefault();
 		var page = $(this).attr("href").trim();
-		$("#reviewNoitceFrmPage > input[name=page]").val(page);
-		$("#reviewNoitceFrmPage").submit();
+		$("#adminNoticeFrmPage > input[name=page]").val(page);
+		$("#adminNoticeFrmPage").submit();
 	});
 	$("a.notice_title").click(function(e){
 		e.preventDefault();
 		var notice_no=$(this).attr("data-notice_no");
 		console.log("notice_no:", notice_no);
-		$("#reviewNoitceFrmPage > input[name=notice_no]").val(notice_no);
-		$("#reviewNoitceFrmPage").attr("action", $(this).attr("href"));
-		$("#reviewNoitceFrmPage").submit();
+		$("#adminNoticeFrmPage > input[name=notice_no]").val(notice_no);
+		$("#adminNoticeFrmPage").attr("action", $(this).attr("href"));
+		$("#adminNoticeFrmPage").submit();
 	});
 	});
 
@@ -71,7 +71,7 @@ $(function() {
 
 </script>
 
-<%@ include file="../include/campingNoticeFrmPage.jsp" %>
+<%@ include file="../include/adminNoticeFrmPage.jsp" %>
 
 <div class="container-fluid">
 	<div class="row">

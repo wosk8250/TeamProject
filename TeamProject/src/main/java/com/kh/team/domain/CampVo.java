@@ -19,10 +19,7 @@ public class CampVo {
 	private int recommend;
 	private int viewcnt;
 	private String operatingday;
-	private String inclination;
-	private String latitude;
 	private String user_id;
-	private String user_email;
 	private String camp_operation;
 	private String camp_weekdays;
 	private String camp_weekend;
@@ -141,16 +138,6 @@ public class CampVo {
 		this.thumbnail = thumbnail;
 	}
 
-	public String getUser_email() {
-		return user_email;
-	}
-
-
-	public void setUser_email(String user_email) {
-		this.user_email = user_email;
-	}
-
-
 	public int getCamp_no() {
 		return camp_no;
 	}
@@ -239,21 +226,6 @@ public class CampVo {
 		this.files = files;
 	}
 
-	public String getInclination() {
-		return inclination;
-	}
-
-	public void setInclination(String inclination) {
-		this.inclination = inclination;
-	}
-
-	public String getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
 
 	public String getUser_id() {
 		return user_id;
@@ -270,12 +242,9 @@ public class CampVo {
 				+ ", camp_name=" + camp_name + ", camp_content=" + camp_content + ", camp_http=" + camp_http
 				+ ", camp_admin=" + camp_admin + ", camp_location=" + camp_location + ", camp_area=" + camp_area
 				+ ", table_name=" + table_name + ", files=" + Arrays.toString(files) + ", thumbnail=" + thumbnail
-				+ ", recommend=" + recommend + ", viewcnt=" + viewcnt + ", operatingday=" + operatingday
-				+ ", inclination=" + inclination + ", latitude=" + latitude + ", user_id=" + user_id + ", user_email="
-				+ user_email + ", camp_operation=" + camp_operation + ", camp_weekdays=" + camp_weekdays
+				+ ", recommend=" + recommend + ", viewcnt=" + viewcnt + ", operatingday=" + operatingday + ", user_id="
+				+ user_id + ", camp_operation=" + camp_operation + ", camp_weekdays=" + camp_weekdays
 				+ ", camp_weekend=" + camp_weekend + ", camp_peakweekdays=" + camp_peakweekdays + ", camp_peakweekend="
 				+ camp_peakweekend + ", camp_intro=" + camp_intro + "]";
 	}
-
-	
 }
