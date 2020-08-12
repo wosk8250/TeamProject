@@ -75,7 +75,7 @@ ul.tabs li.current {
 	margin: auto;
 	text-align: center;
 }
-#tab-2 {
+#tab-2content {
 	width:90%;
 	rhight: 50px;
 	text-align: center;
@@ -358,7 +358,7 @@ ul.tabs li.current {
 		<hr>
 	</div>
 </div>
-<div id="tab-2" class="tab-content">
+<div id="tab-2content" class="tab-content">
 	<h2>● ${campVo.camp_name} 요금안내표</h2>
 	</br>
 <div class="container-fluid" id="tabMenu">

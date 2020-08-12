@@ -56,8 +56,10 @@ th, td {
   }
   
 .listTable {
-	display: flex;
-	justify-content: center;
+ 	width: 100%; 
+	margin: 0px auto; 
+ 	position: relative; 
+ 	color: black; 
 }
 .str {
 	color: gray;
@@ -87,7 +89,7 @@ th, td {
 					
 					$("#locationSi").append(optionArea);
 				});
-				$("#locationSi option:eq(0)").before("<option value='${CampVo.camp_location}' selected>전체/시</option>");	
+				$("#locationSi option:eq(0)").before("<option value='${CampVo.camp_location}' selected>전체/구</option>");	
 			});
 			
 		});
@@ -252,15 +254,15 @@ th, td {
 									  
    										 <label>지역 선택</label>
    										<select id="areaDo" name="areaDo" class="custom-select">
-   											 <option value="1" selected>전체/도</option>
+   											 <option value="1" selected>전체/시</option>
 			   									 <c:forEach items="${list}" var="areaDo">
 			   										 <option value="${areaDo.camp_area}">${areaDo.camp_area}</option>
 			   									 </c:forEach>
 										</select>
 										
-										<label>동 선택</label>
+										<label>구 선택</label>
 										<select id="locationSi" name="locationSi" class="custom-select">
-							 			 <option value="11">전체/시</option>
+							 			 <option value="11">전체/구</option>
 							 			 </select>
 										<button class="btn btn-primary my-2 my-sm-0" type="button" id="searchButton">검색</button>
  									</div>
