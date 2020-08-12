@@ -12,6 +12,7 @@ import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.PagingDto;
 import com.kh.team.domain.UserVo;
+import com.kh.team.domain.searchDto;
 import com.kh.team.domain.ReviewVo;
 
 public interface SelectCampDao {
@@ -27,6 +28,8 @@ public interface SelectCampDao {
 	public int pageCount(PagingDto pagingDto) throws Exception;
 	
 	public List<CampVo> searchList(String camp_area, String camp_location, PagingDto pagingDto) throws Exception;
+	//메인에서 검색
+	public List<CampVo> mainSearchList(searchDto searchDto) throws Exception;
 	
 	public void viewcnt(int camp_no) throws Exception;
 

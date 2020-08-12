@@ -3,6 +3,7 @@ package com.kh.team.ksk.persistence;
 import java.util.List;
 
 import com.kh.team.domain.DemeritVo;
+import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
 import com.kh.team.domain.myReviewPagingDto;
@@ -36,8 +37,11 @@ public interface UserDao {
 	//내가 쓴 리뷰
 	public List<ReviewVo> myReviewList(myReviewPagingDto pagingDto) throws Exception;
 	
-	//자주묻는 질문 갯수
+	//내가 쓴 리뷰 갯수
 	public int getCount(myReviewPagingDto pagingDto) throws Exception;
+	
+	//예약 갯수
+	public int getReservationCount(myReviewPagingDto pagingDto) throws Exception;
 	
 	// 회원 정지날짜
 	public String getStopDate(String user_id) throws Exception;
@@ -50,4 +54,7 @@ public interface UserDao {
 	
 	//비번찾기
 	public UserVo findPw(String user_id, String user_email) throws Exception;
+	
+	//나의 예약 조회
+	public List<ReservationVo> myReservation(myReviewPagingDto pagingDto)throws Exception;
 }

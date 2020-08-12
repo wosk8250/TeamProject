@@ -235,7 +235,6 @@ public class CampVo {
 		this.user_id = user_id;
 	}
 
-
 	@Override
 	public String toString() {
 		return "CampVo [camp_no=" + camp_no + ", camp_address=" + camp_address + ", camp_phone=" + camp_phone
@@ -247,4 +246,10 @@ public class CampVo {
 				+ ", camp_weekend=" + camp_weekend + ", camp_peakweekdays=" + camp_peakweekdays + ", camp_peakweekend="
 				+ camp_peakweekend + ", camp_intro=" + camp_intro + "]";
 	}
+
+
+
+
+
+
 }

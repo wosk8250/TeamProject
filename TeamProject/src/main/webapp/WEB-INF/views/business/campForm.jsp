@@ -4,6 +4,15 @@
 
 <%@ include file="../include/header.jsp" %>
 <style>
+	#mylink {
+ 		background-color: rgba(226,226,226,0.5);
+		color: black;
+ 		border: 1px solid white;
+ 		box-shadow: inset 0px -4px 5px #ccc;
+	}
+	#mylink-active {
+		color: black;
+	}
 
 #uploadedList > div {
 	float : left;
@@ -86,7 +95,7 @@ $(function () {
 		});
 	}
 
-	var insert = ["#camp_name","#camp_address","#camp_phone","#camp_http","#camp_area","#camp_location","#camp_content","#power","#wifi","#hotwater","#trail","#mart","#park", "#camp_peakweekdays", "#camp_peakweekend", "#camp_weekdays", "#camp_weekend"];
+	var insert = ["#camp_name","#camp_address","#camp_phone","#camp_http","#camp_location","#camp_area","#camp_content","#power","#wifi","#hotwater","#trail","#mart","#park", "#camp_peakweekdays", "#camp_peakweekend", "#camp_weekdays", "#camp_weekend"];
 	var write = ["#camping_name","#roadFullAddr","#camping_phone","#camping_http","#sggNm","#siNm","#camping_content","#camping_power","#camping_wifi","#camping_hotwater","#camping_trail","#camping_mart","#camping_park", "#camping_peakweekdays", "#camping_peakweekend", "#camping_weekdays", "#camping_weekend"];
 	var writecheck = ["#camping_name","#roadFullAddr","#camping_phone","#camping_http","#camping_content"];
 	//요금표
@@ -175,6 +184,20 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 </script>
 <div class="container-fluid">
+	<div class="row" style="margin-bottom: 30px;">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<ul class="nav nav-tabs nav-fill">
+				<li class="nav-item">
+					<a class="nav-link active" id="mylink-active" href="/business/campForm">캠핑장 등록</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="mylink" href="/business/myCampList">캠핑장 리스트</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">

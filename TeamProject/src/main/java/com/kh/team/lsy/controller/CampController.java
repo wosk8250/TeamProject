@@ -28,6 +28,7 @@ import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.PagingDto;
 import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.UserVo;
+import com.kh.team.domain.searchDto;
 import com.kh.team.ljh.service.AdminService;
 import com.kh.team.ljh.utile.ReservationDate;
 import com.kh.team.domain.ReviewVo;
@@ -43,11 +44,11 @@ public class CampController {
 	private AdminService adminService;
 
 	@RequestMapping(value = "/home" , method = RequestMethod.GET)
-	public String home(Model model,  PagingDto pagingDto) throws Exception {
+	public String home(Model model,  PagingDto pagingDto, searchDto searchDto) throws Exception {
 		pagingDto.setPageInfo();
 		int totalCount = selectCampService.pageCount(pagingDto);
 		pagingDto.setTotalCount(totalCount);
-
+		System.out.println("searchDto" + searchDto);
 		List<AreaCampLocationVo> list = selectCampService.campSelect();
 		List<CampVo> campList = selectCampService.campList(pagingDto);
 		List<AmenitiesVo> amenitiesList = selectCampService.amenitiesList();

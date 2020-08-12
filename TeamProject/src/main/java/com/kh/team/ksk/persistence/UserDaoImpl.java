@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.DemeritVo;
+import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
 import com.kh.team.domain.myReviewPagingDto;
@@ -88,6 +89,11 @@ public class UserDaoImpl implements UserDao {
 	public int getCount(myReviewPagingDto pagingDto) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "getCount", pagingDto);
 	}
+	//예약 갯수
+	@Override
+	public int getReservationCount(myReviewPagingDto pagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getReservationCount", pagingDto);
+	}
 	//회원 정지날짜
 	@Override
 	public String getStopDate(String user_id) throws Exception {
@@ -112,6 +118,12 @@ public class UserDaoImpl implements UserDao {
 		paramMap.put("user_id", user_id);
 		paramMap.put("user_email", user_email);
 		return sqlSession.selectOne(NAMESPACE + "findPw",paramMap);
+	}
+
+	//나의 예약조회
+	@Override
+	public List<ReservationVo> myReservation(myReviewPagingDto pagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "myReservation",pagingDto);
 	}
 	
 	
