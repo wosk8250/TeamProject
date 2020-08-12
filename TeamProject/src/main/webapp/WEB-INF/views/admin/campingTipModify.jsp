@@ -115,7 +115,6 @@ $(function() {
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-		<button id="a">as</button>
 			<form role="form" id="campingModifyRun" action="/admin/campingTipModifyRun" method="post"  enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="campingtip_title"> 제목 </label> 

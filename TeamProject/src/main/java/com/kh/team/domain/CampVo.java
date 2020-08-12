@@ -46,6 +46,16 @@ public class CampVo {
 	
 	
 
+	public String getCamp_intro() {
+		return camp_intro;
+	}
+
+
+	public void setCamp_intro(String camp_intro) {
+		this.camp_intro = camp_intro;
+	}
+
+
 	public String getCamp_peakweekdays() {
 		return camp_peakweekdays;
 	}
@@ -224,17 +234,6 @@ public class CampVo {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-
-
-	public String getCamp_intro() {
-		return camp_intro;
-	}
-
-
-	public void setCamp_intro(String camp_intro) {
-		this.camp_intro = camp_intro;
-	}
-
 
 	@Override
 	public String toString() {

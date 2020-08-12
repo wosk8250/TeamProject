@@ -59,8 +59,9 @@ public class SelectCampDaoImpl implements SelectCampDao {
 	
 	}
 	@Override
-	public List<CampVo> searchList(String camp_area, String camp_location) throws Exception {
+	public List<CampVo> searchList(String camp_area, String camp_location ,PagingDto pagingDto) throws Exception {
 		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("pagingDto", pagingDto);
 		paramMap.put("camp_area", camp_area);
 		paramMap.put("camp_location", camp_location);
 		return sqlSession.selectList(NAMESPACE + "searchList", paramMap);
@@ -82,8 +83,8 @@ public class SelectCampDaoImpl implements SelectCampDao {
 	}
 
 	@Override
-	public CampRecommendVo recommendCheck(String user_id) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "recommendCheck", user_id);
+	public CampRecommendVo recommendCheck(CampRecommendVo campRecommendVo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "recommendCheck", campRecommendVo);
 	}
 
 	@Override

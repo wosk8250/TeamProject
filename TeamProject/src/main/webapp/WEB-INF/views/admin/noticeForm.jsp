@@ -22,7 +22,7 @@
 				<textarea class="form-control id="notice_content" name="notice_content" rows="25" style="resize:none; width:100%;" ></textarea>
 					
 				</div>
-				<button id="modifyBtn" type="button" class="btn btn-primary">완료</button>
+				<button id="modifyBtn" type="submit" class="btn btn-primary">완료</button>
 			</form>
 		</div>
 	</div>

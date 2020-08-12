@@ -29,13 +29,19 @@ public interface SelectCampDao {
 	
 	public int pageCount(PagingDto pagingDto) throws Exception;
 	
+<<<<<<< HEAD
 	public List<CampVo> searchList(String camp_area, String camp_location) throws Exception;
+=======
+	public List<CampVo> searchList(String camp_area, String camp_location, PagingDto pagingDto) throws Exception;
+	//메인에서 검색
+	public List<CampVo> mainSearchList(searchDto searchDto) throws Exception;
+>>>>>>> branch 'master' of https://github.com/wosk8250/TeamProject.git
 	
 	public void viewcnt(int camp_no) throws Exception;
 
 	public void recommend(int camp_no) throws Exception;
 	
-	public CampRecommendVo recommendCheck(String user_id) throws Exception;
+	public CampRecommendVo recommendCheck(CampRecommendVo campRecommendVo) throws Exception;
 	
 	public void recommendInsert(CampRecommendVo campRecommendVo) throws Exception;
 	

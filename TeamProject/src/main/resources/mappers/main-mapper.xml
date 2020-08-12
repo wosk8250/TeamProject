@@ -36,10 +36,12 @@
 		select count(camp_no) from tbl_camp
 	</select>
 	
-
+	<!-- 검색버튼 -->
 	<select id="searchList" resultType="CampVo">
 		select * from tbl_camp where camp_area = #{camp_area} and camp_location = #{camp_location}
 	</select>
+	
+	
 	
 	<!-- 리뷰5개 -->
 	<select id="reviewTop5" resultType="ReviewVo">
@@ -105,11 +107,12 @@
 		where camp_no = #{camp_no}
 	</update>
 	
+	<!-- 추천 중복아이디체크 -->
 	<select id="recommendCheck" resultType="CampRecommendVo">
 		select * from tbl_camp_recommend where user_id = #{user_id} and camp_no = #{camp_no}
 	</select>
 	
-	
+	<!-- 추천후 아이디Insert -->
 	<insert id="recommendInsert">
 		insert into tbl_camp_recommend(camp_no, user_id, check_num)
 		values(#{camp_no}, #{user_id}, #{check_num})

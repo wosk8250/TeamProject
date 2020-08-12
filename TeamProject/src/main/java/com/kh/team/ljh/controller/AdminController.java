@@ -178,6 +178,12 @@ public class AdminController {
 		return "admin/deleteCamp";
 		
 	}
+	//캠핑장 재등록
+	@RequestMapping(value="/deleteCampReEnrollment/{camp_no}",method = RequestMethod.GET)
+	public String deleteCampReEnrollment(@PathVariable("camp_no")String camp_no) throws Exception{
+		adminService.deleteCampReEnrollment(camp_no);
+		return "redirect:/admin/deleteCamp";
+	}
 
 	// 캠핑장 입력폼
 	@RequestMapping(value = "/campForm", method = RequestMethod.GET)
@@ -378,8 +384,6 @@ public class AdminController {
 		System.out.println(campNoticeVo);
 		adminService.noticeModifyRun(campNoticeVo);
 		String url = UrlUtil.makePagingUrl(campNoticeVo.getNotice_no(),"/camp/singleContentsCampNotice", pagingDto);
-		System.out.println(pagingDto);
-		System.out.println(url);
 		return "redirect:" + url;
 	}
 
@@ -438,7 +442,7 @@ public class AdminController {
 			adminService.insertDemerit(demeritVo);
 			int userDemerit = adminService.selectUserDemerit(user_id);
 			if(10 <= userDemerit && userDemerit < 50) {
-				String user_stopdate = String.valueOf(time.plusMinutes(5));
+				String user_stopdate = String.valueOf(time.plusSeconds(3));
 				UserVo userVo = new UserVo();
 				userVo.setUser_id(user_id);
 				userVo.setUser_stopdate(user_stopdate);

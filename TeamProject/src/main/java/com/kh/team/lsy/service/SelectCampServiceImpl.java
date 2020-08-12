@@ -55,8 +55,8 @@ public class SelectCampServiceImpl implements SelectCampService {
 	}
 
 	@Override
-	public List<CampVo> searchList(String camp_area, String camp_location) throws Exception {
-		return selectCampDao.searchList(camp_area, camp_location);
+	public List<CampVo> searchList(String camp_area, String camp_location , PagingDto pagingDto) throws Exception {
+		return selectCampDao.searchList(camp_area, camp_location, pagingDto);
 	}
 
 	@Override
@@ -70,8 +70,8 @@ public class SelectCampServiceImpl implements SelectCampService {
 	}
 
 	@Override
-	public CampRecommendVo recommendCheck(String user_id) throws Exception {
-		return selectCampDao.recommendCheck(user_id);
+	public CampRecommendVo recommendCheck(CampRecommendVo campRecommendVo) throws Exception {
+		return selectCampDao.recommendCheck(campRecommendVo);
 	}
 
 	@Override
