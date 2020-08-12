@@ -56,10 +56,10 @@ th, td {
   }
   
 .listTable {
- 	width: 100%; 
-	margin: 0px auto; 
- 	position: relative; 
- 	color: black; 
+/*  	width: 100%;  */
+/* 	margin: 0px auto;  */
+/*  	position: relative;  */
+/*  	color: black;  */
 }
 .str {
 	color: gray;

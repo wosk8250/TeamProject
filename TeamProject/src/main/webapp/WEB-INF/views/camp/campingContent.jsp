@@ -72,13 +72,12 @@ ul.tabs li.current {
 #tabMenu {
 	width:60%;
 	rhight: 50px;
-	margin: auto;
 	text-align: center;
 }
-#tab-2content {
-	width:90%;
-	rhight: 50px;
-	text-align: center;
+#tab-2 {
+ 	width:90%; 
+ 	rhight: 50px; 
+	text-align: center; 
 }
 
 </style>
@@ -358,13 +357,14 @@ ul.tabs li.current {
 		<hr>
 	</div>
 </div>
-<div id="tab-2content" class="tab-content">
+<div id="tab-2" class="tab-content">
 	<h2>● ${campVo.camp_name} 요금안내표</h2>
 	</br>
 <div class="container-fluid" id="tabMenu">
 	<div class="row">
 		<div class="col-md-12">
 			<table class="table table-bordered" id="tableSize">
+				<thead>
 				<h2>일반캠핑</h2>
 				</thead>
 				<tbody>
