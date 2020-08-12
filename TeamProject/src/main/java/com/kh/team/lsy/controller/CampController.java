@@ -62,6 +62,7 @@ public class CampController {
 		return "camp/home";
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value = "/locationArea/{camp_area}", method = RequestMethod.GET)
 	public List<String> locationArea(@PathVariable("camp_area") String camp_area) throws Exception {
@@ -103,10 +104,10 @@ public class CampController {
 	@RequestMapping(value = "/recommend", method = RequestMethod.POST)
 	public String recommend(CampRecommendVo campRecommendVo) throws Exception {
 		System.out.println("recommend, camp_no" + campRecommendVo);
-		CampRecommendVo vo = selectCampService.recommendCheck(campRecommendVo.getUser_id());
+		CampRecommendVo vo = selectCampService.recommendCheck(campRecommendVo);
 		if(vo != null) {
 			return "fail";
-		} 
+		}
 		System.out.println("insert");
 		selectCampService.recommendInsert(campRecommendVo);// 추천 테이블
 		selectCampService.recommend(campRecommendVo.getCamp_no());// 추천 테이블

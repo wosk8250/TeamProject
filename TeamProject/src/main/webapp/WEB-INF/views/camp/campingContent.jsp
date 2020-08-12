@@ -10,14 +10,14 @@ ul.tabs {
 
 ul.tabs li {
 	display: inline-block;
-	background: #898989;
-	color: white;
+	background: #f0f0f0;
+	color: black;
 	padding: 10px 15px;
 	cursor: pointer;
 }
 
 ul.tabs li.current {
-	background: #e0e0e0;
+	background: #898989;
 	color: #222;
 }
 
@@ -27,6 +27,7 @@ ul.tabs li.current {
 }
 
 .tab-content.current {
+/* 	display: inherit; */
 	display: inherit;
 }
 
@@ -81,9 +82,12 @@ ul.tabs li.current {
 }
 #btnRecommend {
 	float: left;
-	margin-left: 70%;
+	margin-left: 60%;
 }
-
+#imageDiv {
+	width: 100%;
+	text-align: center
+}
 </style>
 
 
@@ -228,7 +232,6 @@ ul.tabs li.current {
 				});
 	});
 	$(function() {
-
 		$('ul.tabs li').click(function() {
 			var tab_id = $(this).attr('data-tab');
 
@@ -283,15 +286,13 @@ ul.tabs li.current {
 					</tr>
 					<tr>
 						<th>홈페이지</th>
-						<td><a href="${campVo.camp_http}">${campVo.camp_http}</a></td>
+						<td><a href="https://${campVo.camp_http}" target="_blank">${campVo.camp_http}</a></td>
 					</tr>
 					<tr>
 						<th></th>
 						<td><button class="btn btn-large btn-success" type="button" id="btnRecommend" name="btnRecommend">추천하기</button></td>
-						
 						<td>
-							 	 <a id="modal-649695" href="#modal-container-649695" role="button" class="btn btn-dark" data-toggle="modal">예약하기</a>
-			
+							<a id="modal-649695" href="#modal-container-649695" role="button" class="btn btn-dark" data-toggle="modal">예약하기</a>
 								<div class="modal fade" id="modal-container-649695" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
@@ -327,13 +328,10 @@ ul.tabs li.current {
 												</button>
 											</div>
 										</div>
-										
 								</div>
-			</div>
-							
+							</div>
 						</td>
 					</tr>
-					
 				</tbody>
 			</table>
 		</div>
@@ -399,11 +397,9 @@ ul.tabs li.current {
 		</div>
 	</div>
 </div>
+<hr>
 </div>
-
 </br>
-
-
 	<div class="mapDiv" id="map" style="width: 63%; height: 350px;"></div>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6a7370418a9ba06a9222aff299cacd04&libraries=services"></script>

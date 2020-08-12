@@ -85,8 +85,8 @@ public class SelectCampDaoImpl implements SelectCampDao {
 	}
 
 	@Override
-	public CampRecommendVo recommendCheck(String user_id) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "recommendCheck", user_id);
+	public CampRecommendVo recommendCheck(CampRecommendVo campRecommendVo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "recommendCheck", campRecommendVo);
 	}
 
 	@Override

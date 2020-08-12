@@ -30,7 +30,7 @@ public interface SelectCampService {
 	
 	public void recommend(int camp_no) throws Exception;
 	
-	public CampRecommendVo recommendCheck(String user_id) throws Exception;
+	public CampRecommendVo recommendCheck(CampRecommendVo campRecommendVo) throws Exception;
 	
 	public void recommendInsert(CampRecommendVo campRecommendVo) throws Exception; 
 	

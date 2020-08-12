@@ -54,15 +54,8 @@ th, td {
     padding: 10px;
   }
   
-.listTable {
-/* 	float: left; */
-/* 	margin-left: 10%; */
-}
 .str {
 	color: gray;
-}
-#pagingDiv {
-
 }
 </style>
 <script>
@@ -182,6 +175,39 @@ th, td {
 						output += "</div>";
 						output += "</div>";
 						$("#campingDiv").append(output);
+						
+// 						function(totalCnt, dataSize, pagesize, pageNo, token) {
+// 							totalCnt = parseInt(totalCnt); // 전체 수
+// 							dataSize = parseInt(dataSize); // 페이지당 수
+// 							pageSize = parseInt(pageSize); // 그룹범위
+// 							pageNo = parseInt(pageNo); // 현재
+							
+// 							var html = new Array();
+// 							if(totalCnt = 0) {
+// 							return "";
+// 							}
+// 							var pageCnt = totalCnt % dataSize;
+// 							if(pageCnt == 0) {
+// 								pageCnt = parseInt(totalCnt/dataSize);
+// 							}else{
+// 							pageCnt = parseInt(totalCnt/dataSize) + 1;			
+// 							}
+							
+// 							var pRCnt = parseInt(pageNo/pageSize);
+// 							if(pageNo % pageSize == 0) {
+// 							pRCnt = parseInt(pageNo/pageSize) - 1;			
+// 							}
+							
+// 							if(pageNo > pageSize) {
+// 								var s2;
+// 								if(pageNo % pageSize == 0){
+// 									s2 = pageNo - pageSize;				
+// 								} else {
+// 									s2 = pageNo - pageNo % pageSize;
+// 								}
+// 								html.push("<a href=javascript:goPaging_" + token + '')
+// 							}
+// 						}
 						
 						
 				}
@@ -371,4 +397,7 @@ th, td {
 		</div>
 	</div>
 </div>
+
+
+
 <%@ include file="../include/footer.jsp"%>

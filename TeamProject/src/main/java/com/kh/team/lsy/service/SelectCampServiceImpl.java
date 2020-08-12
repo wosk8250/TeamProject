@@ -68,8 +68,8 @@ public class SelectCampServiceImpl implements SelectCampService {
 	}
 
 	@Override
-	public CampRecommendVo recommendCheck(String user_id) throws Exception {
-		return selectCampDao.recommendCheck(user_id);
+	public CampRecommendVo recommendCheck(CampRecommendVo campRecommendVo) throws Exception {
+		return selectCampDao.recommendCheck(campRecommendVo);
 	}
 
 	@Override
