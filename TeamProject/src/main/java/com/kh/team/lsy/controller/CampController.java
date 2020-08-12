@@ -48,15 +48,20 @@ public class CampController {
 	@RequestMapping(value = "/home" , method = RequestMethod.GET)
 	public String home(Model model,  PagingDto pagingDto, MyReviewPagingDto myReviewPagingDto) throws Exception {
 		
+		System.out.println(myReviewPagingDto.getCamp_area());
+		System.out.println(myReviewPagingDto.getCamp_location());
 		List<AreaCampLocationVo> list = selectCampService.campSelect();//검색창
 		if(myReviewPagingDto.getCamp_area() != null) {
+			System.out.println("조인");
 			myReviewPagingDto.setmyReviewPageInfo();
 			int totalCount = selectCampService.SearchCount(myReviewPagingDto);
 			myReviewPagingDto.setTotalCount(totalCount);
 			
-			List<CampJoinVo> campList = selectCampService.mainSearchList(myReviewPagingDto);
-			model.addAttribute("campList" , campList);
+			List<CampVo> campJoinList = selectCampService.mainSearchList(myReviewPagingDto);
+			System.out.println("campJoinList:" + campJoinList);
+			model.addAttribute("campJoinList" , campJoinList);
 		}else {
+			System.out.println("캠프");
 			pagingDto.setPageInfo();
 			int totalCount = selectCampService.pageCount(pagingDto);
 			pagingDto.setTotalCount(totalCount);

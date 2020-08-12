@@ -57,7 +57,7 @@ public interface SelectCampDao {
 	public List<CampVo> recommendTop10() throws Exception;
 	
 	//메인페이지 -> 검색 페이지
-	public List<CampJoinVo> mainSearchList(MyReviewPagingDto myReviewPagingDto) throws Exception;
+	public List<CampVo> mainSearchList(MyReviewPagingDto myReviewPagingDto) throws Exception;
 	
 	//검색한 갯수
 	public int SearchCount(MyReviewPagingDto myReviewPagingDto) throws Exception;

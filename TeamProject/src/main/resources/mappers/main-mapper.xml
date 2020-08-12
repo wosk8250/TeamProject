@@ -128,11 +128,11 @@
 	</select>
 	
 	<!-- 메인페이지 -> 검색 페이지 -->
-	<select id="mainSearchList" resultType="CampJoinVo">
+	<select id="mainSearchList" resultType="CampVo">
 		select *
 			from(select rownum rnum, a.*
 				from(select * from tbl_camp camp
-            		full outer join tbl_amenities b on a.camp_no = b.camp_no
+            		full outer join tbl_amenities b on camp.camp_no = b.camp_no
 					where camp_area = #{camp_area} and camp_location = #{camp_location}
 					order by recommend DESC) a)
 		where rnum between #{startRow} and #{endRow}

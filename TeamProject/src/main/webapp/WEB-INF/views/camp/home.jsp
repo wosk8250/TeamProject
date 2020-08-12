@@ -326,7 +326,49 @@ th, td {
 				</thead>
 				<tbody>
 <!-- 				style="background-color: #F9FFFF;" -->
-				<c:forEach items="${campList}" var="CampVo">
+<c:choose>
+	<c:when test="${campJoinList != null}">
+	<!-- 조인 -->
+	<c:forEach items="${campJoinList}" var="CampVo">
+						<th><img width="200" height="200" src="/upload/displayCampingImg?fileName=${CampVo.thumbnail}"></th>
+						<th><h2><a href="/camp/campingContent" class="a_title" data-camp_no="${CampVo.camp_no}"><i class="str">[${CampVo.camp_area} ${CampVo.camp_location}] ${CampVo.camp_name}</i></a></h2></br>
+							<span id="contentSpan">${CampVo.camp_intro}</span></br></br>
+							<img width="20" height="20" src="/resources/image/locations.png">&nbsp${CampVo.camp_address}
+							&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+							<span><img width="20" height="20" src="/resources/image/calling1.png">&nbsp${CampVo.camp_phone}</span>
+						</th>
+							<th>
+							<div class="camp_item_box">
+							<ul>
+							<c:if test="${CampVo.wifi == '1'}">
+									<li>무선인터넷 <i class="fa fa-wifi" aria-hidden="true"></i></li>
+							</c:if>		
+							<c:if test="${CampVo.power == '1'}">
+									<li>전기 <i class="fa fa-bolt" aria-hidden="true"></i></li>
+							</c:if>
+							<c:if test="${CampVo.hotwater == '1'}">
+									<li>온수 <i class="fa fa-shower" aria-hidden="true"></i></li>
+							</c:if>
+							<c:if test="${CampVo.trail == '1'}">
+									<li>산책로 <i class="fa fa-leaf" aria-hidden="true"></i></li>
+							</c:if>
+							<c:if test="${CampVo.mart == '1'}">
+									<li>마트,편의점	<i class="fa fa-shopping-basket" aria-hidden="true"></i></li>
+							</c:if>
+							<c:if test="${CampVo.park == '1'}">
+									<li>주차장 <i class="fa fa-car" aria-hidden="true"></i></li>
+							</c:if>
+							</ul>
+							</div>
+						</th>
+						<td><button id="viewbtn" type="btn" class="btn btn-sm btn-success">조회수 : ${CampVo.viewcnt}</button></br>
+							<button type="recommendbtn" class="btn btn-sm btn-danger">추천수 : ${CampVo.recommend}</button></td>
+					</tr>
+			 		</c:forEach>
+	</c:when>
+	<c:otherwise>
+	<!-- 캠프리스트 -->
+	<c:forEach items="${campList}" var="CampVo">
 						<th><img width="200" height="200" src="/upload/displayCampingImg?fileName=${CampVo.thumbnail}"></th>
 						<th><h2><a href="/camp/campingContent" class="a_title" data-camp_no="${CampVo.camp_no}"><i class="str">[${CampVo.camp_area} ${CampVo.camp_location}] ${CampVo.camp_name}</i></a></h2></br>
 							<span id="contentSpan">${CampVo.camp_intro}</span></br></br>
@@ -364,6 +406,8 @@ th, td {
 							<button type="recommendbtn" class="btn btn-sm btn-danger">추천수 : ${CampVo.recommend}</button></td>
 					</tr>
 			 		</c:forEach>
+	</c:otherwise>
+</c:choose>
 				</tbody>
 			</table>
 		</div>

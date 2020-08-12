@@ -26,6 +26,12 @@ public class CampVo {
 	private String camp_peakweekdays;
 	private String camp_peakweekend;
 	private String camp_intro;
+	private String power;
+	private String wifi;
+	private String hotwater;
+	private String trail;
+	private String mart;
+	private String park;
 	
 	public CampVo() {
 		super();
@@ -45,6 +51,67 @@ public class CampVo {
 	}
 	
 	
+	
+
+	public String getPower() {
+		return power;
+	}
+
+
+	public void setPower(String power) {
+		this.power = power;
+	}
+
+
+	public String getWifi() {
+		return wifi;
+	}
+
+
+	public void setWifi(String wifi) {
+		this.wifi = wifi;
+	}
+
+
+	public String getHotwater() {
+		return hotwater;
+	}
+
+
+	public void setHotwater(String hotwater) {
+		this.hotwater = hotwater;
+	}
+
+
+	public String getTrail() {
+		return trail;
+	}
+
+
+	public void setTrail(String trail) {
+		this.trail = trail;
+	}
+
+
+	public String getMart() {
+		return mart;
+	}
+
+
+	public void setMart(String mart) {
+		this.mart = mart;
+	}
+
+
+	public String getPark() {
+		return park;
+	}
+
+
+	public void setPark(String park) {
+		this.park = park;
+	}
+
 
 	public String getCamp_intro() {
 		return camp_intro;
@@ -235,6 +302,7 @@ public class CampVo {
 		this.user_id = user_id;
 	}
 
+
 	@Override
 	public String toString() {
 		return "CampVo [camp_no=" + camp_no + ", camp_address=" + camp_address + ", camp_phone=" + camp_phone
@@ -244,12 +312,10 @@ public class CampVo {
 				+ ", recommend=" + recommend + ", viewcnt=" + viewcnt + ", operatingday=" + operatingday + ", user_id="
 				+ user_id + ", camp_operation=" + camp_operation + ", camp_weekdays=" + camp_weekdays
 				+ ", camp_weekend=" + camp_weekend + ", camp_peakweekdays=" + camp_peakweekdays + ", camp_peakweekend="
-				+ camp_peakweekend + ", camp_intro=" + camp_intro + "]";
+				+ camp_peakweekend + ", camp_intro=" + camp_intro + ", power=" + power + ", wifi=" + wifi
+				+ ", hotwater=" + hotwater + ", trail=" + trail + ", mart=" + mart + ", park=" + park + "]";
 	}
 
-
-
-
-
+	
 
 }

@@ -109,12 +109,15 @@ public class SelectCampServiceImpl implements SelectCampService {
 	}
 
 	@Override
-	public List<CampJoinVo> mainSearchList(MyReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampVo> mainSearchList(MyReviewPagingDto myReviewPagingDto) throws Exception {
+		List<CampVo> a = selectCampDao.mainSearchList(myReviewPagingDto);
+		System.out.println("a : " + a);
 		return selectCampDao.mainSearchList(myReviewPagingDto);
 	}
 
 	@Override
 	public int SearchCount(MyReviewPagingDto myReviewPagingDto) throws Exception {
+		
 		return selectCampDao.SearchCount(myReviewPagingDto);
 	}
 	

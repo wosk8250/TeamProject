@@ -124,8 +124,8 @@ public class SelectCampDaoImpl implements SelectCampDao {
 
 	//메인페이지 -> 검색 페이지
 	@Override
-	public List<CampJoinVo> mainSearchList(MyReviewPagingDto myReviewPagingDto) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "searchList", myReviewPagingDto);
+	public List<CampVo> mainSearchList(MyReviewPagingDto myReviewPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "mainSearchList", myReviewPagingDto);
 	}
 
 	@Override
