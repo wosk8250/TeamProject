@@ -10,7 +10,7 @@ import com.kh.team.domain.DemeritVo;
 import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.ksk.persistence.UserDao;
 
 @Repository
@@ -75,20 +75,20 @@ public class UserServiceImpl implements UserService {
 
 	// 내가 쓴 리뷰
 	@Override
-	public List<ReviewVo> myReviewList(myReviewPagingDto pagingDto) throws Exception {
+	public List<ReviewVo> myReviewList(MyReviewPagingDto pagingDto) throws Exception {
 		List<ReviewVo> list = userDao.myReviewList(pagingDto);
 		return list;
 	}
 
 	// 리뷰 갯수
 	@Override
-	public int getCount(myReviewPagingDto pagingDto) throws Exception {
+	public int getCount(MyReviewPagingDto pagingDto) throws Exception {
 		return userDao.getCount(pagingDto);
 	}
 	
 	// 예약 갯수
 	@Override
-	public int getReservationCount(myReviewPagingDto pagingDto) throws Exception {
+	public int getReservationCount(MyReviewPagingDto pagingDto) throws Exception {
 		return userDao.getReservationCount(pagingDto);
 	}
 
@@ -122,8 +122,14 @@ public class UserServiceImpl implements UserService {
 
 	//나의 예약조회
 	@Override
-	public List<ReservationVo> myReservation(myReviewPagingDto pagingDto) throws Exception {
+	public List<ReservationVo> myReservation(MyReviewPagingDto pagingDto) throws Exception {
 		return userDao.myReservation(pagingDto);
+	}
+
+	//예약취소
+	@Override
+	public void cancelReservation(String startdate, String user_id) throws Exception {
+		userDao.cancelReservation(startdate, user_id);
 	}
 
 }

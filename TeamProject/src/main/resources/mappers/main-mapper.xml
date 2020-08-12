@@ -11,7 +11,7 @@
 		select distinct camp_location from tbl_camp where camp_area = #{camp_area}
 	</select>
 	
-		
+	<!-- 시 단위 중복 제외 select -->
 	<select id="campSelect" resultType="AreaCampLocationVo">
 		select distinct camp_area from tbl_camp
 	</select>
@@ -127,4 +127,19 @@
 		select * from tbl_amenities
 	</select>
 	
+	<!-- 메인페이지 -> 검색 페이지 -->
+	<select id="mainSearchList" resultType="CampJoinVo">
+		select *
+			from(select rownum rnum, a.*
+				from(select * from tbl_camp camp
+            		full outer join tbl_amenities b on a.camp_no = b.camp_no
+					where camp_area = #{camp_area} and camp_location = #{camp_location}
+					order by recommend DESC) a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+		<!-- 게시글 갯수 -->
+	<select id="SearchCount" resultType="int">
+		select count(*) from tbl_camp
+        where camp_area = #{camp_area} and camp_location = #{camp_location}
+	</select>
 </mapper>

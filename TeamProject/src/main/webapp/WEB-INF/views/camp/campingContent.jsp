@@ -286,7 +286,7 @@ ul.tabs li.current {
 					</tr>
 					<tr>
 						<th>홈페이지</th>
-						<td><a href="https://${campVo.camp_http}" target="_blank">${campVo.camp_http}</a></td>
+						<td><a href="https://${campVo.camp_http}">${campVo.camp_http}</a></td>
 					</tr>
 					<tr>
 						<th></th>

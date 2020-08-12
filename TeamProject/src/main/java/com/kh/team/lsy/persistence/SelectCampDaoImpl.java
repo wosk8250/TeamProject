@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampLocationVo;
+import com.kh.team.domain.CampJoinVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
 import com.kh.team.domain.CampingLocationVo;
@@ -19,7 +20,8 @@ import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.PagingDto;
 import com.kh.team.domain.UserVo;
-import com.kh.team.domain.searchDto;
+import com.kh.team.domain.MyReviewPagingDto;
+import com.kh.team.domain.SearchDto;
 import com.kh.team.domain.ReviewVo;
 
 @Repository
@@ -63,10 +65,6 @@ public class SelectCampDaoImpl implements SelectCampDao {
 		paramMap.put("camp_area", camp_area);
 		paramMap.put("camp_location", camp_location);
 		return sqlSession.selectList(NAMESPACE + "searchList", paramMap);
-	}
-	@Override
-	public List<CampVo> mainSearchList(searchDto searchDto) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "searchList", searchDto);
 	}
 
 	@Override
@@ -124,6 +122,18 @@ public class SelectCampDaoImpl implements SelectCampDao {
 		return sqlSession.selectList(NAMESPACE + "amenitiesList");
 	}
 
+	//메인페이지 -> 검색 페이지
+	@Override
+	public List<CampJoinVo> mainSearchList(MyReviewPagingDto myReviewPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "searchList", myReviewPagingDto);
+	}
+
+	@Override
+	public int SearchCount(MyReviewPagingDto myReviewPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "SearchCount", myReviewPagingDto);
+	}
+
+	
 
 	
 }

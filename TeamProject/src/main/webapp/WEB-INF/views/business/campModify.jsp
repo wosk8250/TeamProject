@@ -85,8 +85,8 @@ $(function() {
 		});		
 	});
 
-	var insert = ["#camp_name","#camp_address","#camp_phone","#camp_http","#camp_area","#camp_location","#camp_content","#power","#wifi","#hotwater","#trail","#mart","#park", "#camp_peakweekdays", "#camp_peakweekend", "#camp_weekdays", "#camp_weekend"];
-	var write = ["#camping_name","#roadFullAddr","#camping_phone","#camping_http","#siNm","#sggNm","#camping_content","#camping_power","#camping_wifi","#camping_hotwater","#camping_trail","#camping_mart","#camping_park", "#camping_peakweekdays", "#camping_peakweekend", "#camping_weekdays", "#camping_weekend"];
+	var insert = ["#camp_name","#camp_address","#camp_phone","#camp_http","#camp_location","#camp_area","#camp_content","#power","#wifi","#hotwater","#trail","#mart","#park", "#camp_peakweekdays", "#camp_peakweekend", "#camp_weekdays", "#camp_weekend"];
+	var write = ["#camping_name","#roadFullAddr","#camping_phone","#camping_http","#sggNm","#siNm","#camping_content","#camping_power","#camping_wifi","#camping_hotwater","#camping_trail","#camping_mart","#camping_park", "#camping_peakweekdays", "#camping_peakweekend", "#camping_weekdays", "#camping_weekend"];
 	var writecheck = ["#camping_name","#roadFullAddr","#camping_phone","#camping_http","#camping_content"];
 	//요금표
 	var campFare = ["#camp_peakweekdays", "#camp_peakweekend", "#camp_weekdays", "#camp_weekend"];

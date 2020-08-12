@@ -1,6 +1,6 @@
 package com.kh.team.domain;
 
-public class myReviewPagingDto {
+public class MyReviewPagingDto {
 	private int page =1;//보여지는 페이지(현제 페이지)
 	private int perPage = 10;//보여지는 리뷰 목록의 갯수
 	private int startRow =1; //맨 첫페이지
@@ -10,13 +10,15 @@ public class myReviewPagingDto {
 	private int totalPage;//총 페이지
 	private int totalCount;//전체 게시글 수
 	private String user_id;
-	private String location;
-	private String area;
+	private String camp_area;//ex)울산광역시
+	private String camp_location;//ex)남구
 	private String textReview;
 	private String searchCnd;
+	private String searchType;
+	private String keyword;
 	
 	
-	public myReviewPagingDto() {
+	public MyReviewPagingDto() {
 		super();
 	}
 	
@@ -31,12 +33,10 @@ public class myReviewPagingDto {
 		this.endPage = (int) (Math.ceil((double)page / 10) * 10);
 		this.startPage = this.endPage - 10 + 1;
 	}
-	
-	
 
-
-public myReviewPagingDto(int page, int perPage, int startRow, int endRow, int startPage, int endPage, int totalPage,
-			int totalCount, String user_id, String location, String area, String textReview, String searchCnd) {
+	public MyReviewPagingDto(int page, int perPage, int startRow, int endRow, int startPage, int endPage, int totalPage,
+			int totalCount, String user_id, String camp_area, String camp_location, String textReview,
+			String searchCnd) {
 		super();
 		this.page = page;
 		this.perPage = perPage;
@@ -47,39 +47,10 @@ public myReviewPagingDto(int page, int perPage, int startRow, int endRow, int st
 		this.totalPage = totalPage;
 		this.totalCount = totalCount;
 		this.user_id = user_id;
-		this.location = location;
-		this.area = area;
+		this.camp_area = camp_area;
+		this.camp_location = camp_location;
 		this.textReview = textReview;
 		this.searchCnd = searchCnd;
-	}
-
-//	public myReviewPagingDto(int page, int perPage, int startRow, int endRow, int startPage, int endPage, int totalPage,
-//			int totalCount) {
-//		super();
-//		this.page = page;
-//		this.perPage = perPage;
-//		this.startRow = startRow;
-//		this.endRow = endRow;
-//		this.startPage = startPage;
-//		this.endPage = endPage;
-//		this.totalPage = totalPage;
-//		this.totalCount = totalCount;
-//	}
-	
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public String getArea() {
-		return area;
-	}
-
-	public void setArea(String area) {
-		this.area = area;
 	}
 
 	public int getPage() {
@@ -169,22 +140,48 @@ public myReviewPagingDto(int page, int perPage, int startRow, int endRow, int st
 		this.searchCnd = searchCnd;
 	}
 
+	public String getCamp_area() {
+		return camp_area;
+	}
+
+	public void setCamp_area(String camp_area) {
+		this.camp_area = camp_area;
+	}
+
+	public String getCamp_location() {
+		return camp_location;
+	}
+
+	public void setCamp_location(String camp_location) {
+		this.camp_location = camp_location;
+	}
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
 	@Override
 	public String toString() {
 		return "myReviewPagingDto [page=" + page + ", perPage=" + perPage + ", startRow=" + startRow + ", endRow="
 				+ endRow + ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage=" + totalPage
-				+ ", totalCount=" + totalCount + ", user_id=" + user_id + ", location=" + location + ", area=" + area
-				+ ", textReview=" + textReview + ", searchCnd=" + searchCnd + "]";
+				+ ", totalCount=" + totalCount + ", user_id=" + user_id + ", camp_area=" + camp_area
+				+ ", camp_location=" + camp_location + ", textReview=" + textReview + ", searchCnd=" + searchCnd
+				+ ", searchType=" + searchType + ", keyword=" + keyword + "]";
 	}
 
 
-//	@Override
-//	public String toString() {
-//		return "myReviewPagingDto [page=" + page + ", perPage=" + perPage + ", startRow=" + startRow + ", endRow="
-//				+ endRow + ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage=" + totalPage
-//				+ ", totalCount=" + totalCount + ", user_id=" + user_id + "]";
-//	}
-	
 
 	
 	

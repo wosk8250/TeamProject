@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampLocationVo;
+import com.kh.team.domain.CampJoinVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
 import com.kh.team.domain.CampingLocationVo;
@@ -12,7 +13,9 @@ import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.PagingDto;
 import com.kh.team.domain.UserVo;
+import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.domain.ReviewVo;
+import com.kh.team.domain.SearchDto;
 
 public interface SelectCampService {
 	
@@ -50,5 +53,9 @@ public interface SelectCampService {
 	//추천수 높은 순 캠핑장 보기
 	public List<CampVo> recommendTop10() throws Exception;
 	
+	//메인페이지 -> 검색 페이지
+	public List<CampJoinVo> mainSearchList(MyReviewPagingDto myReviewPagingDto) throws Exception;
 	
+	//검색한 갯수
+	public int SearchCount(MyReviewPagingDto myReviewPagingDto) throws Exception;
 }

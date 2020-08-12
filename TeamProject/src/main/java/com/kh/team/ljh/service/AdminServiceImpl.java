@@ -21,7 +21,7 @@ import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.ljh.persistence.AdminDao;
 import com.kh.team.sjy.persitence.CampNoticeDao;
 @Repository
@@ -269,7 +269,7 @@ public class AdminServiceImpl implements AdminService {
 
 	// 캠핑장 페이징
 	@Override
-	public List<CampVo> campListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampVo> campListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return adminDao.campListPage(myReviewPagingDto);
 	}
 
@@ -280,7 +280,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 	// 삭제된 캠핑장 페이징
 	@Override
-	public List<CampVo> blockCampListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampVo> blockCampListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return adminDao.blockCampListPage(myReviewPagingDto);
 	}
 	
@@ -291,7 +291,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<CampingTipVo> campingTipListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampingTipVo> campingTipListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return adminDao.campingTipListPage(myReviewPagingDto);
 	}
 
@@ -301,7 +301,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<FaqVo> faqListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<FaqVo> faqListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return adminDao.faqListPage(myReviewPagingDto);
 	}
 
@@ -311,7 +311,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<CampNoticeVo> noticeListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampNoticeVo> noticeListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return adminDao.noticeListPage(myReviewPagingDto);
 	}
 
@@ -321,7 +321,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<ReviewVo> reviewListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<ReviewVo> reviewListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return adminDao.reviewListPage(myReviewPagingDto);
 	}
 
@@ -425,29 +425,29 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<CampVo> deletePagingCampList(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampVo> deletePagingCampList(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return adminDao.deletePagingCampList(myReviewPagingDto);
 	}
 
 	@Override
-	public List<CampingTipVo> deletePagingCampingTipList(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampingTipVo> deletePagingCampingTipList(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return adminDao.deletePagingCampingTipList(myReviewPagingDto);
 	}
 
 	
 
 	@Override
-	public List<FaqVo> deletePagingFaqList(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<FaqVo> deletePagingFaqList(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return adminDao.deletePagingFaqList(myReviewPagingDto);
 	}
 
 	@Override
-	public List<CampNoticeVo> deletePagingNoticeList(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampNoticeVo> deletePagingNoticeList(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return adminDao.deletePagingNoticeList(myReviewPagingDto);
 	}
 
 	@Override
-	public List<ReviewVo> deletePagingReviewList(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<ReviewVo> deletePagingReviewList(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return adminDao.deletePagingReviewList(myReviewPagingDto);
 	}
 
@@ -522,7 +522,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<CampVo> waitForRegistrationCamp(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampVo> waitForRegistrationCamp(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return adminDao.waitForRegistrationCamp(myReviewPagingDto);
 	}
 

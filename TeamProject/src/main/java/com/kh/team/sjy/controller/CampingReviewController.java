@@ -18,7 +18,7 @@ import com.kh.team.domain.AreaCampingNameVo;
 
 import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.ReviewVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.sjy.persitence.AreaCampingNameDaoImpl;
 import com.kh.team.sjy.persitence.CampingReviewDaoImpl;
 
@@ -49,7 +49,7 @@ public class CampingReviewController {
 	
 	//캠핑장 후기 목록 
 	@RequestMapping(value="/campingReviewList", method=RequestMethod.GET)
-	public String campingReviewList(myReviewPagingDto myReviewPagingDto, Model model)throws Exception{
+	public String campingReviewList(MyReviewPagingDto myReviewPagingDto, Model model)throws Exception{
 			myReviewPagingDto.setmyReviewPageInfo();
 			int totalCount = campingReviewService.campingReviewListCount(myReviewPagingDto);
 //			System.out.println("totalCount:" + totalCount);
@@ -95,7 +95,7 @@ public class CampingReviewController {
 	
 	//캠핑장 글 내용
 	@RequestMapping(value="/selectReview/{review_no}", method = RequestMethod.GET)
-	public String selectReview(@PathVariable("review_no")int review_no , Model model , myReviewPagingDto myReviewPagingDto) throws Exception{
+	public String selectReview(@PathVariable("review_no")int review_no , Model model , MyReviewPagingDto myReviewPagingDto) throws Exception{
 	
 		System.out.println("review_no:" + review_no);
 		ReviewVo reviewVo = campingReviewDaoImpl.selectReview(review_no);

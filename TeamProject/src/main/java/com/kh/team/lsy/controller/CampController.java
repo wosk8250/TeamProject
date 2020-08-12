@@ -20,15 +20,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampLocationVo;
+import com.kh.team.domain.CampJoinVo;
 import com.kh.team.domain.CampRecommendVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.FaqVo;
+import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.domain.PagingDto;
 import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.UserVo;
-import com.kh.team.domain.searchDto;
+import com.kh.team.domain.SearchDto;
 import com.kh.team.ljh.service.AdminService;
 import com.kh.team.ljh.utile.ReservationDate;
 import com.kh.team.domain.ReviewVo;
@@ -44,20 +46,28 @@ public class CampController {
 	private AdminService adminService;
 
 	@RequestMapping(value = "/home" , method = RequestMethod.GET)
-	public String home(Model model,  PagingDto pagingDto, searchDto searchDto) throws Exception {
-		pagingDto.setPageInfo();
-		int totalCount = selectCampService.pageCount(pagingDto);
-		pagingDto.setTotalCount(totalCount);
-		System.out.println("searchDto" + searchDto);
-		List<AreaCampLocationVo> list = selectCampService.campSelect();
-		List<CampVo> campList = selectCampService.campList(pagingDto);
-		List<AmenitiesVo> amenitiesList = selectCampService.amenitiesList();
+	public String home(Model model,  PagingDto pagingDto, MyReviewPagingDto myReviewPagingDto) throws Exception {
 		
-		
-		System.out.println("list" + list);
+		List<AreaCampLocationVo> list = selectCampService.campSelect();//검색창
+		if(myReviewPagingDto.getCamp_area() != null) {
+			myReviewPagingDto.setmyReviewPageInfo();
+			int totalCount = selectCampService.SearchCount(myReviewPagingDto);
+			myReviewPagingDto.setTotalCount(totalCount);
+			
+			List<CampJoinVo> campList = selectCampService.mainSearchList(myReviewPagingDto);
+			model.addAttribute("campList" , campList);
+		}else {
+			pagingDto.setPageInfo();
+			int totalCount = selectCampService.pageCount(pagingDto);
+			pagingDto.setTotalCount(totalCount);
+			//캠핑장 리스트, 부대시설
+			List<CampVo> campList = selectCampService.campList(pagingDto);
+			List<AmenitiesVo> amenitiesList = selectCampService.amenitiesList();
+			
+			model.addAttribute("campList" , campList);
+			model.addAttribute("amenitiesList", amenitiesList);
+		}
 		model.addAttribute("list" , list);
-		model.addAttribute("campList" , campList);
-		model.addAttribute("amenitiesList", amenitiesList);
 
 		return "camp/home";
 	}

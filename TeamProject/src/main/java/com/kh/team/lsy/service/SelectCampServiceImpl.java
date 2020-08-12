@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampLocationVo;
+import com.kh.team.domain.CampJoinVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
 import com.kh.team.domain.CampingLocationVo;
@@ -17,6 +18,7 @@ import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.PagingDto;
 import com.kh.team.domain.UserVo;
+import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.lsy.persistence.SelectCampDao;
 
@@ -104,6 +106,16 @@ public class SelectCampServiceImpl implements SelectCampService {
 	@Override
 	public List<AmenitiesVo> amenitiesList() throws Exception {
 		return selectCampDao.amenitiesList();
+	}
+
+	@Override
+	public List<CampJoinVo> mainSearchList(MyReviewPagingDto myReviewPagingDto) throws Exception {
+		return selectCampDao.mainSearchList(myReviewPagingDto);
+	}
+
+	@Override
+	public int SearchCount(MyReviewPagingDto myReviewPagingDto) throws Exception {
+		return selectCampDao.SearchCount(myReviewPagingDto);
 	}
 	
 

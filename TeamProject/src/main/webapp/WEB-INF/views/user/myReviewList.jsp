@@ -33,6 +33,7 @@ $(function () {
 		e.preventDefault(); // 브라우저의 기본기능(a:링크) 막기
 		var page = $(this).attr("href").trim();
 		$("#myReviewFrmPage > input[name=page]").val(page);
+		$("#myReviewFrmPage > input[name=page]").val(page);
 		$("#myReviewFrmPage").submit();
 	});
 });
