@@ -9,9 +9,6 @@
 		text-align: center;
 		color: black;
 	}
-	#td-title {
-		text-align: left;
-	}
 	th {
 		background-color: #4f6fcc25;
 	}
@@ -46,10 +43,10 @@ $(function () {
 		<div class="col-md-8">
 			<ul class="nav nav-tabs nav-fill">
 				<li class="nav-item">
-					<a class="nav-link active" id="mylink-active" href="/user/myReviewList">내가 작성한 후기</a>
+					<a class="nav-link" id="mylink" href="/user/myReviewList">내가 작성한 후기</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" id="mylink" href="/user/myReservation">예약목록</a>
+					<a class="nav-link active" id="mylink-active" href="/user/myReservation">예약목록</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" id="mylink" href="/user/profile">회원정보</a>
@@ -70,22 +67,22 @@ $(function () {
 				<thead>
 					<tr>
 						<th>번호</th>
-						<th width="450">제목</th>
-						<th>작성자</th>
 						<th>캠핑장 이름</th>
-						<th>등록일</th>
+						<th>입실</th>
+						<th>퇴실</th>
+						<th>예약 취소</th>
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${reviewList}" var="reviewVo">
+				<c:forEach items="${list}" var="reservationVo">
 					<tr>
-						<td>${reviewVo.review_no}</td>
-						<td width="450" id="td-title">
-							<a href="/camp/selectReview/${reviewVo.review_no}">${reviewVo.review_title}</a>
+						<td>${reservationVo.camp_no}</td>
+						<td>
+							<a href="/camp/selectReview/${reservationVo.camp_no}">${reservationVo.camp_name}</a>
 						</td>
-						<td>${reviewVo.review_id}</td>
-						<td>${reviewVo.review_campingname}</td>
-						<td>${reviewVo.review_date}</td>
+						<td>${reservationVo.startdate}</td>
+						<td>${reservationVo.enddate}</td>
+						<td><a class="btn btn-warning btn-sm" style="color: black;">예약 취소</a></td>
 					</tr>
 				</c:forEach>
 				</tbody>

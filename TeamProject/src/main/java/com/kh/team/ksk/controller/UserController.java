@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.domain.DemeritVo;
+import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
 import com.kh.team.domain.myReviewPagingDto;
@@ -218,6 +219,7 @@ public class UserController {
 		pagingDto.setmyReviewPageInfo();
 		int totalCount = userService.getCount(pagingDto);
 		pagingDto.setTotalCount(totalCount);
+		
 		List<ReviewVo> reviewList = userService.myReviewList(pagingDto);
 		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("reviewList", reviewList);
@@ -228,6 +230,24 @@ public class UserController {
 	@RequestMapping(value = "/findPw", method = RequestMethod.GET)
 	public void findPwGet()throws Exception{
 		
+	}
+	
+	//나의 예약목록
+	@RequestMapping(value = "/myReservation", method = RequestMethod.GET)
+	public String myReservation(Model model, HttpServletRequest request, myReviewPagingDto pagingDto)throws Exception{
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		pagingDto.setUser_id(user_id);
+		
+		pagingDto.setmyReviewPageInfo();
+		int totalCount = userService.getReservationCount(pagingDto);
+		pagingDto.setTotalCount(totalCount);
+		
+		List<ReservationVo> list = userService.myReservation(pagingDto);
+		System.out.println("list : " + list);
+		model.addAttribute("pagingDto", pagingDto);
+		model.addAttribute("list", list);
+		return "/user/myReservation";
 	}
 	
 

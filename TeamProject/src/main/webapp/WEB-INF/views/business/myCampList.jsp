@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 <style>
+
 	div {
 		color: black;
 	}
@@ -60,22 +61,11 @@ $(function () {
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<ul class="nav nav-tabs nav-fill">
-			<c:if test="${sessionScope.checkAdmin == 2}">
 				<li class="nav-item">
-					<a class="nav-link active" id="mylink-active" href="/business/myCampList">내가 올린 캠핑장</a>
-				</li>
-			</c:if>
-				<li class="nav-item">
-					<a class="nav-link" id="mylink" href="/user/myReviewList">내가 작성한 후기</a>
-				</li>
-				<li class="nav-item select">
-					<a class="nav-link" id="mylink" href="/user/profile">회원정보</a>
+					<a class="nav-link" id="mylink" href="/business/campForm">캠핑장 등록</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" id="mylink" href="/user/updateInfo">회원정보 수정</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" id="mylink" href="/user/updatePw">비밀번호 수정</a>
+					<a class="nav-link active" id="mylink-active" href="/business/myCampList">캠핑장 리스트</a>
 				</li>
 			</ul>
 		</div>

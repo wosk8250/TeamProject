@@ -392,7 +392,7 @@
 	<!-- 지역 & 시구 입력 -->
 	<insert id="insertAreaCampingName">
 		insert into tbl_area_camping_name(area_camping_no,area_si,area_gu,area_camping)
-		values(SEQ_AREA_CAMPING_NO.nextval,#{area_si},#{area_gu},#{area_camping})
+		values(#{area_camping_no},#{area_si},#{area_gu},#{area_camping})
 	</insert>
 	<!-- 리뷰 검색 -->
 	<select id="searchReview" resultType="ReviewVo">
@@ -507,8 +507,8 @@
 	</select>
 	<!-- 예약 입력 -->
 	<insert id="reservationDate">
-		insert into tbl_reservation(camp_no,startdate,enddate,user_id)
-		values(#{camp_no},#{startdate},#{enddate},#{user_id})
+		insert into tbl_reservation(camp_no,startdate,enddate,user_id,camp_name, host)
+		values(#{camp_no},#{startdate},#{enddate},#{user_id},#{camp_name},#{host})
 	</insert>
 </mapper>
 
