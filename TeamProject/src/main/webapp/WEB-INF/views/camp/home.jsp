@@ -56,15 +56,15 @@ th, td {
   }
   
 .listTable {
-/*  	width: 100%;  */
-/* 	margin: 0px auto;  */
-/*  	position: relative;  */
-/*  	color: black;  */
+/* 	float: left; */
+/* 	margin-left: 10%; */
 }
 .str {
 	color: gray;
 }
+#pagingDiv {
 
+}
 </style>
 <script>
 
@@ -166,7 +166,7 @@ th, td {
 							console.log(output);
 							console.log("thumb", item.thumbnail);
 							
-							output += "<tr>";
+							output += "<tr>";	
 							output += "<th>" + "<img width='200' height='200' src='/upload/displayCampingImg?fileName=" + item.thumbnail +"'>" + "</th>";
 							output += "<th>" + "<h2>" + "<a href='/camp/campingContent?camp_no="+ item.camp_no +"' class='a_title' data-camp_no='" + item.camp_no + "'>"+ "<i class='str'>" + '[' + item.camp_area + item.camp_location + ']' + item.camp_name + "</i>" + "</a>" + "</h2>" + "</br>" + item.camp_intro + "</br>" + "</br>" + "<img width='20' height='20' src='/resources/image/locations.png'>"+ '&nbsp' +item.camp_address + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + "<span>"+ "<img width='20' height='20' src='/resources/image/calling1.png'>" + '&nbsp' + item.camp_phone +"</span>";
 							output += "</th>";
@@ -182,7 +182,6 @@ th, td {
 						output += "</table>";
 						output += "</div>";
 						output += "</div>";
-						console.log("c");
 						$("#campingDiv").append(output);
 						
 						
@@ -346,7 +345,7 @@ th, td {
 		</div>
 	</div>
 	</br>
-	<div class="row">
+	<div class="row" id="pagingDiv">
 		<div class="col-md-12 text-center" >
 			<nav>
 				<ul class="pagination" >
@@ -372,7 +371,5 @@ th, td {
 			</nav>
 		</div>
 	</div>
-	
-	
 </div>
 <%@ include file="../include/footer.jsp"%>

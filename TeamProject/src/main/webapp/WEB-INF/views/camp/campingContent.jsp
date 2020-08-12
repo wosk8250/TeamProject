@@ -396,6 +396,8 @@ ul.tabs li.current {
 </div>
 
 </br>
+
+
 	<div class="mapDiv" id="map" style="width: 63%; height: 350px;"></div>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6a7370418a9ba06a9222aff299cacd04&libraries=services"></script>
