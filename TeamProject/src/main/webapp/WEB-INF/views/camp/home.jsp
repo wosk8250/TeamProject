@@ -176,7 +176,7 @@ th, td {
 						output += "</div>";
 						$("#campingDiv").append(output);
 						
-// 						function(totalCnt, dataSize, pagesize, pageNo, token) {
+// 							function(totalCnt, dataSize, pagesize, pageNo, token) {
 // 							totalCnt = parseInt(totalCnt); // 전체 수
 // 							dataSize = parseInt(dataSize); // 페이지당 수
 // 							pageSize = parseInt(pageSize); // 그룹범위

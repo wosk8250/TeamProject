@@ -91,8 +91,8 @@ $(function() {
 			});
 			$("#locationSi option:eq(0)").before("<option value='${CampVo.camp_location}' selected>전체/시</option>");	
 		});
-		
 	});
+	
 });
 </script>
 
