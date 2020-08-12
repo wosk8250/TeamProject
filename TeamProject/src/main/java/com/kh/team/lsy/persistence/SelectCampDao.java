@@ -29,9 +29,8 @@ public interface SelectCampDao {
 	
 	public int pageCount(PagingDto pagingDto) throws Exception;
 	
+
 	public List<CampVo> searchList(String camp_area, String camp_location, PagingDto pagingDto) throws Exception;
-	//메인에서 검색
-	public List<CampVo> mainSearchList(SearchDto searchDto) throws Exception;
 	
 	public void viewcnt(int camp_no) throws Exception;
 
