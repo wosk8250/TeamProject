@@ -30,7 +30,7 @@ import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.domain.PagingDto;
 import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.UserVo;
-import com.kh.team.domain.SearchDto;
+
 import com.kh.team.ljh.service.AdminService;
 import com.kh.team.ljh.utile.ReservationDate;
 import com.kh.team.domain.ReviewVo;
