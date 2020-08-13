@@ -13,6 +13,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		System.out.println("Auth inter");
 		HttpSession session = request.getSession();
 			String uri = request.getRequestURI();
 			String Loction = "";

@@ -30,7 +30,7 @@ import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.domain.PagingDto;
 import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.UserVo;
-import com.kh.team.domain.SearchDto;
+
 import com.kh.team.ljh.service.AdminService;
 import com.kh.team.ljh.utile.ReservationDate;
 import com.kh.team.domain.ReviewVo;
@@ -161,6 +161,7 @@ public class CampController {
 		model.addAttribute("CampingTipVo" , CampingTipVo);// 수칙리스트
 		model.addAttribute("faqVo" , faqVo);//질문 리스트
 		model.addAttribute("campVo" , campVo);//추천수 많은 캠핑장10
+		System.out.println("main, session, user_id:" + session.getAttribute("user_id"));
 		return "camp/main";
 	}
 	

@@ -38,10 +38,10 @@ public class BusinessController {
 
 	}
 
-	// 캠핑장 글쓰기 처리
-	@RequestMapping(value = "/campRun", method = RequestMethod.POST)
-	public String campInsert(CampVo campVo, AmenitiesVo amenitiesVo, HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
+	// 캠핑장 글쓰기 처리 
+	@RequestMapping(value = "/campRun", method = RequestMethod.POST) 
+	public String campInsert(CampVo campVo, AmenitiesVo amenitiesVo, HttpSession session) throws Exception {
+//		HttpSession session = request.getSession();
 		String user_id = (String)session.getAttribute("user_id");
 		campVo.setUser_id(user_id);
 		//캠핑장 소개글 글자 자르기
@@ -55,7 +55,7 @@ public class BusinessController {
 		campVo.setCamp_intro(camp_intro);
 		adminService.campInsertRun(campVo, amenitiesVo);
 
-
+		System.out.println("run, session, user_id:"  + session.getAttribute("user_id"));
 		return "redirect:/camp/main";
 	}
 	

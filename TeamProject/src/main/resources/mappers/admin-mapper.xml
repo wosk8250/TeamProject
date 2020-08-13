@@ -70,7 +70,8 @@
 		camp_weekend = #{camp_weekend},
 		camp_peakweekdays = #{camp_peakweekdays},
 		camp_peakweekend = #{camp_peakweekend},
-		camp_intro = #{camp_intro}
+		camp_intro = #{camp_intro},
+		camp_admin = 2
 		where camp_no = #{camp_no}
 	</update>
 	<!-- 캠핑장 삭제 처리 -->
