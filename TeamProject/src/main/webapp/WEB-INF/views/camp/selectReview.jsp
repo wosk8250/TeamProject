@@ -221,7 +221,7 @@ $(function(){
 		</div>
 		<div class="col-md-8">
 		
-			<h3 style="padding: 10px;">캠핑장 후기2</h3>
+			<h3 style="padding: 10px;">캠핑장 후기</h3>
 			
 			<div class="row" id="review_title">
 				<div class="col-md-6">

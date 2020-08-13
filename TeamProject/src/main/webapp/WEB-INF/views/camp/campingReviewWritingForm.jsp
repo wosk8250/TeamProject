@@ -281,7 +281,7 @@ $(function() {
 		}else {
 // 			console.log("not null");
 // 			$(".modal").remove();
-	
+
 			var inputMessage = "<div><span>등록 완료됐습니다.</span></div>";
 			$(".modal-body > div").remove();
 		$(".modal-body").append(inputMessage);
