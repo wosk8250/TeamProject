@@ -18,6 +18,8 @@ public class MyReviewPagingDto {
 	private String searchCnd;
 	private String searchType;
 	private String keyword;
+	private String area;
+	private String location;
 	
 	
 	public MyReviewPagingDto() {
@@ -36,9 +38,13 @@ public class MyReviewPagingDto {
 		this.startPage = this.endPage - 10 + 1;
 	}
 
+
+
+
+
 	public MyReviewPagingDto(int page, int perPage, int startRow, int endRow, int startPage, int endPage, int totalPage,
-			int totalCount, String user_id, String camp_area, String camp_location, String textReview,
-			String searchCnd) {
+			int totalCount, String user_id, String camp_area, String camp_location, String textReview, String searchCnd,
+			String searchType, String keyword, String area, String location) {
 		super();
 		this.page = page;
 		this.perPage = perPage;
@@ -53,6 +59,10 @@ public class MyReviewPagingDto {
 		this.camp_location = camp_location;
 		this.textReview = textReview;
 		this.searchCnd = searchCnd;
+		this.searchType = searchType;
+		this.keyword = keyword;
+		this.area = area;
+		this.location = location;
 	}
 
 	public int getPage() {
@@ -173,15 +183,37 @@ public class MyReviewPagingDto {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+	
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
 
 	@Override
 	public String toString() {
-		return "myReviewPagingDto [page=" + page + ", perPage=" + perPage + ", startRow=" + startRow + ", endRow="
+		return "MyReviewPagingDto [page=" + page + ", perPage=" + perPage + ", startRow=" + startRow + ", endRow="
 				+ endRow + ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage=" + totalPage
 				+ ", totalCount=" + totalCount + ", user_id=" + user_id + ", camp_area=" + camp_area
 				+ ", camp_location=" + camp_location + ", textReview=" + textReview + ", searchCnd=" + searchCnd
-				+ ", searchType=" + searchType + ", keyword=" + keyword + "]";
+				+ ", searchType=" + searchType + ", keyword=" + keyword + ", area=" + area + ", location=" + location
+				+ "]";
 	}
+
+
+
+
 
 
 

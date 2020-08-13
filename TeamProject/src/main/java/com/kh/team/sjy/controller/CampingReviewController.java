@@ -86,9 +86,7 @@ public class CampingReviewController {
 		HttpSession httpSession =  request.getSession();
 		String user_id = (String)httpSession.getAttribute("user_id");
 		reviewVo.setReview_id(user_id);
-//		System.out.println("user_id:"+user_id);
-//		System.out.println("review_id:"+reviewVo.getReview_id());
-//		System.out.println("reviewVo:"+reviewVo);
+
 
 		campingReviewService.campingReviewInsertRun(reviewVo);
 		return "redirect:/camp/campingReviewList";

@@ -40,6 +40,7 @@ select{
 
 
 $(function() {
+	
 	$("#review_area").change(function(){
 		var area_si =$(this).val();
 		
@@ -245,6 +246,7 @@ $(function() {
 		$.get(url, sendData, function(rData) {
 			that.parent().remove();
 		});		
+		
 	});	
 	
 // 	$("#campingReviewWritingRun").submit(function() {
@@ -278,17 +280,26 @@ $(function() {
 
 		}else {
 // 			console.log("not null");
-			$(".modal").remove();
-			var upDiv = $("#uploadedList > div");
-			upDiv.each(function(index) {
-				var filename = $(this).attr("data-filename");
-				var hiddenInput = "<input type='hidden' name='files["+index+"]' value='"+filename+"'/>";
-				$("#campingReviewWritingRun").prepend(hiddenInput);
-			});
+// 			$(".modal").remove();
+	
+			var inputMessage = "<div><span>등록 완료됐습니다.</span></div>";
+			$(".modal-body > div").remove();
+		$(".modal-body").append(inputMessage);
+		var upDiv = $("#uploadedList > div");
+		upDiv.each(function(index) {
+			var filename = $(this).attr("data-filename");
+			var hiddenInput = "<input type='hidden' name='files["+index+"]' value='"+filename+"'/>";
+			$("#campingReviewWritingRun").prepend(hiddenInput);
+		});
+		
+
+		
+
+			
 		}
 	});
 	
-			
+
 			
 }); //function()
 
@@ -314,7 +325,7 @@ $(function() {
         </div>
 <!--         Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">확인</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnInsert">확인</button>
         </div>
         
       </div>

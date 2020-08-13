@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-     <script src="/resources/vendor/jquery/jquery.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     
      <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
      
@@ -81,6 +81,7 @@ margin-left:  50px;
 <script>
 
 $(function(){
+
 	getCommentList();
 	
 	function getCommentList(){
@@ -192,10 +193,15 @@ $(function(){
 	
 	$("#btnDelete").click(function(e){
 		e.preventDefault();
+
 		$("#reviewFrmPage").attr("action", $(this).attr("href"))
 							.submit();
 	});
-	
+	var msg = "${msg}"
+	 if(msg =="modify"){
+		alert("게시글 수정이 되었습니다.");
+	}
+
 	
 });
 
