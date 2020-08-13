@@ -145,7 +145,7 @@ $(function() {
 						<div class="owl-carousel" id="owl-demo">
 							<c:forEach items="${campVo}" var="campVo">
 					            <div class="item">
-					            <a href="/camp/campingContent?camp_no=${campVo.camp_no }">
+					            <a href="/camp/campingContent?camp_no=${campVo.camp_no}">
 					            <img src="/upload/displayCampingImg?fileName=${campVo.thumbnail}" alt="${campVo.thumbnail}"/>
 					            </a>
 					              <h4>${campVo.camp_name}</h4>
@@ -244,7 +244,7 @@ $(function() {
 	    loop:true,
 	    margin:10,
 	    autoplay:true,
-	    autoplayTimeout:5000,
+	    autoplayTimeout:4000,
 	    autoplayHoverPause:true
 
 	});

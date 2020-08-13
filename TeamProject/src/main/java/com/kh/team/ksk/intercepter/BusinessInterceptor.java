@@ -13,6 +13,7 @@ public class BusinessInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		System.out.println("Business inter"); 
 		HttpSession session = request.getSession();
 		String user_id = (String)session.getAttribute("user_id");
 		String checkAdmin = (String)session.getAttribute("checkAdmin");
