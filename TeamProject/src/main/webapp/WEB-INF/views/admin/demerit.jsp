@@ -81,9 +81,6 @@ $(function() {
 										<div class="modal-content">
 											<div class="modal-header">
 												<h5 class="modal-title" id="myModalLabel"></h5>
-												<button type="button" class="close" data-dismiss="modal">
-													<span aria-hidden="true">×</span>
-												</button>
 											</div>
 											<form action="/admin/modifyDemeritCode">
 											<div class="modal-body"></div>
@@ -127,9 +124,7 @@ $(function() {
 			<div class="modal-content">
 				<div class="modal-headerInput">
 					<h5 class="modal-title" id="myModalLabel">벌점 등록</h5>
-					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">×</span>
-					</button>
+					
 				</div>
 				<form action="/admin/insertDemeritCode" method="get">
 				<div class="modal-bodyInput">
