@@ -1,5 +1,7 @@
 package com.kh.team.domain;
 
+
+
 public class MyReviewPagingDto {
 	private int page =1;//보여지는 페이지(현제 페이지)
 	private int perPage = 10;//보여지는 리뷰 목록의 갯수
@@ -186,3 +188,4 @@ public class MyReviewPagingDto {
 	
 	
 }
+
