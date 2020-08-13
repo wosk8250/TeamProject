@@ -6,7 +6,7 @@ import com.kh.team.domain.DemeritVo;
 import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 
 public interface UserDao {
 	
@@ -35,13 +35,13 @@ public interface UserDao {
 	public void secessionUser(String user_id) throws Exception;
 	
 	//내가 쓴 리뷰
-	public List<ReviewVo> myReviewList(myReviewPagingDto pagingDto) throws Exception;
+	public List<ReviewVo> myReviewList(MyReviewPagingDto pagingDto) throws Exception;
 	
 	//내가 쓴 리뷰 갯수
-	public int getCount(myReviewPagingDto pagingDto) throws Exception;
+	public int getCount(MyReviewPagingDto pagingDto) throws Exception;
 	
 	//예약 갯수
-	public int getReservationCount(myReviewPagingDto pagingDto) throws Exception;
+	public int getReservationCount(MyReviewPagingDto pagingDto) throws Exception;
 	
 	// 회원 정지날짜
 	public String getStopDate(String user_id) throws Exception;
@@ -56,5 +56,8 @@ public interface UserDao {
 	public UserVo findPw(String user_id, String user_email) throws Exception;
 	
 	//나의 예약 조회
-	public List<ReservationVo> myReservation(myReviewPagingDto pagingDto)throws Exception;
+	public List<ReservationVo> myReservation(MyReviewPagingDto pagingDto)throws Exception;
+	
+	//예약취소
+	public void cancelReservation(String startdate, String user_id) throws Exception;
 }

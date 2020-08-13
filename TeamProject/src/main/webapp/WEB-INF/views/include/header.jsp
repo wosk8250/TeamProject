@@ -87,20 +87,20 @@ $(function () {
 	            <a class="collapse-item" href="/user/myReviewList"> 내가 작성한 후기</a>
 	            <a class="collapse-item" href="/user/myReservation"> 예약 목록</a>
 	            <a class="collapse-item" href="/user/profile">프로필 </a>
-	            <a class="collapse-item" href="/user/updateInfo"> 프로필 수정</a>
-	            <a class="collapse-item" href="/user/updatePw"> 비밀번호 수정</a>
+	            <a class="collapse-item" href="/user/updateInfo"> 회원정보 수정</a>
 	          </div>
 	        </div>
 	        <c:if test="${sessionScope.checkAdmin == 2}">
 			<li class="nav-item"><a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMyCamp" aria-expanded="true" aria-controls="collapseTwo">
 	          <i class="fas fa-home fa-sm fa-fw mr-2"></i>
-	          <span>캠핑장 등록</span>
+	          <span>캠핑장 관리</span>
 	        </a>
 	        <div id="collapseMyCamp" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	          <div class="bg-white py-2 collapse-inner rounded">
 	            <!-- <h6 class="collapse-header">Custom Components:</h6> -->
 	            <a class="collapse-item" href="/business/campForm"> 캠핑장 등록</a>
 	            <a class="collapse-item" href="/business/myCampList"> 내가 올린 캠핑장</a>
+	            <a class="collapse-item" href="/business/campReservation"> 캠핑장 예약현황</a>
 
 	          </div>
 	        </div>

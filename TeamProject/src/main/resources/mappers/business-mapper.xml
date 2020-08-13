@@ -31,4 +31,20 @@
 		select count(*) from tbl_camp
 		where user_id = #{user_id}
 	</select>
+	
+		<!-- 내가 예약한 캠핑장 -->
+	<select id="campReservation" resultType="ReservationVo">
+		select * 
+		from(select rownum rnum, a.* 
+    		from(select * from tbl_reservation 
+        		where host = #{user_id}
+        		order by camp_no desc)a) 
+		where rnum between #{startRow} and #{endRow}
+	</select>
+		<!-- 예약한 갯수 -->
+	<select id="getReservationCount" resultType="int">
+		select count(*) from tbl_Reservation
+		where host = #{user_id}
+	</select>
+	
 </mapper>

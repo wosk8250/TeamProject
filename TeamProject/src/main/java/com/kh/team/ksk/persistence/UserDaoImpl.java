@@ -13,7 +13,7 @@ import com.kh.team.domain.DemeritVo;
 import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -80,18 +80,18 @@ public class UserDaoImpl implements UserDao {
 
 	//내가 쓴 리뷰
 	@Override
-	public List<ReviewVo> myReviewList(myReviewPagingDto pagingDto) throws Exception {
+	public List<ReviewVo> myReviewList(MyReviewPagingDto pagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "myReviewList", pagingDto);
 	}
 	
 	//리뷰 갯수
 	@Override
-	public int getCount(myReviewPagingDto pagingDto) throws Exception {
+	public int getCount(MyReviewPagingDto pagingDto) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "getCount", pagingDto);
 	}
 	//예약 갯수
 	@Override
-	public int getReservationCount(myReviewPagingDto pagingDto) throws Exception {
+	public int getReservationCount(MyReviewPagingDto pagingDto) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "getReservationCount", pagingDto);
 	}
 	//회원 정지날짜
@@ -122,8 +122,17 @@ public class UserDaoImpl implements UserDao {
 
 	//나의 예약조회
 	@Override
-	public List<ReservationVo> myReservation(myReviewPagingDto pagingDto) throws Exception {
+	public List<ReservationVo> myReservation(MyReviewPagingDto pagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "myReservation",pagingDto);
+	}
+
+	//예약취소
+	@Override
+	public void cancelReservation(String startdate, String user_id) throws Exception {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("startdate", startdate);
+		paramMap.put("user_id", user_id);
+		sqlSession.selectList(NAMESPACE + "cancelReservation",paramMap);
 	}
 	
 	

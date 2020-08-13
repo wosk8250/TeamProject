@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.ReviewVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.sjy.persitence.CampingReviewDao;
 
 @Service
@@ -122,12 +122,12 @@ public class CampingReviewServiceImpl implements CampingReviewService {
 
 	//캠핑장 후기 게시물 개수 
 	@Override
-	public int campingReviewListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public int campingReviewListCount(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return campingReivewDao.campingReviewListCount(myReviewPagingDto);
 	}
 	//캠핑장 후기 페이징
 	@Override
-	public List<ReviewVo> campingReviewListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<ReviewVo> campingReviewListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return campingReivewDao.campingReviewListPage(myReviewPagingDto);
 	}
 

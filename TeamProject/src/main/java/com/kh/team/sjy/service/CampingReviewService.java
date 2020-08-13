@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.ReviewVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 
 public interface CampingReviewService {
 	
@@ -33,10 +33,10 @@ public interface CampingReviewService {
 	public List<FilesVo> modifyFileList(String table_name)throws Exception;
 	
 	//캠핑장 후기 게시물 개수 
-	public int campingReviewListCount(myReviewPagingDto myReviewPagingDto) throws Exception;
+	public int campingReviewListCount(MyReviewPagingDto myReviewPagingDto) throws Exception;
 	
 	//캠핑장 후기 페이징
-	public List<ReviewVo> campingReviewListPage(myReviewPagingDto myReviewPagingDto)throws Exception;
+	public List<ReviewVo> campingReviewListPage(MyReviewPagingDto myReviewPagingDto)throws Exception;
 	
 
 

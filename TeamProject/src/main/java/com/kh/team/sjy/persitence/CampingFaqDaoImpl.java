@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.FaqVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 
 
 @Repository
@@ -34,13 +34,13 @@ public class CampingFaqDaoImpl implements CampingFaqDao {
 	}
 	//자주묻는 질문 게시물 갯수
 	@Override
-	public int campingFaqListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public int campingFaqListCount(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "campingFaqListCount" , myReviewPagingDto );
 	}
 
 	//페이징
 	@Override
-	public List<FaqVo> faqListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<FaqVo> faqListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "faqListPage" , myReviewPagingDto);
 	}
 

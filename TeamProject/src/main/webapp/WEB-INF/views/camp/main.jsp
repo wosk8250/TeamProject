@@ -68,9 +68,9 @@ $(function() {
 	$("#img_bg").attr("src","/resources/image/main_bg0"+random+".jpg");
 	
 	//군,구 불러오기
-	$("#areaDo").change(function() {
+	$("#camp_area").change(function() {
 		
-		var camp_area = $("#areaDo").val()
+		var camp_area = $("#camp_area").val()
 		console.log(camp_area);
 		
 		
@@ -79,7 +79,7 @@ $(function() {
 		var sendData ={
 			"camp_area" : camp_area
 		};
-		$("#locationSi option").remove();
+		$("#camp_location option").remove();
 		console.log("sendData", sendData);	
 		
 		$.get(url, sendData, function(rData){
@@ -87,12 +87,12 @@ $(function() {
 				console.log(rData);
 				var optionArea = "<option value='"+ rData[index] +"'>" + rData[index]+ "</option>";
 				
-				$("#locationSi").append(optionArea);
+				$("#camp_location").append(optionArea);
 			});
-			$("#locationSi option:eq(0)").before("<option value='${CampVo.camp_location}' selected>전체/시</option>");	
+			$("#camp_location option:eq(0)").before("<option value='${CampVo.camp_location}' selected>전체/시</option>");	
 		});
-		
 	});
+	
 });
 </script>
 
@@ -114,11 +114,11 @@ $(function() {
 								</button>
 								<div id="out" >
 									<!-- 셀렉트박스  -->
-									<form class="form-inline" name="form">
+									<form class="form-inline" name="form" action="/camp/home">
 									<div class="form-group" id="in">
 									  
    										 <label>지역 선택</label>
-   										<select id="areaDo" name="areaDo" class="custom-select">
+   										<select id="camp_area" name="camp_area" class="custom-select">
    											 <option value="1" selected>전체/도</option>
 		   									 <c:forEach items="${list}" var="areaVo">
 	   										 <option value="${areaVo.camp_area}">${areaVo.camp_area}</option>
@@ -126,10 +126,10 @@ $(function() {
 										</select>
 										
 										<label>&nbsp; | &nbsp;</label>
-										<select id="locationSi" name="locationSi" class="custom-select">
+										<select id="camp_location" name="camp_location" class="custom-select">
 							 			 <option value="11">전체/시</option>
 							 			 </select>
-										<button type="button" class="btn btn-primary my-2 my-sm-0"  id="searchButton">검색</button>
+										<button type="submit" class="btn btn-primary my-2 my-sm-0"  id="searchButton">검색</button>
  									</div>
 									</form>
 								</div>

@@ -17,8 +17,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.CampVo;
 import com.kh.team.domain.FilesVo;
+import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.ksk.service.BusinessService;
 import com.kh.team.ljh.service.AdminService;
 
@@ -116,7 +117,7 @@ public class BusinessController {
 	
 	//내가 등록한 캠핑장 목록-페이징
 	@RequestMapping(value = "/myCampList", method = RequestMethod.GET)
-	public String MycampListPaging(Model model, HttpServletRequest request, myReviewPagingDto pagingDto) throws Exception{
+	public String MycampListPaging(Model model, HttpServletRequest request, MyReviewPagingDto pagingDto) throws Exception{
 		HttpSession session = request.getSession();
 		String user_id = (String) session.getAttribute("user_id");
 		pagingDto.setUser_id(user_id);
@@ -131,6 +132,24 @@ public class BusinessController {
 		model.addAttribute("myCampList", myCampList);
 		System.out.println(myCampList);
 		return "business/myCampList";
+	}
+	
+	//예약목록
+	@RequestMapping(value = "/campReservation", method = RequestMethod.GET)
+	public String campReservation(Model model, HttpServletRequest request, MyReviewPagingDto pagingDto)throws Exception{
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		pagingDto.setUser_id(user_id);
+		
+		pagingDto.setmyReviewPageInfo();
+		int totalCount = businessService.getReservationCount(pagingDto);
+		pagingDto.setTotalCount(totalCount);
+		
+		List<ReservationVo> list = businessService.campReservation(pagingDto);
+		System.out.println("list : " + list);
+		model.addAttribute("pagingDto", pagingDto);
+		model.addAttribute("list", list);
+		return "business/campReservation";
 	}
 
 }

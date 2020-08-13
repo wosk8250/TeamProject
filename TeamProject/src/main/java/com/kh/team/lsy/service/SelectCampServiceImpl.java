@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.team.domain.AmenitiesVo;
 import com.kh.team.domain.AreaCampLocationVo;
+import com.kh.team.domain.CampJoinVo;
 import com.kh.team.domain.CampNoticeVo;
 import com.kh.team.domain.CampVo;
 import com.kh.team.domain.CampingLocationVo;
@@ -17,6 +18,7 @@ import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.FaqVo;
 import com.kh.team.domain.PagingDto;
 import com.kh.team.domain.UserVo;
+import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.lsy.persistence.SelectCampDao;
 
@@ -53,8 +55,8 @@ public class SelectCampServiceImpl implements SelectCampService {
 	}
 
 	@Override
-	public List<CampVo> searchList(String camp_area, String camp_location) throws Exception {
-		return selectCampDao.searchList(camp_area, camp_location);
+	public List<CampVo> searchList(String camp_area, String camp_location , PagingDto pagingDto) throws Exception {
+		return selectCampDao.searchList(camp_area, camp_location, pagingDto);
 	}
 
 	@Override
@@ -68,8 +70,8 @@ public class SelectCampServiceImpl implements SelectCampService {
 	}
 
 	@Override
-	public CampRecommendVo recommendCheck(String user_id) throws Exception {
-		return selectCampDao.recommendCheck(user_id);
+	public CampRecommendVo recommendCheck(CampRecommendVo campRecommendVo) throws Exception {
+		return selectCampDao.recommendCheck(campRecommendVo);
 	}
 
 	@Override
@@ -104,6 +106,19 @@ public class SelectCampServiceImpl implements SelectCampService {
 	@Override
 	public List<AmenitiesVo> amenitiesList() throws Exception {
 		return selectCampDao.amenitiesList();
+	}
+
+	@Override
+	public List<CampVo> mainSearchList(MyReviewPagingDto myReviewPagingDto) throws Exception {
+		List<CampVo> a = selectCampDao.mainSearchList(myReviewPagingDto);
+		System.out.println("a : " + a);
+		return selectCampDao.mainSearchList(myReviewPagingDto);
+	}
+
+	@Override
+	public int SearchCount(MyReviewPagingDto myReviewPagingDto) throws Exception {
+		
+		return selectCampDao.SearchCount(myReviewPagingDto);
 	}
 	
 
