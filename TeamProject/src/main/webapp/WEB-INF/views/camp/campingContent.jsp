@@ -299,7 +299,7 @@ ul.tabs li.current {
 						<td><a>${campVo.camp_http}</a></td>
 						</c:when>
 						<c:otherwise>
-						<td><a href="https://${campVo.camp_http}">${campVo.camp_http}</a></td>
+						<td><a href="https://${campVo.camp_http}" target="_blank">${campVo.camp_http}</a></td>
 						</c:otherwise>
 						</c:choose>
 					</tr>
