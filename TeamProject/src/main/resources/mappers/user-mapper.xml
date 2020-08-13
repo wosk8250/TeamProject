@@ -119,4 +119,9 @@
 		select count(*) from tbl_Reservation
 		where user_id = #{user_id}
 	</select>
+	<!-- 예약취소 -->
+	<delete id="cancelReservation">
+		delete tbl_reservation
+		where startdate=#{startdate} and user_id=#{user_id}
+	</delete>
 </mapper>

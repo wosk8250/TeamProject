@@ -34,7 +34,7 @@ import com.kh.team.domain.PagingDto;
 import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.ksk.service.UserService;
 import com.kh.team.ljh.service.AdminService;
 import com.kh.team.ljh.utile.DateUtile;
@@ -105,7 +105,7 @@ public class AdminController {
 
 	// 공지사항 조회
 	@RequestMapping(value = "/notice", method = RequestMethod.GET)
-	public String adminNotice(myReviewPagingDto myReviewPagingDto,Model model,String notice_title) throws Exception {
+	public String adminNotice(MyReviewPagingDto myReviewPagingDto,Model model,String notice_title) throws Exception {
 		if(notice_title == null) {
 		myReviewPagingDto.setmyReviewPageInfo();
 		int totalCount = adminService.noticePostsCount();
@@ -122,7 +122,7 @@ public class AdminController {
 
 	// 자주묻는질문 조회
 	@RequestMapping(value = "/faq", method = RequestMethod.GET)
-	public String adminFrequentlyAskedQuestions(myReviewPagingDto myReviewPagingDto,Model model,String faq_title) throws Exception {
+	public String adminFrequentlyAskedQuestions(MyReviewPagingDto myReviewPagingDto,Model model,String faq_title) throws Exception {
 		if(faq_title == null){
 		myReviewPagingDto.setmyReviewPageInfo();
 		int totalCount = adminService.faqPostsCount();
@@ -141,7 +141,7 @@ public class AdminController {
 
 	// 캠핑장 조회
 	@RequestMapping(value = "/camp", method = RequestMethod.GET)
-	public String adminCampList(HttpSession session,myReviewPagingDto myReviewPagingDto,Model model,String camp_name) throws Exception {
+	public String adminCampList(HttpSession session,MyReviewPagingDto myReviewPagingDto,Model model,String camp_name) throws Exception {
 		myReviewPagingDto.setmyReviewPageInfo();
 		int totalCount = adminService.campPostsCount();
 		myReviewPagingDto.setTotalCount(totalCount);
@@ -161,7 +161,7 @@ public class AdminController {
 	}
 	//삭제된 캠핑장 조회
 	@RequestMapping(value = "/deleteCamp", method = RequestMethod.GET)
-	public String blockCampListPage(myReviewPagingDto myReviewPagingDto,Model model,String camp_name) throws Exception {
+	public String blockCampListPage(MyReviewPagingDto myReviewPagingDto,Model model,String camp_name) throws Exception {
 		myReviewPagingDto.setmyReviewPageInfo();
 		int totalCount = adminService.blockCampPostsCount();
 		myReviewPagingDto.setTotalCount(totalCount);
@@ -245,14 +245,14 @@ public class AdminController {
 	
 	//캠핑장 페이징
 	@RequestMapping(value="/campListPage" , method=RequestMethod.GET)
-	public void campListPage(myReviewPagingDto myReviewPagingDto,Model model) throws Exception{
+	public void campListPage(MyReviewPagingDto myReviewPagingDto,Model model) throws Exception{
 		
 		
 	}
 
 	// 캠핑수칙 조회
 	@RequestMapping(value = "/campingTip", method = RequestMethod.GET)
-	public String campingTipList(myReviewPagingDto myReviewPagingDto,Model model,String campingtip_title) throws Exception {
+	public String campingTipList(MyReviewPagingDto myReviewPagingDto,Model model,String campingtip_title) throws Exception {
 		List<CampingTipVo> list = null;
 		if(campingtip_title == null) {
 		myReviewPagingDto.setmyReviewPageInfo();
@@ -331,7 +331,7 @@ public class AdminController {
 
 	// 캠핑 후기 조회
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
-	public String reviewList(myReviewPagingDto myReviewPagingDto,Model moadel,String review_title) throws Exception {
+	public String reviewList(MyReviewPagingDto myReviewPagingDto,Model moadel,String review_title) throws Exception {
 		if(review_title == null) {
 		myReviewPagingDto.setmyReviewPageInfo();
 		int totalCount = adminService.reviewPostsCount();
@@ -494,7 +494,7 @@ public class AdminController {
 		
 		//등록 대기 캠핑장 조회
 		@RequestMapping(value="/waitForRegistrationCamp",method=RequestMethod.GET)
-		public String waitForRegistrationCamp(Model model,myReviewPagingDto myReviewPagingDto) throws Exception{
+		public String waitForRegistrationCamp(Model model,MyReviewPagingDto myReviewPagingDto) throws Exception{
 			myReviewPagingDto.setmyReviewPageInfo();
 			int totalCount = adminService.waitForRegistrationCampCount();
 			myReviewPagingDto.setTotalCount(totalCount);

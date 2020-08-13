@@ -20,7 +20,7 @@ import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 
 @Repository
 public class AdminDaoImpl implements AdminDao {
@@ -222,7 +222,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	// 캠핑장 페이징
 	@Override
-	public List<CampVo> campListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampVo> campListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "campListPage", myReviewPagingDto);
 	}
 
@@ -233,7 +233,7 @@ public class AdminDaoImpl implements AdminDao {
 	}
 	//삭제된 캠핑장 페이징
 	@Override
-	public List<CampVo> blockCampListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampVo> blockCampListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "blockCampListPage", myReviewPagingDto);
 	}
 	
@@ -245,7 +245,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	// 캠핑수칙 페이징
 	@Override
-	public List<CampingTipVo> campingTipListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampingTipVo> campingTipListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "campingTipListPage", myReviewPagingDto);
 	}
 
@@ -257,7 +257,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	// 자주묻는질문 페이징
 	@Override
-	public List<FaqVo> faqListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<FaqVo> faqListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "faqListPage", myReviewPagingDto);
 	}
 
@@ -269,7 +269,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	// 공지사항 페이징
 	@Override
-	public List<CampNoticeVo> noticeListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampNoticeVo> noticeListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "noticeListPage", myReviewPagingDto);
 	}
 
@@ -280,7 +280,7 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<ReviewVo> reviewListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<ReviewVo> reviewListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "reviewListPage", myReviewPagingDto);
 	}
 
@@ -401,28 +401,28 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<CampVo> deletePagingCampList(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampVo> deletePagingCampList(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "deletePagingCampList",myReviewPagingDto);
 	}
 
 	@Override
-	public List<CampingTipVo> deletePagingCampingTipList(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampingTipVo> deletePagingCampingTipList(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "deletePagingCampingTipList",myReviewPagingDto);
 	}
 
 
 	@Override
-	public List<FaqVo> deletePagingFaqList(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<FaqVo> deletePagingFaqList(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "deletePagingFaqList",myReviewPagingDto);
 	}
 
 	@Override
-	public List<CampNoticeVo> deletePagingNoticeList(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampNoticeVo> deletePagingNoticeList(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "deletePagingNoticeList",myReviewPagingDto);
 	}
 
 	@Override
-	public List<ReviewVo> deletePagingReviewList(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<ReviewVo> deletePagingReviewList(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "deletePagingReviewList",myReviewPagingDto);
 	}
 
@@ -493,7 +493,7 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<CampVo> waitForRegistrationCamp(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<CampVo> waitForRegistrationCamp(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "waitForRegistrationCamp",myReviewPagingDto);
 	}
 

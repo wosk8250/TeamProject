@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.ReviewVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 
 @Repository
 public class CampingReviewDaoImpl implements CampingReviewDao {
@@ -96,12 +96,12 @@ public class CampingReviewDaoImpl implements CampingReviewDao {
 	}
 	//캠핑장 후기 게시물 개수 
 	@Override
-	public int campingReviewListCount(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public int campingReviewListCount(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectOne(NAMESPACE +"campingReviewListCount" ,myReviewPagingDto);
 	}
 	//캠핑장 후기 페이징
 	@Override
-	public List<ReviewVo> campingReviewListPage(myReviewPagingDto myReviewPagingDto) throws Exception {
+	public List<ReviewVo> campingReviewListPage(MyReviewPagingDto myReviewPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE +"campingReviewListPage",myReviewPagingDto );
 	}
 	

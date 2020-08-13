@@ -67,6 +67,9 @@ $(function () {
 				<li class="nav-item">
 					<a class="nav-link active" id="mylink-active" href="/business/myCampList">캠핑장 리스트</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="mylink" href="/business/campReservation">캠핑장 예약현황</a>
+				</li>
 			</ul>
 		</div>
 		<div class="col-md-2"></div>
@@ -84,6 +87,7 @@ $(function () {
 						<th>캠핑장 이름</th>
 						<th>주소</th>
 						<th>수정</th>
+						<th>비고</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -91,11 +95,15 @@ $(function () {
 				<tr>
 						<td>${campVo.camp_no}</td>
 						<td width="450" id="td-title">
-							<a href="/board/campingContent" class="a_title" data-camp_no="${campVo.camp_no}">${campVo.camp_name}</a>
+							<a href="/camp/campingContent?camp_no=${campVo.camp_no}">${campVo.camp_name}</a>
 						</td>
 						<td>${campVo.camp_name}</td>
 						<td>${campVo.camp_address}</td>
 						<td><a class="btn btn-warning" href="/business/campModify?camp_no=${campVo.camp_no}">수정</a> </td>
+						<td>
+							<c:if test="${campVo.camp_admin == 3}"> 거절됨</c:if>
+							<c:if test="${campVo.camp_admin == 2}"> 등록대기</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 				</tbody>

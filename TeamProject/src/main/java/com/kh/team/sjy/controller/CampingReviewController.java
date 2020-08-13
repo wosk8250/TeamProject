@@ -18,11 +18,12 @@ import com.kh.team.domain.AreaCampingNameVo;
 
 import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.ReviewVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.sjy.persitence.AreaCampingNameDaoImpl;
 import com.kh.team.sjy.persitence.CampingReviewDaoImpl;
 
 import com.kh.team.sjy.service.CampingReviewService;
+import com.kh.team.sjy.utile.CampingUrlUtil;
 
 
 
@@ -49,7 +50,7 @@ public class CampingReviewController {
 	
 	//캠핑장 후기 목록 
 	@RequestMapping(value="/campingReviewList", method=RequestMethod.GET)
-	public String campingReviewList(myReviewPagingDto myReviewPagingDto, Model model)throws Exception{
+	public String campingReviewList(MyReviewPagingDto myReviewPagingDto, Model model)throws Exception{
 			myReviewPagingDto.setmyReviewPageInfo();
 			int totalCount = campingReviewService.campingReviewListCount(myReviewPagingDto);
 //			System.out.println("totalCount:" + totalCount);
@@ -95,7 +96,7 @@ public class CampingReviewController {
 	
 	//캠핑장 글 내용
 	@RequestMapping(value="/selectReview/{review_no}", method = RequestMethod.GET)
-	public String selectReview(@PathVariable("review_no")int review_no , Model model , myReviewPagingDto myReviewPagingDto) throws Exception{
+	public String selectReview(@PathVariable("review_no")int review_no , Model model , MyReviewPagingDto myReviewPagingDto) throws Exception{
 	
 		System.out.println("review_no:" + review_no);
 		ReviewVo reviewVo = campingReviewDaoImpl.selectReview(review_no);
@@ -171,18 +172,23 @@ public class CampingReviewController {
 	}
 	//캠핑장 후기 수정 처리
 	@RequestMapping(value="/campingReviewModifyRun", method = RequestMethod.POST)
-	public String campingReviewModifyRun(ReviewVo reviewVo , RedirectAttributes rttr) throws Exception{
+	public String campingReviewModifyRun(ReviewVo reviewVo , RedirectAttributes rttr,  MyReviewPagingDto pagingDto) throws Exception{
+		System.out.println("/camp/selectReview,post, reviewVo:" + reviewVo);
+		System.out.println("/camp/selectReview,post, pagingDto:" + pagingDto);
 		rttr.addFlashAttribute("msg","modify");
 		campingReviewService.campingReviewModifyRun(reviewVo);
-		return "redirect:/camp/selectReview/" + reviewVo.getReview_no();
+		String url = CampingUrlUtil.modifyPagingUrl("/camp/selectReview", pagingDto, reviewVo.getReview_no());
+		System.out.println("/camp/selectReview,post, url:" + url);
+		return "redirect:" + url;
 	}
 	
 	//캠핑장 후기 삭제 처리
 	@RequestMapping(value="/campingReviewDelete/{review_no}" , method = RequestMethod.GET)
-	public String campingReviewDelete(@PathVariable("review_no") int review_no , RedirectAttributes rttr) throws Exception{
+	public String campingReviewDelete(@PathVariable("review_no") int review_no , RedirectAttributes rttr, MyReviewPagingDto pagingDto) throws Exception{
 		rttr.addFlashAttribute("msg", "delete");
 		campingReviewService.campingReviewDelete(review_no);
-		return "redirect:/camp/campingReviewList";
+		String url =CampingUrlUtil.deletePagingUrl("/camp/campingReviewList", pagingDto);
+		return "redirect:" +url;
 	}
 
 	

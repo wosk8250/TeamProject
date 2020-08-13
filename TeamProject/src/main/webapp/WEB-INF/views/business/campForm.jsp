@@ -194,6 +194,9 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 				<li class="nav-item">
 					<a class="nav-link" id="mylink" href="/business/myCampList">캠핑장 리스트</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="mylink" href="/business/campReservation">캠핑장 예약현황</a>
+				</li>
 			</ul>
 		</div>
 		<div class="col-md-2"></div>

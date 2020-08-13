@@ -15,7 +15,7 @@ import com.kh.team.domain.FilesVo;
 import com.kh.team.domain.ReservationVo;
 import com.kh.team.domain.ReviewVo;
 import com.kh.team.domain.UserVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 import com.kh.team.sjy.persitence.CampNoticeDao;
 
 public interface AdminDao {
@@ -112,37 +112,37 @@ public interface AdminDao {
 	public void areaInsert(AreaCampingNameVo areaCampingNameVo) throws Exception;
 
 	// 캠핑장 페이징
-	public List<CampVo> campListPage(myReviewPagingDto myReviewPagingDto) throws Exception;
+	public List<CampVo> campListPage(MyReviewPagingDto myReviewPagingDto) throws Exception;
 
 	// 캠핑장 게시물 갯수 검색
 	public int campPostsCount() throws Exception;
 
 	// 삭제된 캠핑장 페이징
-	public List<CampVo> blockCampListPage(myReviewPagingDto myReviewPagingDto) throws Exception;
+	public List<CampVo> blockCampListPage(MyReviewPagingDto myReviewPagingDto) throws Exception;
 
 	// 삭제된 캠핑장 게시물 갯수 검색
 	public int blockCampPostsCount() throws Exception;
 
 	// 캠핑 수칙 페이징
-	public List<CampingTipVo> campingTipListPage(myReviewPagingDto myReviewPagingDto) throws Exception;
+	public List<CampingTipVo> campingTipListPage(MyReviewPagingDto myReviewPagingDto) throws Exception;
 
 	// 캠핑 수칙 게시물 갯수 검색
 	public int campingTipPostsCount() throws Exception;
 
 	// 자주묻는질문 페이징
-	public List<FaqVo> faqListPage(myReviewPagingDto myReviewPagingDto) throws Exception;
+	public List<FaqVo> faqListPage(MyReviewPagingDto myReviewPagingDto) throws Exception;
 
 	// 자주묻는질문 게시물 갯수 검색
 	public int faqPostsCount() throws Exception;
 
 	// 공지사항 페이징
-	public List<CampNoticeVo> noticeListPage(myReviewPagingDto myReviewPagingDto) throws Exception;
+	public List<CampNoticeVo> noticeListPage(MyReviewPagingDto myReviewPagingDto) throws Exception;
 
 	// 공지사항 게시물 갯수 검색
 	public int noticePostsCount() throws Exception;
 
 	// 캠핑후기 페이징
-	public List<ReviewVo> reviewListPage(myReviewPagingDto myReviewPagingDto) throws Exception;
+	public List<ReviewVo> reviewListPage(MyReviewPagingDto myReviewPagingDto) throws Exception;
 
 	// 캠핑후기 게시물 갯수 검색
 	public int reviewPostsCount() throws Exception;
@@ -211,11 +211,11 @@ public interface AdminDao {
 	public List<CampingTipVo> searchCampingTip(String campingtip_title) throws Exception;
 
 	// 삭제된 글 조회
-	public List<CampVo> deletePagingCampList(myReviewPagingDto myReviewPagingDto)throws Exception;
-	public List<CampingTipVo> deletePagingCampingTipList(myReviewPagingDto myReviewPagingDto)throws Exception;
-	public List<FaqVo> deletePagingFaqList(myReviewPagingDto myReviewPagingDto)throws Exception;
-	public List<CampNoticeVo> deletePagingNoticeList(myReviewPagingDto myReviewPagingDto)throws Exception;
-	public List<ReviewVo> deletePagingReviewList(myReviewPagingDto myReviewPagingDto)throws Exception;
+	public List<CampVo> deletePagingCampList(MyReviewPagingDto myReviewPagingDto)throws Exception;
+	public List<CampingTipVo> deletePagingCampingTipList(MyReviewPagingDto myReviewPagingDto)throws Exception;
+	public List<FaqVo> deletePagingFaqList(MyReviewPagingDto myReviewPagingDto)throws Exception;
+	public List<CampNoticeVo> deletePagingNoticeList(MyReviewPagingDto myReviewPagingDto)throws Exception;
+	public List<ReviewVo> deletePagingReviewList(MyReviewPagingDto myReviewPagingDto)throws Exception;
 
 	// 삭제된 글 조회
 
@@ -254,7 +254,7 @@ public interface AdminDao {
 	// 삭제된 게시글 제목으로 검색
 
 	// 캠핑장 등록대기 목록
-	public List<CampVo> waitForRegistrationCamp(myReviewPagingDto myReviewPagingDto) throws Exception;
+	public List<CampVo> waitForRegistrationCamp(MyReviewPagingDto myReviewPagingDto) throws Exception;
 
 	// 대기상태 캠핑장 등록
 	public void registCamp(int camp_no) throws Exception;

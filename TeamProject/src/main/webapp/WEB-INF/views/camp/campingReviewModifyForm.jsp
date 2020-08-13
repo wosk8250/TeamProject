@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="/resources/vendor/jquery/jquery.js"></script>
 
 <style>
@@ -253,17 +254,26 @@ $(function(){
 			that.parent().remove();
 		});
 	});
+
+
 	$("#campingReviewModifyRun").submit(function(){
 		var upDiv = $("#uploadedList > div");
 		upDiv.each(function(index) {
 		var filename  = $(this).attr("data-filename");
 		var hiddenInput = "<input type='hidden' name='files["+index+"]' value= '"+ filename+"' />";
 		$("#campingReviewModifyRun").prepend(hiddenInput);
+ 		$("#campingReviewModifyRun").prependTo("#reviewFrmPage > input");
+
+		
 		});
 	});
+	
 
-}); //$(function()
+		
+	}); //$(function()
 </script>
+
+	<%@ include file="../include/campingReviewFrmPage.jsp" %>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -301,7 +311,7 @@ $(function(){
 									</tr>
 									<tr>
 										<th scope="row" class="gray">
-											<label for="camp_name">캠핑장221</label>
+											<label for="camp_name">캠핑장</label>
 								
 										</th>
 										<td>
@@ -366,7 +376,8 @@ $(function(){
 						<div class="col-md-12">
 					
 							<a href="/camp/campingReviewList" class="btn btn-secondary">목록</a>
-							<button type="submit" class="btn btn-primary" >글 수정</button>
+							<button type="submit" class="btn btn-primary"   >글 수정</button>
+
 						</div>
 					</div>
 				</div>

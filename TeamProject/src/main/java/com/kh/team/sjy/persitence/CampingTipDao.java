@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.kh.team.domain.CampingTipVo;
 import com.kh.team.domain.FilesVo;
-import com.kh.team.domain.myReviewPagingDto;
+import com.kh.team.domain.MyReviewPagingDto;
 
 public interface CampingTipDao {
 
@@ -20,10 +20,10 @@ public interface CampingTipDao {
 	//(캠핑장 수칙 ) 이미지 보여주기  filesNoFilsList(파일번호 조회)
 	public List<FilesVo> filesNoFilesList(int files_no) throws Exception;
 	// 캠핑장 수칙 게시물 개수 
-	public int campingTipListCount(myReviewPagingDto myReviewPagingDto)throws Exception;
+	public int campingTipListCount(MyReviewPagingDto myReviewPagingDto)throws Exception;
 	
 	//캠핑장 수칙 페이징
-	public List<CampingTipVo> campingTipListPage(myReviewPagingDto myReviewPagingDto)throws Exception;
+	public List<CampingTipVo> campingTipListPage(MyReviewPagingDto myReviewPagingDto)throws Exception;
 
 	
 
