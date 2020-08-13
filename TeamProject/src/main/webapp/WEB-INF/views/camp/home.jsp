@@ -330,7 +330,14 @@ th, td {
 	<c:when test="${campJoinList != null}">
 	<!-- 조인 -->
 	<c:forEach items="${campJoinList}" var="CampVo">
+						<c:choose>
+						<c:when test="${CampVo.thumbnail == '사진없음'}">
+						<th><img width="200" height="200" src="/resources/image/1594178025406.jpg"></th>
+						</c:when>
+						<c:otherwise>
 						<th><img width="200" height="200" src="/upload/displayCampingImg?fileName=${CampVo.thumbnail}"></th>
+						</c:otherwise>
+						</c:choose>
 						<th><h2><a href="/camp/campingContent" class="a_title" data-camp_no="${CampVo.camp_no}"><i class="str">[${CampVo.camp_area} ${CampVo.camp_location}] ${CampVo.camp_name}</i></a></h2></br>
 							<span id="contentSpan">${CampVo.camp_intro}</span></br></br>
 							<img width="20" height="20" src="/resources/image/locations.png">&nbsp${CampVo.camp_address}
@@ -369,7 +376,14 @@ th, td {
 	<c:otherwise>
 	<!-- 캠프리스트 -->
 	<c:forEach items="${campList}" var="CampVo">
+						<c:choose>
+						<c:when test="${CampVo.thumbnail == '2020_camping.jpg'}">
+						<th><img width="200" height="200" src="/resources/image/2020_camping.jpg"></th>
+						</c:when>
+						<c:otherwise>
 						<th><img width="200" height="200" src="/upload/displayCampingImg?fileName=${CampVo.thumbnail}"></th>
+						</c:otherwise>
+						</c:choose>	
 						<th><h2><a href="/camp/campingContent" class="a_title" data-camp_no="${CampVo.camp_no}"><i class="str">[${CampVo.camp_area} ${CampVo.camp_location}] ${CampVo.camp_name}</i></a></h2></br>
 							<span id="contentSpan">${CampVo.camp_intro}</span></br></br>
 							<img width="20" height="20" src="/resources/image/locations.png">&nbsp${CampVo.camp_address}

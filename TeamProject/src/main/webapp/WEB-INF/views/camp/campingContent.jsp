@@ -252,7 +252,14 @@ ul.tabs li.current {
 	<%-- ${CampRecommendVo} --%>
 	<article class="imgArticle">
 		<div>
-			<img width="450" height="450" src="/upload/displayCampingImg?fileName=${campVo.thumbnail}">
+			<c:choose>
+				<c:when test="${campVo.thumbnail == '2020_camping.jpg'}">
+					<img width="450" height="450" src="/resources/image/2020_camping.jpg">
+				</c:when>
+				<c:otherwise>
+					<img width="450" height="450" src="/upload/displayCampingImg?fileName=${campVo.thumbnail}">
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</article>
 
@@ -286,7 +293,15 @@ ul.tabs li.current {
 					</tr>
 					<tr>
 						<th>홈페이지</th>
+						<c:choose>
+						
+						<c:when test="${campVo.camp_http == '없음'}">
+						<td><a>${campVo.camp_http}</a></td>
+						</c:when>
+						<c:otherwise>
 						<td><a href="https://${campVo.camp_http}">${campVo.camp_http}</a></td>
+						</c:otherwise>
+						</c:choose>
 					</tr>
 					<tr>
 						<th></th>
