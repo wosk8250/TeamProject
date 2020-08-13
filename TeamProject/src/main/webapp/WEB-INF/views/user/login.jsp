@@ -72,10 +72,10 @@ $(function () {
                   </div>
                   <form class="user"  action="/user/login" method="post">
                     <div class="form-group">
-                    <input type="text" class="form-control form-control-user" value="admin" id="user_id" name="user_id" placeholder="아이디">
+                    <input type="text" class="form-control form-control-user" id="user_id" name="user_id" placeholder="아이디">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" value="1234" id="user_pw" name="user_pw" placeholder="비밀번호">
+                      <input type="password" class="form-control form-control-user" id="user_pw" name="user_pw" placeholder="비밀번호">
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">로그인</button>
                   </form>
