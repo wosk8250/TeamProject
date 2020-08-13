@@ -172,7 +172,7 @@ public class CampingReviewController {
 	}
 	//캠핑장 후기 수정 처리
 	@RequestMapping(value="/campingReviewModifyRun", method = RequestMethod.POST)
-	public String campingReviewModifyRun(ReviewVo reviewVo , RedirectAttributes rttr,  myReviewPagingDto pagingDto) throws Exception{
+	public String campingReviewModifyRun(ReviewVo reviewVo , RedirectAttributes rttr,  MyReviewPagingDto pagingDto) throws Exception{
 		System.out.println("/camp/selectReview,post, reviewVo:" + reviewVo);
 		System.out.println("/camp/selectReview,post, pagingDto:" + pagingDto);
 		rttr.addFlashAttribute("msg","modify");
@@ -184,7 +184,7 @@ public class CampingReviewController {
 	
 	//캠핑장 후기 삭제 처리
 	@RequestMapping(value="/campingReviewDelete/{review_no}" , method = RequestMethod.GET)
-	public String campingReviewDelete(@PathVariable("review_no") int review_no , RedirectAttributes rttr, myReviewPagingDto pagingDto) throws Exception{
+	public String campingReviewDelete(@PathVariable("review_no") int review_no , RedirectAttributes rttr, MyReviewPagingDto pagingDto) throws Exception{
 		rttr.addFlashAttribute("msg", "delete");
 		campingReviewService.campingReviewDelete(review_no);
 		String url =CampingUrlUtil.deletePagingUrl("/camp/campingReviewList", pagingDto);
