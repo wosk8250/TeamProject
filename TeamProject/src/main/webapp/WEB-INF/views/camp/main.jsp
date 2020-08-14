@@ -226,7 +226,8 @@ $(function() {
 				<tbody>
 					<c:forEach items="${faqVo}" var="faqVo">
 						<tr>
-							<td><a href="/camp/selectByfaq/${faqVo.faq_no}/${checkBoard}">${faqVo.faq_title}</a></td>
+<%-- 							<td><a href="/camp/selectByfaq/${faqVo.faq_no}/${checkBoard}">${faqVo.faq_title}</a></td> --%>
+							<td><a href="/camp/selectByFaq/${faqVo.faq_no}" class="faq_title" data-faq_no="${faqVo.faq_no}">${faqVo.faq_title}</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
