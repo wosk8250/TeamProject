@@ -71,8 +71,9 @@ pre {
 			</div>
 			<div id="faq_content">
 			<h4 class="text-center" style="margin-bottom: 30px;">
-				<b>${faqVo.faq_content}</b>
+			${faqVo.faq_title}
 			</h4>
+				<pre>${faqVo.faq_content}</pre>
 			
 			</div>
 			<div style="text-align: right;">
