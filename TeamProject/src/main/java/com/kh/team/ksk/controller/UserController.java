@@ -97,7 +97,7 @@ public class UserController {
 		userVo.setAdmin("0");
 		userService.insertUser(userVo);
 		System.out.println(userVo);
-		return "redirect:/camp/home";
+		return "redirect:/camp/main";
 	}
 	
 	//사업자 회원가입 처리
@@ -106,7 +106,7 @@ public class UserController {
 		userVo.setAdmin("2");
 		userService.insertUser(userVo);
 		System.out.println(userVo);
-		return "redirect:/camp/home";
+		return "redirect:/camp/main";
 	}
 	
 	// 사업자 회원가입 폼

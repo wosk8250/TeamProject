@@ -101,8 +101,9 @@ $(function () {
 						<td>${campVo.camp_address}</td>
 						<td><a class="btn btn-warning" href="/business/campModify?camp_no=${campVo.camp_no}">수정</a> </td>
 						<td>
-							<c:if test="${campVo.camp_admin == 3}"> 거절됨</c:if>
+							<c:if test="${campVo.camp_admin == 1}"> 중지</c:if>
 							<c:if test="${campVo.camp_admin == 2}"> 등록대기</c:if>
+							<c:if test="${campVo.camp_admin == 3}"> 거절</c:if>
 						</td>
 					</tr>
 				</c:forEach>
