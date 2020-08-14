@@ -514,7 +514,7 @@ public class AdminController {
 		}
 		
 		//등록 대기 캠핑장 거절
-		@RequestMapping(value="/notRegistCamp/{camp_no}" , method = RequestMethod.GET)
+		@RequestMapping(value="/notRegistCamp/{camp_no}	" , method = RequestMethod.GET)
 		public String notRegistCamp(@PathVariable("camp_no") int camp_no)throws Exception  {
 			adminService.notRegistCamp(camp_no);
 			

@@ -262,7 +262,8 @@ $(function(){
 		var filename  = $(this).attr("data-filename");
 		var hiddenInput = "<input type='hidden' name='files["+index+"]' value= '"+ filename+"' />";
 		$("#campingReviewModifyRun").prepend(hiddenInput);
- 		$("#campingReviewModifyRun").prependTo("#reviewFrmPage > input");
+//  		$("#campingReviewModifyRun").prependTo("#reviewFrmPage > input");
+ 		
 
 		
 		});

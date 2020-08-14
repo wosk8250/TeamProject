@@ -22,7 +22,13 @@ div {
 
 <script>
 $(function(){
-	
+	var msg = "${msg}"
+		console.log("msg:",msg);
+		if(msg == "delete"){
+			alert("게시글 삭제가 되었습니다.");
+		}
+		
+		
 	$("#searchReview").click(function(){
 		var searchCnd = $("select[name=searchCnd]").val();
 		var textReview = $("#textReview").val();

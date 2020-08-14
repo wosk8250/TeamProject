@@ -21,10 +21,7 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
 $(function() {
-	var msg = "${msg}"
-	if(msg == "delete"){
-		alert("게시글 삭제완료");
-	}
+	
 
 	$(".page-link").click(function(e) {
 		e.preventDefault();
@@ -85,7 +82,7 @@ $(function() {
 						<td><a href="/camp/campingContent?camp_no=${campVo.camp_no}">${campVo.camp_name}</a></td>
 						<td>${campVo.camp_location}</td>
 						<td>${campVo.camp_area}</td>
-						<td><a href="/admin/campDelete?camp_no=${campVo.camp_no}" class="btn btn-danger">삭제</a></td>
+						<td><a href="/admin/campDelete?camp_no=${campVo.camp_no}" date-no="${campVo.camp_no}" class="btn btn-danger">이용중지</a></td>
 					</tr>
 				</c:forEach>
 				</tbody>
