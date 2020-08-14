@@ -102,6 +102,7 @@ position:  relative;
 								
 							</div>
 							<div class="campingTip_content">
+							<h3 style="margin-bottom: 30px; color: black;">${campingTipVo.campingtip_title }</h3>
 									<pre class="camping_pre">${campingTipVo.campingtip_content}</pre>
 							</div>
 					</td>

@@ -74,9 +74,10 @@ pre {
 				</div>
 			</div>
 			<div id="faq_content">
-			<h4 class="text-center" style="margin-bottom: 30px;">
-				<b>${campNoticeVo.notice_content}</b>
-			</h4>
+			<h3 class="text-center" style="margin-bottom: 30px;">
+			${campNoticeVo.notice_title}
+			</h3>
+				<pre>${campNoticeVo.notice_content}</pre>
 			
 			</div>
 			<div style="text-align: right;">

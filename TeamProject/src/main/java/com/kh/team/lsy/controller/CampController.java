@@ -119,7 +119,7 @@ public class CampController {
 	@RequestMapping(value = "/recommend", method = RequestMethod.POST)
 	public String recommend(CampRecommendVo campRecommendVo) throws Exception {
 		System.out.println("recommend, camp_no" + campRecommendVo);
-		CampRecommendVo vo = selectCampService.recommendCheck(campRecommendVo);
+		CampRecommendVo vo = selectCampService.recommendCheck(campRecommendVo);//체크
 		if(vo != null) {
 			return "fail";
 		}

@@ -297,7 +297,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 					</tr>
 					<tr>
 						<td class="td_title" width="140">소개 : </td>
-						<td><textarea class="form-control" id="camping_content" rows="20" style="resize:none; width:100%;" ></textarea></td>
+						<td><textarea class="form-control" id="camping_content" rows="5" style="resize:none; width:100%;" ></textarea></td>
 					</tr>
 				</table>
 				</div>

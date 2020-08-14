@@ -114,8 +114,8 @@
 	
 	<!-- 추천후 아이디Insert -->
 	<insert id="recommendInsert">
-		insert into tbl_camp_recommend(camp_no, user_id, check_num)
-		values(#{camp_no}, #{user_id}, #{check_num})
+		insert into tbl_camp_recommend(recommend_no,camp_no, user_id, check_num)
+		values(SEQ_RECOMMEND.nextval, #{camp_no}, #{user_id}, #{check_num})
 	</insert>
 	
 	<!-- 지역별 베스트 -->
